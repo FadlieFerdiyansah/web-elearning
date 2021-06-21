@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Matkul extends Model
 {
     use HasFactory;
+
+    public function jadwals()
+    {
+        return $this->hasMany(Jadwal::class);
+    }
 }
