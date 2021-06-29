@@ -16,11 +16,11 @@ class CreateJadwalsTable extends Migration
         Schema::create('jadwals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kelas_id');
+            $table->foreignId('dosen_id');
             $table->foreignId('matkul_id');
             $table->string('hari');
             $table->string('jam_masuk');
             $table->string('jam_keluar');
-            $table->timestamps();
         });
     }
 

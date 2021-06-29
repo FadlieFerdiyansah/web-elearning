@@ -17,7 +17,6 @@ class DosenSeed extends Seeder
     {
         $dosen = Dosen::create([
             'kelas_id' => 1,
-            'matkul_id' => 4,
             'nip' => 100912812,
             'nama' => 'Dosen',
             'email' => 'dosen@gmail.com',

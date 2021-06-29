@@ -16,10 +16,10 @@ class MahasiswaSeed extends Seeder
     public function run()
     {
         $mhs = Mahasiswa::create([
+            'fakultas_id' => 1,
             'kelas_id' => 2,
             'nim' => 17200812,
             'nama' => 'Fadlie Ferdiyansah',
-            'fakultas' => 'TI',
             'email' => 'fadlie@gmail.com',
             'password' => bcrypt('mhs123'),
             'foto' => 'default.png'

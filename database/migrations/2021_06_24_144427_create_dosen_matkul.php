@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKelasTable extends Migration
+class CreateDosenMatkul extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateKelasTable extends Migration
      */
     public function up()
     {
-        Schema::create('kelas', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('kd_kelas');
+        Schema::create('dosen_matkul', function (Blueprint $table) {
+            $table->unsignedInteger('dosen_id')->constrained('dosens')->onDelete('cascade');
+            $table->unsignedInteger('matkul_id');
+            $table->primary(['dosen_id','matkul_id']);
+
         });
     }
 
@@ -26,6 +28,6 @@ class CreateKelasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelas');
+        Schema::dropIfExists('dosen_matkul');
     }
 }

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Jadwal extends Model
 {
     use HasFactory;
+    protected $with = ['kelas','matkul','dosen'];
+
 
     public function kelas()
     {
@@ -19,8 +21,8 @@ class Jadwal extends Model
         return $this->belongsTo(Matkul::class);
     }
 
-    // public function dosens()
-    // {
-    //     return $this->
-    // }
+    public function dosen()
+    {
+        return $this->belongsTo(Dosen::class);
+    }
 }

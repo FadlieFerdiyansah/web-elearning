@@ -2,9 +2,10 @@
     <aside id="sidebar-wrapper">
       <div class="sidebar-brand">
         <a href="index.html"> <img alt="image" src="/assets/images/logo/logo-elearning.png" class="header-logo" /> <span
-            class="logo-name">E-Learning</span>
+            class="logo-name">{{ Auth::user()->nama }}</span>
         </a>
       </div>
+      <small class="ml-3">Role : {{ implode(', ', Auth::user()->getRoleNames()->toArray()) }}</small>
       <ul class="sidebar-menu">
         <li class="menu-header">Menu</li>
         <li class="dropdown{{ request()->routeIs('dashboard') ? ' active' : '' }}">
@@ -14,7 +15,7 @@
             <a href="index.html" class="nav-link"><i data-feather="user"></i><span>Profile</span></a>
         </li> --}}
 
-        @can('jadwal kuliah')
+        @canany(['jadwal kuliahd','jadwal kuliahm'])
           <li class="dropdown{{ request()->routeIs('jadwalKuliah') || request()->routeIs('jadwalPengganti') ? ' active' : '' }}">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="calendar"></i><span>Jadwal</span></a>
               <ul class="dropdown-menu">
@@ -22,7 +23,7 @@
                 <li><a class="nav-link" href="{{ route('jadwalPengganti') }}">Jadwal Pengganti</a></li>
               </ul>
           </li>
-        @endcan
+        @endcanany
 
           @can('management nilai')          
               <li class="dropdown">

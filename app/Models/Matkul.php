@@ -13,4 +13,9 @@ class Matkul extends Model
     {
         return $this->hasMany(Jadwal::class);
     }
+
+    public function dosens()
+    {
+        return $this->belongsToMany(Dosen::class);
+    }
 }

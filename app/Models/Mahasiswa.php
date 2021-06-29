@@ -11,4 +11,9 @@ class Mahasiswa extends Authenticatable
 {
 
     use HasFactory, HasRoles;
+
+    public function fakultas()
+    {
+        return $this->belongsTo(Fakultas::class);
+    }
 }

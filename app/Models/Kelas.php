@@ -9,8 +9,23 @@ class Kelas extends Model
 {
     use HasFactory;
 
+    // public function matkul()
+    // {
+    //     return $this->hasManyThrough(Matkul::class,Jadwal::class);
+    // }
+
     public function jadwals()
     {
         return $this->hasMany(Jadwal::class);
-    } 
+    }
+    
+    public function dosens()
+    {
+        return $this->belongsToMany(Dosen::class);
+    }
+
+    // public function mahasiswa()
+    // {
+    //     return $this->hasMany(Mahasiswa::class);
+    // }
 }
