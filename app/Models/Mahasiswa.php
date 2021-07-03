@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
@@ -15,5 +16,10 @@ class Mahasiswa extends Authenticatable
     public function fakultas()
     {
         return $this->belongsTo(Fakultas::class);
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');
     }
 }

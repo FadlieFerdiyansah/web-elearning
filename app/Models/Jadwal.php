@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Jadwal extends Model
 {
     use HasFactory;
-    protected $with = ['kelas','matkul','dosen'];
+    // protected $with = ['kelas','matkul','dosen'];
 
 
     public function kelas()

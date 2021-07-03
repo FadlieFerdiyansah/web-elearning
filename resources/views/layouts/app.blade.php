@@ -9,12 +9,12 @@
 
     <title>{{ $title ?? config('app.name') }}</title>
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
     <!-- Template CSS -->
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
     <!-- Custom style CSS -->
-    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 @stack('styles')
 </head>
 <body>
@@ -22,15 +22,21 @@
     <x-navbar/>
     <x-sidebar/>
   @endif
-    {{ $slot }}
-@stack('scripts')
-  <!-- General JS Scripts -->
-  <script src="/assets/js/app.min.js"></script>
+  <div class="main-content">
+    <section class="section">
+      <div class="section-body">
+        {{ $slot }}
+      </div>
+    </section>
+  </div>
   <!-- Page Specific JS File -->
-  <script src="/assets/js/page/index.js"></script>
+  @stack('scripts')
+
+  <!-- General JS Scripts -->
+  <script src="{{ asset('assets/js/app.min.js') }}"></script>
   <!-- Template JS File -->
-  <script src="/assets/js/scripts.js"></script>
+  <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <!-- Custom JS File -->
-  <script src="/assets/js/custom.js"></script>
+  <script src="{{ asset('assets/js/custom.js') }}"></script>
 </body>
 </html>

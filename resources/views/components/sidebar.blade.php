@@ -55,6 +55,34 @@
             </li>
           @endcan
 
+          @can('management users')
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="layout"></i><span>Form Control</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('jadwals.create') }}">Buat Jadwal</a></li>
+                <li><a class="nav-link" href="{{ route('mahasiswa') }}">Buat Matakuliah</a></li>
+                <li><a class="nav-link" href="{{ route('mahasiswa') }}">Buat Kelas</a></li>
+                <li><a class="nav-link" href="{{ route('mahasiswa') }}">Buat Fakultas</a></li>
+                <li><a class="nav-link" href="{{ route('mahasiswa') }}">Buat Mahasiswa</a></li>
+                <li><a class="nav-link" href="{{ route('mahasiswa') }}">Buat Dosen</a></li>
+              </ul>
+            </li>
+          @endcan
+
+          @can('management datatable')
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="layout"></i><span>Data Table</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('jadwals.table') }}">Jadwal</a></li>
+                <li><a class="nav-link" href="{{ route('mahasiswa') }}">Matakuliah</a></li>
+                <li><a class="nav-link" href="{{ route('mahasiswa') }}">Kelas</a></li>
+                <li><a class="nav-link" href="{{ route('mahasiswa') }}">Fakultas</a></li>
+                <li><a class="nav-link" href="{{ route('mahasiswa') }}">Mahasiswa</a></li>
+                <li><a class="nav-link" href="{{ route('mahasiswa') }}">Dosen</a></li>
+              </ul>
+            </li>
+          @endcan
+
         {{-- <li class="dropdown">
             <form action="{{ route('logout') }}" method="POST">
               @csrf

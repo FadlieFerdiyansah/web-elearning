@@ -7,6 +7,8 @@
     <title>Landing Page</title>
 </head>
 <body>
-    <h1>Landing Page</h1>
+    <div id="example">
+        <h1>Landing Page</h1>
+    </div>
 </body>
 </html>

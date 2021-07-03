@@ -1,20 +1,20 @@
 <x-app-layouts>
-    <div class="main-content">
-        <section class="section">
-            <div class="section-body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Jadwal Pengganti</h4>
-                            </div>
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis pariatur et deserunt eaque nihil mollitia, nulla quaerat? Optio recusandae ipsam suscipit distinctio asperiores molestias eligendi! Voluptates doloribus libero illum repellat.</p>
-                            </div>
-                        </div>
-                    </div>
+
+    <div class="row">
+        @foreach ($jadwals as $jadwal)
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>{{ $jadwal->hari }}</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>{{ $jadwal->matkul->nm_matkul }}</li>
+                    </ul>
                 </div>
             </div>
-        </section>
+        </div>
+        @endforeach
     </div>
+
 </x-app-layouts>
