@@ -92,4 +92,37 @@ class JadwalController extends Controller
         return $dosen->matkuls;
     }
 
+    // public function getDays()
+    // {
+    //     $days = ['Senin','Selasa','Rabu','Kamis','Jum\'at', 'Sabtu', 'Minggu'];
+    //     dd($days);
+    //     return view('form-control.jadwals.jadwal', [ 
+    //         'days' => $days ,
+    //     ]);
+    // }
+
+    public function store()
+    {
+        request()->validate([
+            'kelas' => 'required',
+            'dosen' => 'required',
+            'matkul' => 'required',
+            'hari' => 'required',
+            'jamMasuk' => 'required',
+            'jamKeluar' => 'required',
+        ]);
+
+        Jadwal::create([
+            'kelas_id' => request('kelas'),
+            'dosen_id' => request('dosen'),
+            'matkul_id' => request('matkul'),
+            'hari' => request('hari'),
+            'jam_masuk' => request('jamMasuk'),
+            'jam_keluar' => request('jamKeluar'),
+        ]);
+
+        $kelas = Kelas::find(request('kelas'));
+        return response()->json(['message' => 'Berhasil membuat jadwal untuk kelas '. $kelas->kd_kelas]);
+    }
+
 }

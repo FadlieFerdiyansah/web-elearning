@@ -9,7 +9,8 @@ class Jadwal extends Model
 {
     use HasFactory;
     // protected $with = ['kelas','matkul','dosen'];
-
+    protected $fillable = ['kelas_id','dosen_id','matkul_id','hari','jam_masuk','jam_keluar'];
+    public $timestamps = false;
 
     public function kelas()
     {
