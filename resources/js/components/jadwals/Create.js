@@ -1,14 +1,16 @@
 // import axios from 'axios';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
-function FormJadwalKuliah(props) {
+function Create(props) {
     //Fecthing data
     const [kelas, setKelas] = useState([])
     const [dosens, setDosens] = useState([])
     const [matkuls, setMakuls] = useState([])
     const [days, setDays] = useState([''])
+    const [kelasDoesntHaveJadwal, setKelasDoesntHaveJadwal] = useState([''])
 
     //untuk mendaptkan value dari inputan
     const [kelasId, setKelasId] = useState('')
@@ -73,9 +75,15 @@ function FormJadwalKuliah(props) {
         setMatkulId(e.target.value)
     }
 
+    const getKelasDoesntHaveJadwal = async e => {
+        let response = await axios.get('/jadwals/kelas-mempunyai-jadwal')
+        setKelasDoesntHaveJadwal(response.data)
+    }
+
     useEffect((e) => {
         setDays([ 'Senin','Selasa','Rabu','Kamis','Jum\'at', 'Sabtu', 'Minggu' ])
         getKelas()
+        getKelasDoesntHaveJadwal()
     },[])
     return (
         <div className="row">
@@ -203,16 +211,50 @@ function FormJadwalKuliah(props) {
                 </div>
             </div>
         </div>
+            {
+                kelasDoesntHaveJadwal.length ?
+                    <div className="col-12 col-md-6 col-lg-6">
+                    <div className="card">
+                        <div className="card-header">
+                            <h4>Kelas yang belum mempunyai jadwal</h4>
+                        </div>
+                        <div className="card-body">
+                            <table className="table table-hover">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Kelas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                    kelasDoesntHaveJadwal.map((k) => {
+                                        return (
+                                            <tr key={k.id}>
+                                                <td>{k.id}</td>
+                                                <td>{k.kd_kelas}</td>
+                                            </tr>
+                                        )
+                                    })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                :
+                ''
+            }
         </div>
     );
 }
 
-export default FormJadwalKuliah;
+export default Create;
 
 if (document.getElementById('jadwal')) {
     var item = document.getElementById('jadwal');
     ReactDOM.render(
-                <FormJadwalKuliah 
+                <Create 
                     endpoint={item.getAttribute('endpoint')} 
                     title={item.getAttribute('title')}
                     />, item);

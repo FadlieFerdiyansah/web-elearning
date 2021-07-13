@@ -8,7 +8,7 @@
                     <p>Role : {{ Auth::guard('mahasiswa')->user()->hasRole('mahasiswa') ? 'mahasiswa' : 'bukan' }}</p> --}}
                 </div>
                 <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis pariatur et deserunt eaque nihil mollitia, nulla quaerat? Optio recusandae ipsam suscipit distinctio asperiores molestias eligendi! Voluptates doloribus libero illum repellat.</p>
+                    <h2>Hi, {{ Auth::user()->nama }}</h2>
                 </div>
             </div>
         </div>

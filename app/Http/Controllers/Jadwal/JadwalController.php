@@ -10,6 +10,7 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\JadwalResource;
 use App\Models\Matkul;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,17 @@ use Spatie\Permission\Models\Permission;
 
 class JadwalController extends Controller
 {
+    public function table()
+    {
+        // $jadwals = Jadwal::get()->load(['dosen','matkul','kelas']);
+        return view('datatable.jadwals.table');
+    }
     
+    public function dataTable()
+    {
+        return JadwalResource::collection(Jadwal::with('dosen','matkul','kelas')->paginate(9));
+    }
+
     public function jadwalKuliah()
     {
 
@@ -72,14 +83,26 @@ class JadwalController extends Controller
 
     public function create()
     {
-        $kelas = Kelas::get()->load(['dosens']);
+        // $kelas = Kelas::get()->load(['dosens']);
 
-        $matkul = Matkul::with('dosens')->get();
+        // $matkul = Matkul::with('dosens')->get();
 
-        return view('form-control.jadwals.jadwal', [ 
-            'kelas' => $kelas ,
-            'matkuls' => $matkul
-        ]);
+        return view('form-control.jadwals.jadwal');
+    }
+
+    public function edit(Jadwal $jadwal)
+    {
+        return $jadwal;
+    }
+
+    public function update(Jadwal $jadwal)
+    {
+        return 'ok';
+    }
+
+    public function getSomething()
+    {
+        return Kelas::whereDoesntHave('jadwals')->get();
     }
 
     public function getDosenByKelasId(Kelas $kelas)

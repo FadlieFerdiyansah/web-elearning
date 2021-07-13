@@ -12,4 +12,6 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/FormJadwalKuliah');
+require('./components/jadwals/Create');
+require('./components/jadwals/Table');
+require('./components/jadwals/Edit');

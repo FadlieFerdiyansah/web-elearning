@@ -37,7 +37,7 @@
 
           @can('management roles and permissions')            
             <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="clipboard"></i><span>Role & Permission</span></a>
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="shield-off"></i><span>Role & Permission</span></a>
               <ul class="dropdown-menu">
                   <li><a class="nav-link" href="icon-material.html">Role</a></li>
                 <li><a class="nav-link" href="icon-font-awesome.html">Permission</a></li>
@@ -60,7 +60,7 @@
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="layout"></i><span>Form Control</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('jadwals.create') }}">Buat Jadwal</a></li>
-                <li><a class="nav-link" href="{{ route('mahasiswa') }}">Buat Matakuliah</a></li>
+                <li><a class="nav-link" href="{{ route('matkuls.create') }}">Buat Matakuliah</a></li>
                 <li><a class="nav-link" href="{{ route('mahasiswa') }}">Buat Kelas</a></li>
                 <li><a class="nav-link" href="{{ route('mahasiswa') }}">Buat Fakultas</a></li>
                 <li><a class="nav-link" href="{{ route('mahasiswa') }}">Buat Mahasiswa</a></li>
@@ -71,7 +71,7 @@
 
           @can('management datatable')
             <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="layout"></i><span>Data Table</span></a>
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="grid"></i><span>Data Table</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('jadwals.table') }}">Jadwal</a></li>
                 <li><a class="nav-link" href="{{ route('mahasiswa') }}">Matakuliah</a></li>
