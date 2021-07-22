@@ -3,7 +3,7 @@
 <h3>Web E-learning</h3>
 
 
-<h5>Technologies what I'm use</h5>
+<h5>Technologies</h5>
 
 <ul>
     <li>HTML</i>
