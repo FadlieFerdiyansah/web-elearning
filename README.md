@@ -1,8 +1,9 @@
 <h1>Devloping</h1>
 
-Web E-learning
+<h3>Web E-learning</h3>
 
-Technologies what I'm use
+
+<h5>Technologies what I'm use</h5>
 
 <ul>
     <li>HTML</i>
@@ -10,4 +11,12 @@ Technologies what I'm use
     <li>JS</i>
     <li>PHP</i>
     <li>Laravel</i>
+</ul>
+
+
+<h5>Tools</h5>
+
+<ul>
+    <li>VSCode</i>
+    <li>Mysql</i>
 </ul>
