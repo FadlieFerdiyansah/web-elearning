@@ -8,17 +8,23 @@ use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function table()
     {
         if (request()->expectsJson()) {
             return Kelas::get();
         }
-        return Kelas::get();
+        $kelas = Kelas::get();
+        return view('datatable.kelas.table',compact('kelas'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        abort(404);
     }
 
     /**
@@ -28,7 +34,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        //
+        return view('form-control.kelas.create');
     }
 
     /**
@@ -39,7 +45,9 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([ 'kelas' => 'required' ]);
+        Kelas::create(['kd_kelas' => $request->kelas]);
+        return back()->with('success', "Berhasil membuat kelas : {$request->kelas}");
     }
 
     /**
@@ -59,9 +67,11 @@ class KelasController extends Controller
      * @param  \App\Models\kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function edit(kelas $kelas)
+    public function edit(Kelas $kela)
     {
-        //
+        return view('form-control.kelas.edit',[
+            'kela' => $kela
+        ]);
     }
 
     /**
@@ -71,9 +81,11 @@ class KelasController extends Controller
      * @param  \App\Models\kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, kelas $kelas)
+    public function update(Request $request, Kelas $kela)
     {
-        //
+        $request->validate([ 'kelas' => 'required' ]);
+        $kela->update(['kd_kelas' => $request->kelas]);
+        return back()->with('success', "Berhasil update data kelas : {$request->kelas}");
     }
 
     /**
@@ -82,8 +94,9 @@ class KelasController extends Controller
      * @param  \App\Models\kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(kelas $kelas)
+    public function destroy(kelas $kela)
     {
-        //
+        $kela->delete();
+        return back()->with('success', "Berhasil menghapus data kelas : {$kela->kd_kelas}");
     }
 }

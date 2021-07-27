@@ -6,10 +6,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dosen\DosenController;
+use App\Http\Controllers\Fakultas\FakultasController;
 use App\Http\Controllers\Jadwal\JadwalController;
 use App\Http\Controllers\Kelas\KelasController;
 use App\Http\Controllers\Mahasiswa\MahasiswaController;
-use App\Http\Controllers\MatkulController;
+use App\Http\Controllers\Matakuliah\MatkulController;
+use App\Http\Controllers\MateriController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 Route::get('', HomeController::class)->name('index');
 
@@ -22,20 +26,37 @@ Route::middleware('auth:mahasiswa,admin,dosen', 'disable.back')->group(function(
     Route::middleware('permission:jadwal kuliahm|jadwal kuliahd')->group(function(){
         Route::get('jadwal-kuliah', [JadwalController::class, 'jadwalKuliah'])->name('jadwalKuliah');
         Route::get('jadwal-pengganti', [JadwalController::class, 'jadwalPengganti'])->name('jadwalPengganti');
+
+        Route::get('materi/upload', [MateriController::class, 'upload'])->name('materi.upload');
+        Route::post('materi/upload', [MateriController::class, 'store'])->name('materi.store');
+        Route::get('materi/{materi}', [MateriController::class, 'materi'])->name('materi');
     });
 
     Route::middleware('role:admin')->group(function(){
-        Route::prefix('managementUser')->group(function(){
-            Route::get('/dosen', [DosenController::class, 'index'])->name('dosen');
-    
-            Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa');
-            Route::get('/mahasiswa/datatables-mahasiswa', [MahasiswaController::class, 'jsonData'])->name('mahasiswa.jsonData');
+        Route::prefix('management-user')->group(function(){
+            Route::prefix('dosen')->group(function() {
+                Route::get('table', [DosenController::class, 'table'])->name('dosen.table');
+                Route::delete('table',[DosenController::class, 'delete_checkbox']);
+                Route::get('create', [DosenController::class, 'create'])->name('dosen.create');
+                Route::post('create', [DosenController::class, 'store']);
+                Route::get('{dosen:nip}/edit', [DosenController::class, 'edit'])->name('dosen.edit');
+                Route::put('{dosen:nip}/edit', [DosenController::class, 'update']);
+                Route::delete('{dosen:nip}/delete', [DosenController::class, 'destroy'])->name('dosen.delete');
+            });
+
+            Route::prefix('mahasiswa')->group(function() {
+                Route::get('table', [MahasiswaController::class, 'table'])->name('mahasiswa.table');
+                Route::delete('table', [MahasiswaController::class, 'delete_checkbox']);
+                Route::get('create', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
+                Route::get('{mahasiswa:nim}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+                Route::put('{mahasiswa:nim}/edit', [MahasiswaController::class, 'update']);
+                Route::delete('{mahasiswa:nim}/delete', [MahasiswaController::class, 'destroy'])->name('mahasiswa.delete');
+            });
         });
 
         Route::prefix('jadwals')->group(function(){
             Route::get('/table', [JadwalController::class, 'table'])->name('jadwals.table');
             Route::get('/data-table', [JadwalController::class, 'dataTable'])->name('jadwals.datatable');
-            // Route::get('/kelas-mempunyai-jadwal', [JadwalController::class, 'getSomething']);
 
             Route::get('/create', [JadwalController::class, 'create'])->name('jadwals.create');
             Route::post('/create', [JadwalController::class, 'store']);
@@ -46,16 +67,29 @@ Route::middleware('auth:mahasiswa,admin,dosen', 'disable.back')->group(function(
             Route::get('/get-matkul-by-{dosen}', [JadwalController::class, 'getMatkulByDosenId']);
         });
 
-        Route::prefix('kelas')->group(function(){
-            Route::get('/table', [KelasController::class, 'table'])->name('kelas.table');
-        
-            Route::get('/create', [KelasController::class, 'create'])->name('kelas.create');
-            Route::post('/create', [KelasController::class, 'store']);
-        });
+        // Route::prefix('kelas')->group(function(){
+            Route::get('kelas/table', [KelasController::class, 'table'])->name('kelas.table');
+            Route::resource('kelas',KelasController::class);
+        // });
 
-        Route::group(['prefix' => 'matkuls'], function() {
-            Route::get('/create', [MatkulController::class, 'create'])->name('matkuls.create');
-        });
+        // Route::group(['prefix' => 'matkuls'], function() {
+            // Route::get('table', [MatkulController::class, 'table'])->name('matkuls.table');
+
+            // Route::get('create', [MatkulController::class, 'create'])->name('matkuls.create');
+            // Route::post('create', [MatkulController::class, 'store']);
+            // Route::get('{matkuls}/edit', [MatkulController::class, 'edit'])->name('matkuls.edit');
+            // Route::put('{matkuls}/edit', [MatkulController::class, 'update']);
+            // Route::delete('{matkuls}/delete', [MatkulController::class, 'destroy'])->name('matkuls.delete');
+            Route::get('matkuls/table', [MatkulController::class, 'table'])->name('matkuls.table');
+            Route::get('matkuls/table=search', [MatkulController::class, 'search'])->name('search');
+            Route::resource('matkuls', MatkulController::class);
+            // ->missing(function (Request $request){
+            //     return Redirect::route('matkuls.index');
+            // });
+        // });
+
+            Route::get('fakultas/table', [FakultasController::class, 'table'])->name('fakultas.table');
+            Route::resource('fakultas',FakultasController::class);
         
     });
 

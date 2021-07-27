@@ -18,6 +18,8 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
+        // $role = Role::find(1);
+        // $role->givePermissionTo(['jadwal kuliahm']);
         // dd(new ZipArchive);
         return view('dashboard.index');
     }

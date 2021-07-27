@@ -22,6 +22,11 @@
                     <div class="card card-primary">
                         <div class="card-header">
                             <h4>Login</h4>
+                            @if (session()->has('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">

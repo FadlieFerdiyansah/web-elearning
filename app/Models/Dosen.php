@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Dosen extends Authenticatable
 {
     use HasFactory, HasRoles;
+    protected $guarded = [];
 
     public function jadwals()
     {
@@ -24,5 +25,15 @@ class Dosen extends Authenticatable
     public function matkuls()
     {
         return $this->belongsToMany(Matkul::class);
+    }
+
+    public function materis()
+    {
+        return $this->hasMany(Materi::class);
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');
     }
 }

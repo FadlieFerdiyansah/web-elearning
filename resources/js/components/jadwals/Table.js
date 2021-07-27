@@ -28,7 +28,7 @@ function Table(props) {
                     <h4>{props.title}</h4>
                 </div>
                 <div className="card-body">
-                    <table className="table table-hover">
+                    <table className="table table-hover table-responsive">
                         <thead>
                             <tr>
                                 <th>#</th>

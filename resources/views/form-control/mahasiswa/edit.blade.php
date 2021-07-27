@@ -3,53 +3,44 @@
     @endpush
         <div class="card">
             <div class="card-header">
-                <h4>Form Create Matakuliah</h4>
+                <h4>Edit &raquo; {{ $mahasiswa->nama }}</h4>
             </div>
             <div class="card-body col-md-8 col-sm">
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible show fade">
-                        <div class="alert-body">
-                        <button class="close" data-dismiss="alert">
-                            <span>×</span>
-                        </button>
-                            {!! session('success') !!}
-                        </div>
-                    </div>
-                @endif
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        @foreach ($errors->all() as $message)
-                            <li>{{ $message }}</li>
-                        @endforeach
-                    </div>
-                @endif
-                <form action="{{ route('matkuls.store') }}" method="post">
+                <form action="{{ route('mahasiswa.edit',$mahasiswa) }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="form-group">
-                        <label for="matkul">Matakuliah</label>
-                        <input type="text" name="nm_matkul" class="form-control">
+                        <img src="{{ $mahasiswa->foto == 'default.png' ? $mahasiswa->pictureDefault : $mahasiswa->picture  }}" alt="foto" style="width:100px;" class="mb-3 rounded">
+                        <input type="file" class="form-control" name="foto">
                     </div>
                     <div class="form-group">
-                        <label for="sks">SKS</label>
-                        <input type="text" name="sks" class="form-control">
+                        <label for="nim">NIM</label>
+                        <input type="text" id="nim" value="{{ $mahasiswa->nim }}" class="form-control" name="nim" disabled>
                     </div>
-                    {{-- <div class="form-group">
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" id="nama" value="{{ $mahasiswa->nama }}" class="form-control" name="nama">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" value="{{ $mahasiswa->email }}" class="form-control" name="email">
+                    </div>
+                    <div class="form-group">
                         <label for="fakultas">Fakultas</label>
                         <select name="fakultas" id="fakultas" class="form-control">
                             @foreach ($fakultas as $fk)
                                 <option {{ $mahasiswa->fakultas_id == $fk->id ? 'selected' : null }} value="{{ $fk->id }}">{{ $fk->nama }}</option>
                             @endforeach
                         </select>
-                    </div> --}}
-                    {{-- <div class="form-group">
+                    </div>
+                    <div class="form-group">
                         <label for="kelas">Kelas</label>
                         <select name="kelas" id="kelas" class="form-control">
                             @foreach ($kelas as $kls)
                                 <option {{ $mahasiswa->kelas_id == $kls->id ? 'selected' : null }} value="{{ $kls->id }}">{{ $kls->kd_kelas }}</option>
                             @endforeach
                         </select>
-                    </div> --}}
+                    </div>
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Simpan</button>

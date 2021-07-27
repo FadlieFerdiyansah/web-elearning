@@ -31,7 +31,6 @@ class JadwalController extends Controller
 
     public function jadwalKuliah()
     {
-
         $today = date('l');
         if ($today == 'Sunday') {
             $day = 'Minggu';

@@ -12,6 +12,7 @@ class Mahasiswa extends Authenticatable
 {
 
     use HasFactory, HasRoles;
+    protected $fillable = ['foto','nim','nama','email','fakultas_id','kelas_id'];
 
     public function getPictureAttribute()
     {
@@ -38,9 +39,9 @@ class Mahasiswa extends Authenticatable
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');
     }
 
-    public function table()
-    {
-        $mahasiswas = Mahasiswa::get();
-        return view('managementUser.mahasiswa.index',compact('mahasiswas'));
-    }
+    // public function table()
+    // {
+    //     $mahasiswas = Mahasiswa::get();
+    //     return view('managementUser.mahasiswa.index',compact('mahasiswas'));
+    // }
 }
