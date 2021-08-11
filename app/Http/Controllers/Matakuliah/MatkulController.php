@@ -20,9 +20,8 @@ class MatkulController extends Controller
     {
         $query =  request('query');
 
-
         return view('datatable.matkuls.table', [
-            'matkuls' => Matkul::where("nm_matkul", "like" , "%$query%")->latest()->paginate(1),
+            'matkuls' => Matkul::where("nm_matkul", "like" , "%$query%")->latest()->paginate(10),
             'result' => Matkul::where('nm_matkul', 'like', "%".$query."%")->latest()->paginate()
         ]);
     }

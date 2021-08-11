@@ -16,9 +16,10 @@ class CreateTugasTable extends Migration
         Schema::create('tugas', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignId('kelas_id');
-            $table->foreignId('mahasiswa_id');
+            $table->foreignId('dosen_id');
+            $table->foreignId('mahasiswa_id')->default(0);
             $table->string('judul');
-            $table->longText('namafile');
+            $table->longText('file_or_link');
             $table->string('pertemuan');
             $table->text('deskripsi');
             $table->dateTime('mulai', 0);

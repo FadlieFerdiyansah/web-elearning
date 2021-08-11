@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Materi;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Matkul extends Model
 {
@@ -19,6 +20,11 @@ class Matkul extends Model
     public function dosens()
     {
         return $this->belongsToMany(Dosen::class);
+    }
+
+    public function materis()
+    {
+        return $this->hasMany(Materi::class);
     }
 
     //Mutators when attribute 'nameOfAttribute' store will be lowercase

@@ -36,24 +36,17 @@
               <tr>
                 <th>Dosen</th>
                 <td>:</td>
-                <td> {{ $jadwal->dosen->nama }}</td>
+                <td> {{ $jadwal->dosen->nama ?? ' ' }}</td>
               </tr>
             </table>
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-icon icon-left btn-primary form-control"><i class=" fas fa-briefcase"></i>Masuk Kelas</a>
             <div class="d-flex justify-content-around mt-3">
-              <a href="{{ route('materi',$jadwal->matkul->id) }}" class="btn btn-icon icon-left btn-dark"><i class="far fa-file-alt"></i>Materi</a>
+              <a href="{{ route('materi.show',$jadwal->matkul->id) }}" class="btn btn-icon icon-left btn-dark"><i class="far fa-file-alt"></i>Materi</a>
               <a href="#" class="btn btn-icon icon-left btn-dark"><i class="fas fa-tasks"></i>Tugas</a>
               <a href="#" class="btn btn-icon icon-left btn-dark"><i class="fab fa-discourse"></i>Diskusi</a>
             </div>
-            {{-- <div class="card-header-action">
-              <div class="btn-group">
-                <a href="#" class="btn btn-success">Absen</a>
-                <a href="#" class="btn btn-primary">Diskusi</a>
-                <a href="#" class="btn btn-warning">Materi</a>
-              </div>
-            </div> --}}
           </div>
         </div>
       </div>

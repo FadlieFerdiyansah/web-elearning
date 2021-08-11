@@ -248,7 +248,6 @@ function Create(props) {
         </div>
     );
 }
-
 export default Create;
 
 if (document.getElementById('jadwal')) {

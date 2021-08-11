@@ -75,7 +75,7 @@
                     <select class="form-control selectric" name="tipe" id="tipe">
                     {{-- <select class="form-control selectric" name="tipe" id="tipe" onchange="selectType(this)"> --}}
                         <option disabled selected>Pilih Tipe</option>
-                        <option value="pdf">PDF</option>
+                        <option value="file">PDF</option>
                         <option value="youtube">YouTube</option>
                     </select>
                 </div>
