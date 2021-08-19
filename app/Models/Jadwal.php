@@ -11,6 +11,7 @@ class Jadwal extends Model
     // protected $with = ['kelas','matkul','dosen'];
     protected $fillable = ['kelas_id','dosen_id','matkul_id','hari','jam_masuk','jam_keluar'];
     public $timestamps = false;
+    protected $with = ['kelas','dosen','matkul'];
 
     public function kelas()
     {

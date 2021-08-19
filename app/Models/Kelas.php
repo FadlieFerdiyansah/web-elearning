@@ -11,16 +11,7 @@ class Kelas extends Model
 
     protected $fillable = ['kd_kelas'];
     public $timestamps = false;
-
-    // public function matkul()
-    // {
-    //     return $this->hasManyThrough(Matkul::class,Jadwal::class);
-    // }
-
-    //  public function getRouteKeyName()
-    //  {
-    //      return 'kd_kelas';
-    //  }
+    // protected $with = ['materis','dosens'];
 
     public function jadwals()
     {
@@ -35,6 +26,11 @@ class Kelas extends Model
     public function materis()
     {
         return $this->hasMany(Materi::class);
+    }
+
+    public function mahasiswas()
+    {
+        return $this->hasMany(Mahasiswa::class);
     }
 
     // public function mahasiswa()

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Elearning;
 
+use App\Http\Controllers\Controller;
 use App\Models\Dosen;
 use App\Models\Kelas;
 use App\Models\Materi;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Jadwal;
+namespace App\Http\Controllers\Elearning;
 
 use Carbon\Carbon;
 use App\Models\Dosen;
@@ -60,6 +60,8 @@ class JadwalController extends Controller
                 $jadwals = Jadwal::get()->load(['dosen','matkul','kelas']);
             }
         }
+
+        // return $jadwals;
 
         
 

@@ -1,13 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Kelas;
+namespace App\Http\Controllers\Elearning;
 
-use App\Http\Controllers\Controller;
 use App\Models\kelas;
+use App\Models\Jadwal;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class KelasController extends Controller
 {
+    public function masuk($id)
+    {
+        $id = Crypt::decryptString($id);
+        
+        $kelas_mhs = Jadwal::where('matkul_id',$id)->first();
+        return view('frontend.kelas.masuk',compact('kelas_mhs'));
+    }
+
     public function table()
     {
         if (request()->expectsJson()) {

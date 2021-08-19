@@ -1,56 +1,67 @@
 <x-app-layouts>
-  @push('styles')
-      <style>
-        td:nth-child(2){
-          width: 20px;
-          text-align: center
-        }
-      </style>
-  @endpush
-  <div class="row">
-    @foreach ($jadwals as $jadwal)
-    <div class="col-md-4">
-      <div class="card {{ $jadwal->hari == $day ? 'card-primary' : 'card-light' }}">
-        <div class="card-header">
-          <h4><i data-feather="award"></i><span class="ml-2">{{ strtoupper($jadwal->hari) }} ~ {{ $jadwal->jam_masuk ."-". $jadwal->jam_keluar }}</span></h4>
-          <div class="card-header-action">
-            <a data-collapse="#{{ $jadwal->id }}" class="btn btn-icon btn-info" href="#"><i
-              class="fas fa-minus"></i></a>
-            </div>
-          </div>
-          <div class="collapse show" id="{{ $jadwal->id }}" style="">
-            <div class="card-body background-primary color-primary">
-            <h6>{{ $jadwal->matkul->nm_matkul }}</h6>
-            <hr>
-            <table>
-              <tr>
-                <th>Kelas</th>
-                <td>:</td>
-                <td>{{ $jadwal->kelas->kd_kelas }}</td>
-              </tr>
-              <tr>
-                <th>Kode Matkul</th>
-                <td>:</td>
-                <td> {{ $jadwal->matkul->kd_matkul }}</td>
-              </tr>
-              <tr>
-                <th>Dosen</th>
-                <td>:</td>
-                <td> {{ $jadwal->dosen->nama ?? ' ' }}</td>
-              </tr>
-            </table>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-icon icon-left btn-primary form-control"><i class=" fas fa-briefcase"></i>Masuk Kelas</a>
-            <div class="d-flex justify-content-around mt-3">
-              <a href="{{ route('materi.show',$jadwal->matkul->id) }}" class="btn btn-icon icon-left btn-dark"><i class="far fa-file-alt"></i>Materi</a>
-              <a href="#" class="btn btn-icon icon-left btn-dark"><i class="fas fa-tasks"></i>Tugas</a>
-              <a href="#" class="btn btn-icon icon-left btn-dark"><i class="fab fa-discourse"></i>Diskusi</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    @endforeach
-  </div>
+	@push('styles')
+	<style>
+		td:nth-child(2) {
+			width: 20px;
+			text-align: center
+		}
+	</style>
+	@endpush
+	<div class="row">
+		@foreach ($jadwals as $jadwal)
+		<div class="col-12 col-md-4 col-lg-4">
+			<div class="pricing{{ $jadwal->hari == $day ? ' pricing-highlight' : '' }}">
+				<div class="pricing-title">
+					{{ $jadwal->jam_masuk .'-'.$jadwal->jam_keluar }}
+				</div>
+				<div class="pricing-padding">
+					<div class="pricing-price">
+						<div>{{ $jadwal->hari }}</div>
+						<div>{{ $jadwal->matkul->nm_matkul }}</div>
+						{{ $jadwal->kelas_id }}
+					</div>
+					<div>
+						<div class="py-4">
+							<p class="clearfix">
+								<span class="float-left font-bold">
+									Kelas
+								</span>
+								<span class="float-right text-muted">
+									{{ $jadwal->kelas->kd_kelas }}
+								</span>
+							</p>
+							<p class="clearfix">
+								<span class="float-left font-bold">
+									Nama Dosen
+								</span>
+								<span class="float-right text-muted">
+									{{ $jadwal->dosen->nama }}
+								</span>
+							</p>
+							<p class="clearfix">
+								<span class="float-left font-bold">
+									Kode Matkul
+								</span>
+								<span class="float-right text-muted">
+									{{ $jadwal->matkul->kd_matkul }}
+								</span>
+							</p>
+							<p>
+								<span class="float-left font-bold">
+									SKS
+								</span>
+								<span class="float-right text-muted">
+									{{ $jadwal->matkul->sks }}
+								</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="pricing-cta">
+					<a href="{{ route('kelas.masuk',Crypt::encryptString($jadwal->matkul_id)) }}">Masuk <i class="fas fa-arrow-right"></i></a>
+				</div>
+			</div>
+		</div>
+		@endforeach
+	</div>
 </x-app-layouts>

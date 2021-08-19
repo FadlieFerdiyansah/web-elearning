@@ -18,7 +18,7 @@ class CreateMaterisTable extends Migration
             $table->foreignId('kelas_id');
             $table->foreignId('dosen_id');
             $table->foreignId('matkul_id');
-            $table->string('judul');
+            $table->string('judul'); 
             $table->string('tipe');
             $table->longText('file_or_link');
             $table->string('pertemuan');

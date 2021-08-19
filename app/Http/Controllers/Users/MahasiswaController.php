@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Mahasiswa;
+namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Fakultas;
@@ -45,6 +45,33 @@ class MahasiswaController extends Controller
         }
 
         return view('managementUser.mahasiswa.table',compact('mahasiswas'));
+    }
+
+    public function create()
+    {
+        $kelas = Kelas::get();
+        $fakultas = Fakultas::get();
+        return view('form-control.mahasiswa.create',compact('kelas','fakultas'));
+    }
+
+    public function store()
+    {
+        // return $request->all();
+
+        if(request('foto')) $img = request()->file('foto')->move('images/profile');
+        
+       $mahasiswa = Mahasiswa::create([
+            'foto' => $img ?? 'default.png',
+            'nim' => request('nim'),
+            'nama' => request('nama'),
+            'email' => request('email'),
+            'password' => bcrypt(request('password')),
+            'fakultas_id' => request('fakultas'),
+            'kelas_id' => request('kelas'),
+        ]);
+        $mahasiswa->assignRole('mahasiswa');
+
+        return back()->with('success','Berhasil membuat data mahasiswa');
     }
 
     public function edit(Mahasiswa $mahasiswa)

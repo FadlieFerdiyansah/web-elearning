@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dosen;
+namespace App\Http\Controllers\Users;
 
 use App\Models\Dosen;
 use App\Models\Kelas;
@@ -69,6 +69,7 @@ class DosenController extends Controller
 
     public function store()
     {
+        return request('time');
         if(request('foto')){
             $photo = request()->file('foto')->store('images/profile');
         }else{

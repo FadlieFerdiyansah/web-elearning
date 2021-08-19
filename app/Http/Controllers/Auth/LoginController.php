@@ -12,9 +12,9 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    protected $adminGuard;
-    protected $mahasiswaGuard;
-    protected $dosenGuard;
+    // protected $adminGuard;
+    // protected $mahasiswaGuard;
+    // protected $dosenGuard;
     /*
     |--------------------------------------------------------------------------
     | Login Controller

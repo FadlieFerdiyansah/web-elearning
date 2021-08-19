@@ -6,6 +6,7 @@
                     {{-- <h4>Total {{ Str::plural('materi', $materis) }} {{ $materis }}</h4> --}}
                     {{-- {{ dd($matkul) }} --}}
                     {{ Str::title('ini adalah setiap awal huruf besar') }}
+                    <h3 class="ml-4">{{ Auth::user()->kelas->kd_kelas }}</h3>
                 </div>
                 <div class="card-body">
                     @if (session('success'))
