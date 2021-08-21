@@ -57,16 +57,16 @@ Route::middleware('auth:mahasiswa,admin,dosen', 'disable.back')->group(function(
         });
 
         Route::prefix('jadwals')->group(function(){
-            Route::get('/table', [JadwalController::class, 'table'])->name('jadwals.table');
-            Route::get('/data-table', [JadwalController::class, 'dataTable'])->name('jadwals.datatable');
+            Route::get('table', [JadwalController::class, 'table'])->name('jadwals.table');
 
-            Route::get('/create', [JadwalController::class, 'create'])->name('jadwals.create');
-            Route::post('/create', [JadwalController::class, 'store']);
+            Route::get('create', [JadwalController::class, 'create'])->name('jadwals.create');
+            Route::post('create', [JadwalController::class, 'store']);
             Route::get('edit/{jadwal}', [JadwalController::class, 'edit'])->name('jadwals.edit');
             Route::put('edit/{jadwal}', [JadwalController::class, 'update']);
 
-            Route::get('/get-dosen-by-{kelas}', [JadwalController::class, 'getDosenByKelasId']);
-            Route::get('/get-matkul-by-{dosen}', [JadwalController::class, 'getMatkulByDosenId']);
+            Route::get('get-dosen-by-{kelas}', [JadwalController::class, 'getDosenByKelasId']);
+            Route::get('get-matkul-by-{dosen}', [JadwalController::class, 'getMatkulByDosenId']);
+            // Route::resource('jadwals',JadwalController::class);
         });
 
             Route::get('kelas/table', [KelasController::class, 'table'])->name('kelas.table');

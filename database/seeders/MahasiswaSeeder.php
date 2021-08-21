@@ -6,7 +6,7 @@ use App\Models\Mahasiswa;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
-class MahasiswaSeed extends Seeder
+class MahasiswaSeeder extends Seeder
 {
     /**
      * Run the database seeds.

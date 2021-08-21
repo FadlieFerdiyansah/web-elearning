@@ -10,6 +10,7 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\JadwalRequest;
 use App\Http\Resources\JadwalResource;
 use App\Models\Matkul;
 use Illuminate\Contracts\Auth\Guard;
@@ -21,12 +22,10 @@ class JadwalController extends Controller
     public function table()
     {
         // $jadwals = Jadwal::get()->load(['dosen','matkul','kelas']);
+        if(request()->expectsJson()){
+            return JadwalResource::collection(Jadwal::with('dosen','matkul','kelas')->paginate(7));
+        }
         return view('datatable.jadwals.table');
-    }
-    
-    public function dataTable()
-    {
-        return JadwalResource::collection(Jadwal::with('dosen','matkul','kelas')->paginate(9));
     }
 
     public function jadwalKuliah()
@@ -53,9 +52,9 @@ class JadwalController extends Controller
         {
             if (Auth::guard('mahasiswa')->check()) {
                 $user = Auth::user()->kelas_id;
-                $jadwals = Jadwal::where('kelas_id', $user) ->get();
+                $jadwals = Jadwal::where('kelas_id', $user)->get();
             }elseif(Auth::guard('dosen')->check()){
-                $jadwals = Jadwal::where('dosen_id', Auth::id()) ->get();
+                $jadwals = Jadwal::where('dosen_id', Auth::id())->get();
             }elseif(Auth::guard('admin')->check()){
                 $jadwals = Jadwal::get()->load(['dosen','matkul','kelas']);
             }
@@ -84,10 +83,6 @@ class JadwalController extends Controller
 
     public function create()
     {
-        // $kelas = Kelas::get()->load(['dosens']);
-
-        // $matkul = Matkul::with('dosens')->get();
-
         return view('form-control.jadwals.jadwal');
     }
 
@@ -101,51 +96,22 @@ class JadwalController extends Controller
         return 'ok';
     }
 
-    public function getSomething()
-    {
-        return Kelas::whereDoesntHave('jadwals')->get();
-    }
-
+    //Mendapatkan data dosen berdasarkan kelas
     public function getDosenByKelasId(Kelas $kelas)
     {
         return $kelas->dosens;
     }
 
+    //Mendapatkan data matkul berdasarkan dosen
     public function getMatkulByDosenId(Dosen $dosen)
     {
         return $dosen->matkuls;
     }
 
-    // public function getDays()
-    // {
-    //     $days = ['Senin','Selasa','Rabu','Kamis','Jum\'at', 'Sabtu', 'Minggu'];
-    //     dd($days);
-    //     return view('form-control.jadwals.jadwal', [ 
-    //         'days' => $days ,
-    //     ]);
-    // }
-
-    public function store()
+    public function store(JadwalRequest $request)
     {
-        request()->validate([
-            'kelas' => 'required',
-            'dosen' => 'required',
-            'matkul' => 'required',
-            'hari' => 'required',
-            'jamMasuk' => 'required',
-            'jamKeluar' => 'required',
-        ]);
-
-        Jadwal::create([
-            'kelas_id' => request('kelas'),
-            'dosen_id' => request('dosen'),
-            'matkul_id' => request('matkul'),
-            'hari' => request('hari'),
-            'jam_masuk' => request('jamMasuk'),
-            'jam_keluar' => request('jamKeluar'),
-        ]);
-
-        $kelas = Kelas::find(request('kelas'));
+        Jadwal::create($request->all());
+        $kelas = Kelas::find($request->kelas_id);
         return response()->json(['message' => 'Berhasil membuat jadwal untuk kelas '. $kelas->kd_kelas]);
     }
 

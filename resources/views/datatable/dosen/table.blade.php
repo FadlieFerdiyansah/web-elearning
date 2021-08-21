@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Users: Dosen">
     @push('styles')
     {{-- dataTables --}}
     <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/datatables.min.css') }}">

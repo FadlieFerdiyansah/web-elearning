@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Dashboard">
     <div class="row">
         <div class="col-12">
             <div class="card">

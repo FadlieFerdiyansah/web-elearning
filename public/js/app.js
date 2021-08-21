@@ -1870,8 +1870,6 @@ __webpack_require__(/*! ./components/jadwals/Table */ "./resources/js/components
 
 __webpack_require__(/*! ./components/jadwals/Edit */ "./resources/js/components/jadwals/Edit.js");
 
-__webpack_require__(/*! ./components/uploadMateri/selectTipe */ "./resources/js/components/uploadMateri/selectTipe.js");
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -1983,57 +1981,52 @@ function Create(props) {
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(['']),
       _useState8 = _slicedToArray(_useState7, 2),
       days = _useState8[0],
-      setDays = _useState8[1];
+      setDays = _useState8[1]; //untuk mendaptkan value dari inputan
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(['']),
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState10 = _slicedToArray(_useState9, 2),
-      kelasDoesntHaveJadwal = _useState10[0],
-      setKelasDoesntHaveJadwal = _useState10[1]; //untuk mendaptkan value dari inputan
-
+      kelasId = _useState10[0],
+      setKelasId = _useState10[1];
 
   var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState12 = _slicedToArray(_useState11, 2),
-      kelasId = _useState12[0],
-      setKelasId = _useState12[1];
+      dosenId = _useState12[0],
+      setDosenId = _useState12[1];
 
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState14 = _slicedToArray(_useState13, 2),
-      dosenId = _useState14[0],
-      setDosenId = _useState14[1];
+      matkulId = _useState14[0],
+      setMatkulId = _useState14[1];
 
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState16 = _slicedToArray(_useState15, 2),
-      matkulId = _useState16[0],
-      setMatkulId = _useState16[1];
+      hari = _useState16[0],
+      setHari = _useState16[1];
 
   var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState18 = _slicedToArray(_useState17, 2),
-      hari = _useState18[0],
-      setHari = _useState18[1];
+      jamMasuk = _useState18[0],
+      setJamMasuk = _useState18[1];
 
   var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState20 = _slicedToArray(_useState19, 2),
-      jamMasuk = _useState20[0],
-      setJamMasuk = _useState20[1];
+      jamKeluar = _useState20[0],
+      setJamKeluar = _useState20[1]; //Notif ketika berhasil create jadwal
 
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
+
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(['']),
       _useState22 = _slicedToArray(_useState21, 2),
-      jamKeluar = _useState22[0],
-      setJamKeluar = _useState22[1]; //Notif ketika berhasil create jadwal
-
-
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(['']),
-      _useState24 = _slicedToArray(_useState23, 2),
-      errors = _useState24[0],
-      setErrors = _useState24[1];
+      errors = _useState22[0],
+      setErrors = _useState22[1];
 
   var request = {
-    kelas: kelasId,
-    dosen: dosenId,
-    matkul: matkulId,
+    kelas_id: kelasId,
+    dosen_id: dosenId,
+    matkul_id: matkulId,
     hari: hari,
-    jamMasuk: jamMasuk,
-    jamKeluar: jamKeluar
+    jam_masuk: jamMasuk,
+    jam_keluar: jamKeluar
   };
 
   var store = /*#__PURE__*/function () {
@@ -2174,41 +2167,13 @@ function Create(props) {
     setMatkulId(e.target.value);
   };
 
-  var getKelasDoesntHaveJadwal = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(e) {
-      var response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              _context5.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/jadwals/kelas-mempunyai-jadwal');
-
-            case 2:
-              response = _context5.sent;
-              setKelasDoesntHaveJadwal(response.data);
-
-            case 4:
-            case "end":
-              return _context5.stop();
-          }
-        }
-      }, _callee5);
-    }));
-
-    return function getKelasDoesntHaveJadwal(_x4) {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function (e) {
     setDays(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum\'at', 'Sabtu', 'Minggu']);
     getKelas();
-    getKelasDoesntHaveJadwal();
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "row",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "col-12 col-md-6 col-lg-6",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_hot_toast__WEBPACK_IMPORTED_MODULE_5__.Toaster, {
         position: "bottom-right",
@@ -2244,9 +2209,9 @@ function Create(props) {
                     children: k.kd_kelas
                   }, k.id);
                 })]
-              }), errors.kelas ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              }), errors.kelas_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "text-danger text-small",
-                children: errors.kelas
+                children: errors.kelas_id
               }) : '']
             }), dosens.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "form-group",
@@ -2268,9 +2233,9 @@ function Create(props) {
                     children: dosen.nama
                   }, dosen.id);
                 })]
-              }), errors.dosen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              }), errors.dosen_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "text-danger text-small",
-                children: errors.dosen
+                children: errors.dosen_id
               }) : '']
             }) : '', matkuls.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "form-group",
@@ -2292,9 +2257,9 @@ function Create(props) {
                     children: matkul.nm_matkul
                   }, matkul.id);
                 })]
-              }), errors.matkul ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              }), errors.matkul_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "text-danger text-small",
-                children: errors.matkul
+                children: errors.matkul_id
               }) : '']
             }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "form-group",
@@ -2341,9 +2306,9 @@ function Create(props) {
                     className: "form-control timepicker",
                     name: "jam_masuk",
                     id: "jam_masuk"
-                  }), errors.jamMasuk ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                  }), errors.jam_masuk ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "text-danger text-small",
-                    children: errors.jamMasuk
+                    children: errors.jam_masuk
                   }) : '']
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -2362,9 +2327,9 @@ function Create(props) {
                     className: "form-control timepicker",
                     name: "jam_keluar",
                     id: "jam_keluar"
-                  }), errors.jamKeluar ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                  }), errors.jam_keluar ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "text-danger text-small",
-                    children: errors.jamKeluar
+                    children: errors.jam_keluar
                   }) : '']
                 })
               })]
@@ -2379,44 +2344,7 @@ function Create(props) {
           })
         })]
       })]
-    }), kelasDoesntHaveJadwal.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      className: "col-12 col-md-6 col-lg-6",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "card",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          className: "card-header",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
-            children: "Kelas yang belum mempunyai jadwal"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          className: "card-body",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("table", {
-            className: "table table-hover",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("thead", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-                  scope: "col",
-                  children: "#"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-                  scope: "col",
-                  children: "Kelas"
-                })]
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tbody", {
-              children: kelasDoesntHaveJadwal.map(function (k) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
-                    children: k.id
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
-                    children: k.kd_kelas
-                  })]
-                }, k.id);
-              })
-            })]
-          })
-        })]
-      })
-    }) : '']
+    })
   });
 }
 
@@ -2677,40 +2605,6 @@ if (document.getElementById('table')) {
     endpoint: item.getAttribute('endpoint'),
     title: item.getAttribute('title')
   }), item);
-}
-
-/***/ }),
-
-/***/ "./resources/js/components/uploadMateri/selectTipe.js":
-/*!************************************************************!*\
-  !*** ./resources/js/components/uploadMateri/selectTipe.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
- // import ReactDOM from 'react-dom';
-
-
-
-function selectTipe() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-      children: "Hello"
-    })
-  });
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (selectTipe);
-
-if (document.getElementById('tipe')) {
-  var item = document.getElementById('tipe');
-  ReactDOM.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("selectTipe", {}), item);
 }
 
 /***/ }),

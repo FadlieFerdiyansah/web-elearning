@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Tambah Dosen">
     @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/bundles/select2/dist/css/select2.min.css') }}">
     <style>

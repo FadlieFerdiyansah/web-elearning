@@ -15,12 +15,6 @@ class DosenController extends Controller
 {
     public function table(Request $request)
     {
-        // $dosen = Dosen::latest()->with(['matkuls' => function($query){
-        //     $query->select('nm_matkul');
-        // },'kelas' => function($query){
-        //     $query->select('kd_kelas');
-        // }])->get();
-        //     dd($dosen);
         if($request->wantsJson()){
             $dosen = Dosen::latest()->with(['matkuls','kelas'])->get();
             return DataTables::of($dosen)
@@ -145,15 +139,8 @@ class DosenController extends Controller
                 }
             }
         }
-        
-
-        // foreach($mhs as $m){
-            //  dd($m);
-            // $m[0]->delete();
-            // if($m[0]->foto != 'default.png'){
-            //     Storage::delete($m[0]->foto); 
-            // }
-        // }
-        
     }
+
+
+
 }

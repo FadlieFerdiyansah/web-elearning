@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Jadwal Kuliah">
 	@push('styles')
 	<style>
 		td:nth-child(2) {
@@ -16,7 +16,7 @@
 				</div>
 				<div class="pricing-padding">
 					<div class="pricing-price">
-						<div>{{ $jadwal->hari }}</div>
+						<div>{{ strtoupper($jadwal->hari) }}</div>
 						<div>{{ $jadwal->matkul->nm_matkul }}</div>
 						{{ $jadwal->kelas_id }}
 					</div>
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 				<div class="pricing-cta">
-					<a href="{{ route('kelas.masuk',Crypt::encryptString($jadwal->matkul_id)) }}">Masuk <i class="fas fa-arrow-right"></i></a>
+					<a href="{{ route('kelas.masuk',Crypt::encryptString($jadwal->id)) }}">Masuk <i class="fas fa-arrow-right"></i></a>
 				</div>
 			</div>
 		</div>

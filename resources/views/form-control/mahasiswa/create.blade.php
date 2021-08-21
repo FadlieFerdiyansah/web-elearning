@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Tambah Mahasiswa">
     @push('styles')
     @endpush
         <div class="card">

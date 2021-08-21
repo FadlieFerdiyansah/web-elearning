@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Buat Jadwal">
     @push('styles')
     @endpush
 

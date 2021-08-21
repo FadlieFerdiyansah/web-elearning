@@ -1,14 +1,14 @@
 <x-app-layouts>
     <div class="row">
         <div class="col-md-3">
-            <div class="pricing pricing-highlight">
+            <div class="pricing ">
                 <div class="pricing-title">
                     presensi
                 </div>
                 <div class="pricing-padding">
                     <div class="pricing-price">
                         <h3>{{ $kelas_mhs->jam_masuk .' - '. $kelas_mhs->jam_keluar }}</h3>
-                        <div>Jam masuk - Jam keluar</div>
+                        <div>Jam masuk - Jam keluar {{ $kelas_mhs->kelas->kd_kelas }}</div>
                     </div>
                     <div>
                         <table class="table">

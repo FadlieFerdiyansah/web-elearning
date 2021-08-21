@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Tabel Matakuliah">
     @push('styles')
     @endpush
         <div class="card">

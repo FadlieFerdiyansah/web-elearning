@@ -49,7 +49,7 @@
     </div>
 </x-app-layouts> --}}
 
-<x-app-layouts>
+<x-app-layouts title="Table Materi">
     @push('styles')
     {{-- dataTables --}}
     <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/datatables.min.css') }}">

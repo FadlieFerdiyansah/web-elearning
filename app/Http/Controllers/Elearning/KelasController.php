@@ -14,9 +14,9 @@ class KelasController extends Controller
 {
     public function masuk($id)
     {
-        $id = Crypt::decryptString($id);
-        
-        $kelas_mhs = Jadwal::where('matkul_id',$id)->first();
+        $jadwal_id = Crypt::decryptString($id);
+
+        $kelas_mhs = Jadwal::where('id',$jadwal_id)->first();
         return view('frontend.kelas.masuk',compact('kelas_mhs'));
     }
 

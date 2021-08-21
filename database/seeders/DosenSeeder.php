@@ -6,7 +6,7 @@ use App\Models\Dosen;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
-class DosenSeed extends Seeder
+class DosenSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -1,11 +1,8 @@
-<x-app-layouts>
-  @push('styles')
+<x-app-layouts title="Tabel Jadwal">
+  <div id="table" endpoint="{{ route('jadwals.table') }}" title="Table Jadwal">
+  </div>
+
+  @push('scripts')
+  <script src="{{ asset('js/app.js') }}"></script>
   @endpush
-
-    <div id="table" endpoint="{{ route('jadwals.datatable') }}" title="Table Jadwal">
-    </div>
-
-    @push('scripts')
-    <script src="{{ asset('js/app.js') }}"></script>
-    @endpush
 </x-app-layouts>
