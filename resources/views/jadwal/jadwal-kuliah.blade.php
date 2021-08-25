@@ -18,7 +18,6 @@
 					<div class="pricing-price">
 						<div>{{ strtoupper($jadwal->hari) }}</div>
 						<div>{{ $jadwal->matkul->nm_matkul }}</div>
-						{{ $jadwal->kelas_id }}
 					</div>
 					<div>
 						<div class="py-4">

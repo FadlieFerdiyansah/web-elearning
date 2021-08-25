@@ -2302,7 +2302,7 @@ function Create(props) {
                     onChange: function onChange(e) {
                       return setJamMasuk(e.target.value);
                     },
-                    type: "text",
+                    type: "time",
                     className: "form-control timepicker",
                     name: "jam_masuk",
                     id: "jam_masuk"
@@ -2323,7 +2323,7 @@ function Create(props) {
                     onChange: function onChange(e) {
                       return setJamKeluar(e.target.value);
                     },
-                    type: "text",
+                    type: "time",
                     className: "form-control timepicker",
                     name: "jam_keluar",
                     id: "jam_keluar"
@@ -2537,9 +2537,7 @@ function Table(props) {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                 children: "Matakuliah"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                children: "Jam Masuk"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                children: "Jam Keluar"
+                children: "Jam"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                 children: "Action"
               })]
@@ -2556,9 +2554,7 @@ function Table(props) {
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
                   children: jadwal.matkul
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-                  children: jadwal.jam_masuk
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-                  children: jadwal.jam_keluar
+                  children: "".concat(jadwal.jam_masuk, " - ").concat(jadwal.jam_keluar)
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
                     href: "#",

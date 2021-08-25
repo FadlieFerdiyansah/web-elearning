@@ -35,6 +35,11 @@ class Mahasiswa extends Authenticatable
         return $this->belongsTo(Kelas::class);
     }
 
+    public function absens()
+    {
+        return $this->hasMany(Absen::class);
+    }
+
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');

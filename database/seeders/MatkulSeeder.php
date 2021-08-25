@@ -14,23 +14,6 @@ class MatkulSeeder extends Seeder
      */
     public function run()
     {
-        // Matkul::create([
-        //     'kd_matkul' => 'MTK',
-        //     'nm_matkul' => 'Matematika',
-        //     'sks' => 18,
-        // ]);
-
-        // Matkul::create([
-        //     'kd_matkul' => 'PBO',
-        //     'nm_matkul' => 'Pemrograman Berorentasi Objek',
-        //     'sks' => 22,
-        // ]);
-
-        // Matkul::create([
-        //     'kd_matkul' => 'AK',
-        //     'nm_matkul' => 'Arsitektur Komputer',
-        //     'sks' => 10,
-        // ]);
         $matkuls = collect(['arsiteksur komputer',
                         'pemrograman berorientasi objek',
                         'matematika diskrit',

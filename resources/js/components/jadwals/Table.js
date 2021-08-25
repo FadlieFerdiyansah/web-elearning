@@ -35,8 +35,7 @@ function Table(props) {
                                 <th>Kelas</th>
                                 <th>Dosen Pengajar</th>
                                 <th>Matakuliah</th>
-                                <th>Jam Masuk</th>
-                                <th>Jam Keluar</th>
+                                <th>Jam</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -49,8 +48,7 @@ function Table(props) {
                                             <td>{jadwal.kelas}</td>
                                             <td>{jadwal.dosen}</td>
                                             <td>{jadwal.matkul}</td>
-                                            <td>{jadwal.jam_masuk}</td>
-                                            <td>{jadwal.jam_keluar}</td>
+                                            <td>{`${jadwal.jam_masuk} - ${jadwal.jam_keluar}`}</td>
                                             <td>
                                                 <a href="#" className="btn btn-icon icon-left btn-primary btn-sm mr-1"><i className="fas fa-edit"></i> Edit</a>
                                                 <a href="#" className="btn btn-icon icon-left btn-danger btn-sm"><i className="fas fa-times"></i> Delete</a>

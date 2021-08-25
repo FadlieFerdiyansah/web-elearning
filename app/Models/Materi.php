@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Materi extends Model
 {
     use HasFactory;
-    // protected $with = ['kelas','matkul'];
     protected $fillable = ['judul','pertemuan','tipe','file_or_link','deskripsi','kelas_id','dosen_id','matkul_id'];
+    protected $with = ['kelas','matkul'];
 
     public function kelas()
     {
@@ -24,7 +24,7 @@ class Materi extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');
+        return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y H:i');
 
     }
 }

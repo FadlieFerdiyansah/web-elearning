@@ -11,7 +11,8 @@ class Matkul extends Model
     use HasFactory;
 
     protected $fillable = ['kd_matkul','nm_matkul','sks'];
-
+    // protected $with = ['materis'];
+    
     public function jadwals()
     {
         return $this->hasMany(Jadwal::class);
@@ -36,5 +37,10 @@ class Matkul extends Model
     public function getNmMatkulAttribute()
     {
         return strtoupper($this->attributes['nm_matkul']);
+    }
+
+    public function getKdMatkulAttribute()
+    {
+        return strtoupper($this->attributes['kd_matkul']);
     }
 }

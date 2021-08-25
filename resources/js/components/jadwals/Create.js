@@ -173,7 +173,7 @@ function Create(props) {
                                 <div className="col">
                                     <div className="form-group">
                                         <label htmlFor="jam_masuk">Jam Masuk</label>
-                                        <input value={jamMasuk} onChange={e => setJamMasuk(e.target.value)} type="text" className="form-control timepicker" name="jam_masuk" id="jam_masuk" />
+                                        <input value={jamMasuk} onChange={e => setJamMasuk(e.target.value)} type="time" className="form-control timepicker" name="jam_masuk" id="jam_masuk" />
                                         {
                                             errors.jam_masuk ?
                                                 <div className="text-danger text-small">{errors.jam_masuk}</div>
@@ -185,7 +185,7 @@ function Create(props) {
                                 <div className="col">
                                     <div className="form-group">
                                         <label htmlFor="jam_keluar">Jam Keluar</label>
-                                        <input value={jamKeluar} onChange={e => setJamKeluar(e.target.value)} type="text" className="form-control timepicker" name="jam_keluar" id="jam_keluar" />
+                                        <input value={jamKeluar} onChange={e => setJamKeluar(e.target.value)} type="time" className="form-control timepicker" name="jam_keluar" id="jam_keluar" />
                                         {
                                             errors.jam_keluar ?
                                                 <div className="text-danger text-small">{errors.jam_keluar}</div>

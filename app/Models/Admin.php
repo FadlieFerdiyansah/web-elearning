@@ -11,4 +11,9 @@ class Admin extends Authenticatable
 {
 
     use HasFactory,HasRoles;
+
+    public function absens()
+    {
+        return 'ok';
+    }
 }

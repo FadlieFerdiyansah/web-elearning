@@ -23,7 +23,7 @@ Route::middleware('auth:mahasiswa,admin,dosen', 'disable.back')->group(function(
         Route::get('jadwal-pengganti', [JadwalController::class, 'jadwalPengganti'])->name('jadwalPengganti');
 
         Route::get('masuk/kelas/{kelas}', [KelasController::class, 'masuk'])->name('kelas.masuk');
-        
+        Route::get('masuk/kelas/{matkul}/materi', [MateriController::class, 'materi'])->name('materi');
 
         Route::get('materi/upload', [MateriController::class, 'upload'])->name('materi.upload');
         Route::post('materi/upload', [MateriController::class, 'store'])->name('materi.store');

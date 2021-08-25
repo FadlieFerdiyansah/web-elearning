@@ -15,9 +15,12 @@ use Illuminate\Support\Facades\Auth;
 
 class MateriController extends Controller
 {
-    public function materi(Materi $materi)
+    public function materi(Matkul $matkul)
     {
-        return view('materi.index',compact('materi'));
+        $matkul = Matkul::find($matkul->id);
+        $materis = $matkul->materis()->where('kelas_id',Auth::user()->kelas->id)->orderByDesc('pertemuan')->paginate(5);
+        // return $materis;
+        return view('frontend.kelas.materi',compact('materis','matkul'));
     }    
 
     public function table(Request $request)
