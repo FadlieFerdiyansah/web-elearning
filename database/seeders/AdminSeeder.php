@@ -22,11 +22,6 @@ class AdminSeeder extends Seeder
             'foto' => 'default.png',
         ]);
 
-        Role::create([
-            'name' => 'admin',
-            'guard_name' => 'admin'
-        ]);
-
         $admin->assignRole('admin');
     }
 }

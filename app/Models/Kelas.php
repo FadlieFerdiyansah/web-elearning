@@ -12,6 +12,7 @@ class Kelas extends Model
     protected $fillable = ['kd_kelas'];
     public $timestamps = false;
     // protected $with = ['materis','dosens'];
+    protected $with = ['dosens'];
 
     public function jadwals()
     {

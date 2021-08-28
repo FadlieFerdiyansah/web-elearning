@@ -10,6 +10,8 @@ class Absen extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['mahasiswa_id','jadwal_id','status','pertemuan'];
+
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class);

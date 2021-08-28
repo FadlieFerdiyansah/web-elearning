@@ -15,12 +15,24 @@ use Illuminate\Support\Facades\Auth;
 
 class MateriController extends Controller
 {
-    public function materi(Matkul $matkul)
+    public function materi(Kelas $kelas,Matkul $matkul)
     {
-        $matkul = Matkul::find($matkul->id);
-        $materis = $matkul->materis()->where('kelas_id',Auth::user()->kelas->id)->orderByDesc('pertemuan')->paginate(5);
+        // if ($kelas->id !== Auth::user()->kelas_id) {
+        //     return abort(404);
+        // }
+        
+        if(Auth::guard('admin')->user() || Auth::guard('dosen')->user()){
+            $some = Auth::user()->kelas()->findOrFail($kelas->id);
+            $sim = Auth::user()->matkuls()->findOrFail($matkul->id);
+            // $materis = $kelas->materis()->where('kelas_id',$kelas->id)->where('matkul_id',$matkul->id)->latest()->paginate(5);
+            //  $materis = $kelas->materis()->whereIn('kelas_id',Auth::user()->kelas()->pluck('id'))->where('matkul_id',$matkul->id)->latest()->paginate(5);
+             $materis = $kelas->materis()->where('kelas_id',optional($some)->id)->where('matkul_id',$sim->id)->latest()->paginate(5);
+
+        }else{
+            $materis = $kelas->materis()->where('kelas_id',Auth::user()->kelas_id)->where('matkul_id',$matkul->id)->orderByDesc('pertemuan')->paginate(5);
+        }
         // return $materis;
-        return view('frontend.kelas.materi',compact('materis','matkul'));
+        return view('frontend.kelas.materi',compact('materis','kelas'));
     }    
 
     public function table(Request $request)

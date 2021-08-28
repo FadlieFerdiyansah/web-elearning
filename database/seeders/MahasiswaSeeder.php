@@ -25,11 +25,6 @@ class MahasiswaSeeder extends Seeder
             'foto' => 'default.png'
         ]);
 
-        Role::create([
-            'name' => 'mahasiswa',
-            'guard_name' => 'mahasiswa'
-        ]);
-
         $mhs->assignRole('mahasiswa');
     }
 }

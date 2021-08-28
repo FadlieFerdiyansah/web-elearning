@@ -1,7 +1,6 @@
 <x-app-layouts>
     <div class="card">
-        <div class="card-header"><h3>Materi &raquo; {{ $matkul->nm_matkul }}</h3></div>
-
+        <div class="card-header"><h3>Materi &raquo; {{ $kelas }}</h3></div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">

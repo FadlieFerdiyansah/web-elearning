@@ -16,17 +16,11 @@ class DosenSeeder extends Seeder
     public function run()
     {
         $dosen = Dosen::create([
-            'kelas_id' => 1,
             'nip' => 100912812,
-            'nama' => 'Dosen',
-            'email' => 'dosen@gmail.com',
-            'password' => bcrypt('dosen123'),
+            'nama' => 'Fadlie Dosen',
+            'email' => 'fadlie@gmail.com',
+            'password' => bcrypt('admin123'),
             'foto' => 'default.png'
-        ]);
-
-        Role::create([
-            'name' => 'dosen',
-            'guard_name' => 'dosen'
         ]);
 
         $dosen->assignRole('dosen');

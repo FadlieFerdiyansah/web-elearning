@@ -12,7 +12,7 @@ class Dosen extends Authenticatable
     use HasFactory, HasRoles;
 
     protected $guarded = [];
-
+    protected $with = ['kelas'];
     /**
      * The attributes that should be hidden for arrays.
      *

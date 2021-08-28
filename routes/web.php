@@ -7,7 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Elearning\MatkulController;
 use App\Http\Controllers\Elearning\FakultasController;
 use App\Http\Controllers\Users\{DosenController, MahasiswaController};
-use App\Http\Controllers\Elearning\{KelasController, JadwalController, MateriController};
+use App\Http\Controllers\Elearning\{AbsenController, KelasController, JadwalController, MateriController};
 
 
 Route::get('', HomeController::class)->name('index');
@@ -23,7 +23,8 @@ Route::middleware('auth:mahasiswa,admin,dosen', 'disable.back')->group(function(
         Route::get('jadwal-pengganti', [JadwalController::class, 'jadwalPengganti'])->name('jadwalPengganti');
 
         Route::get('masuk/kelas/{kelas}', [KelasController::class, 'masuk'])->name('kelas.masuk');
-        Route::get('masuk/kelas/{matkul}/materi', [MateriController::class, 'materi'])->name('materi');
+        Route::get('masuk/kelas/{kelas}/{matkul}', [MateriController::class, 'materi'])->name('materi');
+        Route::post('masuk/kelas/{jadwal}/absen', [AbsenController::class, 'absen'])->name('absen');
 
         Route::get('materi/upload', [MateriController::class, 'upload'])->name('materi.upload');
         Route::post('materi/upload', [MateriController::class, 'store'])->name('materi.store');

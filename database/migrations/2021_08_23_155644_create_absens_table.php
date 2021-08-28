@@ -18,8 +18,7 @@ class CreateAbsensTable extends Migration
             $table->foreignId('mahasiswa_id');
             $table->foreignId('jadwal_id');
             $table->boolean('status');
-            $table->dateTime('tanggal');
-            $table->string('pertemuan');
+            $table->string('pertemuan')->nullable();
             $table->timestamps();
         });
     }

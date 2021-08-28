@@ -6,6 +6,9 @@
         </a>
       </div>
       <small class="ml-3">Role : {{ implode(', ', Auth::user()->getRoleNames()->toArray()) }}</small>
+      @if (Auth::guard('mahasiswa')->user())
+      <small><b>Kelas</b> : {{ Auth::user()->kelas->kd_kelas }} &raquo; <b>Id</b> : {{ Auth::user()->kelas->id }}</small>
+      @endif
       <ul class="sidebar-menu">
         <li class="menu-header">Menu</li>
         <li class="dropdown{{ request()->routeIs('dashboard') ? ' active' : '' }}">

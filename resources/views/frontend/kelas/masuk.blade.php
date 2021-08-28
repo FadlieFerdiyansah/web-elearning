@@ -29,11 +29,14 @@
                         </table>
                     </div>
                 </div>
+                @hasrole ('mahasiswa')
                 <div class="pricing-cta bg-primary">
-                    <form action="#" method="post">
+                    <form action="{{ route('absen', $kelas_mhs->id  ) }}" method="post">
+                        @csrf
                         <button class="btn btn-primary form-control">Absen <i class="fas fa-arrow-right"></i></button>
                     </form>
                 </div>
+                @endhasrole
             </div>
         </div>
         <div class="col-md-9">
@@ -45,7 +48,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col mb-4 mb-lg-0 text-center">
-                                <a href="{{ route('materi', $kelas_mhs->matkul->id) }}">
+                                <a href="{{ route('materi', [$kelas_mhs->kelas_id,$kelas_mhs->matkul_id]) }}">
                                     <i data-feather="book-open"></i>
                                     <div class="mt-2 font-weight-bold">Materi</div>
                                     <div class="text-small text-muted"><span class="text-primary"><i
