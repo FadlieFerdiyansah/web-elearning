@@ -8,7 +8,7 @@
 	</style>
 	@endpush
 	<div class="row">
-		@foreach ($jadwals as $jadwal)
+		@forelse ($jadwals as $jadwal)
 		<div class="col-12 col-md-4 col-lg-4">
 			<div class="pricing{{ $jadwal->hari == $day ? ' pricing-highlight' : '' }}">
 				<div class="pricing-title">
@@ -57,10 +57,25 @@
 					</div>
 				</div>
 				<div class="pricing-cta">
-					<a href="{{ route('kelas.masuk',Crypt::encryptString($jadwal->id)) }}">Masuk <i class="fas fa-arrow-right"></i></a>
+					<a href="{{ route('kelas.masuk',Crypt::encryptString($jadwal->id)) }}">Masuk <i
+							class="fas fa-arrow-right"></i></a>
 				</div>
 			</div>
 		</div>
-		@endforeach
+		@empty
+			<div class="card">
+				<div class="card-body">
+					<div class="empty-state" data-height="200">
+						<div class="empty-state-icon">
+							<i class="fas fa-question"></i>
+						</div>
+						<h2>Tidak menemukan jadwal kuliah</h2>
+						<p class="lead">
+							Silahkan Hubungi <a href="mailto:help@mybest.com">help@mybest.com</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		@endforelse
 	</div>
 </x-app-layouts>

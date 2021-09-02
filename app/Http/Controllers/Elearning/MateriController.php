@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\MateriRequest;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class MateriController extends Controller
@@ -22,14 +23,20 @@ class MateriController extends Controller
         // }
         
         if(Auth::guard('admin')->user() || Auth::guard('dosen')->user()){
-            $some = Auth::user()->kelas()->findOrFail($kelas->id);
-            $sim = Auth::user()->matkuls()->findOrFail($matkul->id);
+            $user = Auth::user();
+            $dosen_klsId = $user->kelas()->findOrFail($kelas->id);
+            $dosen_matkulId = $user->matkuls()->findOrFail($matkul->id);
             // $materis = $kelas->materis()->where('kelas_id',$kelas->id)->where('matkul_id',$matkul->id)->latest()->paginate(5);
             //  $materis = $kelas->materis()->whereIn('kelas_id',Auth::user()->kelas()->pluck('id'))->where('matkul_id',$matkul->id)->latest()->paginate(5);
-             $materis = $kelas->materis()->where('kelas_id',optional($some)->id)->where('matkul_id',$sim->id)->latest()->paginate(5);
+             $materis = $kelas->materis()->where('kelas_id',optional($dosen_klsId)->id)->where('matkul_id',$dosen_matkulId->id)->latest()->paginate(5);
 
         }else{
-            $materis = $kelas->materis()->where('kelas_id',Auth::user()->kelas_id)->where('matkul_id',$matkul->id)->orderByDesc('pertemuan')->paginate(5);
+            $user_klsId = Auth::user()->kelas_id;
+            if($user_klsId == $kelas->id){
+                $materis = $kelas->materis()->whereKelasId($user_klsId)->where('matkul_id',$matkul->id)->orderByDesc('pertemuan')->paginate(5);
+            }else{
+                abort(404,'Mahasiswa tidak bisa mengakses kelas lain');
+            }
         }
         // return $materis;
         return view('frontend.kelas.materi',compact('materis','kelas'));

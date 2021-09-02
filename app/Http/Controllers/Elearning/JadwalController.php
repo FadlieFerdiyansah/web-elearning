@@ -47,6 +47,8 @@ class JadwalController extends Controller
             $day = 'Sabtu';
         }
 
+        // return Jadwal::paginate(6);
+         
 
         // Get Jadwal Berdasarkan Mahasiswa/Dosen
         {
@@ -63,7 +65,7 @@ class JadwalController extends Controller
                 //     'sks' => Matkul::select('sks')->whereColumn('id','jadwals.matkul_id')->limit(1),
                 //     'hari' => Jadwal::select('hari')->whereColumn('id','id')->limit(1)
                 // ])->get();
-                $jadwals = JadwalResource::collection(Jadwal::paginate(6));
+                $jadwals = Jadwal::paginate(6);
             }
         }
 

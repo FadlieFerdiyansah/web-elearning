@@ -15,6 +15,7 @@ class DosenController extends Controller
 {
     public function table(Request $request)
     {
+             
         if($request->wantsJson()){
             $dosen = Dosen::latest()->with(['matkuls','kelas'])->get();
             return DataTables::of($dosen)
