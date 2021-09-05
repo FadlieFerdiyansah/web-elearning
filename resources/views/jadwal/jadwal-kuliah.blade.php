@@ -17,6 +17,7 @@
 				<div class="pricing-padding">
 					<div class="pricing-price">
 						<div>{{ strtoupper($jadwal->hari) }}</div>
+						<p>{{ $jadwal->id }}</p>
 						<div>{{ $jadwal->matkul->nm_matkul }}</div>
 					</div>
 					<div>

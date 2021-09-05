@@ -23,13 +23,14 @@ Route::middleware('auth:mahasiswa,admin,dosen', 'disable.back')->group(function(
         Route::get('jadwal-pengganti', [JadwalController::class, 'jadwalPengganti'])->name('jadwalPengganti');
 
         Route::get('masuk/kelas/{kelas}', [KelasController::class, 'masuk'])->name('kelas.masuk');
-        Route::get('masuk/kelas/{kelas}/{matkul}', [MateriController::class, 'materi'])->name('materi');
+        // Route::get('masuk/kelas/{kelas}/{matkul}', [MateriController::class, 'materi'])->name('materi');
         Route::post('masuk/kelas/{jadwal}/absen', [AbsenController::class, 'absen'])->name('absen');
-
+        
         Route::get('materi/upload', [MateriController::class, 'upload'])->name('materi.upload');
         Route::post('materi/upload', [MateriController::class, 'store'])->name('materi.store');
         Route::get('materi/table', [MateriController::class, 'table'])->name('materi.table');
-        Route::get('materi/{matkul}', [MateriController::class, 'show'])->name('materi.show');
+        Route::get('materi/{jadwal}', [MateriController::class, 'materi'])->name('materi');
+        // Route::get('materi/{matkul}', [MateriController::class, 'show'])->name('materi.show');
         Route::delete('materi/{materi}/delete', [MateriController::class, 'destroy'])->name('materi.delete');
         Route::put('materi/{materi}/edit', [MateriController::class, 'edit'])->name('materi.edit');
     });

@@ -47,7 +47,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="kelas">Kelas</label>
-                    <select name="kelas[]" id="kelas" class="form-control select2" multiple="">
+                    <select name="kelas[]" id="kelas" class="form-control select2" multiple>
                         @foreach ($kelas as $kls)
                         <option value="{{ $kls->id }}">{{ $kls->kd_kelas }}</option>
                         @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class MateriRequest extends FormRequest
 {
@@ -23,13 +24,18 @@ class MateriRequest extends FormRequest
      */
     public function rules()
     {
+        if(request('tipe') == 'pdf'){
+            $condition = 'file|mimes:pdf|max:1000';
+        }else{
+            $condition = 'required';
+        }
         return [
             'kelas' => 'required',
             'matkul' => 'required',
             'judul' => 'required',
             'pertemuan' => 'required',
             'tipe' => 'required',
-            'file_or_link' => 'required',
+            'file_or_link' => $condition,
             'deskripsi' => 'required',
         ];
     }

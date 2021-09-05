@@ -48,7 +48,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col mb-4 mb-lg-0 text-center">
-                                <a href="{{ route('materi', [$kelas_mhs->kelas_id,$kelas_mhs->matkul_id]) }}">
+                                {{-- <a href="{{ route('materi', [$kelas_mhs->kelas_id,$kelas_mhs->matkul_id]) }}"> --}}
+                                <a href="{{ route('materi', Crypt::encryptString($kelas_mhs->id)) }}">
                                     <i data-feather="book-open"></i>
                                     <div class="mt-2 font-weight-bold">Materi</div>
                                     <div class="text-small text-muted"><span class="text-primary"><i
