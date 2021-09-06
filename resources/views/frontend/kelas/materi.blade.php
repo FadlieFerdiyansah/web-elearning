@@ -1,6 +1,6 @@
 <x-app-layouts>
     <div class="card">
-        <div class="card-header"><h3>Materi &raquo; {{ $materis[0]->matkul->nm_matkul ?? '?' }}</h3></div>
+        <div class="card-header"><h3>Materi &raquo; {{ $jadwal->matkul->nm_matkul }}</h3></div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">
@@ -12,10 +12,9 @@
                             <th>Kode Matkul</th>
                             <th>Pertemuan</th>
                             <th>Judul</th>
-                            <th>Tipe</th>
                             <th>File/Link</th>
                             <th>Deskripsi</th>
-                            <th>Dibuat pada</th>
+                            <th>Diupload pada</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,12 +26,11 @@
                             <td>{{ $materi->matkul->kd_matkul }}</td>
                             <td>{{ $materi->pertemuan }}</td>
                             <td>{{ $materi->judul }}</td>
-                            <td>{{ $materi->tipe }}</td>
                             <td>
                                 @if ($materi->tipe == 'youtube')
-                                    <a class="btn btn-dark btn-sm" href="{{ $materi->file_or_link }}" target="_blank">Klik me</a>
+                                    <a href="{{ $materi->file_or_link }}" target="_blank">Klik me</a>
                                 @else
-                                    <div class="btn btn-sm btn-dark">Download</div>
+                                    <a class="btn btn-dark btn-sm" href="{{ asset("/storage/$materi->file_or_link") }}" download>Download</a>
                                 @endif
                             </td>
                             <td>{{ $materi->deskripsi }}</td>
@@ -45,6 +43,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                {{ $materis->links() }}
             </div>
         </div>
     </div>

@@ -15,49 +15,36 @@ use App\Models\Jadwal;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class MateriController extends Controller
 {
     public function materi($id)
     { 
-        
+        //Decrypt var $id dari jadwal
         $jadwal_id =  Crypt::decryptString($id);
 
+        //Setelah di decrypt cari. apakah id ada di dalam table jadwal
+        //jika ada tampilkan hanya 1
         $jadwal = Jadwal::whereId($jadwal_id)->first();
 
-        {
-            // if ($kelas->id !== Auth::user()->kelas_id) {
-            //     return abort(404);
-            // }
-
-            // $user = Auth::user();
-            // if(Auth::guard('admin')->user()){
-            //     $materis = $kelas->materis()->whereKelasId($kelas->id)->whereMatkulId($matkul->id)->latest()->paginate(5);
-
-            // }elseif(Auth::guard('dosen')->user()){
-            //     $dosen_klsId = $user->kelas()->findOrFail($kelas->id);
-            //     $dosen_matkulId = $user->matkuls()->findOrFail($matkul->id);
-            //     $materis = $kelas->materis()->whereKelasId($dosen_klsId->id)->whereMatkulId($dosen_matkulId->id)->latest()->paginate(5);
-
-            // }else{
-            //     $mhs_klsId = Auth::guard('mahasiswa')->user()->kelas_id;
-            //     if($mhs_klsId == $kelas->id){
-            //         $materis = $kelas->materis()->whereKelasId($mhs_klsId)->whereMatkulId($matkul->id)->orderByDesc('pertemuan')->paginate(5);
-            //     }else{
-            //         abort(404,'Mahasiswa tidak bisa mengakses kelas lain');
-            //     }
-            // }
-            // return $materis;
-        }
         if(Auth::guard('mahasiswa')->user()){
+            //Jika mahasiswa yang login mempunyai kelas_id yang sama dengan kelas_id dari table jadwal
+            //maka tampilkan materi berdasarkan matkul/dosen/kls
             if(Auth::guard('mahasiswa')->user()->kelas_id == $jadwal->kelas_id){
                 $materis = Materi::whereMatkulId($jadwal->matkul_id)->whereDosenId($jadwal->dosen_id)->whereKelasId($jadwal->kelas_id)->latest()->paginate(5);
+            }else{
+                //Jika mahasiswa yang login tidak memiliki kelas_id yang sama dengan kelas_id dari table jadwal maka redirect ke 404
+                abort(404);
             }
         }elseif(Auth::guard('dosen')->user() || Auth::guard('admin')->user()){
+            //Jika yang login admin/ dosen tampilkan materis berdasarkan matkul/dosen/kelas
             $materis = Materi::whereMatkulId($jadwal->matkul_id)->whereDosenId($jadwal->dosen_id)->whereKelasId($jadwal->kelas_id)->latest()->paginate(5);
         }
+        
+
         // return view('frontend.kelas.materi', compact('materis', 'kelas'));
-        return view('frontend.kelas.materi', compact('materis'));
+        return view('frontend.kelas.materi', compact('materis','jadwal'));
     }
 
     public function table(Request $request)
@@ -153,10 +140,9 @@ class MateriController extends Controller
                 $materi['kelas_id'] = $request->kelas[$i];
                 $materi['matkul_id'] = $request->matkul;
 
-                
                 if($request->tipe == 'pdf'){
                     $fileName = time() .'.'.$request->file('file_or_link')->extension();
-                    $materi['file_or_link'] = $request->file('file_or_link')->move("materials",$fileName);
+                    $materi['file_or_link'] = $request->file('file_or_link')->storeAs("materials",$fileName);
                 }
                 Auth::user()->materis()->create($materi);
             }

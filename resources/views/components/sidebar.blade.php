@@ -47,7 +47,7 @@
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="book-open"></i><span>Management Materi</span></a>
                 <ul class="dropdown-menu">
                     <li {{ request()->routeIs('materi.table') ? 'class=active' : '' }}><a class="nav-link" href="{{ route('materi.table') }}">Tabel Materi</a></li>
-                    <li {{ request()->routeIs('materi.upload') ? 'class=active' : '' }}><a class="nav-link" href="{{ route('materi.upload') }}">Materi</a></li>
+                    <li {{ request()->routeIs('materi.upload') ? 'class=active' : '' }}><a class="nav-link" href="{{ route('materi.upload') }}">Upload Materi</a></li>
                   {{-- <li><a class="nav-link" href="icon-font-awesome.html">Mahasiswa</a></li> --}}
                 </ul>
               </li>
