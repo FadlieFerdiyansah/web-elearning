@@ -8,46 +8,40 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Absen;
+use App\Models\Admin;
 use App\Models\Dosen;
 use App\Models\Matkul;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class KelasController extends Controller
 {
+    public function waktuSekarang()
+    {
+        return Carbon::now('Asia/Jakarta')->format('H:i');
+    }
+
     public function masuk($id)
     {
         $jadwal_id = Crypt::decryptString($id);
 
-        $kelas_mhs = Jadwal::where('id', $jadwal_id)->first();
-        // $matkul = Matkul::find($kelas_mhs->matkul_id);
-        // $materis = $matkul->materis()->where('kelas_id',Auth::user()->kelas->id)->get();
-        // $kelas_mhs = Jadwal::where('id', $jadwal_id)
-        // ->addSelect([
-        //     'nama_dosen' => Dosen::select('nama')
-        //     ->whereColumn('id', 'jadwals.dosen_id')
-        //     ->limit(1),
-        //     'kelas' => Kelas::select('kd_kelas')
-        //     ->whereColumn('id', 'jadwals.kelas_id')
-        //     ->limit(1),
-        //     'sks' => Matkul::select('sks')
-        //     ->whereColumn('id', 'jadwals.matkul_id')
-        //     ->limit(1),
-        //     'nm_matkul' => Matkul::select('nm_matkul')
-        //     ->whereColumn('id', 'jadwals.matkul_id')
-        //     ->limit(1),
-        // ])
-        // ->first();
-        if(Auth::guard('admin') && Auth::guard('dosen')){
-            $absens = Absen::where('jadwal_id', $jadwal_id)->latest()->paginate(5);
-        }else{
-            $absens = Auth::user()->absens()->where('jadwal_id', $jadwal_id)->paginate(5);
+        $jadwal = Jadwal::whereId($jadwal_id)->first();
+        $waktuAbsen = (bool) $this->waktuSekarang() >= $jadwal->jam_masuk && $this->waktuSekarang() <= $jadwal->jam_keluar;
+        // $today = Carbon::now('Asia/Jakarta')->format('H:i');
+        // return $today;
+        // return Jadwal::whereBetween('jam_masuk',[$jadwal->jam_masuk,$jadwal->jam_keluar])->first();
+        if(Auth::guard('admin')->user() || Auth::guard('dosen')->user()){
+            $absens = Absen::whereJadwalId($jadwal_id)->latest()->paginate(5);
+        }elseif(Auth::guard('mahasiswa')->user()){
+            $absens = Auth::user()->absens()->whereJadwalId($jadwal_id)->paginate(5);
         }
         // return $kelas_mhs;
         // return $absens;
         return view('frontend.kelas.masuk', [
-            'kelas_mhs' => $kelas_mhs,
-            'absens' => $absens
+            'jadwal' => $jadwal,
+            'absens' => $absens,
+            'waktuAbsen' => $waktuAbsen
         ]);
     }
 
@@ -57,7 +51,7 @@ class KelasController extends Controller
             return Kelas::get();
         }
         $kelas = Kelas::get();
-        return view('datatable.kelas.table', compact('kelas'));
+        return view('backend.datatable.kelas.table', compact('kelas'));
     }
 
     /**
@@ -77,7 +71,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        return view('form-control.kelas.create');
+        return view('backend.form-control.kelas.create');
     }
 
     /**
@@ -112,7 +106,7 @@ class KelasController extends Controller
      */
     public function edit(Kelas $kela)
     {
-        return view('form-control.kelas.edit', [
+        return view('backend.form-control.kelas.edit', [
             'kela' => $kela
         ]);
     }

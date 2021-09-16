@@ -24,7 +24,7 @@ class DashboardController extends Controller
         // dd(new ZipArchive);
         // $user =  Auth::user()->roles;
         // return $role->givePermissionTo(['']);
-        // return $user->hasPermissionTo('jadwal kuliahm');
+        // return $role->hasPermissionTo('management absensi');
         return view('dashboard.index');
     }
 }

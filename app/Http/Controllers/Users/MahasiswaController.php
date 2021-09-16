@@ -44,19 +44,25 @@ class MahasiswaController extends Controller
             $mahasiswas = Mahasiswa::count();
         }
 
-        return view('managementUser.mahasiswa.table',compact('mahasiswas'));
+        return view('backend.managementUser.mahasiswa.table',compact('mahasiswas'));
     }
 
     public function create()
     {
         $kelas = Kelas::get();
         $fakultas = Fakultas::get();
-        return view('form-control.mahasiswa.create',compact('kelas','fakultas'));
+        return view('backend.form-control.mahasiswa.create',compact('kelas','fakultas'));
     }
 
     public function store()
     {
-        // return $request->all();
+        request()->validate([
+            'nim' => 'required',
+            'nama' => 'required',
+            'email' => 'required',
+            'fakultas_id' => 'required',
+            'kelas_id' => 'required',
+        ]);
 
         if(request('foto')) $img = request()->file('foto')->move('images/profile');
         
@@ -76,7 +82,7 @@ class MahasiswaController extends Controller
 
     public function edit(Mahasiswa $mahasiswa)
     {
-        return view('form-control.mahasiswa.edit', [
+        return view('backend.form-control.mahasiswa.edit', [
             'mahasiswa' => $mahasiswa,
             'fakultas' => Fakultas::get(),
             'kelas' => Kelas::get()

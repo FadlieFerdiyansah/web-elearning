@@ -11,7 +11,7 @@ class FakultasController extends Controller
     public function table()
     {
         $fakultas = Fakultas::get();
-        return view('datatable.fakultas.table', compact('fakultas'));
+        return view('backend.datatable.fakultas.table', compact('fakultas'));
     }
 
     /**
@@ -31,7 +31,7 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        return view('form-control.fakultas.create');
+        return view('backend.form-control.fakultas.create');
     }
 
     /**
@@ -42,6 +42,10 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required'
+        ]);
+        
         $nm_fk = $request->nama;
         $arr = explode(' ', $nm_fk);
         $singkatan = '';
@@ -78,7 +82,7 @@ class FakultasController extends Controller
      */
     public function edit(Fakultas $fakulta)
     {
-        return view('form-control.fakultas.edit',compact('fakulta'));
+        return view('backend.form-control.fakultas.edit',compact('fakulta'));
     }
 
     /**

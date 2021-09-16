@@ -11,7 +11,7 @@ class MatkulController extends Controller
 {
     public function table()
     {
-        return view('datatable.matkuls.table',[
+        return view('backend.datatable.matkuls.table',[
             'matkuls' => Matkul::latest()->paginate(10)
         ]);
     }
@@ -20,7 +20,7 @@ class MatkulController extends Controller
     {
         $query =  request('query');
 
-        return view('datatable.matkuls.table', [
+        return view('backend.datatable.matkuls.table', [
             'matkuls' => Matkul::where("nm_matkul", "like" , "%$query%")->latest()->paginate(10),
             'result' => Matkul::where('nm_matkul', 'like', "%".$query."%")->latest()->paginate()
         ]);
@@ -43,7 +43,7 @@ class MatkulController extends Controller
      */
     public function create()
     {
-        return view('form-control.matkuls.create',[
+        return view('backend.form-control.matkuls.create',[
             'title' => 'Form Matkul'
         ]);
     }
@@ -99,7 +99,7 @@ class MatkulController extends Controller
      */
     public function edit(Matkul $matkul)
     {
-        return view('form-control.matkuls.edit',compact('matkul'));
+        return view('backend.form-control.matkuls.edit',compact('matkul'));
     }
 
     /**

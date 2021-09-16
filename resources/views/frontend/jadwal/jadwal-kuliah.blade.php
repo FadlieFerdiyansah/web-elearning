@@ -80,3 +80,35 @@
 		@endforelse
 	</div>
 </x-app-layouts>
+
+
+//Maybe will be executed
+{{-- <div class="row">
+	<div class="col-md-4">
+		<div class="card card-primary">
+			<div class="card-header">
+				<h4>Senin</h4>
+			</div>
+			<div class="card-body">
+				<label><b>Kelas :</b> 17.2A.12</label>
+				<label><b>Dosen :</b> Rimuru Ahmed Julian S.MPD</label>
+				<label><b>Kode Matkul :</b> BI</label> <br>
+				<label><b>SKS :</b> 4</label>
+			</div>
+			<div class="d-flex justify-content-center">
+				<div class="btn-group">
+					<a href="#" class="btn btn-success">Masuk Kelas</a>
+					<a href="#" class="btn btn-primary">
+						<i style="width: 15px;" data-feather="book-open"></i>
+					</a>
+					<a href="#" class="btn btn-primary">
+						<i style="width: 15px;" data-feather="clipboard"></i>
+					</a>
+					<a href="#" class="btn btn-primary">
+						<i style="width: 15px;" data-feather="message-square"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> --}}

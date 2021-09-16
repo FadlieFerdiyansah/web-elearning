@@ -128,6 +128,7 @@
                                     <th>Link/File</th>
                                     <th>Deskripsi</th>
                                     <th>Dibuat pada</th>
+                                    <th>Action</th>
                                     <th><input type="checkbox" class="check_all"></th>
                                 </tr>
                             </thead>
@@ -218,11 +219,12 @@
                                 return meta.row + meta.settings._iDisplayStart + 1;
                                 }  
                             },
-                        { data: 'kd_kelas'},
+                        { data: 'kelas.kd_kelas'},
                         { data: 'pertemuan'},
-                        { data: 'nm_matkul' },
+                        { data: 'matkul.nm_matkul' },
                         { data: 'judul' },
                         { data: 'file_or_link' },
+                        { data: 'deskripsi' },
                         { data: 'created_at', searchable:true },
                         { data: 'action', orderable: false, searchable: false},
                         // { data: 'checkbox', orderable: false, searchable: false}

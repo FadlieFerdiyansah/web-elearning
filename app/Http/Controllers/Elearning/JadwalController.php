@@ -25,7 +25,7 @@ class JadwalController extends Controller
         if(request()->expectsJson()){
             return JadwalResource::collection(Jadwal::paginate(5));
         }
-        return view('datatable.jadwals.table');
+        return view('backend.datatable.jadwals.table');
     }
 
     public function jadwalKuliah()
@@ -73,7 +73,7 @@ class JadwalController extends Controller
 
         
 
-        return view('jadwal.jadwal-kuliah', [
+        return view('frontend.jadwal.jadwal-kuliah', [
             'jadwals' => $jadwals,
             'day' => $day
         ]);
@@ -87,12 +87,12 @@ class JadwalController extends Controller
                     ->where('kelas_id', Auth::user()->kelas_id)->get();
 
 
-        return view('jadwal.jadwal-pengganti',compact('dosens','jadwals'));
+        return view('frontend.jadwal.jadwal-pengganti',compact('dosens','jadwals'));
     }
 
     public function create()
     {
-        return view('form-control.jadwals.jadwal');
+        return view('backend.form-control.jadwals.jadwal');
     }
 
     public function edit(Jadwal $jadwal)

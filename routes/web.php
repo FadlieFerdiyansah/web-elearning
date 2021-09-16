@@ -24,7 +24,7 @@ Route::middleware('auth:mahasiswa,admin,dosen', 'disable.back')->group(function(
 
         Route::get('masuk/kelas/{kelas}', [KelasController::class, 'masuk'])->name('kelas.masuk');
         // Route::get('masuk/kelas/{kelas}/{matkul}', [MateriController::class, 'materi'])->name('materi');
-        Route::post('masuk/kelas/{jadwal}/absen', [AbsenController::class, 'absen'])->name('absen');
+        Route::post('masuk/kelas/absen', [AbsenController::class, 'absen'])->name('absen');
         
         Route::get('materi/upload', [MateriController::class, 'upload'])->name('materi.upload');
         Route::post('materi/upload', [MateriController::class, 'store'])->name('materi.store');

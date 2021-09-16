@@ -49,14 +49,11 @@ class MateriController extends Controller
 
     public function table(Request $request)
     {
-        // return Str::between('fadlie ganteng','a','e');
+        // return Str::between('12:00','11:00','12:00');
         // $j = $request->merge(['fadlie','ganteng',1]);
 
         if ($request->wantsJson()) {
-            return DataTables::of(Auth::user()->materis()->addSelect([
-                'kd_kelas' => Kelas::select('kd_kelas')->whereColumn('kelas_id', 'kelas.id'),
-                'nm_matkul' => Matkul::select('nm_matkul')->whereColumn('matkul_id', 'matkuls.id')
-            ])->orderByDesc('pertemuan'))
+            return DataTables::of(Auth::user()->materis()->orderByDesc('pertemuan'))
                 ->addColumn('action', function ($materi) {
                     $button = '
                         <div class="dropdown d-inline">
@@ -79,11 +76,9 @@ class MateriController extends Controller
                     return $button;
                 })
                 ->make(true);
-        } else {
-            $materis = Auth::user();
         }
 
-        return view('materi.table', compact('materis'));
+        return view('frontend.materi.table');
     }
 
     public function show(Matkul $matkul, Request $request)
@@ -101,7 +96,7 @@ class MateriController extends Controller
         } else {
             $materis = $matkul->materis()->latest()->paginate(5);
         }
-        return view('materi.show', compact('materis'));
+        return view('frontend.materi.show', compact('materis'));
     }
 
     public function upload()
@@ -123,7 +118,7 @@ class MateriController extends Controller
         }
 
 
-        return view('materi.upload', [
+        return view('frontend.materi.upload', [
             'matkuls' => $matkuls,
             'kelas' => $kelas
         ]);

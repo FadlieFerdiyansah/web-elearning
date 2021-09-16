@@ -7,35 +7,42 @@
                 </div>
                 <div class="pricing-padding">
                     <div class="pricing-price">
-                        <h3>{{ $kelas_mhs->jam_masuk .' - '. $kelas_mhs->jam_keluar }}</h3>
-                        <div>Jam masuk - Jam keluar {{ $kelas_mhs->kd_kelas }}</div>
+                        <h3>{{ $jadwal->jam_masuk .' - '. $jadwal->jam_keluar }}</h3>
+                        <div>Jam masuk - Jam keluar {{ $jadwal->kd_kelas }}</div>
                     </div>
                     <div>
                         <table class="table">
                             <thead>
                                 <tr align="left">
                                     <th>Dosen</th>
-                                    <td>{{ $kelas_mhs->dosen->nama }}</td>
+                                    <td>{{ $jadwal->dosen->nama }}</td>
                                 </tr>
                                 <tr align="left">
                                     <th>Matakuliah</th>
-                                    <td>{{ $kelas_mhs->matkul->nm_matkul }}</td>
+                                    <td>{{ $jadwal->matkul->nm_matkul }}</td>
                                 </tr>
                                 <tr align="left">
                                     <th>SKS</th>
-                                    <td>{{ $kelas_mhs->matkul->sks }}</td>
+                                    <td>{{ $jadwal->matkul->sks }}</td>
                                 </tr>
                             </thead>
                         </table>
                     </div>
                 </div>
                 @hasrole ('mahasiswa')
-                <div class="pricing-cta bg-primary">
-                    <form action="{{ route('absen', $kelas_mhs->id  ) }}" method="post">
-                        @csrf
-                        <button class="btn btn-primary form-control">Absen <i class="fas fa-arrow-right"></i></button>
-                    </form>
-                </div>
+                    @if ($waktuAbsen)
+                        <div class="pricing-cta bg-primary">
+                            <form action="{{ route('absen') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ Crypt::encryptString($jadwal->id) }}">
+                                <button class="btn btn-primary form-control">Absen <i class="fas fa-arrow-right"></i></button>
+                            </form>
+                        </div>
+                    @else
+                        <div class="pricing-cta bg-primary">
+                            <button class="btn btn-primary form-control disabled">Absen <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    @endif
                 @endhasrole
             </div>
         </div>
@@ -48,8 +55,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col mb-4 mb-lg-0 text-center">
-                                {{-- <a href="{{ route('materi', [$kelas_mhs->kelas_id,$kelas_mhs->matkul_id]) }}"> --}}
-                                <a href="{{ route('materi', Crypt::encryptString($kelas_mhs->id)) }}">
+                                {{-- <a href="{{ route('materi', [$jadwal->kelas_id,$jadwal->matkul_id]) }}"> --}}
+                                <a href="{{ route('materi', Crypt::encryptString($jadwal->id)) }}">
                                     <i data-feather="book-open"></i>
                                     <div class="mt-2 font-weight-bold">Materi</div>
                                     <div class="text-small text-muted"><span class="text-primary"><i
@@ -95,7 +102,7 @@
                                         <th>#</th>
                                         <th>Status</th>
                                         <th>Pertemuan</th>
-                                        <th>Kode Matakuliah</th>
+                                        <th>Matakuliah</th>
                                         <th>Tanggal</th>
                                     </tr>
                                 </thead>
@@ -107,7 +114,7 @@
                                                 class="badge badge-{{ $absen->status == 1 ? 'success' : 'danger' }}">{{ $absen->status == 1 ? 'Hadir' : 'Tidak Hadir' }}</span>
                                         </td>
                                         <td>{{ $absen->pertemuan }}</td>
-                                        <td>{{ $kelas_mhs->matkul->kd_matkul }}</td>
+                                        <td>{{ $jadwal->matkul->nm_matkul }}</td>
                                         <td>{{ $absen->tanggal }}</td>
                                     </tr>
                                     @empty
@@ -117,6 +124,7 @@
                                     @endforelse
                                 </tbody>
                             </table>
+                            {{ $absens->links() }}
                         </div>
                     </div>
                 </div>

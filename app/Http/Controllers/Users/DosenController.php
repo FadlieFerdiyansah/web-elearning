@@ -51,12 +51,12 @@ class DosenController extends Controller
             $dosens = Dosen::count();
         }
 
-        return view('datatable.dosen.table',compact('dosens'));
+        return view('backend.datatable.dosen.table',compact('dosens'));
     }
 
     public function create()
     {
-        return view('form-control.dosen.create',[
+        return view('backend.form-control.dosen.create',[
             'matkuls' => Matkul::get(),
             'kelas' => Kelas::get()
         ]);
@@ -88,7 +88,7 @@ class DosenController extends Controller
     public function edit(Dosen $dosen)
     {
 
-        return view('form-control.dosen.edit',[
+        return view('backend.form-control.dosen.edit',[
             'dosen' => $dosen,
             'matkuls' => Matkul::get(),
             'kelas' => Kelas::get()
