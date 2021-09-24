@@ -1,13 +1,19 @@
 <?php
 
+use App\Http\Controllers\Admin\JadwalController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Elearning\MatkulController;
-use App\Http\Controllers\Elearning\FakultasController;
-use App\Http\Controllers\Users\{DosenController, MahasiswaController};
-use App\Http\Controllers\Elearning\{AbsenController, KelasController, JadwalController, MateriController};
+use App\Http\Controllers\Dosen\AbsenController;
+use App\Http\Controllers\Dosen\MateriController;
+use App\Http\Controllers\Admin\Users\MahasiswaController;
+
+// use App\Http\Controllers\Elearning\MatkulController;
+// use App\Http\Controllers\Elearning\FakultasController;
+// use App\Http\Controllers\Users\{DosenController, MahasiswaController};
+// use App\Http\Controllers\Elearning\{AbsenController, KelasController, JadwalController, MateriController};
+
 
 
 Route::get('', HomeController::class)->name('index');
@@ -46,8 +52,6 @@ Route::middleware('auth:mahasiswa,admin,dosen', 'disable.back')->group(function 
 
 
 
-
-
     Route::middleware('role:admin')->group(function () {
         Route::prefix('management-user')->group(function () {
             Route::prefix('dosen')->group(function () {
@@ -71,18 +75,7 @@ Route::middleware('auth:mahasiswa,admin,dosen', 'disable.back')->group(function 
             });
         });
 
-        Route::prefix('jadwals')->group(function () {
-            Route::get('table', [JadwalController::class, 'table'])->name('jadwals.table');
-
-            Route::get('create', [JadwalController::class, 'create'])->name('jadwals.create');
-            Route::post('create', [JadwalController::class, 'store']);
-            Route::get('edit/{jadwal}', [JadwalController::class, 'edit'])->name('jadwals.edit');
-            Route::put('edit/{jadwal}', [JadwalController::class, 'update']);
-
-            Route::get('get-dosen-by-{kelas}', [JadwalController::class, 'getDosenByKelasId']);
-            Route::get('get-matkul-by-{dosen}', [JadwalController::class, 'getMatkulByDosenId']);
-            // Route::resource('jadwals',JadwalController::class);
-        });
+        
 
         Route::get('kelas/table', [KelasController::class, 'table'])->name('kelas.table');
         Route::resource('kelas', KelasController::class);
@@ -94,4 +87,32 @@ Route::middleware('auth:mahasiswa,admin,dosen', 'disable.back')->group(function 
         Route::get('fakultas/table', [FakultasController::class, 'table'])->name('fakultas.table');
         Route::resource('fakultas', FakultasController::class);
     });
+});
+
+
+
+
+//Hasil refactor code diatas untuk admin
+Route::middleware('auth:admin')->group(function(){
+
+
+
+
+
+
+
+
+    Route::prefix('jadwals')->group(function () {
+        Route::get('table', [JadwalController::class, 'table'])->name('jadwals.table');
+    
+        Route::get('create', [JadwalController::class, 'create'])->name('jadwals.create');
+        Route::post('create', [JadwalController::class, 'store']);
+        Route::get('edit/{jadwal}', [JadwalController::class, 'edit'])->name('jadwals.edit');
+        Route::put('edit/{jadwal}', [JadwalController::class, 'update']);
+    
+        Route::get('get-dosen-by-{kelas}', [JadwalController::class, 'getDosenByKelasId']);
+        Route::get('get-matkul-by-{dosen}', [JadwalController::class, 'getMatkulByDosenId']);
+        // Route::resource('jadwals',JadwalController::class);
+    });
+
 });
