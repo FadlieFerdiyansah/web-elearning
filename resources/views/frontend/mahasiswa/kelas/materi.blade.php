@@ -1,6 +1,6 @@
 <x-app-layouts>
     <div class="card">
-        <div class="card-header"><h3>Materi &raquo; {{ $jadwal->matkul->nm_matkul }}</h3></div>
+        <div class="card-header"><h3>Materi &raquo; {{ $jadwal->matkul->nm_matkul }}</h3>ini buat mahasiswa</div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">

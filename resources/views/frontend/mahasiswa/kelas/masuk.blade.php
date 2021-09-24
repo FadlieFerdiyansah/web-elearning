@@ -1,13 +1,14 @@
 <x-app-layouts>
     <div class="row">
         <div class="col-md-3">
-            <div class="pricing ">
+            <div class="pricing">
                 <div class="pricing-title">
                     presensi
                 </div>
                 <div class="pricing-padding">
                     <div class="pricing-price">
-                        <h3>{{ $jadwal->jam_masuk .' - '. $jadwal->jam_keluar }}</h3>
+                        <h2>{{ $jadwal->hari }}</h2>
+                        <h5>{{ $jadwal->jam_masuk .' - '. $jadwal->jam_keluar }}</h5>
                         <div>Jam masuk - Jam keluar {{ $jadwal->kd_kelas }}</div>
                     </div>
                     <div>
@@ -29,21 +30,20 @@
                         </table>
                     </div>
                 </div>
-                @hasrole ('mahasiswa')
-                    @if ($waktuAbsen)
-                        <div class="pricing-cta bg-primary">
-                            <form action="{{ route('absen') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ Crypt::encryptString($jadwal->id) }}">
-                                <button class="btn btn-primary form-control">Absen <i class="fas fa-arrow-right"></i></button>
-                            </form>
-                        </div>
-                    @else
-                        <div class="pricing-cta bg-primary">
-                            <button class="btn btn-primary form-control disabled">Absen <i class="fas fa-arrow-right"></i></button>
-                        </div>
-                    @endif
-                @endhasrole
+                @if ($waktuAbsen)
+                <div class="pricing-cta bg-primary">
+                    <form action="{{ route('absen') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ Crypt::encryptString($jadwal->id) }}">
+                        <button class="btn btn-primary form-control">Absen <i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+                @else
+                <div class="pricing-cta bg-primary">
+                    <button class="btn btn-primary form-control disabled">Absen <i
+                            class="fas fa-arrow-right"></i></button>
+                </div>
+                @endif
             </div>
         </div>
         <div class="col-md-9">
@@ -75,17 +75,6 @@
                                 <div class="text-small text-muted"><span class="text-danger"><i
                                             class="fas fa-caret-down"></i></span> 27%</div>
                             </div>
-                            {{-- <div class="col mb-4 mb-lg-0 text-center">
-                                <div class="browser browser-opera"></div>
-                                <div class="mt-2 font-weight-bold">Opera</div>
-                                <div class="text-small text-muted">9%</div>
-                            </div>
-                            <div class="col mb-4 mb-lg-0 text-center">
-                                <div class="browser browser-internet-explorer"></div>
-                                <div class="mt-2 font-weight-bold">IE</div>
-                                <div class="text-small text-muted"><span class="text-primary"><i
-                                            class="fas fa-caret-up"></i></span> 4%</div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>

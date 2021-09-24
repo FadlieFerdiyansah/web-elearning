@@ -64,12 +64,12 @@
           @endcan
 
           @can('management absensi')
-            {{-- <li class="dropdown{{ request()->routeIs(['dosen.table','mahasiswa.table']) ? ' active' : '' }}"> --}}
-            <li class="dropdown">
+            <li class="dropdown{{ request()->routeIs(['absensi.table','absensi.kelas']) ? ' active' : '' }}">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="users"></i><span>Management Absensi</span></a>
               <ul class="dropdown-menu">
                   {{-- <li {{ request()->routeIs('dosen.table') ? 'class=active' : '' }}><a class="nav-link" href="{{ route('dosen.table') }}">M</a></li> --}}
-                  <li {{ request()->routeIs('mahasiswa.table') ? 'class=active' : '' }}><a class="nav-link" href="{{ route('mahasiswa.table') }}">Mahasiswa</a></li>
+                  <li {{ request()->routeIs('absensi.table') ? 'class=active' : '' }}><a class="nav-link" href="{{ route('absensi.table') }}">Absen</a></li>
+                  <li {{ request()->routeIs('absensi.kelas') ? 'class=active' : '' }}><a class="nav-link" href="{{ route('absensi.kelas') }}">Kelas</a></li>
               </ul>
             </li>
           @endcan

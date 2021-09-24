@@ -51,6 +51,11 @@ class Dosen extends Authenticatable
         return $this->hasMany(Materi::class);
     }
 
+    public function absen()
+    {
+        return $this->hasOne(Absen::class);
+    }
+
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');

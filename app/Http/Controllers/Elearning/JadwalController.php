@@ -30,23 +30,6 @@ class JadwalController extends Controller
 
     public function jadwalKuliah()
     {
-        $today = date('l');
-        if ($today == 'Sunday') {
-            $day = 'Minggu';
-        } elseif ($today == 'Monday') {
-            $day = 'Senin';
-        } elseif ($today == 'Tuesday') {
-            $day = 'Selasa';
-        } elseif ($today == 'Wednesday') {
-            $day = 'Rabu';
-        } elseif ($today == 'Thursday') {
-            $day = 'Kamis';
-        } elseif ($today == 'Friday') {
-            $day = 'Jum\'at';
-        } else {
-            $day = 'Sabtu';
-        }
-
         // return Jadwal::paginate(6);
          
 
@@ -75,7 +58,7 @@ class JadwalController extends Controller
 
         return view('frontend.jadwal.jadwal-kuliah', [
             'jadwals' => $jadwals,
-            'day' => $day
+            'day' => hariIndo()
         ]);
     }
 

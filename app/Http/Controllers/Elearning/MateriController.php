@@ -3,49 +3,14 @@
 namespace App\Http\Controllers\Elearning;
 
 use App\Http\Controllers\Controller;
-use App\Models\Dosen;
-use App\Models\Kelas;
-use App\Models\Materi;
 use App\Models\Matkul;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\MateriRequest;
-use App\Models\Jadwal;
-use Exception;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
 
 class MateriController extends Controller
 {
-    public function materi($id)
-    { 
-        //Decrypt var $id dari jadwal
-        $jadwal_id =  Crypt::decryptString($id);
-
-        //Setelah di decrypt cari. apakah id ada di dalam table jadwal
-        //jika ada tampilkan hanya 1
-        $jadwal = Jadwal::whereId($jadwal_id)->first();
-
-        if(Auth::guard('mahasiswa')->user()){
-            //Jika mahasiswa yang login mempunyai kelas_id yang sama dengan kelas_id dari table jadwal
-            //maka tampilkan materi berdasarkan matkul/dosen/kls
-            if(Auth::guard('mahasiswa')->user()->kelas_id == $jadwal->kelas_id){
-                $materis = Materi::whereMatkulId($jadwal->matkul_id)->whereDosenId($jadwal->dosen_id)->whereKelasId($jadwal->kelas_id)->latest()->paginate(5);
-            }else{
-                //Jika mahasiswa yang login tidak memiliki kelas_id yang sama dengan kelas_id dari table jadwal maka redirect ke 404
-                abort(404);
-            }
-        }elseif(Auth::guard('dosen')->user() || Auth::guard('admin')->user()){
-            //Jika yang login admin/ dosen tampilkan materis berdasarkan matkul/dosen/kelas
-            $materis = Materi::whereMatkulId($jadwal->matkul_id)->whereDosenId($jadwal->dosen_id)->whereKelasId($jadwal->kelas_id)->latest()->paginate(5);
-        }
-        
-
-        // return view('frontend.kelas.materi', compact('materis', 'kelas'));
-        return view('frontend.kelas.materi', compact('materis','jadwal'));
-    }
 
     public function table(Request $request)
     {
@@ -78,7 +43,7 @@ class MateriController extends Controller
                 ->make(true);
         }
 
-        return view('frontend.materi.table');
+        return view('frontend.dosen.materi.table');
     }
 
     public function show(Matkul $matkul, Request $request)
@@ -118,7 +83,7 @@ class MateriController extends Controller
         }
 
 
-        return view('frontend.materi.upload', [
+        return view('frontend.dosen.materi.upload', [
             'matkuls' => $matkuls,
             'kelas' => $kelas
         ]);
