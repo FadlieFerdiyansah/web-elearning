@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Auth;
 class MateriController extends Controller
 {
 
+    public function some()
+    {
+        return 'some';
+    }
+
     public function table(Request $request)
     {
         // return Str::between('12:00','11:00','12:00');

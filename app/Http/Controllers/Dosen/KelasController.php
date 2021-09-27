@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers\Dosen;
 
+use App\Http\Controllers\Controller;
 use App\Models\kelas;
 use App\Models\Jadwal;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Absen;
-use App\Models\Admin;
-use App\Models\Dosen;
 use App\Models\Materi;
-use App\Models\Matkul;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;

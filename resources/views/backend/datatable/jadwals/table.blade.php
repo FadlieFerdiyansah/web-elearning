@@ -1,5 +1,5 @@
 <x-app-layouts title="Tabel Jadwal">
-  <div id="table" endpoint="{{ route('jadwals.table') }}" title="Table Jadwal">
+  <div id="table" endpoint="{{ route('jadwals.kuliah') }}" routeCreate={{ route('jadwals.create') }} title="Table Jadwal">
   </div>
 
   @push('scripts')

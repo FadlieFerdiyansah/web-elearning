@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\Admin\Users;
 
 use App\Models\Dosen;
 use App\Models\Kelas;

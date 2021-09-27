@@ -23,7 +23,7 @@ class JadwalController extends Controller
     {
         // $jadwals = Jadwal::get()->load(['dosen','matkul','kelas']);
         if (request()->expectsJson()) {
-            return JadwalResource::collection(Jadwal::paginate(5));
+            return JadwalResource::collection(Jadwal::paginate(7));
         }
         return view('backend.datatable.jadwals.table');
     }

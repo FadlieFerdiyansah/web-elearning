@@ -47,9 +47,9 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between">
                     <h4>Total {{ Str::plural('mahasiswa', $mahasiswas) }} {{ $mahasiswas }}</h4>
-
+                    <a href="{{ route('mahasiswa.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Tambah Mahasiswa</a>
                 </div>
                 <div class="card-body">
                     @if (session('success'))
