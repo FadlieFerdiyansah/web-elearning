@@ -20,8 +20,8 @@
                     <tbody>
                         @foreach ($absensiHariIni as $absen)
                         <tr>
-                            <td>{{ $absen->kelas }}</td>
-                            <td>{{ $absen->matkul }}</td>
+                            <td>{{ $absen->jadwal->kelas->kd_kelas }}</td>
+                            <td>{{ $absen->jadwal->matkul->nm_matkul }}</td>
                             <td>{{ $absen->berita_acara }}</td>
                             <td>{{ $absen->rangkuman }}</td>
                             <td>

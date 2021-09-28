@@ -33,7 +33,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::DASHBOARD;
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -85,6 +85,13 @@ class LoginController extends Controller
 
         // if ($this->attemptLogin($request)) {
         //     return $this->sendLoginResponse($request);
+        // }
+
+        // $guards = ['admin','dosen','mahasiswa'];
+
+        // foreach ($guards as $guard) {
+        //     Auth::guard($guard)->attempt($request->only('email','password'), $request->filled('remember'));
+        //     return redirect()->intended(route('dashboard'));
         // }
 
         if(Auth::guard('admin')->attempt($request->only('email','password'), $request->filled('remember'))){

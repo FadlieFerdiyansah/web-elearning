@@ -2,7 +2,7 @@
 	<aside id="sidebar-wrapper">
 		<div class="sidebar-brand">
 			<a href="index.html"> <img alt="image" src="/assets/images/logo/logo-elearning.png" class="header-logo" />
-				<span class="logo-name">{{ Auth::user()->nama }}</span>
+				{{-- <span class="logo-name">{{ Auth::user()->nama }}</span> --}}
 			</a>
 		</div>
 		<ul class="sidebar-menu">
@@ -13,10 +13,11 @@
 						data-feather="monitor"></i><span>Dashboard</span></a>
 			</li>
 
-			@if (Auth::guard('dosen')->check())
-			<x-spesifik_menu.dosen></x-spesifik_menu.dosen>
-			@elseif(Auth::guard('mahasiswa')->check())
+			@if (Auth::guard('mahasiswa')->check())
 			<x-spesifik_menu.mahasiswa></x-spesifik_menu.mahasiswa>
+			@elseif(Auth::guard('dosen')->check())
+			<li class="menu-header">Manajemen</li>
+			<x-spesifik_menu.dosen></x-spesifik_menu.dosen>
 			@else
 			<li class="menu-header">Manajemen</li>
 			<x-spesifik_menu.admin></x-spesifik_menu.admin>

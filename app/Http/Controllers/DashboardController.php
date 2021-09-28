@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 use ZipArchive;
 
 class DashboardController extends Controller
@@ -25,6 +26,11 @@ class DashboardController extends Controller
         // $user =  Auth::user()->roles;
         // return $role->givePermissionTo(['']);
         // return $role->hasPermissionTo('management absensi');
+        $user = Auth::guard('dosen')->user();
+
+        // return $user;
+
+        // return $user->hasPermissionTo('jadwal mengajar');
         return view('dashboard.index');
     }
 }

@@ -22,9 +22,19 @@ class Absen extends Model
         return $this->belongsTo(Dosen::class);
     }
 
+    public function jadwal()
+    {
+        return $this->belongsTo(Jadwal::class);
+    }
+
     // public function getStatusAttribute($value)
     // {
     //     return $value == 1 ? 'Hadir' : 'Tidak Hadir';
+    // }
+
+    // public function getCreatedAtAttribute($value)
+    // {
+    //     return Carbon::parse($this->attributes['created_at'])->translatedFormat('Y-m-d');
     // }
 
     public function getTanggalAttribute($value)

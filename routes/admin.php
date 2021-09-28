@@ -9,9 +9,8 @@ use App\Http\Controllers\Admin\MatkulController;
 use App\Http\Controllers\Admin\FakultasController;
 use App\Http\Controllers\Admin\Users\{DosenController, MahasiswaController};
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+// Route::get('dashboard', DashboardController::class)->name('dashboard');
 
-Auth::routes();
 
 Route::middleware('auth:admin')->group(function () {
 

@@ -19,16 +19,7 @@ use Spatie\Permission\Models\Permission;
 
 class JadwalController extends Controller
 {
-    public function table()
-    {
-        // $jadwals = Jadwal::get()->load(['dosen','matkul','kelas']);
-        if(request()->expectsJson()){
-            return JadwalResource::collection(Jadwal::paginate(5));
-        }
-        return view('backend.datatable.jadwals.table');
-    }
-
-    public function jadwalKuliah()
+    public function jadwalMengajar()
     {
         // return Jadwal::paginate(6);
          
@@ -62,7 +53,7 @@ class JadwalController extends Controller
         ]);
     }
 
-    public function jadwalPengganti()
+    public function jadwalMengajarPengganti()
     {
         $dosens = Dosen::get()->load(['matkuls','kelas']);
 
@@ -71,40 +62,6 @@ class JadwalController extends Controller
 
 
         return view('frontend.jadwal.jadwal-pengganti',compact('dosens','jadwals'));
-    }
-
-    public function create()
-    {
-        return view('backend.form-control.jadwals.jadwal');
-    }
-
-    public function edit(Jadwal $jadwal)
-    {
-        return $jadwal;
-    }
-
-    public function update(Jadwal $jadwal)
-    {
-        return 'ok';
-    }
-
-    //Mendapatkan data dosen berdasarkan kelas
-    public function getDosenByKelasId(Kelas $kelas)
-    {
-        return $kelas->dosens;
-    }
-
-    //Mendapatkan data matkul berdasarkan dosen
-    public function getMatkulByDosenId(Dosen $dosen)
-    {
-        return $dosen->matkuls;
-    }
-
-    public function store(JadwalRequest $request)
-    {
-        Jadwal::create($request->all());
-        $kelas = Kelas::find($request->kelas_id);
-        return response()->json(['message' => 'Berhasil membuat jadwal untuk kelas '. $kelas->kd_kelas]);
     }
 
 }

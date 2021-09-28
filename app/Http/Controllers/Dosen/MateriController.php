@@ -21,7 +21,6 @@ class MateriController extends Controller
     {
         // return Str::between('12:00','11:00','12:00');
         // $j = $request->merge(['fadlie','ganteng',1]);
-
         if ($request->wantsJson()) {
             return DataTables::of(Auth::user()->materis()->orderByDesc('pertemuan'))
                 ->addColumn('action', function ($materi) {

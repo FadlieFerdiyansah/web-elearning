@@ -28,4 +28,9 @@ class Jadwal extends Model
     {
         return $this->belongsTo(Dosen::class);
     }
+    
+    public function absens()
+    {
+        return $this->hasMany(Absen::class);
+    }
 }

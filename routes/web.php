@@ -1,29 +1,21 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
-
-Route::get('', HomeController::class)->name('index');
-
+use App\Http\Controllers\Mahasiswa\JadwalController;
+use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::middleware('auth:mahasiswa', 'disable.back')->group(function () {
+Route::middleware('auth:admin,dosen,mahasiswa')->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
+});
 
-    Route::middleware('permission:jadwal kuliahm|jadwal kuliahd')->group(function () {
-        Route::get('jadwal-kuliah', [JadwalController::class, 'jadwalKuliah'])->name('jadwalKuliah');
-        Route::get('jadwal-pengganti', [JadwalController::class, 'jadwalPengganti'])->name('jadwalPengganti');
+Route::middleware('auth:mahasiswa', 'disable.back')->group(function () {
 
-        Route::get('masuk/kelas/{kelas}', [KelasController::class, 'masuk'])->name('kelas.masuk');
-        Route::post('masuk/kelas/absen', [KelasController::class, 'absen'])->name('absen');
+    Route::get('jadwal-kuliah', [JadwalController::class, 'jadwalKuliah'])->name('jadwalKuliah');
+    Route::get('jadwal-pengganti', [JadwalController::class, 'jadwalPengganti'])->name('jadwalPengganti');
 
-        // Route::get('materi/{jadwal}', [KelasController::class, 'materi'])->name('materi');
-    });
-
-
-
-    
+    Route::get('masuk/kelas/{kelas}', [KelasController::class, 'masuk'])->name('kelas.masuk');
+    Route::post('masuk/kelas/absen', [KelasController::class, 'absen'])->name('absen');
 });

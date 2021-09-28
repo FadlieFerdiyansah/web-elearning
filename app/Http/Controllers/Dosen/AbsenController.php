@@ -2,23 +2,20 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use App\Models\Jadwal;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Absen;
 use App\Models\Kelas;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\RateLimiter;
 
 class AbsenController extends Controller
 {
     public function table()
     {
-        
-        $dateNow = date('Y-m-d');
-        $absensiHariIni = Absen::where('dosen_id',Auth::guard('dosen')->Id())->where('parent',0)->where('created_at',$dateNow)->get(); 
+        $absensiHariIni = Absen::where('dosen_id', Auth::guard('dosen')->Id())
+                            ->where('parent', 0)
+                            ->whereDate('created_at', now())
+                            ->get();
+
         return view('frontend.dosen.absensi.table',compact('absensiHariIni'));
     }
 
