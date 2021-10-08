@@ -12,6 +12,7 @@ class Dosen extends Authenticatable
     use HasFactory, HasRoles;
 
     protected $guarded = [];
+    // protected $with = ['absens'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -51,9 +52,9 @@ class Dosen extends Authenticatable
         return $this->hasMany(Materi::class);
     }
 
-    public function absen()
+    public function absens()
     {
-        return $this->hasOne(Absen::class);
+        return $this->hasMany(Absen::class);
     }
 
     public function getCreatedAtAttribute()

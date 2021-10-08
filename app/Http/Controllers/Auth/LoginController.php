@@ -95,11 +95,11 @@ class LoginController extends Controller
         // }
 
         if(Auth::guard('admin')->attempt($request->only('email','password'), $request->filled('remember'))){
-            return redirect()->intended(route('dashboard'));
+            return redirect()->intended(route('dashboard.admin'));
         }elseif (Auth::guard('mahasiswa')->attempt($request->only('email','password'), $request->filled('remember'))) {
-            return redirect()->intended(route('dashboard'));
+            return redirect()->intended(route('dashboard.mahasiswa'));
         }elseif(Auth::guard('dosen')->attempt($request->only('email','password'), $request->filled('remember'))){
-            return redirect()->intended(route('dashboard'));
+            return redirect()->intended(route('dashboard.dosen'));
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts

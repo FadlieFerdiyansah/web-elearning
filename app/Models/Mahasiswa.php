@@ -13,6 +13,7 @@ class Mahasiswa extends Authenticatable
 
     use HasFactory, HasRoles;
     protected $fillable = ['foto','nim','nama','email','password','fakultas_id','kelas_id'];
+    protected $with = ['absens','userAbsen'];
 
     public function getPictureAttribute()
     {
@@ -37,6 +38,15 @@ class Mahasiswa extends Authenticatable
     public function absens()
     {
         return $this->hasMany(Absen::class);
+    }
+
+    public function userAbsen()
+    {
+        return $this->hasOne(Absen::class)
+        ->whereNotNull('mahasiswa_id')
+        ->where('parent','!=', 0)
+        ->where('status', 1)
+        ->whereDate('created_at', date('Y-m-d'));
     }
 
     public function getCreatedAtAttribute()

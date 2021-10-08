@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use App\Models\Absen;
+use App\Models\Dosen;
 use App\Models\kelas;
 use App\Models\Jadwal;
-use Illuminate\Http\Request;
-use App\Models\Absen;
 use App\Models\Materi;
-use Carbon\Carbon;
+use App\Models\Mahasiswa;
+use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\RateLimiter;
@@ -25,62 +28,39 @@ class KelasController extends Controller
         $jadwal_id = Crypt::decryptString($id);
         $jadwal = Jadwal::whereId($jadwal_id)->first();
 
-        if (Auth::guard('admin')->user() || Auth::guard('dosen')->user()) {
-            $absens = Absen::whereJadwalId($jadwal_id)->latest()->paginate(5);
-        } elseif (Auth::guard('mahasiswa')->user()) {
-            $absens = Auth::user()->absens()->whereJadwalId($jadwal_id)->paginate(5);
-        }
+        $mahasiswa = Mahasiswa::with(['userAbsen' => function($query) use ($jadwal_id) {
+            $query->where('jadwal_id', $jadwal_id);
+        }])->where('kelas_id', $jadwal->kelas_id)->get();
 
-
-        if (hariIndo() == $jadwal->hari) {
-            $waktuAbsen = $this->waktuSekarang() >= $jadwal->jam_masuk && $this->waktuSekarang() <= $jadwal->jam_keluar;
-        } else {
-            $waktuAbsen = false;
-        }
-
-        if (Auth::guard('mahasiswa')->check()) {
-            return view('frontend.mahasiswa.kelas.masuk', [
-                'jadwal' => $jadwal,
-                'absens' => $absens,
-                'waktuAbsen' => $waktuAbsen
-            ]);
-        }
+        $absen = Absen::where('dosen_id',Auth::Id())->where('jadwal_id',$jadwal_id)->whereDate('created_at',date('Y-m-d'))->first();
+       
+        
 
         return view('frontend.dosen.kelas.masuk', [
             'jadwal' => $jadwal,
-            'absens' => $absens,
-            'waktuAbsen' => $waktuAbsen
+            'mahasiswa' => $mahasiswa,
+            'absen' => $absen,
+            // 'absens' => $absens,
+            // 'waktuAbsen' => $waktuAbsen
         ]);
     }
 
-    public function absen()
+    public function storeRekap()
     {
-        $jadwal_id = Crypt::decryptString(request('id'));
-        $jadwal = Jadwal::findOrFail($jadwal_id);
 
-        // $jam_masuk = $jadwal->jam_masuk;
-        // $jam_keluar = $jadwal->jam_keluar;
-        // $waktuAbsen = (bool) $this->waktuSekarang() >= $jam_masuk && $this->waktuSekarang() <= $jam_keluar;
-        // if ($test) {
-        //     header("Refresh:0");
-        // }else{
-        //     return 'ga bisa absen';
-        // }
-
-
-
-        $absen = Auth::user()->absens()->create([
-            'jadwal_id' => $jadwal_id,
-            'status' => true,
-        ]);
-
-        if (RateLimiter::tooManyAttempts($absen, 1)) {
-            return 'berhasil';
-        } else {
-            return 'kebanyakan kali';
+        for ($i = 0; $i < count(request('mahasiswa')); $i++) {
+            Absen::updateOrCreate(
+                ['mahasiswa_id' => request('mahasiswa')[$i]],
+                [
+                    'parent' => request('parent'),
+                    'status' => request('status')[$i],
+                    'jadwal_id' => request('jadwal'),
+                    'pertemuan' => request('pertemuan'),
+                ]
+            );
         }
-
-
+        // return request()->all();
+        session()->flash('success','Berhasil menyimpan data absen');
         return back();
     }
 

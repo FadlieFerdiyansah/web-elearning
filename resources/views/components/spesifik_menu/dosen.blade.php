@@ -19,15 +19,15 @@
 ])
 @endcan
 
-@can('management absensi')
+{{-- @can('management absensi')
 @include('components._partials.menu',[
 'icon' => 'clipboard',
 'parentName' => 'Absensi',
-'nameRoute' => ['absensi.table','absensi.kelas'],
+'nameRoute' => ['absensi.kelas','absensi.table'],
 'countChild' => 2,
-'childName' => ['Absen','Kelas'],
+'childName' => ['Kelas','Absen'],
 ])
-@endcan
+@endcan --}}
 
 @can('management nilai')
 <li class="dropdown">

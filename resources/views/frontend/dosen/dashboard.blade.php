@@ -3,7 +3,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Dashboard</h4>
+                    <h4>Dashboard Dosen</h4>
                     {{-- <p>{{ Auth::guard('mahasiswa')->user() ? 'ya' : 'no' }}</p>
                     <p>Role : {{ Auth::guard('mahasiswa')->user()->hasRole('mahasiswa') ? 'mahasiswa' : 'bukan' }}</p> --}}
                 </div>

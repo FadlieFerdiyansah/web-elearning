@@ -23,6 +23,9 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                if (Auth::guard('mahasiswa')->check()) {
+                    return redirect(route('dashboard.mahasiswa'));
+                }
                 return redirect(RouteServiceProvider::HOME);
             }
         }

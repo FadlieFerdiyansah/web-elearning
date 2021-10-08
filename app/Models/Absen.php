@@ -10,7 +10,8 @@ class Absen extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'dosen_id', 'mahasiswa_id', 'parent', 'status', 'pertemuan', 'rangkuman', 'berita_acara', ];
+    protected $fillable = [ 'dosen_id', 'mahasiswa_id', 'parent', 'status', 'pertemuan', 'rangkuman', 'berita_acara', 'jadwal_id'];
+    // protected $with = ['dosen'];
 
     public function mahasiswa()
     {

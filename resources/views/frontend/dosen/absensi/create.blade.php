@@ -22,8 +22,9 @@
                 @endforeach
             </div>
             @endif
-            <form action="{{ route('absensi.create') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('absensi.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="text" value="{{ Crypt::encryptString($jadwal->id) }}" name="jadwal">
                 <div class="form-group">
                     <label for="kelas">Kelas</label>
                     <select name="kelas" id="kelas" class="form-control">
@@ -33,8 +34,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="nm_matkul">Matakuliah</label>
-                    <select name="nm_matkul" id="nm_matkul" class="form-control">
+                    <label for="matkul">Matakuliah</label>
+                    <select name="matkul" id="matkul" class="form-control">
                         @foreach ($kelasActive as $active)
                         <option value="{{ $active->matkul->id }}">{{ $active->matkul->nm_matkul }}</option>
                         @endforeach

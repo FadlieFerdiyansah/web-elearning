@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\JadwalController;
 use App\Http\Controllers\Admin\MatkulController;
@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\Users\{DosenController, MahasiswaController};
 
 
 Route::middleware('auth:admin')->group(function () {
+
+    Route::prefix('admin')->get('dashboard', DashboardController::class)->name('dashboard.admin');
 
     Route::prefix('management-user')->group(function () {
         Route::prefix('dosen')->group(function () {

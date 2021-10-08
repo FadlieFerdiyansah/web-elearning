@@ -60,8 +60,8 @@ class MahasiswaController extends Controller
             'nim' => 'required',
             'nama' => 'required',
             'email' => 'required',
-            'fakultas_id' => 'required',
-            'kelas_id' => 'required',
+            'fakultas' => 'required',
+            'kelas' => 'required',
         ]);
 
         if(request('foto')) $img = request()->file('foto')->move('images/profile');

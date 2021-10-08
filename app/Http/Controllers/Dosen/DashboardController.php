@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dosen;
 
+use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -31,6 +32,6 @@ class DashboardController extends Controller
         // return $user;
 
         // return $user->hasPermissionTo('jadwal mengajar');
-        return view('dashboard.index');
+        return view('frontend.dosen.dashboard');
     }
 }
