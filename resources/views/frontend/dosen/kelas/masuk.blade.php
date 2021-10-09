@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col mb-4 mb-lg-0 text-center">
                         {{-- <a href="{{ route('materi', [$jadwal->kelas_id,$jadwal->matkul_id]) }}"> --}}
-                        <a href="{{ route('materi', Crypt::encryptString($jadwal->id)) }}">
+                        <a href="{{ route('kelas.materi', Crypt::encryptString($jadwal->id)) }}">
                             <i data-feather="book-open"></i>
                             <div class="mt-2 font-weight-bold">Materi</div>
                             <div class="text-small text-muted"><span class="text-primary"><i
@@ -67,7 +67,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <form action="{{ route('storeRekap') }}" method="post">
+                                <form action="{{ route('kelas.store_absen') }}" method="post">
                                     @csrf
                                     <input type="hidden" value="{{ $jadwal->id }}" name='jadwal'>
                                     <input type="hidden" value="{{ $absen->id ?? '' }}" name='parent'>

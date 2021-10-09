@@ -43,7 +43,7 @@
                 @endforeach
             </div>
             @endif
-            <form action="{{ route('materi.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('materis.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="kelas">Kelas</label>

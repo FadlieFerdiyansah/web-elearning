@@ -9,52 +9,32 @@ use Illuminate\Http\Request;
 
 class MatkulController extends Controller
 {
-    public function table()
-    {
-        return view('backend.datatable.matkuls.table',[
-            'matkuls' => Matkul::latest()->paginate(10)
-        ]);
-    }
 
     public function search()
     {
         $query =  request('query');
 
-        return view('backend.datatable.matkuls.table', [
+        return view('backend.matkul.index', [
             'matkuls' => Matkul::where("nm_matkul", "like" , "%$query%")->latest()->paginate(10),
             'result' => Matkul::where('nm_matkul', 'like', "%".$query."%")->latest()->paginate()
         ]);
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        return redirect(route('matkuls.table'));
+        return view('backend.matkul.index',[
+            'matkuls' => Matkul::latest()->paginate(10)
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('backend.form-control.matkuls.create',[
+        return view('backend.matkul.create',[
             'title' => 'Form Matkul'
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store()
     {
         request()->validate([
             'nm_matkul' => 'required',
@@ -80,36 +60,12 @@ class MatkulController extends Controller
         return back()->with('success', "Berhasil membuat matakuliah : {$nm_matkul}");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Matkul $matkul)
     {
-        return view('backend.form-control.matkuls.edit',compact('matkul'));
+        return view('backend.matkul.edit',compact('matkul'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Matkul $matkul)
+    public function update(Matkul $matkul)
     {
         request()->validate([
             'nm_matkul' => 'required',
@@ -135,12 +91,6 @@ class MatkulController extends Controller
         return back()->with('success', 'Berhasil meng-update data');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Matkul $matkul)
     {
         $matkul->delete();

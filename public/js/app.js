@@ -2301,7 +2301,7 @@ function Create(props) {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/kelas/table');
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/kelas');
 
             case 3:
               response = _context2.sent;

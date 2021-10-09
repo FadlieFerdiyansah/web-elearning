@@ -1,13 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\KelasController;
-use App\Http\Controllers\Admin\JadwalController;
-use App\Http\Controllers\Admin\MatkulController;
-use App\Http\Controllers\Admin\FakultasController;
 use App\Http\Controllers\Admin\Users\{DosenController, MahasiswaController};
+use App\Http\Controllers\Admin\{DashboardController, KelasController, JadwalController, MatkulController, FakultasController};
 
 // Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -38,29 +33,22 @@ Route::middleware('auth:admin')->group(function () {
         });
     });
 
+    
+    // ** KELAS **
+    Route::resource('kelas', KelasController::class)->except('show');
 
+    // ** MATAKULIAH **
+    Route::get('matkuls/search', [MatkulController::class, 'search'])->name('matkuls.search');
+    Route::resource('matkuls', MatkulController::class)->except('show');
 
-    Route::get('kelas/table', [KelasController::class, 'table'])->name('kelas.table');
-    Route::resource('kelas', KelasController::class);
+    // ** FAKULTAS **
+    Route::resource('fakultas', FakultasController::class)->except('show');
 
-    Route::get('matkuls/table', [MatkulController::class, 'table'])->name('matkuls.table');
-    Route::get('matkuls/table=search', [MatkulController::class, 'search'])->name('search');
-    Route::resource('matkuls', MatkulController::class);
-
-    Route::get('fakultas/table', [FakultasController::class, 'table'])->name('fakultas.table');
-    Route::resource('fakultas', FakultasController::class);
-
+    // ** JADWAL **
     Route::prefix('jadwals')->group(function () {
-        Route::get('jadwal-kuliah', [JadwalController::class, 'table'])->name('jadwals.kuliah');
-        Route::get('jadwal-pengganti', [JadwalController::class, 'table'])->name('jadwals.pengganti');
-
-        Route::get('create', [JadwalController::class, 'create'])->name('jadwals.create');
-        Route::post('create', [JadwalController::class, 'store']);
-        Route::get('edit/{jadwal}', [JadwalController::class, 'edit'])->name('jadwals.edit');
-        Route::put('edit/{jadwal}', [JadwalController::class, 'update']);
-
+        Route::get('jadwal-pengganti', [JadwalController::class, 'index'])->name('jadwals.pengganti');
         Route::get('get-dosen-by-{kelas}', [JadwalController::class, 'getDosenByKelasId']);
         Route::get('get-matkul-by-{dosen}', [JadwalController::class, 'getMatkulByDosenId']);
-        // Route::resource('jadwals',JadwalController::class);
     });
+    Route::resource('jadwals', JadwalController::class)->except('show');
 });

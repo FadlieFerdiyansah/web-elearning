@@ -3,7 +3,7 @@
 @include('components._partials.menu',[
 'icon' => 'calendar',
 'parentName' => 'Jadwal',
-'nameRoute' => ['jadwalMengajar','jadwalMengajarPengganti'],
+'nameRoute' => ['jadwals.mengajar','jadwals.mengajar_pengganti'],
 'countChild' => 2,
 'childName' => ['Jadwal Kuliah','Jadwal Pengganti'],
 ])
@@ -13,9 +13,9 @@
 @include('components._partials.menu',[
 'icon' => 'book-open',
 'parentName' => 'Materi',
-'nameRoute' => ['materi.upload','materi.table'],
+'nameRoute' => ['materis.index','materis.create'],
 'countChild' => 2,
-'childName' => ['Upload Materi','Tabel Materi'],
+'childName' => ['Table Materi','Upload Materi'],
 ])
 @endcan
 

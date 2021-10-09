@@ -51,7 +51,7 @@ function Create(props) {
 
     const getKelas = async () => {
         try {
-            let response = await axios.get('/kelas/table');
+            let response = await axios.get('/kelas');
             setKelas(response.data)
         } catch (e) {
             console.log(e.message);

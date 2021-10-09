@@ -19,18 +19,25 @@ use Spatie\Permission\Models\Permission;
 
 class JadwalController extends Controller
 {
-    public function table()
+    public function index()
     {
         // $jadwals = Jadwal::get()->load(['dosen','matkul','kelas']);
         if (request()->expectsJson()) {
             return JadwalResource::collection(Jadwal::paginate(7));
         }
-        return view('backend.datatable.jadwals.table');
+        return view('backend.jadwal.index');
     }
 
     public function create()
     {
-        return view('backend.form-control.jadwals.jadwal');
+        return view('backend.jadwal.create');
+    }
+
+    public function store(JadwalRequest $request)
+    {
+        Jadwal::create($request->all());
+        $kelas = Kelas::find($request->kelas_id);
+        return response()->json(['message' => 'Berhasil membuat jadwal untuk kelas ' . $kelas->kd_kelas]);
     }
 
     public function edit(Jadwal $jadwal)
@@ -55,10 +62,4 @@ class JadwalController extends Controller
         return $dosen->matkuls;
     }
 
-    public function store(JadwalRequest $request)
-    {
-        Jadwal::create($request->all());
-        $kelas = Kelas::find($request->kelas_id);
-        return response()->json(['message' => 'Berhasil membuat jadwal untuk kelas ' . $kelas->kd_kelas]);
-    }
 }

@@ -3,178 +3,71 @@
 namespace App\Http\Controllers\Dosen;
 
 use Carbon\Carbon;
-use App\Models\Absen;
-use App\Models\Dosen;
-use App\Models\kelas;
-use App\Models\Jadwal;
-use App\Models\Materi;
-use App\Models\Mahasiswa;
-use Illuminate\Support\Arr;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\{Auth, Crypt};
+use App\Models\{Absen, Jadwal, Materi, Mahasiswa};
 
 class KelasController extends Controller
 {
-    public function waktuSekarang()
-    {
-        return Carbon::now('Asia/Jakarta')->format('H:i');
-    }
+    // public function waktuSekarang()
+    // {
+    //     return Carbon::now('Asia/Jakarta')->format('H:i');
+    // }
 
-    public function masuk($id)
+    public function masuk($jadwalId)
     {
-        $jadwal_id = Crypt::decryptString($id);
-        $jadwal = Jadwal::whereId($jadwal_id)->first();
+        //parameter $jadwalId adalah id dari jadwal yang sudah di encrypt
+        //dan kode dibawah untuk mencari jadwal dari param $jadwalId sekalian di decrypt var $jadwalId nya
+        $jadwal = Jadwal::where('id', Crypt::decryptString($jadwalId))->first();
 
-        $mahasiswa = Mahasiswa::with(['userAbsen' => function($query) use ($jadwal_id) {
-            $query->where('jadwal_id', $jadwal_id);
+        $mahasiswa = Mahasiswa::with(['userAbsen' => function ($query) use ($jadwal) {
+            $query->where('jadwal_id', $jadwal->id);
         }])->where('kelas_id', $jadwal->kelas_id)->get();
 
-        $absen = Absen::where('dosen_id',Auth::Id())->where('jadwal_id',$jadwal_id)->whereDate('created_at',date('Y-m-d'))->first();
-       
-        
+        $absen = Absen::where('dosen_id', Auth::Id())
+            ->where('jadwal_id', $jadwal->id)
+            ->whereDate('created_at', date('Y-m-d'))
+            ->first();
 
-        return view('frontend.dosen.kelas.masuk', [
-            'jadwal' => $jadwal,
-            'mahasiswa' => $mahasiswa,
-            'absen' => $absen,
-            // 'absens' => $absens,
-            // 'waktuAbsen' => $waktuAbsen
-        ]);
+
+        return view('frontend.dosen.kelas.masuk', compact('mahasiswa', 'jadwal', 'absen'));
     }
 
-    public function storeRekap()
+    public function storeAbsen()
     {
+        $absen = collect(Absen::where('dosen_id', Auth::Id())
+        ->where('jadwal_id', request('jadwal'))
+        ->whereDate('created_at', date('Y-m-d'))
+        ->first());
 
-        for ($i = 0; $i < count(request('mahasiswa')); $i++) {
-            Absen::updateOrCreate(
-                ['mahasiswa_id' => request('mahasiswa')[$i]],
-                [
-                    'parent' => request('parent'),
-                    'status' => request('status')[$i],
-                    'jadwal_id' => request('jadwal'),
-                    'pertemuan' => request('pertemuan'),
-                ]
-            );
+        if ($absen->isNotEmpty()) {
+            for ($i = 0; $i < count(request('mahasiswa')); $i++) {
+                Absen::updateOrCreate(
+                    ['mahasiswa_id' => request('mahasiswa')[$i]],
+                    [
+                        'parent' => request('parent'),
+                        'status' => request('status')[$i],
+                        'jadwal_id' => request('jadwal'),
+                        'pertemuan' => request('pertemuan'),
+                    ]
+                );
+            }
+            session()->flash('success', 'Berhasil menyimpan data absen');
         }
-        // return request()->all();
-        session()->flash('success','Berhasil menyimpan data absen');
+
         return back();
     }
 
-    public function materi($id)
+    public function materi($jadwalId)
     {
-        //Decrypt var $id dari jadwal
-        $jadwal_id =  Crypt::decryptString($id);
-
         //Setelah di decrypt cari. apakah id ada di dalam table jadwal
         //jika ada tampilkan hanya 1
-        $jadwal = Jadwal::whereId($jadwal_id)->first();
-        $materis = Materi::whereMatkulId($jadwal->matkul_id)->whereDosenId($jadwal->dosen_id)->whereKelasId($jadwal->kelas_id)->latest()->paginate(5);
-
-        if (Auth::guard('mahasiswa')->check()) {
-            if (Auth::guard('mahasiswa')->user()->kelas_id == $jadwal->kelas_id) {
-                //Jika mahasiswa yang login kelas_id sama dengan kelas_id yang ada di jadwal return ke suatu halaman
-                return view('frontend.mahasiswa.kelas.materi', compact('materis', 'jadwal'));
-            }
-            //Jika tidak sama return ke 404
-            abort(404);
-        }
+        $jadwal = Jadwal::where('id', Crypt::decryptString($jadwalId))->first();
+        $materis = Materi::where('matkul_id', $jadwal->matkul_id)
+            ->where('dosen_id', $jadwal->dosen_id)
+            ->where('kelas_id', $jadwal->kelas_id)
+            ->latest()->paginate(5);
 
         return view('frontend.dosen.kelas.materi', compact('materis', 'jadwal'));
-    }
-
-    public function table()
-    {
-        if (request()->expectsJson()) {
-            return Kelas::get();
-        }
-        $kelas = Kelas::get();
-        return view('backend.datatable.kelas.table', compact('kelas'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        abort(404);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('backend.form-control.kelas.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate(['kelas' => 'required']);
-        Kelas::create(['kd_kelas' => $request->kelas]);
-        return back()->with('success', "Berhasil membuat kelas : {$request->kelas}");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function show(kelas $kelas)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Kelas $kela)
-    {
-        return view('backend.form-control.kelas.edit', [
-            'kela' => $kela
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Kelas $kela)
-    {
-        $request->validate(['kelas' => 'required']);
-        $kela->update(['kd_kelas' => $request->kelas]);
-        return back()->with('success', "Berhasil update data kelas : {$request->kelas}");
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(kelas $kela)
-    {
-        $kela->delete();
-        return back()->with('success', "Berhasil menghapus data kelas : {$kela->kd_kelas}");
     }
 }

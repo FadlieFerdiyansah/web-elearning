@@ -10,9 +10,6 @@ class Jadwal extends Model
     use HasFactory;
     protected $fillable = ['kelas_id','dosen_id','matkul_id','hari','jam_masuk','jam_keluar'];
     public $timestamps = false;
-    
-    // Note : 
-    //     Permasalahannya sepertinya pada relasi kelas dan Jadwal Resource
 
     public function kelas()
     {

@@ -12,12 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class MateriController extends Controller
 {
 
-    public function some()
-    {
-        return 'some';
-    }
-
-    public function table(Request $request)
+    public function index(Request $request)
     {
         // return Str::between('12:00','11:00','12:00');
         // $j = $request->merge(['fadlie','ganteng',1]);
@@ -30,14 +25,14 @@ class MateriController extends Controller
                             Action
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item has-icon" href="' . route("materi.edit", $materi) . '"><i class="
+                                <a class="dropdown-item has-icon" href="' . route("materis.edit", $materi) . '"><i class="
                                 fas fa-edit"></i> Edit</a>
-                                <form action="' . route("materi.delete", $materi) . '" method="post" style="font-size:13px">
+                                <form action="' . route("materis.destroy", $materi) . '" method="post" style="font-size:13px">
                                     ' . csrf_field() . '
                                     ' . method_field('delete') . '
                                     <button type="submit" class="dropdown-item has-icon font-sm"><i class="fas fa-times"></i> Delete</button>
                                 </form>
-                                <a class="dropdown-item has-icon" href="' . route("materi.delete", $materi) . '"><i class="
+                                <a class="dropdown-item has-icon" href="' . route("materis.destroy", $materi) . '"><i class="
                                 fas fa-list-alt"></i> Detail</a>
                             </div>
                         </div>
@@ -47,28 +42,10 @@ class MateriController extends Controller
                 ->make(true);
         }
 
-        return view('frontend.dosen.materi.table');
+        return view('frontend.dosen.materi.index');
     }
 
-    public function show(Matkul $matkul, Request $request)
-    {
-        // return $matkul->materis;
-        // dd(DataTables::of($matkul->materis)->make(true));
-        // if($request->wantsJson()){
-        //     return DataTables::of($matkul->materis()->with('kelas','matkul'))
-        //     ->make(true);
-        // }
-        // return Auth::guard('dosen')->user();
-
-        if (Auth::guard('mahasiswa')->user()) {
-            $materis =  $matkul->materis()->where('kelas_id', Auth::user()->kelas->id)->latest()->paginate(5);
-        } else {
-            $materis = $matkul->materis()->latest()->paginate(5);
-        }
-        return view('frontend.materi.show', compact('materis'));
-    }
-
-    public function upload()
+    public function create()
     {
         //get name of current user
         $dosen = Auth::user();
@@ -87,7 +64,7 @@ class MateriController extends Controller
         }
 
 
-        return view('frontend.dosen.materi.upload', [
+        return view('frontend.dosen.materi.create', [
             'matkuls' => $matkuls,
             'kelas' => $kelas
         ]);
@@ -96,21 +73,22 @@ class MateriController extends Controller
     public function store(MateriRequest $request)
     {
         // Membuat sekaligus materi untuk kelas yang berbeda dikarenakan jadwal,materi,petermuan nya sama
-        // Bisa juga membuat hanya 1 jadwal,materi,petermuan
-        
+
         if (request('kelas') > 1) {
             for ($i = 0; $i < count(request('kelas')); $i++) {
                 $materi = $request->all();
                 $materi['kelas_id'] = $request->kelas[$i];
                 $materi['matkul_id'] = $request->matkul;
 
-                if($request->tipe == 'pdf'){
-                    $fileName = time() .'.'.$request->file('file_or_link')->extension();
-                    $materi['file_or_link'] = $request->file('file_or_link')->storeAs("materials",$fileName);
+                if ($request->tipe == 'pdf') {
+                    $fileName = time() . '.' . $request->file('file_or_link')->extension();
+                    $materi['file_or_link'] = $request->file('file_or_link')->storeAs("materials", $fileName);
                 }
                 Auth::user()->materis()->create($materi);
             }
         }
         return back()->with('success', 'Berhasil membuat materi');
     }
+
+
 }

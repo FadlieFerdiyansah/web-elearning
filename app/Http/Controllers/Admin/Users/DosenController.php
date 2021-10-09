@@ -51,12 +51,12 @@ class DosenController extends Controller
             $dosens = Dosen::count();
         }
 
-        return view('backend.datatable.dosen.table',compact('dosens'));
+        return view('backend.managementUser.dosen.index',compact('dosens'));
     }
 
     public function create()
     {
-        return view('backend.form-control.dosen.create',[
+        return view('backend.ManagementUser.dosen.create',[
             'matkuls' => Matkul::get(),
             'kelas' => Kelas::get()
         ]);

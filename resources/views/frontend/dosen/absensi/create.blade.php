@@ -24,7 +24,7 @@
             @endif
             <form action="{{ route('absensi.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="text" value="{{ Crypt::encryptString($jadwal->id) }}" name="jadwal">
+                <input type="hidden" value="{{ Crypt::encryptString($jadwal->id) }}" name="jadwal">
                 <div class="form-group">
                     <label for="kelas">Kelas</label>
                     <select name="kelas" id="kelas" class="form-control">

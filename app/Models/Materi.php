@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Materi extends Model
 {
     use HasFactory;
-    protected $fillable = ['judul','pertemuan','tipe','file_or_link','deskripsi','kelas_id','dosen_id','matkul_id'];
+    protected $fillable = ['judul','pertemuan','tipe','file_or_link','deskripsi','kelas_id','matkul_id'];
     protected $with = ['kelas','matkul'];
 
     public function kelas()

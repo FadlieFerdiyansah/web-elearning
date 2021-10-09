@@ -44,14 +44,14 @@ class MahasiswaController extends Controller
             $mahasiswas = Mahasiswa::count();
         }
 
-        return view('backend.managementUser.mahasiswa.table',compact('mahasiswas'));
+        return view('backend.managementUser.mahasiswa.index',compact('mahasiswas'));
     }
 
     public function create()
     {
         $kelas = Kelas::get();
         $fakultas = Fakultas::get();
-        return view('backend.form-control.mahasiswa.create',compact('kelas','fakultas'));
+        return view('backend.managementUser.mahasiswa.create',compact('kelas','fakultas'));
     }
 
     public function store()
@@ -82,7 +82,7 @@ class MahasiswaController extends Controller
 
     public function edit(Mahasiswa $mahasiswa)
     {
-        return view('backend.form-control.mahasiswa.edit', [
+        return view('backend.managementUser.mahasiswa.edit', [
             'mahasiswa' => $mahasiswa,
             'fakultas' => Fakultas::get(),
             'kelas' => Kelas::get()

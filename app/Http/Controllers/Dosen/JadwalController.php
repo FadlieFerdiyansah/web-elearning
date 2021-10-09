@@ -21,7 +21,7 @@ class JadwalController extends Controller
 {
     public function jadwalMengajar()
     {
-        $jadwals = Jadwal::where('dosen_id', Auth::id())->get();
+        $jadwals = Jadwal::where('dosen_id', Auth::Id())->get();
 
         return view('frontend.dosen.jadwal.jadwal-mengajar', [
             'jadwals' => $jadwals,

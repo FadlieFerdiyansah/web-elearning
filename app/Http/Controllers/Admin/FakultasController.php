@@ -8,38 +8,17 @@ use Illuminate\Http\Request;
 
 class FakultasController extends Controller
 {
-    public function table()
-    {
-        $fakultas = Fakultas::get();
-        return view('backend.datatable.fakultas.table', compact('fakultas'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return redirect(route('fakultas.table'));
+        $fakultas = Fakultas::get();
+        return view('backend.fakultas.index', compact('fakultas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('backend.form-control.fakultas.create');
+        return view('backend.fakultas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -63,35 +42,11 @@ class FakultasController extends Controller
         return back()->with('success','Berhasil menyimpan data');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Fakultas $fakulta)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  Fakultas $fakulta
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Fakultas $fakulta)
     {
-        return view('backend.form-control.fakultas.edit',compact('fakulta'));
+        return view('backend.fakultas.edit',compact('fakulta'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  Fakultas $fakulta
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Fakultas $fakulta)
     {
         $request->validate([
@@ -114,12 +69,6 @@ class FakultasController extends Controller
         return back()->with('success', 'Berhasil meng-Update data');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  Fakultas $fakulta
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Fakultas $fakulta)
     {
         $fakulta->delete();
