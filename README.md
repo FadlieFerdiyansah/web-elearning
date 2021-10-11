@@ -3,7 +3,7 @@
 <p>Download file dengan cara zip/clone</p>
 <h5> Zip </h5>
 <p>Klik button Code disamping kanan atas, lalu klik <b>download zip</b></p>
-<br>
+
 <h5> Git Clone </h5>
 <p>Paste code dibawah, buka terminal lalu paste dan enter</p>
 <code>git clone https://github.com/FadlieFerdiyansah/web-elearning.git</code>
