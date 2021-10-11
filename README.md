@@ -19,5 +19,5 @@
     <li>Setelah itu download semua package dengan cara <b><code> composer install </code></b> </li>
     <li>Terakhir jalankan server nya <b><code> php artisan serve </code></b></li>
     <li>dan buka url nya diweb browser default bawaan laravel, <b><code>http://127.0.0.1:8000</code></b></li>
-    <li>Atau kalau menggunakan valet/laragon <b><code>e-learning.test</code></b></li>
+    <li>Atau kalau menggunakan valet/laragon <b><code>web-elearning.test</code></b></li>
 </ol>
