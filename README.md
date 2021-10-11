@@ -9,9 +9,11 @@ Cara install :
 <h4> Running program </h4>
 
 <ol>
-    <li>Buka terminal ketikan <code> php artisan key:generate </code> </li> 
+    <b>
+        <li>Buka terminal ketikan <code> php artisan key:generate </code> </li> 
     <li>Setelah selesai generate key, ketikan lagi <code> php artisan storage:link </code> </li>
     <li>Setelah itu download semua package dengan cara <code> composer install </code> </li>
     <li>Terakhir jalankan server nya <code> php artisan serve </code> </li>
+    </b>
 </ol>
     
