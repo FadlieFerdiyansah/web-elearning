@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Fakultas;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\FakultasRequest;
 
 class FakultasController extends Controller
 {
@@ -19,12 +19,9 @@ class FakultasController extends Controller
         return view('backend.fakultas.create');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required'
-        ]);
-        
+    public function store(FakultasRequest $request)
+    {   
+
         $nm_fk = $request->nama;
         $arr = explode(' ', $nm_fk);
         $singkatan = '';
@@ -39,7 +36,7 @@ class FakultasController extends Controller
             'nama' => $nm_fk
         ]);
 
-        return back()->with('success','Berhasil menyimpan data');
+        return redirect(route('fakultas.index'))->with('success','Berhasil menyimpan data fakultas');
     }
 
     public function edit(Fakultas $fakulta)
@@ -47,11 +44,9 @@ class FakultasController extends Controller
         return view('backend.fakultas.edit',compact('fakulta'));
     }
 
-    public function update(Request $request, Fakultas $fakulta)
+    public function update(FakultasRequest $request, Fakultas $fakulta)
     {
-        $request->validate([
-            'nama' => 'required|unique:fakultas'
-        ]);
+
         $nm_fk = $request->nama;
         $arr = explode(' ', $nm_fk);
         $singkatan = '';
@@ -66,12 +61,12 @@ class FakultasController extends Controller
             'nama' => $nm_fk
         ]);
 
-        return back()->with('success', 'Berhasil meng-Update data');
+        return redirect(route('fakultas.index'))->with('success', 'Berhasil update data fakultas');
     }
 
     public function destroy(Fakultas $fakulta)
     {
         $fakulta->delete();
-        return back()->with('success', 'Berhasil meng-Hapus data');
+        return back()->with('success', 'Berhasil hapus data fakultas');
     }
 }

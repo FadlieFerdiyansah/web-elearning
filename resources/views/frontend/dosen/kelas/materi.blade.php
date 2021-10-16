@@ -31,8 +31,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Pertemuan</th>
                                     <th>Judul</th>
+                                    <th>Pertemuan</th>
                                     <th>Deskripsi</th>
                                     <th>Diupload pada</th>
                                     <th>Action</th>
@@ -43,16 +43,14 @@
                                 @if ($materi->tipe == 'pdf')
                                 <tr>
                                     <th scope="row">{{ $i + 1 }}</th>
+                                    <td style="width: 300px">{{ $materi->judul }}</td>
                                     <td>{{ $materi->pertemuan }}</td>
-                                    <td>{{ $materi->judul }}</td>
 
                                     <td>
-                                        <div style="width: 350px">{{ $materi->deskripsi }}</div>
+                                        <div style="width: 400px">{{ $materi->deskripsi }}</div>
                                     </td>
                                     <td>{{ $materi->created_at }}</td>
                                     <td>
-                                        {{-- <a class="btn btn-dark btn-sm" href="{{ asset("/storage/$materi->file_or_link") }}"
-                                        download>Download</a> --}}
                                         <div class="dropdown d-inline">
                                             <button class="btn btn-dark dropdown-toggle" type="button"
                                                 id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
