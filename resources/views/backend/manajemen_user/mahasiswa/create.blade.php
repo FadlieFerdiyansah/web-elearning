@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <x-button>Simpan</x-button>
                     </div>
                 </form>
             </div>

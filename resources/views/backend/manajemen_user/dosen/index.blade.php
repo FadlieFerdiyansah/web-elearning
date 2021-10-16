@@ -1,4 +1,4 @@
-<x-app-layouts title="Users: Mahasiswa">
+<x-app-layouts title="Users: Dosen">
     @push('styles')
     {{-- dataTables --}}
     <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/datatables.min.css') }}">
@@ -48,8 +48,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h4>Total {{ Str::plural('mahasiswa', $mahasiswas) }} {{ $mahasiswas }}</h4>
-                    <a href="{{ route('mahasiswa.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Tambah Mahasiswa</a>
+                    <h4>Tabel Dosen</h4>
+                    <a href="{{ route('dosen.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Tambah Dosen</a>
                 </div>
                 <div class="card-body">
                     @if (session('success'))
@@ -71,9 +71,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Foto</th>
-                                    <th>NIM</th>
+                                    <th>NIP</th>
                                     <th>Nama</th>
-                                    <th>Fakultas</th>
+                                    <th>Matakuliah</th>
                                     <th>Kelas</th>
                                     <th>Tanggal Daftar</th>
                                     <th>Action</th>
@@ -100,10 +100,12 @@
 
     <script>
         $(function() {
+            var k = 'ok';
+
                 $('#table-1').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: '{!! route('mahasiswa.table') !!}',
+                    ajax: '{!! route('dosen.table') !!}',
                     lengthMenu: [[5,10,25,50,100,-1],[5,10,25,50,100,'All']],
                     columnDefs: [
                                 {
@@ -147,19 +149,6 @@
                         },
                     ],
                     select: true,
-                    // order: [
-                    //             {
-                    //                 "targets": [1],
-                    //                 "visible": false,
-                    //                 "searchable": false
-                    //             },
-                    //             {
-                    //                 "targets": [7],
-                    //                 "visible": true,
-                    //                 "searchable": false
-                    //             }
-
-                    // ],
                     columns: [
                         // { data: 'id', name: 'id' },
                         { data: 'id',sortable: false, 
@@ -176,17 +165,17 @@
                                 }
                             }
                         },
-                        { data: 'nim'},
+                        { data: 'nip'},
                         { data: 'nama'},
-                        { data: 'fakultas.nama' },
-                        { data: 'kelas.kd_kelas' },
+                        { data: 'matkuls', searchable: true},
+                        { data: 'kelas' },
                         { data: 'created_at', searchable:true },
                         { data: 'action', orderable: false, searchable: false},
                         // { data: 'checkbox', orderable: false, searchable: false}
-                        {data:'nim', orderable: false, searchable: false,
+                        {data:'nip', orderable: false, searchable: false,
                             "render": function(data,type,row) {
                                 // console.log(row.id);
-                                var html = "<input type='checkbox' name='nim[]' class='chk_boxes1' value="+ data +">"
+                                var html = "<input type='checkbox' name='nip[]' class='chk_boxes1' value="+ data +">"
                                 return html
                             } 
                         },
@@ -207,17 +196,17 @@
         
             $('#btn_delete').click(function(){
                 if(confirm("Apakah Anda yakin ingin menghapus data ini?")){
-                    let nim = [];
+                    let nip = [];
             
                     $(':checkbox:checked').each(function(i){
-                    nim[i] = $(this).val();
+                    nip[i] = $(this).val();
                 });
         
                 // Jika data ada yang di checked
-                if(nim.length === 0){
+                if(nip.length === 0){
                     alert("Pilih minimal satu data");
                 }else{
-                    $.ajax({ url:'{!! route('mahasiswa.table') !!}', type:'delete', data:{ "_token": "{{ csrf_token() }}", nim:nim } });
+                    $.ajax({ url:'{!! route('dosen.table') !!}', type:'delete', data:{ "_token": "{{ csrf_token() }}", nip:nip } });
                     window.location.href=window.location.href;
                 }
                 }

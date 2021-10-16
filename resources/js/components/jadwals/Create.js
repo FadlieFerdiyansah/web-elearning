@@ -196,7 +196,7 @@ function Create(props) {
                             </div>
 
                             <div className="form-group">
-                                <button type="submit" className="btn btn-primary btn-lg btn-block">
+                                <button type="submit" className="btn btn-dark btn-lg btn-block">
                                     Create
                                 </button>
                             </div>

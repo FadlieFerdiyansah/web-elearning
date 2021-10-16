@@ -22,7 +22,7 @@
     @endpush
     <div class="card">
         <div class="card-header">
-            <h4>Form Upload Materi</h4>
+            <h4>Form Edit Materi</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
             @if (session('success'))
@@ -43,50 +43,52 @@
                 @endforeach
             </div>
             @endif
-            <form action="{{ route('materis.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('materis.update', encrypt($materi->id)) }}" method="post" enctype="multipart/form-data">
                 @csrf
+                @method('put')
                 <div class="form-group">
                     <label for="kelas">Kelas</label>
                     <select name="kelas_id" id="kelas" class="form-control">
-                        <option value="{{ $jadwal->kelas_id }}" class="form-control">
-                            {{ $jadwal->kelas->kd_kelas }}</option>
+                        <option value="{{ $materi->kelas_id }}" class="form-control">
+                            {{ $materi->kelas->kd_kelas }}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="matkul">Matakuliah</label>
                     <select name="matkul_id" id="matkul" class="form-control">
-                        <option value="{{ $jadwal->matkul_id }}" class="form-control">
-                            {{ $jadwal->matkul->nm_matkul }}</option>
+                        <option value="{{ $materi->matkul_id }}" class="form-control">
+                            {{ $materi->matkul->nm_matkul }}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="judul">Judul</label>
-                    <input type="text" name="judul" class="form-control" id="judul">
+                    <input type="text" name="judul" class="form-control" id="judul" value="{{ $materi->judul }}">
                 </div>
                 <div class="form-group">
                     <label for="pertemuan">Pertemuan</label>
-                    <input type="text" name="pertemuan" class="form-control" id="pertemuan">
+                    <input type="text" name="pertemuan" class="form-control" id="pertemuan" value="{{ $materi->pertemuan }}">
                 </div>
                 <div class="form-group">
                     <label for="tipe">Tipe</label>
                     <select class="form-control selectric" name="tipe" id="tipe">
                         {{-- <select class="form-control selectric" name="tipe" id="tipe" onchange="selectType(this)"> --}}
                         <option disabled selected>Pilih Tipe</option>
-                        <option value="pdf">PDF</option>
-                        <option value="youtube">YouTube</option>
+                        <option {{ $materi->tipe == 'pdf' ? 'selected' : '' }} value="pdf">PDF</option>
+                        <option {{ $materi->tipe == 'youtube' ? 'selected' : '' }} value="youtube">YouTube</option>
                     </select>
                 </div>
                 <div class="form-group" id="formLink">
                     <label for="link">Link</label>
-                    <input type="text" name="file_or_link" class="form-control" id="link">
+                    <input type="text" name="file_or_link" class="form-control" id="link" value="{{ $materi->tipe == 'youtube' ? $materi->file_or_link : '' }}">
                 </div>
                 <div class="form-group" id="formFile">
                     <label for="file">File</label>
-                    <input type="file" name="file_or_link" class="form-control" id="file">
+                    <input type="file" name="file_or_link" class="form-control" id="file" value="some">
+                    <code>Note: Jika file sama seperti yang diinputkan saat membuat materi, <b>Kosongkan</b> </code>
                 </div>
                 <div class="form-group">
                     <label for="deskripsi">Deskripsi</label>
-                    <textarea name="deskripsi" id="deskripsi" class="form-control"></textarea>
+                    <textarea name="deskripsi" id="deskripsi" class="form-control">{{ $materi->deskripsi }}</textarea>
                 </div>
 
 
@@ -113,8 +115,11 @@
             //     }
             // }
             $(document).ready(function(){
-                $('#formLink').hide();
-                $('#formFile').hide();
+                if($('#tipe option:selected').val() == 'pdf'){
+                    $('#formLink').hide();
+                }else{
+                    $('#formFile').hide();
+                }
                 $("#tipe").change(function() {
                     if ($("#tipe option:selected").val() == 'pdf') {
                             $('#formLink').hide();

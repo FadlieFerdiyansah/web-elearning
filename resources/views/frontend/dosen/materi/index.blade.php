@@ -168,12 +168,6 @@
                     dom: 'Blfrtip',
                     buttons: [
                         {
-                            extend: 'copyHtml5',
-                            exportOptions:{
-                                columns: [0,2,3,4,5,6]
-                            }
-                        },
-                        {
                             extend: 'excelHtml5',
                             exportOptions:{
                                 columns: [0,2,3,4,5,6]
@@ -198,22 +192,7 @@
                             }
                         },
                     ],
-                    select: true,
-                    // order: [
-                    //             {
-                    //                 "targets": [1],
-                    //                 "visible": false,
-                    //                 "searchable": false
-                    //             },
-                    //             {
-                    //                 "targets": [7],
-                    //                 "visible": true,
-                    //                 "searchable": false
-                    //             }
-
-                    // ],
                     columns: [
-                        // { data: 'id', name: 'id' },
                         { data: 'id',sortable: false, 
                             render: function (data, type, row, meta) {
                                 return meta.row + meta.settings._iDisplayStart + 1;

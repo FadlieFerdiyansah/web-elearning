@@ -1,7 +1,7 @@
 <x-app-layouts>
     <div class="card">
         <div class="card-header">
-            <h4>Form Buat Absensi</h4>
+            <h4>Form Edit Absensi</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
             @if (session('success'))
@@ -23,21 +23,22 @@
             </div>
             @endif
 
-            <form action="{{ route('absensi.store') }}" method="post">
+            <form action="{{ route('absensi.update', Crypt::encryptString($absensi->id)) }}" method="post">
                 @csrf
-                <input type="hidden" value="{{ Crypt::encryptString($jadwal->id) }}" name="jadwal">
+                @method('patch')
+                {{-- <input type="hidden" value="{{ Crypt::encryptString($jadwal->id) }}" name="jadwal"> --}}
                 <div class="form-group">
                     <label for="kelas">Kelas</label>
-                    <input disabled value="{{ $jadwal->kelas->kd_kelas }}" class="form-control">
+                    <input disabled value="{{ $absensi->jadwal->kelas->kd_kelas }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="matkul">Matakuliah</label>
-                        <input disabled value="{{ $jadwal->matkul->nm_matkul }}" class="form-control">
+                        <input disabled value="{{ $absensi->jadwal->matkul->nm_matkul }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="pertemuan">Pertemuan</label>
-                    <input autofocus type="text" name="pertemuan"
-                        class="form-control @error('pertemuan')is-invalid @enderror" id="pertemuan">
+                    <input type="text" name="pertemuan" class="form-control @error('pertemuan')is-invalid @enderror"
+                        id="pertemuan" value="{{ $absensi->pertemuan }}" readonly>
                     @error('pertemuan')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -63,7 +64,7 @@
 
 
                 <div class="form-group">
-                    <x-button>Simpan</x-button>
+                    <x-button>Update</x-button>
                 </div>
             </form>
         </div>

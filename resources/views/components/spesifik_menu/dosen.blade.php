@@ -1,6 +1,6 @@
 
 @can('jadwal mengajar')    
-@include('components._partials.menu',[
+@include('components.spesifik_menu.partials.menu',[
 'icon' => 'calendar',
 'parentName' => 'Jadwal',
 'nameRoute' => ['jadwals.mengajar','jadwals.mengajar_pengganti'],
@@ -9,15 +9,15 @@
 ])
 @endcan
 
-@can('management materi')
-@include('components._partials.menu',[
+{{-- @can('management materi')
+@include('components.spesifik_menu.partials.menu',[
 'icon' => 'book-open',
 'parentName' => 'Materi',
 'nameRoute' => ['materis.index','materis.create'],
 'countChild' => 2,
 'childName' => ['Table Materi','Upload Materi'],
 ])
-@endcan
+@endcan --}}
 
 {{-- @can('management absensi')
 @include('components._partials.menu',[

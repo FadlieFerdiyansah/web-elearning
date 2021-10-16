@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="col mb-4 mb-lg-0 text-center">
                                 {{-- <a href="{{ route('materi', [$jadwal->kelas_id,$jadwal->matkul_id]) }}"> --}}
-                                <a href="{{ route('materi.mhs', Crypt::encryptString($jadwal->id)) }}">
+                                <a href="{{ route('materi.mhs', Crypt::encrypt($jadwal->id)) }}">
                                     <i data-feather="book-open"></i>
                                     <div class="mt-2 font-weight-bold">Materi</div>
                                     <div class="text-small text-muted"><span class="text-primary"><i
@@ -90,8 +90,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Status</th>
-                                        <th>Pertemuan</th>
                                         <th>Matakuliah</th>
+                                        <th>Pertemuan</th>
                                         <th>Tanggal</th>
                                     </tr>
                                 </thead>
@@ -102,8 +102,8 @@
                                         <td><span
                                                 class="badge badge-{{ $absen->status == 1 ? 'success' : 'danger' }}">{{ $absen->status == 1 ? 'Hadir' : 'Tidak Hadir' }}</span>
                                         </td>
-                                        <td>{{ $absen->pertemuan }}</td>
                                         <td>{{ $jadwal->matkul->nm_matkul }}</td>
+                                        <td>{{ $absen->pertemuan }}</td>
                                         <td>{{ $absen->tanggal }}</td>
                                     </tr>
                                     @empty

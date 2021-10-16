@@ -29,6 +29,8 @@ class KelasController extends Controller
             ->whereDate('created_at', date('Y-m-d'))
             ->first();
 
+            // return $absen;
+
 
         return view('frontend.dosen.kelas.masuk', compact('mahasiswa', 'jadwal', 'absen'));
     }
@@ -39,6 +41,7 @@ class KelasController extends Controller
         ->where('jadwal_id', request('jadwal'))
         ->whereDate('created_at', date('Y-m-d'))
         ->first());
+
 
         if ($absen->isNotEmpty()) {
             for ($i = 0; $i < count(request('mahasiswa')); $i++) {
@@ -62,12 +65,13 @@ class KelasController extends Controller
     {
         //Setelah di decrypt cari. apakah id ada di dalam table jadwal
         //jika ada tampilkan hanya 1
-        $jadwal = Jadwal::where('id', Crypt::decryptString($jadwalId))->first();
-        $materis = Materi::where('matkul_id', $jadwal->matkul_id)
+        $jadwal = Jadwal::where('id', Crypt::decryptString($jadwalId))->firstOrFail();
+        $materis = Materi::with(['matkul','kelas'])
+            ->where('matkul_id', $jadwal->matkul_id)
             ->where('dosen_id', $jadwal->dosen_id)
             ->where('kelas_id', $jadwal->kelas_id)
-            ->latest()->paginate(5);
+            ->latest()->get();
 
-        return view('frontend.dosen.kelas.materi', compact('materis', 'jadwal'));
+        return view('frontend.dosen.kelas.materi', compact('materis','jadwal'));
     }
 }

@@ -12,7 +12,7 @@
             data-feather="book-open"></i><span>Matakuliah</span></a>
 </li>
 
-@include('components._partials.menu',[
+@include('components.spesifik_menu.partials.menu',[
 'icon' => 'calendar',
 'parentName' => 'Jadwal',
 'nameRoute' => ['jadwals.index','jadwals.pengganti'],
@@ -21,7 +21,7 @@
 ])
 
 @can('management roles and permissions')
-@include('components._partials.menu',[
+@include('components.spesifik_menu.partials.menu',[
 'icon' => 'shield-off',
 'parentName' => 'Roles & Permissions',
 'nameRoute' => ['dosen.table','dosen.table'],
@@ -31,7 +31,7 @@
 @endcan
 
 @can('management roles and permissions')
-@include('components._partials.menu',[
+@include('components.spesifik_menu.partials.menu',[
 'icon' => 'user-plus',
 'parentName' => 'Create Users',
 'nameRoute' => ['dosen.create','mahasiswa.create'],
@@ -54,7 +54,7 @@
 @endcan
 
 {{-- @can('management users')
-@include('components._partials.menu',[
+@include('components.spesifik_menu.partials.menu',[
 'icon' => 'layout',
 'parentName' => 'Form Control',
 'nameRoute' =>
@@ -66,7 +66,7 @@ Dosen', ],
 @endcan --}}
 
 {{-- @can('management datatable')
-@include('components._partials.menu',[
+@include('components.spesifik_menu.partials.menu',[
 'icon' => 'layout',
 'parentName' => 'Data Table',
 'nameRoute' => ['matkuls.index','kelas.index','fakultas.table'],

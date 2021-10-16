@@ -16,10 +16,10 @@ class KelasController extends Controller
 
     public function masuk($id)
     {
-        $jadwal_id = Crypt::decryptString($id);
-        $jadwal = Jadwal::whereId($jadwal_id)->first();
+        $jadwal_id = Crypt::decrypt($id);
+        $jadwal = Jadwal::where('id', $jadwal_id)->first();
 
-        $absens = Auth::user()->absens()->whereJadwalId($jadwal_id)->paginate(5);
+        $absens = Auth::user()->absens()->where('jadwal_id', $jadwal_id)->paginate(5);
 
 
         //Untuk membatasi waktu absen misal : jam masuk 12:00 sedangkan waktu saat itu belum jam 12:00 
@@ -42,7 +42,7 @@ class KelasController extends Controller
     public function absen()
     {
         // return request()->all();
-        $jadwal_id = Crypt::decryptString(request('jadwal'));
+        $jadwal_id = Crypt::decrypt(request('jadwal'));
         // $jadwal = Jadwal::findOrFail($jadwal_id);
         $absen = Absen::where('jadwal_id', $jadwal_id)->where('parent', 0)->whereDate('created_at', date('Y-m-d'))->first();
 
@@ -73,18 +73,21 @@ class KelasController extends Controller
     public function materi($id)
     {
         //Decrypt var $id dari jadwal
-        $jadwal_id =  Crypt::decryptString($id);
+        $jadwal_id =  Crypt::decrypt($id);
 
         //Setelah di decrypt cari. apakah id ada di dalam table jadwal
         //jika ada tampilkan hanya 1
         $jadwal = Jadwal::whereId($jadwal_id)->first();
-        $materis = Materi::whereMatkulId($jadwal->matkul_id)->whereDosenId($jadwal->dosen_id)->whereKelasId($jadwal->kelas_id)->latest()->paginate(5);
+        $materis = Materi::where('matkul_id', $jadwal->matkul_id)
+                ->where('dosen_id', $jadwal->dosen_id)
+                ->where('kelas_id', $jadwal->kelas_id)
+                ->latest()->get();
 
-        if (Auth::guard('mahasiswa')->user()->kelas_id == $jadwal->kelas_id) {
-            //Jika mahasiswa yang login kelas_id sama dengan kelas_id yang ada di jadwal return ke suatu halaman
-            return view('frontend.mahasiswa.kelas.materi', compact('materis', 'jadwal'));
+        if (Auth::guard('mahasiswa')->user()->kelas_id != $jadwal->kelas_id) {
+            //Jika mahasiswa yang login kelas_id tidak sama dengan kelas_id yang ada di jadwal return ke 404
+            abort(404);
         }
-        //Jika tidak sama return ke 404
-        abort(404);
+
+        return view('frontend.mahasiswa.kelas.materi', compact('materis', 'jadwal'));
     }
 }

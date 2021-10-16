@@ -1,12 +1,6 @@
 <x-app-layouts title="Tabel Fakultas">
     @push('styles')
     @endpush
-    <div class="d-flex justify-content-end mb-4">
-        <form class="form-inline" action="{{ route('search') }}" method="GET ">
-            <input class="form-control mr-4 col-md" type="search" placeholder="Search" aria-label="Search" name="query">
-            <button class="btn btn-icon icon-left btn-primary"><i class="fas fa-search"></i> Cari</button>
-        </form>
-    </div>
     <div class="card">
         <div class="card-header d-flex justify-content-between">
                 <h4>Table Kelas</h4>

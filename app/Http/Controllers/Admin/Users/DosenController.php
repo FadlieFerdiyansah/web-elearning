@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers\Admin\Users;
 
-use App\Models\Dosen;
-use App\Models\Kelas;
-use App\Models\Matkul;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Models\{Dosen, Kelas, Matkul};
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class DosenController extends Controller
 {
-    public function table(Request $request)
+    public function table()
     {
              
-        if($request->wantsJson()){
+        if(request()->wantsJson()){
             $dosen = Dosen::latest()->with(['matkuls','kelas'])->get();
             return DataTables::of($dosen)
             ->addColumn('matkuls', function ($dosen) {
@@ -51,12 +47,12 @@ class DosenController extends Controller
             $dosens = Dosen::count();
         }
 
-        return view('backend.managementUser.dosen.index',compact('dosens'));
+        return view('backend.manajemen_user.dosen.index',compact('dosens'));
     }
 
     public function create()
     {
-        return view('backend.ManagementUser.dosen.create',[
+        return view('backend.manajemen_user.dosen.create',[
             'matkuls' => Matkul::get(),
             'kelas' => Kelas::get()
         ]);
@@ -64,8 +60,7 @@ class DosenController extends Controller
 
     public function store()
     {
-        return request('time');
-        if(request('foto')){
+            if(request('foto')){
             $photo = request()->file('foto')->store('images/profile');
         }else{
             $photo = 'default.png';
@@ -88,7 +83,7 @@ class DosenController extends Controller
     public function edit(Dosen $dosen)
     {
 
-        return view('backend.form-control.dosen.edit',[
+        return view('backend.manajemen_user.dosen.edit',[
             'dosen' => $dosen,
             'matkuls' => Matkul::get(),
             'kelas' => Kelas::get()

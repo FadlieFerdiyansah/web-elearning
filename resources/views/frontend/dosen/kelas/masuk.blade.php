@@ -1,4 +1,7 @@
 <x-app-layouts>
+    @push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/bundles/pretty-checkbox/pretty-checkbox.min.css') }}">
+    @endpush
     <div class="row">
         <div class="card w-100">
             <div class="card-header">
@@ -89,11 +92,18 @@
 
                                         <td>
                                             <input type="hidden" value="{{ $mhs->id }}" name="mahasiswa[]">
-                                            <input type="radio" name="status[]{{ $mhs->id }}" value="1"
-                                                {{ $mhs->userAbsen ? 'checked' : '' }}> Hadir
-                                            <input type="radio" name="status[]{{ $mhs->id }}" value="0" class="ml-3"
-                                                {{ !$mhs->userAbsen ? 'checked' : '' }}>
-                                            Tidak Hadir
+                                            <div class="pretty p-default p-round p-thick">
+                                                <input type="radio" name="status[]{{ $i }}" value="1" {{ $mhs->userAbsen ? 'checked' : '' }}>
+                                                <div class="state p-primary-o">
+                                                    <label>Hadir</label>
+                                                </div>
+                                            </div>
+                                            <div class="pretty p-default p-round p-thick">
+                                                <input type="radio" name="status[]{{ $i }}" value="0" {{ !$mhs->userAbsen ? 'checked' : '' }}>
+                                                <div class="state p-danger-o">
+                                                    <label>Tidak Hadir</label>
+                                                </div>
+                                            </div>
                                         </td>
 
                                         @once

@@ -34,25 +34,9 @@
                         <label for="sks">SKS</label>
                         <input type="text" name="sks" class="form-control">
                     </div>
-                    {{-- <div class="form-group">
-                        <label for="fakultas">Fakultas</label>
-                        <select name="fakultas" id="fakultas" class="form-control">
-                            @foreach ($fakultas as $fk)
-                                <option {{ $mahasiswa->fakultas_id == $fk->id ? 'selected' : null }} value="{{ $fk->id }}">{{ $fk->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
-                    {{-- <div class="form-group">
-                        <label for="kelas">Kelas</label>
-                        <select name="kelas" id="kelas" class="form-control">
-                            @foreach ($kelas as $kls)
-                                <option {{ $mahasiswa->kelas_id == $kls->id ? 'selected' : null }} value="{{ $kls->id }}">{{ $kls->kd_kelas }}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <x-button>Simpan</x-button>
                     </div>
                 </form>
             </div>

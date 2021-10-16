@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Tambah Dosen">
     @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/bundles/select2/dist/css/select2.min.css') }}">
     <style>
@@ -14,14 +14,14 @@
         .select2-container--default .select2-selection--multiple .select2-selection__choice,
         .select2-container--default .select2-results__option[aria-selected="true"],
         .select2-container--default .select2-results__option--highlighted[aria-selected] {
-            background-color: rebeccapurple;
+            background-color: #6777ef;
             color: #fff;
         }
     </style>
     @endpush
     <div class="card">
         <div class="card-header">
-            <h4>Form Update Dosen</h4>
+            <h4>Form Create Dosen</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
             @if (session('success'))
@@ -42,8 +42,7 @@
                 @endforeach
             </div>
             @endif
-            <form action="{{ route('dosen.edit',$dosen) }}" method="post" enctype="multipart/form-data">
-                @method('put')
+            <form action="{{ route('dosen.create') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="foto">Foto Profile</label>
@@ -51,21 +50,25 @@
                 </div>
                 <div class="form-group">
                     <label for="nip">NIP</label>
-                    <input type="text" name="nip" class="form-control" id="nip" value="{{ $dosen->nip }}" disabled>
+                    <input type="text" name="nip" class="form-control" id="nip" autofocus>
                 </div>
                 <div class="form-group">
                     <label for="nama">Nama Lengkap</label>
-                    <input type="text" name="nama" class="form-control" id="nama" value="{{ $dosen->nama }}">
+                    <input type="text" name="nama" class="form-control" id="nama">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" id="email" value="{{ $dosen->email }}">
+                    <input type="email" name="email" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control" id="password">
                 </div>
                 <div class="form-group">
                     <label for="matkul">Mengajar Matakuliah</label>
                     <select name="matkul[]" id="matkul" class="form-control select2" multiple="">
                         @foreach ($matkuls as $matkul)
-                            <option {{ $dosen->matkuls->find($matkul->id) ? 'selected' : '' }} value="{{ $matkul->id }}">{{ $matkul->nm_matkul }}</option>
+                        <option value="{{ $matkul->id }}">{{ $matkul->nm_matkul }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -73,23 +76,16 @@
                     <label for="kelas">Mengajar Kelas</label>
                     <select name="kelas[]" id="kelas" class="form-control select2" multiple="">
                         @foreach ($kelas as $kls)
-                        <option {{ $dosen->kelas()->find($kls->id) ? 'selected' : '' }} value="{{ $kls->id }}">{{ $kls->kd_kelas }}</option>
+                        <option value="{{ $kls->id }}">{{ $kls->kd_kelas }}</option>
                         @endforeach
                     </select>
                 </div>
-                {{-- <div class="form-group">
-                        <label for="kelas">Kelas</label>
-                        <select name="kelas" id="kelas" class="form-control">
-                            @foreach ($kelas as $kls)
-                                <option {{ $mahasiswa->kelas_id == $kls->id ? 'selected' : null }}
-                value="{{ $kls->id }}">{{ $kls->kd_kelas }}</option>
-                @endforeach
-                </select>
-        </div> --}}
 
-        <x-button.button>Update</x-button.button>
-        </form>
-    </div>
+                <div class="form-group">
+                    <x-button>Simpan</x-button>
+                </div>
+            </form>
+        </div>
     </div>
     @push('dataTables')
     <script src="{{ asset('assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>

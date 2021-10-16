@@ -57,6 +57,16 @@ class Dosen extends Authenticatable
         return $this->hasMany(Absen::class);
     }
 
+    public function getPictureAttribute()
+    {
+        return asset('/storage/'.$this->foto);
+    }
+
+    public function getPictureDefaultAttribute()
+    {
+        return asset('/assets/images/default.png');
+    }
+
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');

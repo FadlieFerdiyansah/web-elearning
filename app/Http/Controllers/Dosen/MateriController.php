@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use App\Http\Controllers\Controller;
+use App\Models\Jadwal;
 use App\Models\Matkul;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MateriRequest;
+use App\Models\Materi;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class MateriController extends Controller
 {
@@ -45,50 +49,76 @@ class MateriController extends Controller
         return view('frontend.dosen.materi.index');
     }
 
-    public function create()
+    public function create($id)
     {
-        //get name of current user
-        $dosen = Auth::user();
-        //prepare an array variable for accommodate the array value from kelas
-        $kelas = [];
-        //loop the kelas and then push to variable $kelas
-        foreach ($dosen->kelas as $k) {
-            array_push($kelas, $k);
-        }
+        $jadwalId = Crypt::decrypt($id);
+        $jadwal = Jadwal::where('id', $jadwalId)
+            ->where('dosen_id', Auth::Id())
+            ->first();
 
-        //prepare an array variable for accommodate the array value from kelas
-        $matkuls = [];
-        //loop the matkuls and then push to variable $matkuls
-        foreach ($dosen->matkuls as $matkul) {
-            array_push($matkuls, $matkul);
-        }
+        // return $jadwalId;
 
 
-        return view('frontend.dosen.materi.create', [
-            'matkuls' => $matkuls,
-            'kelas' => $kelas
-        ]);
+        return view('frontend.dosen.materi.create', compact('jadwal'));
     }
 
     public function store(MateriRequest $request)
     {
-        // Membuat sekaligus materi untuk kelas yang berbeda dikarenakan jadwal,materi,petermuan nya sama
+        $materi = $request->all();
 
-        if (request('kelas') > 1) {
-            for ($i = 0; $i < count(request('kelas')); $i++) {
-                $materi = $request->all();
-                $materi['kelas_id'] = $request->kelas[$i];
-                $materi['matkul_id'] = $request->matkul;
-
-                if ($request->tipe == 'pdf') {
-                    $fileName = time() . '.' . $request->file('file_or_link')->extension();
-                    $materi['file_or_link'] = $request->file('file_or_link')->storeAs("materials", $fileName);
-                }
-                Auth::user()->materis()->create($materi);
-            }
+        if ($request->tipe == 'pdf') {
+            $fileName = time() . '.' . $request->file('file_or_link')->extension();
+            $materi['file_or_link'] = $request->file('file_or_link')->storeAs("materials", $fileName);
         }
+
+        Auth::user()->materis()->create($materi);
+
         return back()->with('success', 'Berhasil membuat materi');
     }
 
+    public function edit($materiId)
+    {
 
+        $materi = Materi::findOrFail(decrypt($materiId));
+        // return $materi;
+        return view('frontend.dosen.materi.edit', compact('materi'));
+    }
+
+    public function update($materiId, MateriRequest $request)
+    {
+        $materi = Materi::findOrFail(decrypt($materiId));
+
+        // return $materi->file_or_link =;
+        $attr = $request->all();
+        if ($request->tipe == 'pdf' && $request->file_or_link) {
+            Storage::delete($materi->file_or_link);
+            $fileName = time() . '.' . $request->file('file_or_link')->extension();
+            $file = $request->file('file_or_link')->storeAs("materials", $fileName);
+        }else{
+            $file = $materi->file_or_link;
+        }
+
+        if ($request->tipe == 'youtube') {
+            Storage::delete($materi->file_or_link);
+            $attr['file_or_link'] = $request->file_or_link;
+        }else{
+            $attr['file_or_link'] = $file;
+        }
+        
+        $materi->update($attr);
+
+        return back()->with('success', 'Berhasil meng edit materi');
+    }
+
+    public function destroy($materiId)
+    {
+        $materi = Materi::findOrFail($materiId);
+
+        if ($materi->tipe == 'pdf') {
+            Storage::delete($materi->file_or_link);
+        }
+        $materi->delete();
+
+        return back()->with('success', 'Berhasil menghapus materi');
+    }
 }

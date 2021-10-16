@@ -25,13 +25,21 @@ class MateriRequest extends FormRequest
     public function rules()
     {
         if(request('tipe') == 'pdf'){
-            $condition = 'file|mimes:pdf|max:1000';
+            if (request()->routeIs('materis.update',encrypt($this->materiId))) {
+                if (request('file_or_link')) {
+                    $condition = 'file|mimes:pdf|max:1000'; 
+                }else{
+                    $condition = '';
+                }
+            }else{
+                $condition = 'file|mimes:pdf|max:1000';
+            }
         }else{
             $condition = 'required';
         }
         return [
-            'kelas' => 'required',
-            'matkul' => 'required',
+            'kelas_id' => 'required',
+            'matkul_id' => 'required',
             'judul' => 'required',
             'pertemuan' => 'required',
             'tipe' => 'required',

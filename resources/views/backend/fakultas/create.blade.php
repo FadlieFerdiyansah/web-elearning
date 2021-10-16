@@ -31,7 +31,7 @@
                         <input type="text" name="nama" id="fakultas" class="form-control" autofocus>
                     </div>
 
-                    <x-button.button>Simpan</x-button.button>
+                    <x-button>Simpan</x-button>
                 </form>
             </div>
         </div>

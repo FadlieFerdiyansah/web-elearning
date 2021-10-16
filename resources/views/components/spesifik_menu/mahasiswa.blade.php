@@ -1,6 +1,6 @@
 {{-- @canany(['jadwal kuliahd','jadwal kuliahm']) --}}
 @auth('mahasiswa')
-@include('components._partials.menu',[
+@include('components.spesifik_menu.partials.menu',[
     'icon' => 'calendar',
     'parentName' => 'Jadwal for Mahasiswa',
     'nameRoute' => ['jadwalKuliah','jadwalPengganti'],
