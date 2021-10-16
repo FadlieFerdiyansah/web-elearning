@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MatkulRequest;
 use App\Models\Matkul;
 use Illuminate\Http\Request;
 
@@ -34,14 +35,9 @@ class MatkulController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(MatkulRequest $request)
     {
-        request()->validate([
-            'nm_matkul' => 'required',
-            'sks' => 'required'
-        ]);
-
-        $nm_matkul = request('nm_matkul');
+        $nm_matkul = $request->nm_matkul;
 
         $arr = explode(' ', $nm_matkul);
         $singkatan = '';
@@ -51,13 +47,12 @@ class MatkulController extends Controller
             $singkatan .= substr($kata, 0, 1);
         }
 
-        Matkul::create([
-            'kd_matkul' => strtoupper($singkatan),
-            'nm_matkul' => $nm_matkul,
-            'sks' => request('sks')
-        ]);
+        $attr = $request->all();
+        $attr['kd_matkul'] = strtoupper($singkatan);
 
-        return back()->with('success', "Berhasil membuat matakuliah : {$nm_matkul}");
+        Matkul::create($attr);
+
+        return redirect(route('matkuls.index'))->with('success', "Berhasil membuat matakuliah : $nm_matkul");
     }
 
     public function edit(Matkul $matkul)
@@ -65,14 +60,9 @@ class MatkulController extends Controller
         return view('backend.matkul.edit',compact('matkul'));
     }
 
-    public function update(Matkul $matkul)
+    public function update(MatkulRequest $request, Matkul $matkul)
     {
-        request()->validate([
-            'nm_matkul' => 'required',
-            'sks' => 'required'
-        ]);
-
-        $nm_matkul = request('nm_matkul');
+        $nm_matkul = $request->nm_matkul;
 
         $arr = explode(' ', $nm_matkul);
         $singkatan = '';
@@ -82,18 +72,18 @@ class MatkulController extends Controller
             $singkatan .= substr($kata, 0, 1);
         }
 
-        $matkul->update([
-            'kd_matkul' => strtoupper($singkatan),
-            'nm_matkul' => $nm_matkul,
-            'sks' => request('sks'),
-        ]);
+        $attr = $request->all();
+        $attr['kd_matkul'] = strtoupper($singkatan);
+        
+        $matkul->update($attr);
 
-        return back()->with('success', 'Berhasil meng-update data');
+        return redirect(route('matkuls.index'))->with('success', "Berhasil update matkul : $matkul->nm_matkul");
     }
 
     public function destroy(Matkul $matkul)
     {
         $matkul->delete();
-        return back();
+
+        return back()->with('success', "Berhasil delete matakuliah : $matkul->nm_matkul");
     }
 }
