@@ -11,7 +11,7 @@ function Create(props) {
     const [matkuls, setMakuls] = useState([])
     const [days, setDays] = useState([''])
 
-    //untuk mendaptkan value dari inputan
+    //untuk mendapatkan value dari inputan
     const [kelasId, setKelasId] = useState('')
     const [dosenId, setDosenId] = useState('')
     const [matkulId, setMatkulId] = useState('')

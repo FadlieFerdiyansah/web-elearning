@@ -31,22 +31,24 @@
                 <x-input type="text" attr="nama" label="Nama Lengkap" />
                 <x-input type="email" attr="email" label="Email" />
                 <x-input type="password" attr="password" label="Password" />
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="matkul">Mengajar Matakuliah</label>
-                    <select name="matkul[]" id="matkul" class="form-control select2" multiple="">
+                    <select name="matkul[]" id="matkul" multiple="">
                         @foreach ($matkuls as $matkul)
                         <option value="{{ $matkul->id }}">{{ $matkul->nm_matkul }}</option>
                         @endforeach
                     </select>
-                </div>
-                <div class="form-group">
+                </div> --}}
+                {{-- <div class="form-group">
                     <label for="kelas">Mengajar Kelas</label>
-                    <select name="kelas[]" id="kelas" class="form-control select2" multiple="">
+                    <select name="kelas[]" id="kelas" class="form-control select2" multiple>
                         @foreach ($kelas as $kls)
                         <option value="{{ $kls->id }}">{{ $kls->kd_kelas }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
+                <x-select2 label="Mengajar Matakuliah" attr="matkul" :dataArray="$matkuls" value="id" labelOption="nm_matkul" />
+                <x-select2 label="Mengajar Kelas" attr="kelas" :dataArray="$kelas" value="id" labelOption="kd_kelas" />
                 <x-button>Simpan</x-button>
             </form>
         </div>

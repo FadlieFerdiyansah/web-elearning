@@ -12,48 +12,48 @@ class DosenController extends Controller
 {
     public function index()
     {
-             
-        if(request()->wantsJson()){
-            $dosen = Dosen::latest()->with(['matkuls','kelas'])->get();
+
+        if (request()->wantsJson()) {
+            $dosen = Dosen::latest()->with(['matkuls', 'kelas'])->get();
             return DataTables::of($dosen)
-            ->addColumn('matkuls', function ($dosen) {
-                return implode(', ', $dosen->matkuls->pluck('kd_matkul')->toArray());
-            })
-            ->addColumn('kelas', function ($dosen) {
-                return implode(' ~ ', $dosen->kelas->pluck('kd_kelas')->toArray());
-            })
-            ->addColumn('action', function ($dosen) {
-                $button = '
+                ->addColumn('matkuls', function ($dosen) {
+                    return implode(', ', $dosen->matkuls->pluck('kd_matkul')->toArray());
+                })
+                ->addColumn('kelas', function ($dosen) {
+                    return implode(' ~ ', $dosen->kelas->pluck('kd_kelas')->toArray());
+                })
+                ->addColumn('action', function ($dosen) {
+                    $button = '
                         <div class="dropdown d-inline">
                             <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Action
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item has-icon" href="'.route("dosens.edit",$dosen).'"><i class="
+                                <a class="dropdown-item has-icon" href="' . route("dosens.edit", $dosen) . '"><i class="
                                 fas fa-edit"></i> Edit</a>
-                                <form action="'.route("dosens.destroy",$dosen).'" method="post" style="font-size:13px">
-                                    '.csrf_field().'
-                                    '.method_field('delete').'
+                                <form action="' . route("dosens.destroy", $dosen) . '" method="post" style="font-size:13px">
+                                    ' . csrf_field() . '
+                                    ' . method_field('delete') . '
                                     <button type="submit" class="dropdown-item has-icon font-sm"><i class="fas fa-times"></i> Delete</button>
                                 </form>
-                                <a class="dropdown-item has-icon" href="'.route("dosens.destroy",$dosen).'"><i class="
+                                <a class="dropdown-item has-icon" href="' . route("dosens.destroy", $dosen) . '"><i class="
                                 fas fa-list-alt"></i> Detail</a>
                             </div>
                         </div>
                 ';
-                return $button;
-            })
-            ->make(true);
-        }else{
+                    return $button;
+                })
+                ->make(true);
+        } else {
             $dosens = Dosen::count();
         }
 
-        return view('backend.manajemen_user.dosen.index',compact('dosens'));
+        return view('backend.manajemen_user.dosen.index', compact('dosens'));
     }
 
     public function create()
     {
-        return view('backend.manajemen_user.dosen.create',[
+        return view('backend.manajemen_user.dosen.create', [
             'matkuls' => Matkul::get(),
             'kelas' => Kelas::get()
         ]);
@@ -62,12 +62,12 @@ class DosenController extends Controller
     public function store(DosenRequest $request)
     {
         // return request()->all();
-            if(request('foto')){
+        if (request('foto')) {
             $photo = $request->file('foto')->store('images/profile');
-        }else{
+        } else {
             $photo = 'default.png';
         }
-        
+
         $dosen = Dosen::create([
             'nip' => $request->nip,
             'nama' => $request->nama,
@@ -79,13 +79,13 @@ class DosenController extends Controller
         $dosen->assignRole('dosen');
         $dosen->kelas()->sync($request->kelas);
         $dosen->matkuls()->sync($request->matkul);
-        return redirect(route('dosens.index'))->with('success','Berhasil membuat data dosen');
+        return redirect(route('dosens.index'))->with('success', 'Berhasil membuat data dosen');
     }
 
     public function edit(Dosen $dosen)
     {
 
-        return view('backend.manajemen_user.dosen.edit',[
+        return view('backend.manajemen_user.dosen.edit', [
             'dosen' => $dosen,
             'matkuls' => Matkul::get(),
             'kelas' => Kelas::get()
@@ -95,13 +95,13 @@ class DosenController extends Controller
     public function update(DosenRequest $request, Dosen $dosen)
     {
 
-        if($request->foto){
+        if ($request->foto) {
             Storage::delete($dosen->foto);
             $photo = $request->file('foto')->store('images/profile');
-        }else{
+        } else {
             $photo = $dosen->foto;
         }
-        
+
         $dosen->update([
             'nama' => $request->nama,
             'email' => $request->email,
@@ -110,7 +110,7 @@ class DosenController extends Controller
 
         $dosen->kelas()->sync($request->kelas);
         $dosen->matkuls()->sync($request->matkul);
-        return redirect(route('dosens.index'))->with('success','Berhasil update data dosen');
+        return redirect(route('dosens.index'))->with('success', 'Berhasil update data dosen');
     }
 
     //Delete 1 per 1 data
@@ -128,19 +128,16 @@ class DosenController extends Controller
     {
         $nips = request('nip');
         // dd($nims);
-        foreach($nips as $i => $nip){
-            $dosens[] = Dosen::where('nip',$nip)->get();
-            foreach($dosens[$i] as $dosen){
+        foreach ($nips as $i => $nip) {
+            $dosens[] = Dosen::where('nip', $nip)->get();
+            foreach ($dosens[$i] as $dosen) {
                 $dosen->delete();
                 $dosen->kelas()->detach();
                 $dosen->matkuls()->detach();
-                if($dosen->foto != 'default.png'){
-                    Storage::delete($dosen->foto); 
+                if ($dosen->foto != 'default.png') {
+                    Storage::delete($dosen->foto);
                 }
             }
         }
     }
-
-
-
 }
