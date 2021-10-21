@@ -9,7 +9,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class DosenController extends Controller
 {
-    public function table()
+    public function index()
     {
              
         if(request()->wantsJson()){
@@ -28,14 +28,14 @@ class DosenController extends Controller
                             Action
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item has-icon" href="'.route("dosen.edit",$dosen).'"><i class="
+                                <a class="dropdown-item has-icon" href="'.route("dosens.edit",$dosen).'"><i class="
                                 fas fa-edit"></i> Edit</a>
-                                <form action="'.route("dosen.delete",$dosen).'" method="post" style="font-size:13px">
+                                <form action="'.route("dosens.destroy",$dosen).'" method="post" style="font-size:13px">
                                     '.csrf_field().'
                                     '.method_field('delete').'
                                     <button type="submit" class="dropdown-item has-icon font-sm"><i class="fas fa-times"></i> Delete</button>
                                 </form>
-                                <a class="dropdown-item has-icon" href="'.route("dosen.delete",$dosen).'"><i class="
+                                <a class="dropdown-item has-icon" href="'.route("dosens.destroy",$dosen).'"><i class="
                                 fas fa-list-alt"></i> Detail</a>
                             </div>
                         </div>
@@ -77,7 +77,7 @@ class DosenController extends Controller
         $dosen->assignRole('dosen');
         $dosen->kelas()->sync(request('kelas'));
         $dosen->matkuls()->sync(request('matkul'));
-        return back()->with('success','Berhasil membuat data dosen');
+        return redirect(route('dosens.index'))->with('success','Berhasil membuat data dosen');
     }
 
     public function edit(Dosen $dosen)
@@ -108,9 +108,10 @@ class DosenController extends Controller
 
         $dosen->kelas()->sync(request('kelas'));
         $dosen->matkuls()->sync(request('matkul'));
-        return back()->with('success','Berhasil update data dosen');
+        return redirect(route('dosens.index'))->with('success','Berhasil update data dosen');
     }
 
+    //Delete 1 per 1 data
     public function destroy(Dosen $dosen)
     {
         $dosen->delete();
@@ -120,6 +121,7 @@ class DosenController extends Controller
         return back();
     }
 
+    //Delete bisa sekaligus banyak data
     public function delete_checkbox()
     {
         $nips = request('nip');

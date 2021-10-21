@@ -42,7 +42,7 @@
                 @endforeach
             </div>
             @endif
-            <form action="{{ route('dosen.edit',$dosen) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('dosens.update',$dosen) }}" method="post" enctype="multipart/form-data">
                 @method('put')
                 @csrf
                 <div class="form-group">

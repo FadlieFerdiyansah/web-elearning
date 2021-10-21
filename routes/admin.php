@@ -12,15 +12,16 @@ Route::middleware('auth:admin')->group(function () {
     Route::prefix('admin')->get('dashboard', DashboardController::class)->name('dashboard.admin');
 
     Route::prefix('management-user')->group(function () {
-        Route::prefix('dosen')->group(function () {
-            Route::get('table', [DosenController::class, 'table'])->name('dosen.table');
-            Route::delete('table', [DosenController::class, 'delete_checkbox']);
-            Route::get('create', [DosenController::class, 'create'])->name('dosen.create');
-            Route::post('create', [DosenController::class, 'store']);
-            Route::get('{dosen:nip}/edit', [DosenController::class, 'edit'])->name('dosen.edit');
-            Route::put('{dosen:nip}/edit', [DosenController::class, 'update']);
-            Route::delete('{dosen:nip}/delete', [DosenController::class, 'destroy'])->name('dosen.delete');
-        });
+        // Route::prefix('dosen')->group(function () {
+            // Route::get('table', [DosenController::class, 'table'])->name('dosen.table');
+            // Route::delete('table', [DosenController::class, 'delete_checkbox']);
+            // Route::get('create', [DosenController::class, 'create'])->name('dosen.create');
+            // Route::post('create', [DosenController::class, 'store']);
+            // Route::get('{dosen:nip}/edit', [DosenController::class, 'edit'])->name('dosen.edit');
+            // Route::put('{dosen:nip}/edit', [DosenController::class, 'update']);
+            // Route::delete('{dosen:nip}/delete', [DosenController::class, 'destroy'])->name('dosen.delete');
+            Route::resource('dosens', DosenController::class);
+        // });
 
         Route::prefix('mahasiswa')->group(function () {
             Route::get('table', [MahasiswaController::class, 'table'])->name('mahasiswa.table');

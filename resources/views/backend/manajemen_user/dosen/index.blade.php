@@ -49,7 +49,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h4>Tabel Dosen</h4>
-                    <a href="{{ route('dosen.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Tambah Dosen</a>
+                    <a href="{{ route('dosens.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Tambah Dosen</a>
                 </div>
                 <div class="card-body">
                     @if (session('success'))
@@ -105,7 +105,7 @@
                 $('#table-1').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: '{!! route('dosen.table') !!}',
+                    ajax: '{!! route('dosens.index') !!}',
                     lengthMenu: [[5,10,25,50,100,-1],[5,10,25,50,100,'All']],
                     columnDefs: [
                                 {
@@ -206,7 +206,7 @@
                 if(nip.length === 0){
                     alert("Pilih minimal satu data");
                 }else{
-                    $.ajax({ url:'{!! route('dosen.table') !!}', type:'delete', data:{ "_token": "{{ csrf_token() }}", nip:nip } });
+                    $.ajax({ url:'{!! route('dosens.index') !!}', type:'delete', data:{ "_token": "{{ csrf_token() }}", nip:nip } });
                     window.location.href=window.location.href;
                 }
                 }

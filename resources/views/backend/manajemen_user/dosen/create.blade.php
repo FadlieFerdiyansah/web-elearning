@@ -24,25 +24,7 @@
             <h4>Form Create Dosen</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible show fade">
-                <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                        <span>×</span>
-                    </button>
-                    {!! session('success') !!}
-                </div>
-            </div>
-            @endif
-
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                @foreach ($errors->all() as $message)
-                <li>{{ $message }}</li>
-                @endforeach
-            </div>
-            @endif
-            <form action="{{ route('dosen.create') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('dosens.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="foto">Foto Profile</label>
