@@ -92,24 +92,24 @@ class DosenController extends Controller
         ]);
     }
 
-    public function update(Dosen $dosen)
+    public function update(DosenRequest $request, Dosen $dosen)
     {
 
-        if(request('foto')){
+        if($request->foto){
             Storage::delete($dosen->foto);
-            $photo = request()->file('foto')->store('images/profile');
+            $photo = $request->file('foto')->store('images/profile');
         }else{
             $photo = $dosen->foto;
         }
         
         $dosen->update([
-            'nama' => request('nama'),
-            'email' => request('email'),
+            'nama' => $request->nama,
+            'email' => $request->email,
             'foto' => $photo,
         ]);
 
-        $dosen->kelas()->sync(request('kelas'));
-        $dosen->matkuls()->sync(request('matkul'));
+        $dosen->kelas()->sync($request->kelas);
+        $dosen->matkuls()->sync($request->matkul);
         return redirect(route('dosens.index'))->with('success','Berhasil update data dosen');
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class DosenRequest extends FormRequest
 {
@@ -24,10 +25,10 @@ class DosenRequest extends FormRequest
     public function rules()
     {
         return [
-            'nip' => 'required|unique:dosens',
+            'nip' => 'required|unique:dosens,nip,'. optional($this->dosen)->id,
             'nama' => 'required',
-            'email' => 'required|unique:dosens',
-            'password' => 'required',
+            'email' => 'required|unique:dosens,email,'. optional($this->dosen)->id,
+            'password' => Rule::requiredIf(request()->routeIs('dosens.store')),
             'matkul' => 'required|array',
             'kelas' => 'required|array'
         ];

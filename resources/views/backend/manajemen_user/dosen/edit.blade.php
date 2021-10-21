@@ -49,18 +49,9 @@
                     <img src="{{ $dosen->foto == 'default.png' ? $dosen->pictureDefault : $dosen->picture  }}" alt="foto" style="width:100px;" class="mb-3 rounded">
                     <input type="file" name="foto" class="form-control" id="foto">
                 </div>
-                <div class="form-group">
-                    <label for="nip">NIP</label>
-                    <input type="text" name="nip" class="form-control" id="nip" value="{{ $dosen->nip }}" disabled>
-                </div>
-                <div class="form-group">
-                    <label for="nama">Nama Lengkap</label>
-                    <input type="text" name="nama" class="form-control" id="nama" value="{{ $dosen->nama }}">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" id="email" value="{{ $dosen->email }}">
-                </div>
+                <x-input type="text" attr="nip" label="NIP" value="{{ $dosen->nip }}" />
+                <x-input type="text" attr="nama" label="Nama" value="{{ $dosen->nama }}" />
+                <x-input type="text" attr="email" label="Email" value="{{ $dosen->email }}" />
                 <div class="form-group">
                     <label for="matkul">Mengajar Matakuliah</label>
                     <select name="matkul[]" id="matkul" class="form-control select2" multiple="">
