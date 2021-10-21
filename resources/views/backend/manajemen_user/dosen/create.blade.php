@@ -26,26 +26,11 @@
         <div class="card-body col-md-8 col-sm">
             <form action="{{ route('dosens.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group">
-                    <label for="foto">Foto Profile</label>
-                    <input type="file" name="foto" class="form-control" id="foto">
-                </div>
-                <div class="form-group">
-                    <label for="nip">NIP</label>
-                    <input type="text" name="nip" class="form-control" id="nip" autofocus>
-                </div>
-                <div class="form-group">
-                    <label for="nama">Nama Lengkap</label>
-                    <input type="text" name="nama" class="form-control" id="nama">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" id="email">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" id="password">
-                </div>
+                <x-input type="file" attr="foto" label="Foto Profile" />
+                <x-input type="text" attr="nip" label="NIP" />
+                <x-input type="text" attr="nama" label="Nama Lengkap" />
+                <x-input type="email" attr="email" label="Email" />
+                <x-input type="password" attr="password" label="Password" />
                 <div class="form-group">
                     <label for="matkul">Mengajar Matakuliah</label>
                     <select name="matkul[]" id="matkul" class="form-control select2" multiple="">
@@ -62,10 +47,7 @@
                         @endforeach
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <x-button>Simpan</x-button>
-                </div>
+                <x-button>Simpan</x-button>
             </form>
         </div>
     </div>

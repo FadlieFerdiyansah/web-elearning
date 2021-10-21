@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\DosenRequest;
 use App\Models\{Dosen, Kelas, Matkul};
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
@@ -58,25 +59,26 @@ class DosenController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(DosenRequest $request)
     {
+        // return request()->all();
             if(request('foto')){
-            $photo = request()->file('foto')->store('images/profile');
+            $photo = $request->file('foto')->store('images/profile');
         }else{
             $photo = 'default.png';
         }
         
         $dosen = Dosen::create([
-            'nip' => request('nip'),
-            'nama' => request('nama'),
-            'email' => request('email'),
-            'password' => bcrypt(request('password')),
+            'nip' => $request->nip,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
             'foto' => $photo,
         ]);
 
         $dosen->assignRole('dosen');
-        $dosen->kelas()->sync(request('kelas'));
-        $dosen->matkuls()->sync(request('matkul'));
+        $dosen->kelas()->sync($request->kelas);
+        $dosen->matkuls()->sync($request->matkul);
         return redirect(route('dosens.index'))->with('success','Berhasil membuat data dosen');
     }
 
