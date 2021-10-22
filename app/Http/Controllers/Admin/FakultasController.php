@@ -21,7 +21,7 @@ class FakultasController extends Controller
 
     public function store(FakultasRequest $request)
     {   
-
+        
         $nm_fk = $request->nama;
         $arr = explode(' ', $nm_fk);
         $singkatan = '';

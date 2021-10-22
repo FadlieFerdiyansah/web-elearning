@@ -46,41 +46,20 @@
                 @method('put')
                 @csrf
                 <div class="form-group">
-                    <img src="{{ $dosen->foto == 'default.png' ? $dosen->pictureDefault : $dosen->picture  }}" alt="foto" style="width:100px;" class="mb-3 rounded">
+                    <img src="{{ $dosen->foto == 'default.png' ? $dosen->pictureDefault : $dosen->picture  }}"
+                        alt="foto" style="width:100px;" class="mb-3 rounded">
                     <input type="file" name="foto" class="form-control" id="foto">
                 </div>
                 <x-input type="text" attr="nip" label="NIP" value="{{ $dosen->nip }}" />
                 <x-input type="text" attr="nama" label="Nama" value="{{ $dosen->nama }}" />
                 <x-input type="text" attr="email" label="Email" value="{{ $dosen->email }}" />
-                <div class="form-group">
-                    <label for="matkul">Mengajar Matakuliah</label>
-                    <select name="matkul[]" id="matkul" class="form-control select2" multiple="">
-                        @foreach ($matkuls as $matkul)
-                            <option {{ $dosen->matkuls->find($matkul->id) ? 'selected' : '' }} value="{{ $matkul->id }}">{{ $matkul->nm_matkul }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="kelas">Mengajar Kelas</label>
-                    <select name="kelas[]" id="kelas" class="form-control select2" multiple="">
-                        @foreach ($kelas as $kls)
-                        <option {{ $dosen->kelas()->find($kls->id) ? 'selected' : '' }} value="{{ $kls->id }}">{{ $kls->kd_kelas }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                {{-- <div class="form-group">
-                        <label for="kelas">Kelas</label>
-                        <select name="kelas" id="kelas" class="form-control">
-                            @foreach ($kelas as $kls)
-                                <option {{ $mahasiswa->kelas_id == $kls->id ? 'selected' : null }}
-                value="{{ $kls->id }}">{{ $kls->kd_kelas }}</option>
-                @endforeach
-                </select>
-        </div> --}}
-
-        <x-button>Update</x-button>
-        </form>
-    </div>
+                <x-select2 :isSelected="$dosen->matkuls" label="Mengajar Matakuliah" attr="matkul" :dataArray="$matkuls"
+                    valueOption="id" labelOption="nm_matkul" />
+                <x-select2 :isSelected="$dosen->kelas" label="Mengajar Kelas" attr="kelas" :dataArray="$kelas"
+                    valueOption="id" labelOption="kd_kelas" />
+                <x-button>Update</x-button>
+            </form>
+        </div>
     </div>
     @push('dataTables')
     <script src="{{ asset('assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
