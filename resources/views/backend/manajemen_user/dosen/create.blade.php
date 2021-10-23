@@ -1,23 +1,7 @@
 <x-app-layouts title="Tambah Dosen">
     @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/bundles/select2/dist/css/select2.min.css') }}">
-    <style>
-        .select2-container--default.select2-container--focus .select2-selection--multiple {
-            border-color: #e4e6fc;
-        }
-
-        .select2-container--default .select2-selection--multiple {
-            border: 1px solid #e4e6fc;
-        }
-
-        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove,
-        .select2-container--default .select2-selection--multiple .select2-selection__choice,
-        .select2-container--default .select2-results__option[aria-selected="true"],
-        .select2-container--default .select2-results__option--highlighted[aria-selected] {
-            background-color: #6777ef;
-            color: #fff;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     @endpush
     <div class="card">
         <div class="card-header">
@@ -31,29 +15,13 @@
                 <x-input type="text" attr="nama" label="Nama Lengkap" />
                 <x-input type="email" attr="email" label="Email" />
                 <x-input type="password" attr="password" label="Password" />
-                {{-- <div class="form-group">
-                    <label for="matkul">Mengajar Matakuliah</label>
-                    <select name="matkul[]" id="matkul" multiple="">
-                        @foreach ($matkuls as $matkul)
-                        <option value="{{ $matkul->id }}">{{ $matkul->nm_matkul }}</option>
-                        @endforeach
-                    </select>
-                </div> --}}
-                {{-- <div class="form-group">
-                    <label for="kelas">Mengajar Kelas</label>
-                    <select name="kelas[]" id="kelas" class="form-control select2" multiple>
-                        @foreach ($kelas as $kls)
-                        <option value="{{ $kls->id }}">{{ $kls->kd_kelas }}</option>
-                        @endforeach
-                    </select>
-                </div> --}}
-                <x-select2 label="Mengajar Matakuliah" attr="matkul" :dataArray="$matkuls" value="id" labelOption="nm_matkul" />
-                <x-select2 label="Mengajar Kelas" attr="kelas" :dataArray="$kelas" value="id" labelOption="kd_kelas" />
+                <x-select2 label="Mengajar Matakuliah" attr="matkul" :dataArray="$matkuls" valueOption="id" labelOption="nm_matkul" />
+                <x-select2 label="Mengajar Kelas" attr="kelas" :dataArray="$kelas" valueOption="id" labelOption="kd_kelas" />
                 <x-button>Simpan</x-button>
             </form>
         </div>
     </div>
-    @push('dataTables')
+    @push('lastScript')
     <script src="{{ asset('assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     @endpush
 </x-app-layouts>
