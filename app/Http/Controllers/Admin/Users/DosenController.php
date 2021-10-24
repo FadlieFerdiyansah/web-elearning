@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\DosenRequest;
 use App\Models\{Dosen, Kelas, Matkul};
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
+use App\Http\Requests\Admin\DosenRequest;
 
 class DosenController extends Controller
 {

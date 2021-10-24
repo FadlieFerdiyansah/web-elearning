@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Carbon\Carbon;
+use App\Models\Kelas;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\KelasRequest;
-use Illuminate\Support\Facades\{Auth, Crypt};
-use App\Models\{Kelas, Jadwal, Absen, Materi};
-use Illuminate\Support\Facades\RateLimiter;
 
 class KelasController extends Controller
 {

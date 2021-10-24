@@ -2,20 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Carbon\Carbon;
-use App\Models\Dosen;
-use App\Models\Kelas;
-use App\Models\Jadwal;
-use App\Models\Mahasiswa;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JadwalRequest;
+use App\Models\{Jadwal, Kelas, Dosen};
 use App\Http\Resources\JadwalResource;
-use App\Models\Matkul;
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Permission;
 
 class JadwalController extends Controller
 {

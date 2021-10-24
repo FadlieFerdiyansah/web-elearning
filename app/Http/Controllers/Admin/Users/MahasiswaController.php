@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Users;
 
-use App\Http\Controllers\Controller;
-use App\Models\Fakultas;
-use App\Models\Kelas;
-use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
+use App\Models\{Fakultas, Kelas, Mahasiswa};
 
 class MahasiswaController extends Controller
 {

@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use App\Models\Absen;
-use App\Models\Kelas;
-use App\Models\Jadwal;
-use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
+use App\Models\{Jadwal, Absen};
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\{Auth, Crypt};
 
 class AbsenController extends Controller
 {

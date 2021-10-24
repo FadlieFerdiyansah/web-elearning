@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\{Auth, Crypt};
 use App\Models\{Absen, Jadwal, Materi, Mahasiswa};
 
 class KelasController extends Controller
 {
-    // public function waktuSekarang()
-    // {
-    //     return Carbon::now('Asia/Jakarta')->format('H:i');
-    // }
 
     public function masuk($jadwalId)
     {

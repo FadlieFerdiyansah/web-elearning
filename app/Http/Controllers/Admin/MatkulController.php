@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Models\Matkul;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MatkulRequest;
-use App\Models\Matkul;
-use Illuminate\Http\Request;
 
 class MatkulController extends Controller
 {

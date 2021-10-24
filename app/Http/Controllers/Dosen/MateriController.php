@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use App\Models\Jadwal;
-use App\Models\Matkul;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Models\{Jadwal, Materi};
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MateriRequest;
-use App\Models\Materi;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\{Auth, Crypt, Storage};
 
 class MateriController extends Controller
 {
