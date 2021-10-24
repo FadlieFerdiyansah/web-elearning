@@ -20,5 +20,5 @@
     <li>Lalu buat key app nya dengan care <code> php artisan key:generate </code> </li>
     <li>Setelah itu download semua package dengan cara <code> composer install </code> </li>
     <li>Terakhir jalankan server nya <code> php artisan serve </code></li>
-    <li>dan buka url nya diweb browser <b><code>http://127.0.0.1:8000</code></b></li>
+    <li>dan buka url nya diweb browser <code>http://127.0.0.1:8000</code></li>
 </ol>
