@@ -15,11 +15,10 @@
     <li>Copy file <b>.env.example</b> rename menjadi <b>.env</b></li>
     <li>Buat database lalu tuliskan nama database pada file <b>.env</b> <code>DB_DATABASE=elearning</code></li>
     <li>Setelah sudah buat database ketikan <code>php artisan migrate</code> pada terminal lalu enter</li>
-    <li>Lalu masukan <b><code>FILESYSTEM_DRIVER=public</code></b> pada file <b> .env </b> </li>
-    <li>Setelah selesai, ketikan diterminal <b><code> php artisan storage:link </code></b> </li>
-    <li>Lalu buat key app nya dengan care <b><code> php artisan key:generate </code></b> </li>
-    <li>Setelah itu download semua package dengan cara <b><code> composer install </code></b> </li>
-    <li>Terakhir jalankan server nya <b><code> php artisan serve </code></b></li>
-    <li>dan buka url nya diweb browser default bawaan laravel, <b><code>http://127.0.0.1:8000</code></b></li>
-    <li>Atau kalau menggunakan valet/laragon <b><code>web-elearning.test</code></b></li>
+    <li>Lalu masukan <code>FILESYSTEM_DRIVER=public</code> pada file <b> .env </b> </li>
+    <li>Setelah selesai, ketikan diterminal <code> php artisan storage:link </code> </li>
+    <li>Lalu buat key app nya dengan care <code> php artisan key:generate </code> </li>
+    <li>Setelah itu download semua package dengan cara <code> composer install </code> </li>
+    <li>Terakhir jalankan server nya <code> php artisan serve </code></li>
+    <li>dan buka url nya diweb browser <b><code>http://127.0.0.1:8000</code></b></li>
 </ol>
