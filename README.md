@@ -13,7 +13,9 @@
 <h4> Running program </h4>
 <ol>
     <li>Copy file <b>.env.example</b> rename menjadi <b>.env</b></li>
-    <li>Setelah di copy menjadi <b>.env</b> paste code didalam file <b> .env </b> <b><code>FILESYSTEM_DRIVER=public</code></b></li>
+    <li>Buat database lalu tuliskan nama database pada file <b>.env</b> <code>DB_DATABASE=elearning</code></li>
+    <li>Setelah sudah buat database ketikan <code>php artisan migrate</code> pada terminal lalu enter</li>
+    <li>Lalu masukan <b><code>FILESYSTEM_DRIVER=public</code></b> pada file <b> .env </b> </li>
     <li>Setelah selesai, ketikan diterminal <b><code> php artisan storage:link </code></b> </li>
     <li>Lalu buat key app nya dengan care <b><code> php artisan key:generate </code></b> </li>
     <li>Setelah itu download semua package dengan cara <b><code> composer install </code></b> </li>
