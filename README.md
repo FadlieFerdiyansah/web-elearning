@@ -14,15 +14,15 @@ git clone https://github.com/FadlieFerdiyansah/web-elearning.git
 <h4> Running program </h4>
 <ol>
     <li>Copy file <b>.env.example</b> rename menjadi <b>.env</b></li>
-    <li>Buat nama database pada file <b>.env</b> ``` DB_DATABASE=elearning ```</li>
-    <li>Setelah membuat database ketikan ``` php artisan migrate ``` pada terminal lalu enter</li>
-    <li>Setelah berhasil, masukan data-data nya dengan cara ``` php artisan db:seed ``` pada terminal lalu enter</li>
-    <li>Lalu masukan ``` FILESYSTEM_DRIVER=public ``` pada file <b> .env </b> </li>
-    <li>Setelah selesai, ketikan diterminal ```  php artisan storage:link  ``` </li>
-    <li>Lalu buat key app nya dengan care ```  php artisan key:generate  ``` </li>
-    <li>Setelah itu download semua package dengan cara ```  composer install  ``` </li>
-    <li>Terakhir jalankan server nya ```  php artisan serve  ```</li>
-    <li>dan buka url nya diweb browser ``` http://127.0.0.1:8000 ```</li>
+    <li>Buat nama database pada file <b>.env</b> <code> DB_DATABASE=elearning </code></li>
+    <li>Setelah membuat database ketikan <code> php artisan migrate </code> pada terminal lalu enter</li>
+    <li>Setelah berhasil, masukan data-data nya dengan cara <code> php artisan db:seed </code> pada terminal lalu enter</li>
+    <li>Lalu masukan <code> FILESYSTEM_DRIVER=public </code> pada file <b> .env </b> </li>
+    <li>Setelah selesai, ketikan diterminal <code>  php artisan storage:link  </code> </li>
+    <li>Lalu buat key app nya dengan care <code>  php artisan key:generate  </code> </li>
+    <li>Setelah itu download semua package dengan cara <code>  composer install  </code> </li>
+    <li>Terakhir jalankan server nya <code>  php artisan serve  </code></li>
+    <li>dan buka url nya diweb browser <code> http://127.0.0.1:8000 </code></li>
 </ol>
 
 <h3>Login</h3>
