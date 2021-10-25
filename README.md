@@ -1,24 +1,50 @@
-<h3>Cara install : </h3>
-
+<h3>How to install : </h3>
 <p>Download file dengan cara zip/clone</p>
-<h5> Zip </h5>
+<h4> Zip </h4>
 <p>Klik button Code disamping kanan atas, lalu klik <b>download zip</b></p>
-
-<h5> Git Clone </h5>
-<p>Paste code dibawah, buka terminal lalu paste dan enter</p>
-<code>git clone https://github.com/FadlieFerdiyansah/web-elearning.git</code>
-
+<h4> Git Clone </h4>
+<p>Copy code dibawah, buka terminal lalu paste dan enter</p>
+``` git clone https://github.com/FadlieFerdiyansah/web-elearning.git ```
 <br>
 <p>Setelah berhasil meng install file nya</p>
 <h4> Running program </h4>
 <ol>
     <li>Copy file <b>.env.example</b> rename menjadi <b>.env</b></li>
-    <li>Buat database lalu tuliskan nama database pada file <b>.env</b> <code>DB_DATABASE=elearning</code></li>
-    <li>Setelah sudah buat database ketikan <code>php artisan migrate</code> pada terminal lalu enter</li>
-    <li>Lalu masukan <code>FILESYSTEM_DRIVER=public</code> pada file <b> .env </b> </li>
-    <li>Setelah selesai, ketikan diterminal <code> php artisan storage:link </code> </li>
-    <li>Lalu buat key app nya dengan care <code> php artisan key:generate </code> </li>
-    <li>Setelah itu download semua package dengan cara <code> composer install </code> </li>
-    <li>Terakhir jalankan server nya <code> php artisan serve </code></li>
-    <li>dan buka url nya diweb browser <code>http://127.0.0.1:8000</code></li>
+    <li>Buat nama database pada file <b>.env</b> ``` DB_DATABASE=elearning ```</li>
+    <li>Setelah membuat database ketikan ``` php artisan migrate ``` pada terminal lalu enter</li>
+    <li>Setelah berhasil, masukan data-data nya dengan cara ``` php artisan db:seed ``` pada terminal lalu enter</li>
+    <li>Lalu masukan ``` FILESYSTEM_DRIVER=public ``` pada file <b> .env </b> </li>
+    <li>Setelah selesai, ketikan diterminal ```  php artisan storage:link  ``` </li>
+    <li>Lalu buat key app nya dengan care ```  php artisan key:generate  ``` </li>
+    <li>Setelah itu download semua package dengan cara ```  composer install  ``` </li>
+    <li>Terakhir jalankan server nya ```  php artisan serve  ```</li>
+    <li>dan buka url nya diweb browser ``` http://127.0.0.1:8000 ```</li>
 </ol>
+
+<h3>Login</h3>
+<ul>
+    <li>Pergi ke url ``` http://127.0.0.1:8000 ``` Login dengan akun dibawah</li>
+</ul>
+<table border="1px" cellspacing="0" cellpadding="5px">
+    <tr>
+        <th>Email</th>
+        <td>Password</td>
+        <td>Level</td>
+    </tr>
+    <tr>
+        <th>```admin@gmail.com```</th>
+        <td>```password```</td>
+        <td>Admin</td>
+    </tr>
+    <tr>
+        <th>```dosen@gmail.com```</th>
+        <td>```password```</td>
+        <td>Dosen</td>
+    </tr>
+    <tr>
+        <th>```mahasiswa@gmail.com```</th>
+        <td>```password```</td>
+        <td>Mahasiswa</td>
+    </tr>
+</table>
+
