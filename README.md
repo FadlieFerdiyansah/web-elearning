@@ -4,7 +4,11 @@
 <p>Klik button Code disamping kanan atas, lalu klik <b>download zip</b></p>
 <h4> Git Clone </h4>
 <p>Copy code dibawah, buka terminal lalu paste dan enter</p>
-``` git clone https://github.com/FadlieFerdiyansah/web-elearning.git ```
+
+```
+git clone https://github.com/FadlieFerdiyansah/web-elearning.git
+```
+
 <br>
 <p>Setelah berhasil meng install file nya</p>
 <h4> Running program </h4>
@@ -22,28 +26,31 @@
 </ol>
 
 <h3>Login</h3>
-<ul>
-    <li>Pergi ke url ``` http://127.0.0.1:8000 ``` Login dengan akun dibawah</li>
+
+``` 
+http://127.0.0.1:8000/login 
+```
+    
 </ul>
 <table border="1px" cellspacing="0" cellpadding="5px">
     <tr>
         <th>Email</th>
-        <td>Password</td>
-        <td>Level</td>
+        <th>Password</th>
+        <th>Level</th>
     </tr>
     <tr>
-        <th>```admin@gmail.com```</th>
-        <td>```password```</td>
+        <td>admin@gmail.com</td>
+        <td>password</td>
         <td>Admin</td>
     </tr>
     <tr>
-        <th>```dosen@gmail.com```</th>
-        <td>```password```</td>
+        <td>dosen@gmail.com</td>
+        <td>password</td>
         <td>Dosen</td>
     </tr>
     <tr>
-        <th>```mahasiswa@gmail.com```</th>
-        <td>```password```</td>
+        <td>mahasiswa@gmail.com</td>
+        <td>password</td>
         <td>Mahasiswa</td>
     </tr>
 </table>
