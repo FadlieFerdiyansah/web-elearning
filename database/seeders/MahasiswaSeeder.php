@@ -20,8 +20,8 @@ class MahasiswaSeeder extends Seeder
             'kelas_id' => 2,
             'nim' => 17200812,
             'nama' => 'Fadlie Ferdiyansah',
-            'email' => 'fadlie@gmail.com',
-            'password' => bcrypt('mhs123'),
+            'email' => 'mahasiswa@gmail.com',
+            'password' => bcrypt('password'),
             'foto' => 'default.png'
         ]);
 

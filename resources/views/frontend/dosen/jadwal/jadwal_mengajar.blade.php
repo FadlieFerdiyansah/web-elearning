@@ -58,7 +58,7 @@
 					</div>
 				</div>
 				<div class="pricing-cta">
-					<a href="{{ route('kelas.masuk',Crypt::encryptString($jadwal->id)) }}">Masuk <i
+					<a href="{{ route('kelas.masuk',encrypt($jadwal->id)) }}">Masuk <i
 							class="fas fa-arrow-right"></i></a>
 				</div>
 			</div>

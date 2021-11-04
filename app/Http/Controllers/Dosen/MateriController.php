@@ -52,7 +52,7 @@ class MateriController extends Controller
             ->where('dosen_id', Auth::Id())
             ->first();
 
-        // return $jadwalId;
+        // return $jadwal->pertemuan($jadwal->id);
 
 
         return view('frontend.dosen.materi.create', compact('jadwal'));

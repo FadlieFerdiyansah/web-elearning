@@ -21,7 +21,7 @@ class AbsenController extends Controller
 
     public function create($jadwal_id)
     {
-        $jadwal = Jadwal::find(Crypt::decryptString($jadwal_id));
+        $jadwal = Jadwal::find(decrypt($jadwal_id));
         
         $kelasActive = Auth::guard('dosen')->user()->jadwals()->where('hari',hariIndo())->get();
 
@@ -30,7 +30,7 @@ class AbsenController extends Controller
     
     public function store()
     {
-        $jadwal_id = Crypt::decryptString(request('jadwal'));
+        $jadwal_id = decrypt(request('jadwal'));
         
         request()->validate([
             'pertemuan' => 'required'
@@ -50,14 +50,14 @@ class AbsenController extends Controller
 
     public function edit($id)
     {
-        $absensi = Absen::find(Crypt::decryptString($id));
+        $absensi = Absen::find(decrypt($id));
 
         return view('frontend.dosen.absensi.edit', compact('absensi'));
     }
 
     public function update($id)
     {
-        $absen = Absen::find(Crypt::decryptString($id));
+        $absen = Absen::find(decrypt($id));
         
         $absen->update([
             'pertemuan' => request('pertemuan'),
@@ -70,8 +70,8 @@ class AbsenController extends Controller
 
     public function destroy($id)
     {
-        // $absen = Absen::find(Crypt::decryptString($id));
-        $absen = Absen::findOrFail(Crypt::decryptString($id));
+        // $absen = Absen::find(decrypt($id));
+        $absen = Absen::findOrFail(decrypt($id));
 
         $absen->delete();
         Absen::whereNotNull('mahasiswa_id')->where('parent', $absen->id)->delete();

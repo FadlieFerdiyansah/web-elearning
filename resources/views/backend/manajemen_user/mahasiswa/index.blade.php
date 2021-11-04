@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-    @push('lastScript')
+    @push('lastScripts')
 
     <!-- Datatables -->
     <script src="{{ asset('assets/bundles/datatables/datatables.min.js') }}"></script>

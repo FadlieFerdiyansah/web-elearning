@@ -25,7 +25,7 @@
 
             <form action="{{ route('absensi.store') }}" method="post">
                 @csrf
-                <input type="hidden" value="{{ Crypt::encryptString($jadwal->id) }}" name="jadwal">
+                <input type="hidden" value="{{ encrypt($jadwal->id) }}" name="jadwal">
                 <div class="form-group">
                     <label for="kelas">Kelas</label>
                     <input disabled value="{{ $jadwal->kelas->kd_kelas }}" class="form-control">

@@ -13,7 +13,7 @@ class Mahasiswa extends Authenticatable
 
     use HasFactory, HasRoles;
     protected $fillable = ['foto','nim','nama','email','password','fakultas_id','kelas_id'];
-    protected $with = ['absens','userAbsen'];
+    // protected $with = ['absens','userAbsen'];
 
     public function getPictureAttribute()
     {
@@ -40,23 +40,28 @@ class Mahasiswa extends Authenticatable
         return $this->hasMany(Absen::class);
     }
 
-    public function userAbsen()
+    public function mahasiswaAbsenHariIni()
     {
-        return $this->hasOne(Absen::class)
-        ->whereNotNull('mahasiswa_id')
-        ->where('parent','!=', 0)
-        ->where('status', 1)
-        ->whereDate('created_at', date('Y-m-d'));
+            return $this->hasOne(Absen::class)
+            ->whereNotNull('mahasiswa_id')
+            ->where('parent','!=', 0)
+            ->where('status', 1)
+            ->whereDate('created_at', date('Y-m-d'));
     }
+
+    // public function mahasiswaAbsenPerJadwal()
+    // {
+    //     return $this->hasMany(Absen::class)
+    //             ->whereNotNull('mahasiswa_id')
+    //             ->where('parent','!=', 0)
+    //             ->where('status', 1)
+    //             ->whereDate('created_at', date('Y-m-d'));
+    // }
 
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');
     }
 
-    // public function table()
-    // {
-    //     $mahasiswas = Mahasiswa::get();
-    //     return view('managementUser.mahasiswa.index',compact('mahasiswas'));
-    // }
+
 }

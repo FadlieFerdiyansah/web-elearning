@@ -34,8 +34,8 @@
                 <div class="pricing-cta bg-primary">
                     <form action="{{ route('absen') }}" method="post">
                         @csrf
-                        <input type="hidden" name="jadwal" value="{{ Crypt::encryptString($jadwal->id) }}">
-                        <button class="btn btn-primary form-control">{{ Auth::user()->UserAbsen ? 'Sudah Absen' : 'Absen' }} <i class="fas fa-arrow-right"></i></button>
+                        <input type="hidden" name="jadwal" value="{{ encrypt($jadwal->id) }}">
+                        <button class="btn btn-primary form-control">{{ Auth::user()->mahasiswaAbsenHariIni ? 'Sudah Absen' : 'Absen' }} <i class="fas fa-arrow-right"></i></button>
                     </form>
                 </div>
                 @else
@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="col mb-4 mb-lg-0 text-center">
                                 {{-- <a href="{{ route('materi', [$jadwal->kelas_id,$jadwal->matkul_id]) }}"> --}}
-                                <a href="{{ route('materi.mhs', Crypt::encrypt($jadwal->id)) }}">
+                                <a href="{{ route('materi.mhs', encrypt($jadwal->id)) }}">
                                     <i data-feather="book-open"></i>
                                     <div class="mt-2 font-weight-bold">Materi</div>
                                     <div class="text-small text-muted"><span class="text-primary"><i

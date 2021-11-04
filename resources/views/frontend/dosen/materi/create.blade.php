@@ -45,32 +45,16 @@
             @endif
             <form action="{{ route('materis.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group">
-                    <label for="kelas">Kelas</label>
-                    <select name="kelas_id" id="kelas" class="form-control">
-                        <option value="{{ $jadwal->kelas_id }}" class="form-control">
-                            {{ $jadwal->kelas->kd_kelas }}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="matkul">Matakuliah</label>
-                    <select name="matkul_id" id="matkul" class="form-control">
-                        <option value="{{ $jadwal->matkul_id }}" class="form-control">
-                            {{ $jadwal->matkul->nm_matkul }}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="judul">Judul</label>
-                    <input type="text" name="judul" class="form-control" id="judul">
-                </div>
-                <div class="form-group">
-                    <label for="pertemuan">Pertemuan</label>
-                    <input type="text" name="pertemuan" class="form-control" id="pertemuan">
-                </div>
+                <x-select attr="kelas_id" label="Kelas" :data="$jadwal" valueOption="kelas_id" relasi="kelas"
+                    labelOption="kd_kelas" />
+                <x-select attr="matkul_id" label="Matakuliah" :data="$jadwal" valueOption="matkul_id" relasi="matkul"
+                    labelOption="nm_matkul" />
+                <x-input type="text" attr="judul" label="Judul" />
+                <x-input type="text" attr="pertemuan" label="Pertemuan" value="{{ $jadwal->absenParent->pertemuan ?? '' }}" />
+                    {{-- <input type="text" value="pertemuan" class="form-control"> --}}
                 <div class="form-group">
                     <label for="tipe">Tipe</label>
                     <select class="form-control selectric" name="tipe" id="tipe">
-                        {{-- <select class="form-control selectric" name="tipe" id="tipe" onchange="selectType(this)"> --}}
                         <option disabled selected>Pilih Tipe</option>
                         <option value="pdf">PDF</option>
                         <option value="youtube">YouTube</option>
@@ -84,34 +68,16 @@
                     <label for="file">File</label>
                     <input type="file" name="file_or_link" class="form-control" id="file">
                 </div>
-                <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
-                    <textarea name="deskripsi" id="deskripsi" class="form-control"></textarea>
-                </div>
+                <x-textarea attr="deskripsi" label="Deskripsi"></x-textarea>
 
-
-                <div class="form-group">
-                    <x-button>Simpan</x-button>
-                </div>
+                <x-button>Simpan</x-button>
             </form>
         </div>
     </div>
-    @push('dataTables')
+    @push('lastScripts')
     <script src="{{ asset('assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('assets/bundles/jquery-selectric/jquery.selectric.min.js') }}"></script>
     <script>
-        // let link = document.getElementById('formLink'); 
-            // let file = document.getElementById('formFile'); 
-            // function selectType(sel)
-            // {
-            //     if(sel.value == 'pdf'){
-            //         link.style.display = "none";
-            //         file.style.display = "block";
-            //     }else{
-            //         file.style.display = "none";
-            //         link.style.display = "block";
-            //     }
-            // }
             $(document).ready(function(){
                 $('#formLink').hide();
                 $('#formFile').hide();

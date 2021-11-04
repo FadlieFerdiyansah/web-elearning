@@ -18,8 +18,8 @@ class DosenSeeder extends Seeder
         $dosen = Dosen::create([
             'nip' => 100912812,
             'nama' => 'Fadlie Dosen',
-            'email' => 'fadlie@gmail.com',
-            'password' => bcrypt('admin123'),
+            'email' => 'dosen@gmail.com',
+            'password' => bcrypt('password'),
             'foto' => 'default.png'
         ]);
 

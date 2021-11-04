@@ -31,4 +31,11 @@ class Jadwal extends Model
     {
         return $this->hasMany(Absen::class);
     }
+
+    // public function absenParent()
+    // {
+    //     return $this->hasOne(Absen::class)
+    //                 ->whereParent(0)
+    //                 ->whereDate('created_at', date('Y-m-d'));
+    // }
 }

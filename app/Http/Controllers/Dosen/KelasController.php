@@ -13,11 +13,9 @@ class KelasController extends Controller
     {
         //parameter $jadwalId adalah id dari jadwal yang sudah di encrypt
         //dan kode dibawah untuk mencari jadwal dari param $jadwalId sekalian di decrypt var $jadwalId nya
-        $jadwal = Jadwal::where('id', Crypt::decryptString($jadwalId))->first();
+        $jadwal = Jadwal::where('id', decrypt($jadwalId))->first();
 
-        $mahasiswa = Mahasiswa::with(['userAbsen' => function ($query) use ($jadwal) {
-            $query->where('jadwal_id', $jadwal->id);
-        }])->where('kelas_id', $jadwal->kelas_id)->get();
+        $mahasiswa = Mahasiswa::with('mahasiswaAbsenHariIni')->where('kelas_id', $jadwal->kelas_id)->get();
 
         $absen = Absen::where('dosen_id', Auth::Id())
             ->where('jadwal_id', $jadwal->id)
@@ -37,11 +35,14 @@ class KelasController extends Controller
         ->whereDate('created_at', date('Y-m-d'))
         ->first());
 
-
+        //Jika parent absen belom dibuat jangan kasih create absen
         if ($absen->isNotEmpty()) {
             for ($i = 0; $i < count(request('mahasiswa')); $i++) {
                 Absen::updateOrCreate(
-                    ['mahasiswa_id' => request('mahasiswa')[$i]],
+                    [
+                        'mahasiswa_id' => request('mahasiswa')[$i],
+                        'parent' => $absen['id']
+                    ],
                     [
                         'parent' => request('parent'),
                         'status' => request('status')[$i],
@@ -60,7 +61,7 @@ class KelasController extends Controller
     {
         //Setelah di decrypt cari. apakah id ada di dalam table jadwal
         //jika ada tampilkan hanya 1
-        $jadwal = Jadwal::where('id', Crypt::decryptString($jadwalId))->firstOrFail();
+        $jadwal = Jadwal::where('id', decrypt($jadwalId))->firstOrFail();
         $materis = Materi::with(['matkul','kelas'])
             ->where('matkul_id', $jadwal->matkul_id)
             ->where('dosen_id', $jadwal->dosen_id)

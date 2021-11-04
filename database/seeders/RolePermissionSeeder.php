@@ -16,9 +16,9 @@ class RolePermissionSeeder extends Seeder
     public function run()
     {
         $roles = collect(['admin','dosen','mahasiswa']);
-        $permissionMhs = collect(['jadwal kuliahm']);
-        $permissionDsn = collect(['jadwal kuliahd','management nilai','management materi','management absen']);
-        $permissionAdm = collect(['management roles and permissions','management users','management datatable']);
+        // $permissionMhs = collect(['jadwal kuliahm']);
+        $permissionDsn = collect(['jadwal mengajar','management nilai','management materi','management absen']);
+        // $permissionAdm = collect(['management roles and permissions','management users','management datatable']);
         $roles->each(function($role){
             Role::create([
                 'name' => $role,
@@ -26,12 +26,12 @@ class RolePermissionSeeder extends Seeder
             ]);
         });
 
-        $permissionMhs->each(function($permission){
+        // $permissionMhs->each(function($permission){
             Permission::create([
-                'name' => $permission,
+                'name' => 'jadwal kuliah',
                 'guard_name' => 'mahasiswa'
             ]);
-        });
+        // });
 
         $permissionDsn->each(function($permission){
             Permission::create([
@@ -41,9 +41,9 @@ class RolePermissionSeeder extends Seeder
         });
 
         $roleMhs = Role::find(3);
-        $roleMhs->givePermissionTo(['jadwal kuliahm']);
+        $roleMhs->givePermissionTo('jadwal kuliah');
 
         $roleDsn = Role::find(2);
-        $roleDsn->givePermissionTo(['management nilai','management materi','management absen','jadwal kuliahd']);
+        $roleDsn->givePermissionTo(['management nilai','management materi','management absen','jadwal mengajar']);
     }
 }

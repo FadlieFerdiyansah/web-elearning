@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col mb-4 mb-lg-0 text-center">
                         {{-- <a href="{{ route('materi', [$jadwal->kelas_id,$jadwal->matkul_id]) }}"> --}}
-                        <a href="{{ route('kelas.materi', Crypt::encryptString($jadwal->id)) }}">
+                        <a href="{{ route('kelas.materi',encrypt($jadwal->id)) }}">
                             <i data-feather="book-open"></i>
                             <div class="mt-2 font-weight-bold">Materi</div>
                             <div class="text-small text-muted"><span class="text-primary"><i
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="col mb-4 mb-lg-0 text-center">
-                        <a href="{{ route('absensi.create', Crypt::encryptString($jadwal->id)) }}">
+                        <a href="{{ route('absensi.create', encrypt($jadwal->id)) }}">
                             <i data-feather="clipboard"></i>
                             <div class="mt-2 font-weight-bold">Absensi</div>
                             <div class="text-small text-muted"><span class="text-primary"><i
@@ -93,13 +93,13 @@
                                         <td>
                                             <input type="hidden" value="{{ $mhs->id }}" name="mahasiswa[]">
                                             <div class="pretty p-default p-round p-thick">
-                                                <input type="radio" name="status[]{{ $i }}" value="1" {{ $mhs->userAbsen ? 'checked' : '' }}>
+                                                <input type="radio" name="status[]{{ $i }}" value="1" {{ $mhs->mahasiswaAbsenHariIni ? 'checked' : '' }}>
                                                 <div class="state p-primary-o">
                                                     <label>Hadir</label>
                                                 </div>
                                             </div>
                                             <div class="pretty p-default p-round p-thick">
-                                                <input type="radio" name="status[]{{ $i }}" value="0" {{ !$mhs->userAbsen ? 'checked' : '' }}>
+                                                <input type="radio" name="status[]{{ $i }}" value="0" {{ !$mhs->mahasiswaAbsenHariIni ? 'checked' : '' }}>
                                                 <div class="state p-danger-o">
                                                     <label>Tidak Hadir</label>
                                                 </div>

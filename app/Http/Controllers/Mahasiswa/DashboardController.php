@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Mahasiswa;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use ZipArchive;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -16,12 +18,13 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        // $role = Role::find(2);
+        // $role = Role::find(3);
         // $role->givePermissionTo(['jadwal kuliahm']);
         // dd(new ZipArchive);
-        // $user =  Auth::user()->roles;
+        // return Auth::user()->roles->name;
         // return $role->givePermissionTo(['']);
         // return $role->hasPermissionTo('management absensi');
+        // return $role->hasPermissionTo('jadwal kuliah');
 
         // return $user;
 
