@@ -49,6 +49,15 @@ class Mahasiswa extends Authenticatable
             ->whereDate('created_at', date('Y-m-d'));
     }
 
+    public function isAbsen($jadwalId)
+    {
+            return Absen::whereNotNull('mahasiswa_id')
+            ->where('parent','!=', 0)
+            ->where('status', 1)
+            ->where('jadwal_id', $jadwalId)
+            ->whereDate('created_at', date('Y-m-d'));
+    }
+
     // public function mahasiswaAbsenPerJadwal()
     // {
     //     return $this->hasMany(Absen::class)

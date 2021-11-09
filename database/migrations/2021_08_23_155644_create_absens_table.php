@@ -42,7 +42,7 @@ class CreateAbsensTable extends Migration
             $table->foreignId('jadwal_id');
             $table->foreignId('dosen_id')->nullable();
             $table->foreignId('mahasiswa_id')->nullable();
-            $table->boolean('parent')->default(0);
+            $table->string('parent')->default(0);
             $table->boolean('status')->nullable();
             $table->string('pertemuan')->nullable();
             $table->text('rangkuman')->nullable();

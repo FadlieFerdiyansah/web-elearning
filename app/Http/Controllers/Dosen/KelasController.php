@@ -15,14 +15,20 @@ class KelasController extends Controller
         //dan kode dibawah untuk mencari jadwal dari param $jadwalId sekalian di decrypt var $jadwalId nya
         $jadwal = Jadwal::where('id', decrypt($jadwalId))->first();
 
-        $mahasiswa = Mahasiswa::with('mahasiswaAbsenHariIni')->where('kelas_id', $jadwal->kelas_id)->get();
+        $mahasiswa = Mahasiswa::with(['mahasiswaAbsenHariIni' => function($q) use ($jadwal){
+            $q->where('jadwal_id', $jadwal->id);
+        }])->where('kelas_id', $jadwal->kelas_id)->get();
 
         $absen = Absen::where('dosen_id', Auth::Id())
             ->where('jadwal_id', $jadwal->id)
             ->whereDate('created_at', date('Y-m-d'))
             ->first();
 
-            // return $absen;
+            // foreach ($mahasiswa as $mhs) {
+            //     echo $mhs->absens[0]->status ? 'absen' : 'tidak'. '<hr>';
+            // }
+
+            // return $mahasiswa;
 
 
         return view('frontend.dosen.kelas.masuk', compact('mahasiswa', 'jadwal', 'absen'));
@@ -59,6 +65,8 @@ class KelasController extends Controller
 
     public function materi($jadwalId)
     {
+
+        // return Mahasiswa::get();
         //Setelah di decrypt cari. apakah id ada di dalam table jadwal
         //jika ada tampilkan hanya 1
         $jadwal = Jadwal::where('id', decrypt($jadwalId))->firstOrFail();

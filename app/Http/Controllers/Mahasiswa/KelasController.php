@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\{Absen, Jadwal, Materi};
 use Illuminate\Support\Facades\{Auth, Crypt};
 
+use function PHPUnit\Framework\isEmpty;
+
 class KelasController extends Controller
 {
     public function waktuSekarang()
@@ -46,20 +48,36 @@ class KelasController extends Controller
         //Nyambung sama kode diatas.. jadi kode dibawah untuk mengizinkan mahasiswa melakukan absen jika
         //Absen sudah dibuat oleh dosen, jika waktu jam masuk sudah lebih dari jam 12:00 tapi dosen belum
         //Buat absen nya maka mahasiswa nya juga belum bisa absen
-        $allowMhsAbsen = Absen::where('jadwal_id', $jadwal_id)->where('parent', 0)->whereDate('created_at', now())->first();
+        // Mahasiswa::with(['mahasiswaAbsenHariIni' => function($q) use ($jadwal){
+        //     $q->where('jadwal_id', $jadwal->id);
+        // }])->where('kelas_id', $jadwal->kelas_id)->get();
 
+
+
+        $allowMhsAbsen = Absen::where('jadwal_id', $jadwal_id)->where('parent', 0)->whereDate('created_at', now())->first();
+        $isAbsen = Auth::user()->isAbsen($jadwal_id)->first();
+
+        // return Auth::user()->absenYuk($jadwal_id)->first() ? 'ada' : 'kosong';
+
+        // Absen::where('jadwal_id', $jadwal_id)->where('parent', 0)->whereDate('created_at', now())->first();
+
+        // return Auth::user()->mahasiswaAbsenHariIni;
         // return $allowMhsAbsen;
-        return view('frontend.mahasiswa.kelas.masuk', compact('jadwal', 'absens', 'waktuAbsen', 'allowMhsAbsen'));
+        // return $allowMhsAbsen;
+        return view('frontend.mahasiswa.kelas.masuk', compact('jadwal', 'absens', 'waktuAbsen', 'allowMhsAbsen', 'isAbsen'));
     }
 
     public function absen()
     {
         $jadwal_id = decrypt(request('jadwal'));
         $absen = Absen::where('jadwal_id', $jadwal_id)->where('parent', 0)->latest()->first();
+        $isAbsen = Auth::user()->isAbsen($jadwal_id)->first();
+        
 
+        // return $allow ? 'kpsong' : 'ada';
         // return Auth::Id();
         //Jika Mahasiswa yang login sudah absen pada waktu yang ditentukan jangan kasih absen lagi
-        if (!Auth::user()->mahasiswaAbsenHariIni) {
+        if (!$isAbsen) {
             //Jika belum izinkan absen
             Absen::updateOrCreate([
                 'mahasiswa_id' => Auth::Id(),

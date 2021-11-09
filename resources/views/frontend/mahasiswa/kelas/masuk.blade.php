@@ -35,7 +35,7 @@
                     <form action="{{ route('absen') }}" method="post">
                         @csrf
                         <input type="hidden" name="jadwal" value="{{ encrypt($jadwal->id) }}">
-                        <button class="btn btn-primary form-control">{{ Auth::user()->mahasiswaAbsenHariIni ? 'Sudah Absen' : 'Absen' }} <i class="fas fa-arrow-right"></i></button>
+                        <button class="btn btn-primary form-control">{{ $isAbsen ? 'Sudah Absen' : 'Absen' }} <i class="fas fa-arrow-right"></i></button>
                     </form>
                 </div>
                 @else
