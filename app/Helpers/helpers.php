@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 function hariIndo()
 {
     $today = date('l');
@@ -20,4 +22,9 @@ function hariIndo()
     }
 
     return $day;
+}
+
+function waktuSekarang()
+{
+    return Carbon::now('Asia/Jakarta')->format('H:i');
 }

@@ -15,31 +15,35 @@ class KelasController extends Controller
         //dan kode dibawah untuk mencari jadwal dari param $jadwalId sekalian di decrypt var $jadwalId nya
         $jadwal = Jadwal::where('id', decrypt($jadwalId))->first();
 
-        $mahasiswa = Mahasiswa::with(['mahasiswaAbsenHariIni' => function($q) use ($jadwal){
-            $q->where('jadwal_id', $jadwal->id);
-        }])->where('kelas_id', $jadwal->kelas_id)->get();
+        // Jika waktu pada jadwal sesuai maka jalankan code dibawah
+        if (waktuSekarang() >= $jadwal->jam_masuk && waktuSekarang() <= $jadwal->jam_keluar) {
 
-        $absen = Absen::where('dosen_id', Auth::Id())
-            ->where('jadwal_id', $jadwal->id)
-            ->whereDate('created_at', date('Y-m-d'))
-            ->first();
+            // Code dibawah untuk menampilkan seluruh mahasiswa yang berada di kelas yang sama dan dijadwal yang sama
+            // Beserta menampilkan  absensi hari ini
+            $mahasiswa = Mahasiswa::with(['mahasiswaAbsenHariIni' => function ($q) use ($jadwal) {
+                $q->where('jadwal_id', $jadwal->id);
+            }])->where('kelas_id', $jadwal->kelas_id)->get();
 
-            // foreach ($mahasiswa as $mhs) {
-            //     echo $mhs->absens[0]->status ? 'absen' : 'tidak'. '<hr>';
-            // }
+            // Code dibawah untuk menampilkan data absen yang telah dibuat oleh dosen untuk hari ini
+            // dan akan digunakan untuk simpan rekap absen
+            $absen = Absen::where('dosen_id', Auth::Id())
+                ->where('jadwal_id', $jadwal->id)
+                ->whereDate('created_at', now())
+                ->first();
 
-            // return $mahasiswa;
+            return view('frontend.dosen.kelas.masuk', compact('mahasiswa', 'jadwal', 'absen'));
+        }
 
-
-        return view('frontend.dosen.kelas.masuk', compact('mahasiswa', 'jadwal', 'absen'));
+        // Jika waktu pada jadwal tidak sesuai return back
+        return back();
     }
 
     public function storeAbsen()
     {
         $absen = collect(Absen::where('dosen_id', Auth::Id())
-        ->where('jadwal_id', request('jadwal'))
-        ->whereDate('created_at', date('Y-m-d'))
-        ->first());
+            ->where('jadwal_id', request('jadwal'))
+            ->whereDate('created_at', date('Y-m-d'))
+            ->first());
 
         //Jika parent absen belom dibuat jangan kasih create absen
         if ($absen->isNotEmpty()) {
@@ -70,12 +74,12 @@ class KelasController extends Controller
         //Setelah di decrypt cari. apakah id ada di dalam table jadwal
         //jika ada tampilkan hanya 1
         $jadwal = Jadwal::where('id', decrypt($jadwalId))->firstOrFail();
-        $materis = Materi::with(['matkul','kelas'])
+        $materis = Materi::with(['matkul', 'kelas'])
             ->where('matkul_id', $jadwal->matkul_id)
             ->where('dosen_id', $jadwal->dosen_id)
             ->where('kelas_id', $jadwal->kelas_id)
             ->latest()->get();
 
-        return view('frontend.dosen.kelas.materi', compact('materis','jadwal'));
+        return view('frontend.dosen.kelas.materi', compact('materis', 'jadwal'));
     }
 }

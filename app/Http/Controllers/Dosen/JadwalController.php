@@ -14,7 +14,6 @@ class JadwalController extends Controller
 
         return view('frontend.dosen.jadwal.jadwal_mengajar', [
             'jadwals' => $jadwals,
-            'day' => hariIndo()
         ]);
     }
 

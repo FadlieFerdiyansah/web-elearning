@@ -74,8 +74,6 @@ class KelasController extends Controller
         $isAbsen = Auth::user()->isAbsen($jadwal_id)->first();
         
 
-        // return $allow ? 'kpsong' : 'ada';
-        // return Auth::Id();
         //Jika Mahasiswa yang login sudah absen pada waktu yang ditentukan jangan kasih absen lagi
         if (!$isAbsen) {
             //Jika belum izinkan absen

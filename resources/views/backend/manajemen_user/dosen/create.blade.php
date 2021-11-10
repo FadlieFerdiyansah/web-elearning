@@ -21,7 +21,7 @@
             </form>
         </div>
     </div>
-    @push('lastScript')
+    @push('lastScripts')
     <script src="{{ asset('assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     @endpush
 </x-app-layouts>
