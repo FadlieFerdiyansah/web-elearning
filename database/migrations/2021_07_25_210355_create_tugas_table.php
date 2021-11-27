@@ -15,15 +15,16 @@ class CreateTugasTable extends Migration
     {
         Schema::create('tugas', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreignId('dosen_id');
-            $table->foreignId('kelas_id');
-            $table->foreignId('mahasiswa_id');
-            $table->string('judul');
-            $table->longText('file_or_link');
+            $table->foreignId('jadwal_id');
+            $table->foreignId('dosen_id')->nullable();
+            $table->foreignId('mahasiswa_id')->nullable();
+            $table->string('parent')->default(0);
+            $table->string('judul')->nullable();
+            $table->string('file')->nullable();
+            $table->string('link')->nullable();
             $table->string('pertemuan');
-            $table->text('deskripsi');
-            $table->dateTime('mulai',   0);
-            $table->dateTime('selesai', 0);
+            $table->text('deskripsi')->nullable();
+            $table->dateTime('pengumpulan')->nullable();
             $table->timestamps();
         });
     }

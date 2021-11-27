@@ -111,4 +111,11 @@ class KelasController extends Controller
 
         return view('frontend.mahasiswa.kelas.materi', compact('materis', 'jadwal'));
     }
+
+    public function tugas($jadwalId)
+    {
+        $jadwal = Jadwal::whereId(decrypt($jadwalId))->first();
+        // return $jadwal;
+        return view('frontend.mahasiswa.kelas.tugas.index', compact('jadwal'));
+    }
 }

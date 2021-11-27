@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Tugas extends Model
 {
     use HasFactory;
+
+    protected $fillable = [ 'jadwal_id', 'parent', 'judul', 'file', 'link', 'pertemuan', 'deskripsi', 'pengumpulan' ];
 }

@@ -18,4 +18,5 @@ Route::middleware('auth:mahasiswa', 'disable.back')->group(function () {
     Route::get('masuk/kelas/{jadwal}', [KelasController::class, 'masuk'])->name('mahasiswa.masukKelas');
     Route::post('kelas/absen', [KelasController::class, 'absen'])->name('absen');
     Route::get('materi/{jadwal}', [KelasController::class, 'materi'])->name('materi.mhs');
+    Route::get('assignment/{jadwal}', [KelasController::class, 'tugas'])->name('tugas.mhs');
 });

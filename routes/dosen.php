@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dosen\{AbsenController, KelasController, JadwalController, MateriController, DashboardController};
+use App\Http\Controllers\Dosen\{AbsenController, KelasController, JadwalController, MateriController, DashboardController, TugasController};
 
 
 Route::middleware('auth:dosen')->group(function () {
@@ -30,4 +30,12 @@ Route::middleware('auth:dosen')->group(function () {
         Route::delete('delete/{absen}', [AbsenController::class, 'destroy'])->name('absensi.delete');
     });
 
+    // ** TUGAS **
+    Route::get('tugas/{jadwal}', [TugasController::class, 'index'])->name('tugas');
+    Route::get('tugas/create/{jadwal}', [TugasController::class, 'create'])->name('tugas.create');
+    Route::post('tugas/create', [TugasController::class, 'store'])->name('tugas.store');
+    // Route::resource('tugas', TugasController::class)->except('index');
+    // Route::prefix('tugas')->group(function(){
+    //     Route::get('create', [TugasController::class, 'create']);
+    // });
 });

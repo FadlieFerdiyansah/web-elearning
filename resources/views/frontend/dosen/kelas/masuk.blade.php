@@ -18,12 +18,12 @@
                                         class="fas fa-caret-up"></i></span> 38%</div>
                         </a>
                     </div>
-                    <div class="col mb-4 mb-lg-0 text-center">
+                    <a href="{{ route('tugas', encrypt($jadwal->id)) }}" class="col mb-4 mb-lg-0 text-center">
                         <i data-feather="file"></i>
                         <div class="mt-2 font-weight-bold">Tugas</div>
                         <div class="text-small text-muted"><span class="text-primary"><i
                                     class="fas fa-caret-up"></i></span> 22%</div>
-                    </div>
+                    </a>
                     <div class="col mb-4 mb-lg-0 text-center">
                         <i data-feather="message-square"></i>
                         <div class="mt-2 font-weight-bold">Diskusi</div>
