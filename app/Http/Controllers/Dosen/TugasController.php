@@ -16,15 +16,16 @@ class TugasController extends Controller
     {
         $jadwal = Jadwal::whereId(decrypt($jadwalId))->first();
         $tugas = Tugas::where('jadwal_id', $jadwal->id)->latest()->paginate(10);
-        return view('frontend.dosen.tugas.index', compact('jadwal', 'tugas'));
+        $newtsPertemuan = $jadwal->absens()->where('parent', 0)->whereDate('created_at', now('Asia/Jakarta'))->latest()->select('pertemuan')->first();
+        return view('frontend.dosen.tugas.index', compact('jadwal', 'tugas', 'newtsPertemuan'));
     }
 
     public function create($jadwalId)
     {
         $jadwal = Jadwal::whereId(decrypt($jadwalId))->first();
 
-        $newestPertemuan = $jadwal->absens()->where('parent', 0)->whereDate('created_at', now('Asia/Jakarta'))->latest()->select('pertemuan')->first();
-        return view('frontend.dosen.tugas.create', compact('jadwal', 'newestPertemuan'));
+        $newtsPertemuan = $jadwal->absens()->where('parent', 0)->whereDate('created_at', now('Asia/Jakarta'))->latest()->select('pertemuan')->first();
+        return view('frontend.dosen.tugas.create', compact('jadwal', 'newtsPertemuan'));
     }
 
     public function store(TugasRequest $request)

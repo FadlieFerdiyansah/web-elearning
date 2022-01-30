@@ -21,7 +21,7 @@ class AbsenController extends Controller
 
     public function create($jadwal_id)
     {
-        $jadwal = Jadwal::find(decrypt($jadwal_id));
+        $jadwal = Jadwal::findOrFail(decrypt($jadwal_id));
         
         $kelasActive = Auth::guard('dosen')->user()->jadwals()->where('hari',hariIndo())->get();
 

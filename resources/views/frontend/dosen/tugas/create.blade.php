@@ -22,7 +22,7 @@
                 @csrf
                 <input type="hidden" name="jadwal" value="{{ Crypt::encrypt($jadwal->id) }}"/>
                 <x-input type="text" attr="judul" label="Judul" />
-                <x-input type="text" attr="pertemuan" label="Pertemuan" value="{{ $newestPertemuan->pertemuan }}"
+                <x-input type="text" attr="pertemuan" label="Pertemuan" value="{{ $newtsPertemuan->pertemuan }}"
                     readonly />
                 <div class="form-group">
                     <label for="tipe">Tipe</label>
@@ -46,7 +46,15 @@
                 <x-input type="datetime-local" attr="pengumpulan" label="Pengumpulan" />
                 <x-textarea attr="deskripsi" label="Deskripsi"></x-textarea>
 
-                <x-button>Submit</x-button>
+                <div class="d-flex">
+                    <div class="mx-2">
+                        <x-button>Submit</x-button>
+                    </div>
+                    <div>
+                        <a href="{{ route('tugas', encrypt($jadwal->id)) }}" class="btn btn-warning text-uppercase">Back</a>
+                    </div>
+
+                </div>
             </form>
         </div>
     </div>

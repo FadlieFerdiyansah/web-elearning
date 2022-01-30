@@ -1,8 +1,12 @@
 <x-app-layouts>
     <div class="card">
         <div class="card-header">
+            @if ($newtsPertemuan)
             <a href="{{ route('tugas.create', encrypt($jadwal->id)) }}" class="btn btn-success btn-sm"><i
                     class="fas fa-plus"></i> Buat Tugas</a>
+            @else
+            <a href="{{ route('absensi.create', encrypt($jadwal->id)) }}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Buat absen terlebih dahulu</a>
+            @endif
         </div>
         <div class="card-body">
             @if (session('success'))
@@ -28,14 +32,14 @@
                 </thead>
                 <tbody>
                     @foreach ($tugas as $i => $tgs)
-                        <tr>
-                            <td>{{ $tugas->firstItem() + $i }}</td>
-                            <td>{{ $tgs->judul }}</td>
-                            <td>{{ $tgs->pertemuan }}</td>
-                            <td>{{ $tgs->deskripsi }}</td>
-                            <td>{{ $tgs->pengumpulan }}</td>
-                            <td>{{ $tgs->created_at }}</td>
-                        </tr>
+                    <tr>
+                        <td>{{ $tugas->firstItem() + $i }}</td>
+                        <td>{{ $tgs->judul }}</td>
+                        <td><div class="badge badge-dark">{{ $tgs->pertemuan }}</div></td>
+                        <td>{{ $tgs->deskripsi }}</td>
+                        <td>{{ date('d F Y ~ H:s', strtotime($tgs->pengumpulan)) }}</td>
+                        <td>{{ date('d F Y ~ H:s', strtotime($tgs->created_at)) }}</td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
