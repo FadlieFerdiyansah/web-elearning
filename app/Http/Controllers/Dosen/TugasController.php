@@ -2,37 +2,41 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use App\Http\Controllers\Controller;
-use App\Models\Jadwal;
 use App\Models\Tugas;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use App\Http\Requests\Dosen\TugasRequest;
 
 class TugasController extends Controller
 {
     public function index($jadwalId)
     {
         $jadwal = Jadwal::whereId(decrypt($jadwalId))->first();
-
-        return view('frontend.dosen.tugas.index', compact('jadwal'));
+        $tugas = Tugas::where('jadwal_id', $jadwal->id)->latest()->paginate(10);
+        return view('frontend.dosen.tugas.index', compact('jadwal', 'tugas'));
     }
 
     public function create($jadwalId)
     {
         $jadwal = Jadwal::whereId(decrypt($jadwalId))->first();
 
-        return view('frontend.dosen.tugas.create', compact('jadwal'));
+        $newestPertemuan = $jadwal->absens()->where('parent', 0)->whereDate('created_at', now('Asia/Jakarta'))->latest()->select('pertemuan')->first();
+        return view('frontend.dosen.tugas.create', compact('jadwal', 'newestPertemuan'));
     }
 
-    public function store()
+    public function store(TugasRequest $request)
     {
-        Tugas::create([
-            'parent' => request('parent'),
-            'judul' => request('judul'),
-            'file' => request('file'),
-            'link' => request('link'),
-            'pertemuan' => request('pertemuan'),
-            'deskripsi' => request('deskripsi'),
-            'pengumpulan' => request('pengumpulan'),
-        ]);
+        $jadwalId = Crypt::decrypt(request('jadwal'));
+        $jadwal = Jadwal::with('kelas')->where('id', $jadwalId)->first();
+        $attr = $request->validated();
+        $attr['file_or_link'] = request('file_or_link');
+        $attr['jadwal_id'] = $jadwalId;
+
+        Auth::user()->tugas()->create($attr);
+
+        return back()->with('success', "Berhasil membuat tugas untuk kelas {$jadwal->kelas->kd_kelas}");
     }
 }

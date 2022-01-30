@@ -12,17 +12,17 @@
 			@auth('admin')
 				<li class="dropdown{{ request()->routeIs('dashboard.admin') ? ' active' : '' }}">
 					<a href="{{ route('dashboard.admin') }}" class="nav-link"><i
-							data-feather="monitor"></i><span>Dashboard Admin</span></a>
+							data-feather="monitor"></i><span>Dashboard</span></a>
 				</li>
 			@elseauth('dosen')
 			<li class="dropdown{{ request()->routeIs('dashboard.dosen') ? ' active' : '' }}">
 				<a href="{{ route('dashboard.dosen') }}" class="nav-link"><i
-						data-feather="monitor"></i><span>Dashboard Dosen</span></a>
+						data-feather="monitor"></i><span>Dashboard</span></a>
 			</li>
 			@elseauth('mahasiswa')
 			<li class="dropdown{{ request()->routeIs('dashboard.mahasiswa') ? ' active' : '' }}">
 				<a href="{{ route('dashboard.mahasiswa') }}" class="nav-link"><i
-						data-feather="monitor"></i><span>Dashboard Mahasiswa</span></a>
+						data-feather="monitor"></i><span>Dashboard</span></a>
 			</li>
 			@endauth
 

@@ -3,9 +3,12 @@
 @include('components.spesifik_menu.partials.menu',[
 'icon' => 'calendar',
 'parentName' => 'Jadwal',
-'nameRoute' => ['jadwals.mengajar','jadwals.mengajar_pengganti'],
-'countChild' => 2,
-'childName' => ['Jadwal Kuliah','Jadwal Pengganti'],
+// 'nameRoute' => ['jadwals.mengajar','jadwals.mengajar_pengganti'],
+'nameRoute' => ['jadwals.mengajar'],
+'countChild' => 1,
+// 'countChild' => 2,
+// 'childName' => ['Jadwal Kuliah','Jadwal Pengganti'],
+'childName' => ['Jadwal Kuliah'],
 ])
 @endcan
 

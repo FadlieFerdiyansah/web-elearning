@@ -9,6 +9,10 @@
         @else
             value="{{ old($attr) }}"
         @endisset
+        
+        @isset($readonly)
+            readonly
+        @endisset
     >
 
     {{-- Ketika error --}}

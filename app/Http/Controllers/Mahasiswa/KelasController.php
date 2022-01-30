@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
-use App\Models\{Absen, Jadwal, Materi};
+use App\Models\{Absen, Jadwal, Materi, Tugas};
 use Illuminate\Support\Facades\{Auth, Crypt};
 
 use function PHPUnit\Framework\isEmpty;
@@ -116,6 +116,7 @@ class KelasController extends Controller
     {
         $jadwal = Jadwal::whereId(decrypt($jadwalId))->first();
         // return $jadwal;
-        return view('frontend.mahasiswa.kelas.tugas.index', compact('jadwal'));
+        $tugas = Tugas::where('jadwal_id', $jadwal->id)->latest()->paginate(10);
+        return view('frontend.mahasiswa.kelas.tugas.index', compact('jadwal', 'tugas'));
     }
 }

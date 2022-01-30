@@ -20,8 +20,8 @@ class CreateTugasTable extends Migration
             $table->foreignId('mahasiswa_id')->nullable();
             $table->string('parent')->default(0);
             $table->string('judul')->nullable();
-            $table->string('file')->nullable();
-            $table->string('link')->nullable();
+            $table->string('tipe');
+            $table->string('file_or_link');
             $table->string('pertemuan');
             $table->text('deskripsi')->nullable();
             $table->dateTime('pengumpulan')->nullable();

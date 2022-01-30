@@ -9,5 +9,5 @@ class Tugas extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'jadwal_id', 'parent', 'judul', 'file', 'link', 'pertemuan', 'deskripsi', 'pengumpulan' ];
+    protected $fillable = [ 'jadwal_id', 'parent', 'judul', 'tipe', 'file_or_link', 'pertemuan', 'deskripsi', 'pengumpulan' ];
 }

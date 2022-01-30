@@ -27,7 +27,16 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ($tugas as $i => $tgs)
+                        <tr>
+                            <td>{{ $tugas->firstItem() + $i }}</td>
+                            <td>{{ $tgs->judul }}</td>
+                            <td>{{ $tgs->pertemuan }}</td>
+                            <td>{{ $tgs->deskripsi }}</td>
+                            <td>{{ $tgs->pengumpulan }}</td>
+                            <td>{{ $tgs->created_at }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

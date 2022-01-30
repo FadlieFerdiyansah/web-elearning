@@ -30,22 +30,23 @@
                                     <th>#</th>
                                     <th>Kd Matkul</th>
                                     <th>Judul</th>
-                                    <th>Deskripsi</th>
                                     <th>Pertemuan</th>
+                                    <th>Deskripsi</th>
                                     <th>Pengumpulan</th>
                                     <th>Dibuat</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($tugas as $i => $tgs)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Hello</td>
-                                    <td>Hello</td>
-                                    <td>Hello</td>
-                                    <td>Hello</td>
-                                    <td>Hello</td>
-                                    <td>Hello</td>
+                                    <td>{{ $tugas->firstItem() + $i }}</td>
+                                    <td>{{ $jadwal->matkul->kd_matkul }}</td>
+                                    <td>{{ $tgs->judul }}</td>
+                                    <td><span class="badge badge-dark">{{ $tgs->pertemuan }}</span></td>
+                                    <td>{{ $tgs->deskripsi }}</td>
+                                    <td>{{ date('d F Y ~ H:s', strtotime($tgs->pengumpulan)) }}</td>
+                                    <td>{{ date('d F Y', strtotime($tgs->created_at)) }}</td>
                                     <td>
                                         <div class="dropdown d-inline">
                                             <button class="btn btn-info dropdown-toggle" type="button"
@@ -53,13 +54,15 @@
                                                 Action
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item has-icon" href=""><i class=" fas fa-file-export"></i> Kirim Tugas</a>
+                                                <a class="dropdown-item has-icon" href=""><i
+                                                        class=" fas fa-file-export"></i> Kirim Tugas</a>
                                                 <a class="dropdown-item has-icon font-sm"><i
                                                         class=" fas fa-download"></i> Download</a>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

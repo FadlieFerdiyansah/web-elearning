@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+Route::get('/',fn () => view('index'));
 
 Route::middleware('auth:mahasiswa', 'disable.back')->group(function () {
     Route::prefix('user')->get('dashboard', DashboardController::class)->name('dashboard.mahasiswa');

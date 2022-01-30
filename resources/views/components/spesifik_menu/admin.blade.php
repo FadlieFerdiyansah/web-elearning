@@ -15,20 +15,12 @@
 @include('components.spesifik_menu.partials.menu',[
 'icon' => 'calendar',
 'parentName' => 'Jadwal',
-'nameRoute' => ['jadwals.index','jadwals.pengganti'],
-'countChild' => 2,
-'childName' => ['Jadwal Kuliah','Jadwal Pengganti'],
+// 'nameRoute' => ['jadwals.index','jadwals.pengganti'],
+'nameRoute' => ['jadwals.index'],
+'countChild' => 1,
+// 'childName' => ['Jadwal Kuliah','Jadwal Pengganti'],
+'childName' => ['Jadwal Kuliah'],
 ])
-
-@can('management roles and permissions')
-@include('components.spesifik_menu.partials.menu',[
-'icon' => 'shield-off',
-'parentName' => 'Roles & Permissions',
-'nameRoute' => ['dosens.index','dosens.index'],
-'countChild' => 2,
-'childName' => [ 'Roles', 'Permissions' ],
-])
-@endcan
 
 @can('management roles and permissions')
 @include('components.spesifik_menu.partials.menu',[
