@@ -1,11 +1,11 @@
 @can('jadwal kuliah')
-    {{-- @auth('mahasiswa') --}}
     @include('components.spesifik_menu.partials.menu',[
         'icon' => 'calendar',
-        'parentName' => 'Jadwal for Mahasiswa',
-        'nameRoute' => ['jadwalKuliah','jadwalPengganti'],
-        'countChild' => 2,
-        'childName' => ['Jadwal Kuliah','Jadwal Pengganti'],
+        'parentName' => 'Jadwal',
+        // 'nameRoute' => ['jadwalKuliah','jadwalPengganti'],
+        'nameRoute' => ['jadwalKuliah'],
+        'countChild' => 1,
+        // 'childName' => ['Jadwal Kuliah','Jadwal Pengganti'],
+        'childName' => ['Jadwal Kuliah'],
         ])
-    {{-- @endauth --}}
 @endcan

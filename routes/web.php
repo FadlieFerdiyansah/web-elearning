@@ -14,7 +14,7 @@ Route::middleware('auth:mahasiswa', 'disable.back')->group(function () {
     Route::prefix('user')->get('dashboard', DashboardController::class)->name('dashboard.mahasiswa');
 
     Route::get('jadwal-kuliah', [JadwalController::class, 'jadwalKuliah'])->name('jadwalKuliah');
-    Route::get('jadwal-pengganti', [JadwalController::class, 'jadwalPengganti'])->name('jadwalPengganti');
+    // Route::get('jadwal-pengganti', [JadwalController::class, 'jadwalPengganti'])->name('jadwalPengganti');
 
     Route::get('masuk/kelas/{jadwal}', [KelasController::class, 'masuk'])->name('mahasiswa.masukKelas');
     Route::post('kelas/absen', [KelasController::class, 'absen'])->name('absen');

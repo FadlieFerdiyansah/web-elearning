@@ -24,6 +24,9 @@ class KelasController extends Controller
                 $q->where('jadwal_id', $jadwal->id);
             }])->where('kelas_id', $jadwal->kelas_id)->get();
 
+            $mahasiswaHadir = $mahasiswa->where('mahasiswaAbsenHariIni', '!=', null)->count();
+            $mahasiswaTidakHadir = $mahasiswa->where('mahasiswaAbsenHariIni', '==', null)->count();
+
             // Code dibawah untuk menampilkan data absen yang telah dibuat oleh dosen untuk hari ini
             // dan akan digunakan untuk simpan rekap absen
             $absen = Absen::where('dosen_id', Auth::Id())
@@ -31,7 +34,8 @@ class KelasController extends Controller
                 ->whereDate('created_at', now())
                 ->first();
 
-            return view('frontend.dosen.kelas.masuk', compact('mahasiswa', 'jadwal', 'absen'));
+
+            return view('frontend.dosen.kelas.masuk', compact('mahasiswa', 'jadwal', 'absen', 'mahasiswaHadir', 'mahasiswaTidakHadir'));
         }
 
         // Jika waktu pada jadwal tidak sesuai return back

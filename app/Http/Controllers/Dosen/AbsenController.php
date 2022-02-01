@@ -24,8 +24,11 @@ class AbsenController extends Controller
         $jadwal = Jadwal::findOrFail(decrypt($jadwal_id));
         
         $kelasActive = Auth::guard('dosen')->user()->jadwals()->where('hari',hariIndo())->get();
-
-        return view('frontend.dosen.absensi.create',compact('kelasActive','jadwal'));
+        $absen = Absen::where('dosen_id', Auth::Id())
+                ->where('jadwal_id', $jadwal->id)
+                ->whereDate('created_at', now())
+                ->first();
+        return view('frontend.dosen.absensi.create',compact('kelasActive','jadwal', 'absen'));
     }
     
     public function store()
@@ -35,16 +38,17 @@ class AbsenController extends Controller
         request()->validate([
             'pertemuan' => 'required'
         ]);
-
         
-        Auth::user()->absens()->create([
+        Auth::user()->absens()->updateOrCreate(
+            ['jadwal_id' => $jadwal_id],
+            [
             'jadwal_id' => $jadwal_id,
             'pertemuan' => request('pertemuan'),
             'rangkuman' => request('rangkuman'),
             'berita_acara' => request('berita_acara')
         ]);
         
-        // Auth::guard('dosen')->user()->absen()->create();
+        session()->flash('success', 'Berhasil membuat absen hari ini');
         return redirect(route('kelas.masuk',request('jadwal')));
     }
 
@@ -70,10 +74,9 @@ class AbsenController extends Controller
 
     public function destroy($id)
     {
-        // $absen = Absen::find(decrypt($id));
         $absen = Absen::findOrFail(decrypt($id));
-
         $absen->delete();
+        
         Absen::whereNotNull('mahasiswa_id')->where('parent', $absen->id)->delete();
         return redirect(route('absensi.index'));
     }

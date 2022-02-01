@@ -58,6 +58,11 @@ class Mahasiswa extends Authenticatable
             ->whereDate('created_at', date('Y-m-d'));
     }
 
+    // public function scopeCountAbsensiMahasiswa($query, $operator)
+    // {
+    //     return $query->where('mahasiswaAbsenHariIni', '!=', null);
+    // }
+
     // public function mahasiswaAbsenPerJadwal()
     // {
     //     return $this->hasMany(Absen::class)

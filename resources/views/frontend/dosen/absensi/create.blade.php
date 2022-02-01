@@ -4,25 +4,6 @@
             <h4>Form Buat Absensi</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible show fade">
-                <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                        <span>×</span>
-                    </button>
-                    {!! session('success') !!}
-                </div>
-            </div>
-            @endif
-
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                @foreach ($errors->all() as $message)
-                <li>{{ $message }}</li>
-                @endforeach
-            </div>
-            @endif
-
             <form action="{{ route('absensi.store') }}" method="post">
                 @csrf
                 <input type="hidden" value="{{ encrypt($jadwal->id) }}" name="jadwal">
@@ -37,7 +18,7 @@
                 <div class="form-group">
                     <label for="pertemuan">Pertemuan</label>
                     <input autofocus type="text" name="pertemuan"
-                        class="form-control @error('pertemuan')is-invalid @enderror" id="pertemuan">
+                        class="form-control @error('pertemuan')is-invalid @enderror" id="pertemuan" value="{{ $absen->pertemuan ?? '' }}">
                     @error('pertemuan')
                     <div class="invalid-feedback">
                         {{ $message }}

@@ -55,9 +55,14 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item has-icon" href=""><i
-                                                        class=" fas fa-file-export"></i> Kirim Tugas</a>
+                                                        class="fas fa-file-export"></i> Kirim Tugas</a>
+                                                @if ($tgs->type == 'file')
                                                 <a class="dropdown-item has-icon font-sm"><i
-                                                        class=" fas fa-download"></i> Download</a>
+                                                    class="fas fa-download" download></i> Download</a>
+                                                @else
+                                                <a href="{{ $tgs->file_or_link }}" target="_blank" class="dropdown-item has-icon font-sm"><i
+                                                    class="fas fa-download"></i> Download</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>

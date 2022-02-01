@@ -2,53 +2,55 @@
     @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/bundles/pretty-checkbox/pretty-checkbox.min.css') }}">
     @endpush
-    <div class="row">
-        <div class="card w-100">
-            <div class="card-header">
-                <h4>Popular Browser</h4>
-            </div>
+    <div class="row justify-content-center">
+        <div class="card col-sm-12 col-lg-5 mx-1">
             <div class="card-body">
                 <div class="row">
                     <div class="col mb-4 mb-lg-0 text-center">
-                        {{-- <a href="{{ route('materi', [$jadwal->kelas_id,$jadwal->matkul_id]) }}"> --}}
                         <a href="{{ route('kelas.materi',encrypt($jadwal->id)) }}">
                             <i data-feather="book-open"></i>
                             <div class="mt-2 font-weight-bold">Materi</div>
-                            <div class="text-small text-muted"><span class="text-primary"><i
-                                        class="fas fa-caret-up"></i></span> 38%</div>
                         </a>
                     </div>
                     <a href="{{ route('tugas', encrypt($jadwal->id)) }}" class="col mb-4 mb-lg-0 text-center">
                         <i data-feather="file"></i>
                         <div class="mt-2 font-weight-bold">Tugas</div>
-                        <div class="text-small text-muted"><span class="text-primary"><i
-                                    class="fas fa-caret-up"></i></span> 22%</div>
                     </a>
-                    <div class="col mb-4 mb-lg-0 text-center">
-                        <i data-feather="message-square"></i>
-                        <div class="mt-2 font-weight-bold">Diskusi</div>
-                        <div class="text-small text-muted"><span class="text-danger"><i
-                                    class="fas fa-caret-down"></i></span> 27%</div>
-                    </div>
-
                     <div class="col mb-4 mb-lg-0 text-center">
                         <a href="{{ route('absensi.create', encrypt($jadwal->id)) }}">
                             <i data-feather="clipboard"></i>
                             <div class="mt-2 font-weight-bold">Absensi</div>
-                            <div class="text-small text-muted"><span class="text-primary"><i
-                                        class="fas fa-caret-up"></i></span> 38%</div>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="card col-sm-12 col-lg-5 mx-1">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col mb-4 mb-lg-0 text-center">
+                        <i data-feather="users"></i>
+                        <div class="mt-2 font-weight-bold">Total Mahasiswa</div>
+                        <h6 class="badge badge-dark">{{ $mahasiswa->count() }}</h6>
+                    </div>
+                    <div class="col mb-4 mb-lg-0 text-center">
+                        <i data-feather="user-check"></i>
+                        <div class="mt-2 font-weight-bold">Hadir</div>
+                        <h6 class="badge badge-success">{{ $mahasiswaHadir }}</h6>
+                    </div>
+                    <div class="col mb-4 mb-lg-0 text-center">
+                        <i data-feather="user-x"></i>
+                        <div class="mt-2 font-weight-bold">Tidak Hadir</div>
+                        <h6 class="badge badge-danger">{{ $mahasiswaTidakHadir }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div class="row">
         <div class="col-12">
             <div class="card mt-2">
-                <div class="card-header">
-                    <h4>Mahasiswa</h4>
-                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         @if (session('success'))
@@ -93,13 +95,15 @@
                                         <td>
                                             <input type="hidden" value="{{ $mhs->id }}" name="mahasiswa[]">
                                             <div class="pretty p-default p-round p-thick">
-                                                <input type="radio" name="status[]{{ $i }}" value="1" {{ $mhs->mahasiswaAbsenHariIni ? 'checked' : '' }}>
+                                                <input type="radio" name="status[]{{ $i }}" value="1" {{
+                                                    $mhs->mahasiswaAbsenHariIni ? 'checked' : '' }}>
                                                 <div class="state p-primary-o">
                                                     <label>Hadir</label>
                                                 </div>
                                             </div>
                                             <div class="pretty p-default p-round p-thick">
-                                                <input type="radio" name="status[]{{ $i }}" value="0" {{ !$mhs->mahasiswaAbsenHariIni ? 'checked' : '' }}>
+                                                <input type="radio" name="status[]{{ $i }}" value="0" {{
+                                                    !$mhs->mahasiswaAbsenHariIni ? 'checked' : '' }}>
                                                 <div class="state p-danger-o">
                                                     <label>Tidak Hadir</label>
                                                 </div>
