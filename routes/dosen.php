@@ -34,6 +34,9 @@ Route::middleware('auth:dosen')->group(function () {
     Route::get('tugas/{jadwal}', [TugasController::class, 'index'])->name('tugas');
     Route::get('tugas/create/{jadwal}', [TugasController::class, 'create'])->name('tugas.create');
     Route::post('tugas/create', [TugasController::class, 'store'])->name('tugas.store');
+    Route::delete('tugas/{tugas}/delete', [TugasController::class, 'destroy'])->name('tugas.destroy');
+    Route::get('tugas/{tugas}/edit', [TugasController::class, 'edit'])->name('tugas.edit');
+    Route::put('tugas/{tugas}/edit', [TugasController::class, 'update']);
     // Route::resource('tugas', TugasController::class)->except('index');
     // Route::prefix('tugas')->group(function(){
     //     Route::get('create', [TugasController::class, 'create']);

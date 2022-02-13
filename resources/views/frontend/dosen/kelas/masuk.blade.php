@@ -53,16 +53,7 @@
             <div class="card mt-2">
                 <div class="card-body">
                     <div class="table-responsive">
-                        @if (session('success'))
-                        <div class="alert alert-success alert-dismissible show fade">
-                            <div class="alert-body">
-                                <button class="close" data-dismiss="alert">
-                                    <span>×</span>
-                                </button>
-                                {{ session('success') }}
-                            </div>
-                        </div>
-                        @endif
+                        <x-alert/>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -111,13 +102,13 @@
                                         </td>
 
                                         @once
-                                        @if ($absen)
+                                        {{-- @if ($absen) --}}
                                         <button type="submit" class="btn btn-primary btn-sm mb-3"><i
                                                 class="fas fa-save"></i> Simpan Absen</button>
-                                        @else
+                                        {{-- @else
                                         <button type="button" class="btn btn-sm btn-warning mb-3">Silahkan create absen
-                                            terlebih dahulu</button>
-                                        @endif
+                                            terlebih dahulu</button> --}}
+                                        {{-- @endif --}}
                                         @endonce
 
                                     </tr>

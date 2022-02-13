@@ -4,32 +4,23 @@
     @endpush
     <div class="card">
         <div class="card-header">
-            <h4>Form Buat Tugas</h4>
+            <h4>Edit Tugas</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible show fade">
-                <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                        <span>×</span>
-                    </button>
-                    {!! session('success') !!}
-                </div>
-            </div>
-            @endif
-
-            <form action="{{ route('tugas.store') }}" method="post" enctype="multipart/form-data">
+            <x-alert />
+            <form action="{{ route('tugas.edit', $tugas) }}" method="post" enctype="multipart/form-data">
+                @method('put')
                 @csrf
-                <input type="hidden" name="jadwal" value="{{ Crypt::encrypt($jadwal->id) }}"/>
-                <x-input type="text" attr="judul" label="Judul" />
-                <x-input type="text" attr="pertemuan" label="Pertemuan" value="{{ $newtsPertemuan->pertemuan }}"
+                {{-- <input type="hidden" name="jadwal" value="{{ Crypt::encrypt($jadwal->id) }}" /> --}}
+                <x-input type="text" attr="judul" label="Judul" value="{{ $tugas->judul }}"/>
+                <x-input type="text" attr="pertemuan" label="Pertemuan" value="{{ $tugas->pertemuan }}"
                     readonly />
                 <div class="form-group">
                     <label for="tipe">Tipe</label>
                     <select class="form-control selectric @error('tipe') is-invalid @enderror" name="tipe" id="tipe">
                         <option disabled selected>Pilih Tipe</option>
-                        <option value="file">File</option>
-                        <option value="link">Link</option>
+                        <option value="file" {{ $tugas->tipe == 'file' ? 'selected' : '' }}>File</option>
+                        <option value="link" {{ $tugas->tipe == 'link' ? 'selected' : '' }}>Link</option>
                     </select>
                     @error('tipe')
                     <div class="invalid-feedback">
@@ -38,22 +29,18 @@
                     @enderror
                 </div>
                 <div class="form-group" id="formLink">
-                    <x-input type="text" label="Link" attr="file_or_link" id="link" />
+                    <x-input type="text" label="Link" attr="file_or_link" id="link"  value="{{ $tugas->tipe == 'link' ? $tugas->file_or_link : '' }}" />
                 </div>
                 <div class="form-group" id="formFile">
                     <x-input type="file" label="File" attr="file_or_link" id="file" />
                 </div>
-                <x-input type="datetime-local" attr="pengumpulan" label="Pengumpulan" />
-                <x-textarea attr="deskripsi" label="Deskripsi"></x-textarea>
+                <x-input type="text" attr="pengumpulan" label="Pengumpulan" value="{{ $tugas->pengumpulan }}" />
+                <x-textarea attr="deskripsi" label="Deskripsi">{{ $tugas->deskripsi }}</x-textarea>
 
                 <div class="d-flex">
                     <div class="mx-2">
                         <x-button>Submit</x-button>
                     </div>
-                    <div>
-                        <a href="{{ route('tugas', encrypt($jadwal->id)) }}" class="btn btn-warning text-uppercase">Back</a>
-                    </div>
-
                 </div>
             </form>
         </div>

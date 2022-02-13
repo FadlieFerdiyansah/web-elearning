@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\Dosen\TugasRequest;
+use Illuminate\Support\Facades\Storage;
 
 class TugasController extends Controller
 {
@@ -33,11 +34,53 @@ class TugasController extends Controller
         $jadwalId = Crypt::decrypt(request('jadwal'));
         $jadwal = Jadwal::with('kelas')->where('id', $jadwalId)->first();
         $attr = $request->validated();
-        $attr['file_or_link'] = request('file_or_link');
         $attr['jadwal_id'] = $jadwalId;
+
+        if ($request->tipe == 'file') {
+            $file = $request->file('file_or_link')->store('bahan_ajar');
+            $attr['file_or_link'] = $file;
+        }else{
+            $attr['file_or_link'] = request('file_or_link');
+        }
 
         Auth::user()->tugas()->create($attr);
 
         return back()->with('success', "Berhasil membuat tugas untuk kelas {$jadwal->kelas->kd_kelas}");
+    }
+
+    public function edit(Tugas $tugas)
+    {
+        // $tugas->pengumpulan = date('d/m/Y H:s', strtotime($tugas->pengumpulan));
+        // return $tugas;
+        return view('frontend.dosen.tugas.edit', compact('tugas'));
+    }
+
+    public function update(Tugas $tugas, TugasRequest $request)
+    {
+
+        // return request()->all();
+        $attr = $request->validated();
+
+        if ($request->tipe == 'file') {
+            Storage::delete($tugas->file_or_link);
+            $file = $request->file('file_or_link')->store('bahan_ajar');
+            $attr['file_or_link'] = $file;
+        }else{
+            $attr['file_or_link'] = request('file_or_link');
+            Storage::delete($tugas->file_or_link);
+        }
+
+        $tugas->update($attr);
+
+        return back()->with('success', 'Berhasil merubah tugas');
+    }
+
+    public function destroy(Tugas $tugas)
+    {
+        if($tugas->tipe == "file"){
+            Storage::delete($tugas->file_or_link);
+        }
+        $tugas->delete();
+        return back()->with('success', 'Berhasil menghapus tugas');
     }
 }

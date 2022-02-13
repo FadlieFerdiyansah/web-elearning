@@ -23,12 +23,27 @@ class TugasRequest extends FormRequest
      */
     public function rules()
     {
+        if(request('tipe') == 'file'){
+            if (request()->routeIs('tugas.update',$this->id)) {
+                if (request('file_or_link')) {
+                    $condition = 'file|mimes:ppt,pptx,pdf,doc,docx,xls,xlsx|max:10000'; 
+                }else{
+                    $condition = '';
+                }
+            }else{
+                $condition = 'file|mimes:ppt,pptx,pdf,doc,docx,xls,xlsx|max:10000';
+            }
+        }else{
+            $condition = 'required';
+        }
+
         return [
-            'judul' => ['required'],
-            'tipe' => ['required'],
-            'pertemuan' => ['required'],
-            'deskripsi' => ['required'],
-            'pengumpulan' => ['required'],
+            'judul' => 'required',
+            'tipe' => 'required',
+            'file_or_link' => $condition,
+            'pertemuan' => 'required',
+            'deskripsi' => 'required',
+            'pengumpulan' => 'required',
         ];
     }
 }

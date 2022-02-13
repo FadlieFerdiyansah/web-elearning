@@ -39,9 +39,7 @@ class AbsenController extends Controller
             'pertemuan' => 'required'
         ]);
         
-        Auth::user()->absens()->updateOrCreate(
-            ['jadwal_id' => $jadwal_id],
-            [
+        Auth::user()->absens()->create([
             'jadwal_id' => $jadwal_id,
             'pertemuan' => request('pertemuan'),
             'rangkuman' => request('rangkuman'),

@@ -68,7 +68,7 @@ class KelasController extends Controller
             session()->flash('success', 'Berhasil menyimpan data absen');
         }
 
-        return back();
+        return back()->with('error', 'Ups!! Sepertinya anda belum membuat absen untuk hari ini');
     }
 
     public function materi($jadwalId)
