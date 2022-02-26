@@ -72,7 +72,7 @@ class KelasController extends Controller
         $jadwal_id = decrypt(request('jadwal'));
         $absen = Absen::where('jadwal_id', $jadwal_id)->where('parent', 0)->latest()->first();
         $isAbsen = Auth::user()->isAbsen($jadwal_id)->first();
-        
+
 
         //Jika Mahasiswa yang login sudah absen pada waktu yang ditentukan jangan kasih absen lagi
         if (!$isAbsen) {
@@ -80,7 +80,7 @@ class KelasController extends Controller
             Absen::updateOrCreate([
                 'mahasiswa_id' => Auth::Id(),
                 'parent' => $absen->id
-            ],[
+            ], [
                 'jadwal_id' => $jadwal_id,
                 'pertemuan' => $absen->pertemuan,
                 'parent' => $absen->id,
@@ -100,9 +100,9 @@ class KelasController extends Controller
         //jika ada tampilkan hanya 1
         $jadwal = Jadwal::whereId($jadwal_id)->first();
         $materis = Materi::where('matkul_id', $jadwal->matkul_id)
-                ->where('dosen_id', $jadwal->dosen_id)
-                ->where('kelas_id', $jadwal->kelas_id)
-                ->latest()->get();
+            ->where('dosen_id', $jadwal->dosen_id)
+            ->where('kelas_id', $jadwal->kelas_id)
+            ->latest()->get();
 
         if (Auth::guard('mahasiswa')->user()->kelas_id != $jadwal->kelas_id) {
             //Jika mahasiswa yang login kelas_id tidak sama dengan kelas_id yang ada di jadwal return ke 404
@@ -115,8 +115,49 @@ class KelasController extends Controller
     public function tugas($jadwalId)
     {
         $jadwal = Jadwal::whereId(decrypt($jadwalId))->first();
-        // return $jadwal;
-        $tugas = Tugas::where('jadwal_id', $jadwal->id)->latest()->paginate(10);
-        return view('frontend.mahasiswa.kelas.tugas.index', compact('jadwal', 'tugas'));
+
+        $tugas = Tugas::whereJadwalId($jadwal->id)->whereParent(0)->latest()->paginate(10);
+        $tugasHasBeenSent = Auth::user()->tugas()->whereJadwalId($jadwal->id)->paginate(10);
+
+        return view('frontend.mahasiswa.kelas.tugas.index', compact('jadwal', 'tugas','tugasHasBeenSent'));
+    }
+
+    public function sendTugas($jadwalId, $tugasId)
+    {
+        $jadwal = Jadwal::whereId(decrypt($jadwalId))->firstOrFail();
+        $tugas = Tugas::whereId($tugasId)->firstOrFail();
+        // return date('Y-m-d H:i:s');
+        // 2022-02-26 20:21:00
+        // buat kondisi jika tugas pengumpulan sudah lebih dari batas waktu
+        if ($tugas->pengumpulan > date('Y-m-d H:i:s')) {
+            return view('frontend.mahasiswa.kelas.tugas.kirim_tugas', compact('jadwal', 'tugas'));
+        }
+        
+        return back()->with('error', 'Batas waktu pengumpulan tugas sudah lebih dari batas waktu');
+    }
+
+    public function store($jadwalId, $tugasId)
+    {
+        $jadwal = Jadwal::whereId(decrypt($jadwalId))->firstOrFail();
+        $tugas = Tugas::whereId($tugasId)->firstOrFail();
+
+        // make condition where user mahasiswa cant send tugas when tugas has been sent
+        // if (Auth::user()->tugas()->whereJadwalId($jadwal->id)->whereParent(0)->first()) 
+        // make condition where user mahasiswa cant send tugas when tugas penumpulan has over
+        // if (Auth::user()->tugas()->whereJadwalId($jadwal->id)->whereParent(0)->where('created_at', '>', now()->subMinutes(30))->first()) {
+            
+        Auth::user()->tugas()->create([
+            'jadwal_id' => $jadwal->id,
+            'judul' => $tugas->judul,
+            'parent' => $tugas->id,
+            'tipe' => 'link',
+            'file_or_link' => request('link'),
+            'pertemuan' => $tugas->pertemuan,
+            'pengumpulan' => $tugas->pengumpulan,
+        ]);
+        
+        
+        session()->flash('success', 'Tugas berhasil dikirim');
+        return redirect()->route('tugas.mhs', encrypt($jadwal->id));
     }
 }

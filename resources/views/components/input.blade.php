@@ -13,6 +13,9 @@
         @isset($readonly)
             readonly
         @endisset
+        @isset($placeholder)
+            placeholder="{{ $placeholder }}"
+        @endisset
     >
 
     {{-- Ketika error --}}

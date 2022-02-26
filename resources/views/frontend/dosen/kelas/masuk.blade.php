@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ asset('assets/bundles/pretty-checkbox/pretty-checkbox.min.css') }}">
     @endpush
     <div class="row justify-content-center">
-        <div class="card col-sm-12 col-lg-5 mx-1">
+        <div class="card col-sm-12 col-lg-5">
             <div class="card-body">
                 <div class="row">
                     <div class="col mb-4 mb-lg-0 text-center">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="card col-sm-12 col-lg-5 mx-1">
+        <div class="card col-sm-12 col-lg-6 mx-1">
             <div class="card-body">
                 <div class="row">
                     <div class="col mb-4 mb-lg-0 text-center">

@@ -40,6 +40,11 @@ class Mahasiswa extends Authenticatable
         return $this->hasMany(Absen::class);
     }
 
+    public function tugas()
+    {
+        return $this->hasMany(Tugas::class);
+    }
+
     public function mahasiswaAbsenHariIni()
     {
             return $this->hasOne(Absen::class)

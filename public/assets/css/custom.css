@@ -17,3 +17,7 @@
     background-color: #6777ef;
     color: #fff;
 }
+
+th{
+    text-transform: uppercase;
+}

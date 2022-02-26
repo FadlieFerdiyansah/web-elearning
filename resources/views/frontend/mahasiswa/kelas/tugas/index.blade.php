@@ -5,6 +5,7 @@
                 <h6 class="mt-2">{{ $jadwal->matkul->nm_matkul .' - '. $jadwal->kelas->kd_kelas }}</h6>
                 {{-- <h6 class="mt-2">{{ $jadwal->kelas->kd_kelas }}</h6> --}}
             </div>
+            <x-alert />
             <hr>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
@@ -54,10 +55,11 @@
                                                 Action
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item has-icon" href=""><i
+                                                <a class="dropdown-item has-icon"
+                                                    href="{{ route('sendTugas', [encrypt($jadwal->id), $tgs->id]) }}"><i
                                                         class="fas fa-file-export"></i> Kirim Tugas</a>
                                                 @if ($tgs->tipe == 'file')
-                                                <a href="{{ asset("/storage/$tgs->file_or_link") }}"
+                                                <a href="{{ asset(" /storage/$tgs->file_or_link") }}"
                                                     class="dropdown-item has-icon font-sm" download><i
                                                         class="fas fa-download"></i> Download</a>
                                                 @else
@@ -74,10 +76,42 @@
                         </table>
                     </div>
                 </div>
-
+                
                 {{-- Nilai Tugas --}}
                 <div class="tab-pane fade" id="nilaiTugas" role="tabpanel" aria-labelledby="ntugas-tab">
-                    <div class="row mt-4">
+                    <div class="table-responsive">
+                        {{-- <h4 class="mt-2">{{ $jadwal->matkul->nm_matkul .' - '. $jadwal->matkul->kd_matkul}}</h4>
+                        <hr> --}}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Kd Matkul</th>
+                                    <th>Judul</th>
+                                    <th>Link Tugas</th>
+                                    <th>Komentar Dosen</th>
+                                    <th>Nilai</th>
+                                    <th>Dibuat</th>
+                                    <th>Diubah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($tugasHasBeenSent as $i => $thbs)
+                                <tr>
+                                    <td>{{ $tugasHasBeenSent->firstItem() + $i }}</td>
+                                    <td>{{ $jadwal->matkul->kd_matkul }}</td>
+                                    <td>{{ $thbs->judul }}</td>
+                                    <td><a href="{{ $thbs->file_or_link }}" target="_blank">{{ $thbs->file_or_link }}</a></td>
+                                    <td>{{ $thbs->deskripsi }}</td>
+                                    <td>
+                                        80
+                                    </td>
+                                    <td>{{ date('d F Y ~ H:s', strtotime($thbs->created_at)) }}</td>
+                                    <td>{{ date('d F Y ~ H:s', strtotime($thbs->updated_at)) }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
