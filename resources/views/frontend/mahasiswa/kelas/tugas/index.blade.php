@@ -106,8 +106,8 @@
                                     <td>
                                         80
                                     </td>
-                                    <td>{{ date('d F Y ~ H:s', strtotime($thbs->created_at)) }}</td>
-                                    <td>{{ date('d F Y ~ H:s', strtotime($thbs->updated_at)) }}</td>
+                                    <td>{{ date('d F Y ~ H:i', strtotime($thbs->created_at)) }}</td>
+                                    <td>{{ date('d F Y ~ H:i', strtotime($thbs->updated_at)) }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

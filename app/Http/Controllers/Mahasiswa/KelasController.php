@@ -119,45 +119,54 @@ class KelasController extends Controller
         $tugas = Tugas::whereJadwalId($jadwal->id)->whereParent(0)->latest()->paginate(10);
         $tugasHasBeenSent = Auth::user()->tugas()->whereJadwalId($jadwal->id)->paginate(10);
 
-        return view('frontend.mahasiswa.kelas.tugas.index', compact('jadwal', 'tugas','tugasHasBeenSent'));
+        return view('frontend.mahasiswa.kelas.tugas.index', compact('jadwal', 'tugas', 'tugasHasBeenSent'));
     }
 
     public function sendTugas($jadwalId, $tugasId)
     {
         $jadwal = Jadwal::whereId(decrypt($jadwalId))->firstOrFail();
         $tugas = Tugas::whereId($tugasId)->firstOrFail();
-        // return date('Y-m-d H:i:s');
-        // 2022-02-26 20:21:00
-        // buat kondisi jika tugas pengumpulan sudah lebih dari batas waktu
-        if ($tugas->pengumpulan > date('Y-m-d H:i:s')) {
-            return view('frontend.mahasiswa.kelas.tugas.kirim_tugas', compact('jadwal', 'tugas'));
+
+        // kondisi jika tugas pengumpulan sudah lebih dari batas waktu
+        if ($tugas->pengumpulan < date('Y-m-d H:i:s')) {
+            return back()->with('error', 'Batas waktu pengumpulan tugas sudah lebih dari batas waktu');
         }
-        
-        return back()->with('error', 'Batas waktu pengumpulan tugas sudah lebih dari batas waktu');
+
+        return view('frontend.mahasiswa.kelas.tugas.kirim_tugas', compact('jadwal', 'tugas'));
     }
 
     public function store($jadwalId, $tugasId)
     {
+        request()->validate([
+            'link' => 'required',
+        ]);
+
         $jadwal = Jadwal::whereId(decrypt($jadwalId))->firstOrFail();
         $tugas = Tugas::whereId($tugasId)->firstOrFail();
+        
+        if ($tugas->pengumpulan > date('Y-m-d H:i:s')) {
+            Auth::user()->tugas()->updateOrCreate(
+                [
+                    'mahasiswa_id' => Auth::id(),
+                    'parent' => $tugas->id
+                ],
+                [
+                    'jadwal_id' => $jadwal->id,
+                    'judul' => $tugas->judul,
+                    'parent' => $tugas->id,
+                    'tipe' => 'link',
+                    'file_or_link' => request('link'),
+                    'pertemuan' => $tugas->pertemuan,
+                    'pengumpulan' => $tugas->pengumpulan,
+                ]
+            );
 
-        // make condition where user mahasiswa cant send tugas when tugas has been sent
-        // if (Auth::user()->tugas()->whereJadwalId($jadwal->id)->whereParent(0)->first()) 
-        // make condition where user mahasiswa cant send tugas when tugas penumpulan has over
-        // if (Auth::user()->tugas()->whereJadwalId($jadwal->id)->whereParent(0)->where('created_at', '>', now()->subMinutes(30))->first()) {
-            
-        Auth::user()->tugas()->create([
-            'jadwal_id' => $jadwal->id,
-            'judul' => $tugas->judul,
-            'parent' => $tugas->id,
-            'tipe' => 'link',
-            'file_or_link' => request('link'),
-            'pertemuan' => $tugas->pertemuan,
-            'pengumpulan' => $tugas->pengumpulan,
-        ]);
-        
-        
-        session()->flash('success', 'Tugas berhasil dikirim');
+            session()->flash('success', 'Tugas berhasil dikirim');
+            return redirect()->route('tugas.mhs', encrypt($jadwal->id));
+        }
+
+
+        session()->flash('error', 'Batas waktu pengumpulan tugas sudah lebih dari batas waktu');
         return redirect()->route('tugas.mhs', encrypt($jadwal->id));
     }
 }
