@@ -16,7 +16,7 @@ class TugasController extends Controller
     public function index($jadwalId)
     {
         $jadwal = Jadwal::whereId(decrypt($jadwalId))->first();
-        $tugas = Tugas::where('jadwal_id', $jadwal->id)->latest()->paginate(10);
+        $tugas = Tugas::whereJadwalId($jadwal->id)->whereParent(0)->latest()->paginate(10);
         $newtsPertemuan = $jadwal->absens()->where('parent', 0)->whereDate('created_at', now('Asia/Jakarta'))->latest()->select('pertemuan')->first();
         return view('frontend.dosen.tugas.index', compact('jadwal', 'tugas', 'newtsPertemuan'));
     }
@@ -39,7 +39,7 @@ class TugasController extends Controller
         if ($request->tipe == 'file') {
             $file = $request->file('file_or_link')->store('bahan_ajar');
             $attr['file_or_link'] = $file;
-        }else{
+        } else {
             $attr['file_or_link'] = request('file_or_link');
         }
 
@@ -65,7 +65,7 @@ class TugasController extends Controller
             Storage::delete($tugas->file_or_link);
             $file = $request->file('file_or_link')->store('bahan_ajar');
             $attr['file_or_link'] = $file;
-        }else{
+        } else {
             $attr['file_or_link'] = request('file_or_link');
             Storage::delete($tugas->file_or_link);
         }
@@ -75,9 +75,15 @@ class TugasController extends Controller
         return back()->with('success', 'Berhasil merubah tugas');
     }
 
+    public function show(Tugas $tugas)
+    {
+        $tugasMahasiswa = Tugas::with('mahasiswa')->where('parent', '!=', 0)->whereParent($tugas->id)->get();
+        return view('frontend.dosen.tugas.show', compact('tugas', 'tugasMahasiswa'));
+    }
+
     public function destroy(Tugas $tugas)
     {
-        if($tugas->tipe == "file"){
+        if ($tugas->tipe == "file") {
             Storage::delete($tugas->file_or_link);
         }
         $tugas->delete();

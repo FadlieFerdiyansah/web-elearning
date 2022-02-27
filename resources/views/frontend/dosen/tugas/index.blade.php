@@ -27,7 +27,7 @@
                     @foreach ($tugas as $i => $tgs)
                     <tr>
                         <td>{{ $tugas->firstItem() + $i }}</td>
-                        <td>{{ $tgs->judul }}</td>
+                        <td><a href="{{ route('tugas.show', $tgs) }}">{{ $tgs->judul }}</a></td>
                         <td>
                             <div class="badge badge-dark">{{ $tgs->pertemuan }}</div>
                         </td>

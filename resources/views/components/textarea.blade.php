@@ -5,6 +5,9 @@
         @isset($readonly)
         readonly
         @endisset
+        @isset($placeholder)
+            placeholder="{{ $placeholder }}"
+        @endisset
     >{{ $slot }}</textarea>
     {{-- Ketika error --}}
     @error($attr)

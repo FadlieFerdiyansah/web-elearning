@@ -102,7 +102,7 @@
                                     <td>{{ $jadwal->matkul->kd_matkul }}</td>
                                     <td>{{ $thbs->judul }}</td>
                                     <td><a href="{{ $thbs->file_or_link }}" target="_blank">{{ $thbs->file_or_link }}</a></td>
-                                    <td>{{ $thbs->deskripsi }}</td>
+                                    <td>{{ 'this should be comment of teacher' }}</td>
                                     <td>
                                         80
                                     </td>
