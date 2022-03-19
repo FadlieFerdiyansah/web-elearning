@@ -44,4 +44,5 @@ Route::middleware('auth:dosen')->group(function () {
     // });
 
     Route::get('tugas/{tugas}/tanggapi', [NilaiController::class, 'create'])->name('nilai.create');
+    Route::post('tugas/{tugas}/tanggapi', [NilaiController::class, 'store'])->name('nilai.store');
 });

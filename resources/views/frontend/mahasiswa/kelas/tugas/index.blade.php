@@ -59,7 +59,7 @@
                                                     href="{{ route('sendTugas', [encrypt($jadwal->id), $tgs->id]) }}"><i
                                                         class="fas fa-file-export"></i> Kirim Tugas</a>
                                                 @if ($tgs->tipe == 'file')
-                                                <a href="{{ asset(" /storage/$tgs->file_or_link") }}"
+                                                <a href="{{ asset("/storage/$tgs->file_or_link") }}"
                                                     class="dropdown-item has-icon font-sm" download><i
                                                         class="fas fa-download"></i> Download</a>
                                                 @else
@@ -82,7 +82,7 @@
                     <div class="table-responsive">
                         {{-- <h4 class="mt-2">{{ $jadwal->matkul->nm_matkul .' - '. $jadwal->matkul->kd_matkul}}</h4>
                         <hr> --}}
-                        <table class="table">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -102,9 +102,9 @@
                                     <td>{{ $jadwal->matkul->kd_matkul }}</td>
                                     <td>{{ $thbs->judul }}</td>
                                     <td><a href="{{ $thbs->file_or_link }}" target="_blank">{{ $thbs->file_or_link }}</a></td>
-                                    <td>{{ 'this should be comment of teacher' }}</td>
+                                    <td>{{ $thbs->nilai->komentar_dosen ?? '-' }}</td>
                                     <td>
-                                        80
+                                        {{ $thbs->nilai->nilai ?? '-' }}
                                     </td>
                                     <td>{{ date('d F Y ~ H:i', strtotime($thbs->created_at)) }}</td>
                                     <td>{{ date('d F Y ~ H:i', strtotime($thbs->updated_at)) }}</td>

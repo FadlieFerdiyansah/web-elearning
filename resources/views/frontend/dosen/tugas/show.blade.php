@@ -1,10 +1,11 @@
 <x-app-layouts>
+    <x-alert />
+
     <div class="card">
         <div class="card-header">
             <h4 class="text-uppercase text-muted">Tugas yang dibuat dosen</h4>
         </div>
         <div class="card-body">
-            <x-alert />
             <table class="table">
                 <thead>
                     <tr>
@@ -56,7 +57,6 @@
             <h4 class="text-uppercase text-muted">Tugas yang dikumpulkan Mahasiswa</h4>
         </div>
         <div class="card-body">
-            <x-alert />
             <table class="table">
                 <thead>
                     <tr>
@@ -74,8 +74,8 @@
                     <tr>
                         <td>{{ $tgsMhs->mahasiswa->nim }}</td>
                         <td>{{ $tgsMhs->mahasiswa->nama }}</td>
-                        <td><h5>100</h5></td>
-                        <td>{{ 'Mainnya hebat' }}</td>
+                        <td><h5>{{ $tgsMhs->nilai->nilai ?? '' }}</h5></td>
+                        <td>{{ $tgsMhs->nilai->komentar_dosen ?? '' }}</td>
                         <td>{{ date('d F Y ~ H:i', strtotime($tgsMhs->created_at)) }}</td>
                         <td>{{ date('d F Y ~ H:i', strtotime($tgsMhs->updated_at)) }}</td>
                         <td>

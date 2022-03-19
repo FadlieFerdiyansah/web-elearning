@@ -4,7 +4,7 @@
             <h4 class="text-uppercase">Tanggapi hasil tugas mahasiswa</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
-            <form action="" method="post">
+            <form action="{{ route('nilai.store', $tugas) }}" method="post">
                 @csrf
 
                 <label class="text-uppercase text-muted"><b>mahasiswa</b> <hr></label>
@@ -39,8 +39,8 @@
                 </div>
 
                 <label class="text-uppercase text-muted"><b>nilai dan komentar dosen</b> <hr></label>
-                <x-input type="number" attr="nilai" label="Nilai" placeholder="Masukan nilai"/>
-                <x-textarea attr="komentar_dosen" label="Komentar Dosen" placeholder="Berikan komentar..."></x-textarea>
+                <x-input type="number" attr="nilai" label="Nilai" value="{{ old('nilai', $tugas->nilai->nilai ?? '') }}" placeholder="Masukan nilai"/>
+                <x-textarea attr="komentar_dosen" label="Komentar Dosen" placeholder="Berikan komentar...">{{ old('komentar_dosen', $tugas->nilai->komentar_dosen ?? '') }}</x-textarea>
                 
                 <x-button>Submit</x-button>
             </form>

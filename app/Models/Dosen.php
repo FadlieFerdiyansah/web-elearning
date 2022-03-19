@@ -62,6 +62,11 @@ class Dosen extends Authenticatable
         return $this->hasMany(Tugas::class);
     }
 
+    public function nilais()
+    {
+        return $this->hasMany(Nilai::class);
+    }
+
     public function getPictureAttribute()
     {
         return asset('/storage/'.$this->foto);
