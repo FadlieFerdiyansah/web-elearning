@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Tugas">
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between">

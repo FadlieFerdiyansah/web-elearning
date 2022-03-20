@@ -1,18 +1,10 @@
 <x-app-layouts title="Tambah Mahasiswa">
-    @push('styles')
-    @endpush
     <div class="card">
         <div class="card-header">
-            <h4>Create</h4>
+            <h4>Create Mahasiswa</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                @foreach ($errors->all() as $message)
-                <li>{{ $message }}</li>
-                @endforeach
-            </div>
-            @endif
+            <x-alert/>
             <form action="{{ route('mahasiswa.create') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">

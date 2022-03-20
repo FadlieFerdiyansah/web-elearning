@@ -65,7 +65,7 @@ class KelasController extends Controller
                     ]
                 );
             }
-            session()->flash('success', 'Berhasil menyimpan data absen');
+            return back()->with('success', 'Berhasil menyimpan data absen');
         }
 
         return back()->with('error', 'Ups!! Sepertinya anda belum membuat absen untuk hari ini');

@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Kirim Tugas">
     <div class="card">
         <div class="card-body col-8">
             <form action="{{ route('sendTugas', [encrypt($jadwal->id), $tugas->id]) }}" method="post">

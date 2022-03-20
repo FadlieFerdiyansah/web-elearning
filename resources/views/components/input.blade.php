@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="{{ $attr }}">{{ $label }}</label>
-    <input type="{{ $type }}" name="{{ $attr }}" class="form-control @error($attr) is-invalid @enderror" id="{{ $attr }}" 
+    <input type="{{ $type ?? 'text'}}" name="{{ $attr }}" class="form-control @error($attr) is-invalid @enderror" id="{{ $attr }}" 
         @isset($autofocus)
             autofocus="{{ $autofocus }}"
         @endisset

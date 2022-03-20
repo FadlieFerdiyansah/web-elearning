@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Masuk kelas">
     <div class="row">
         <div class="col-md-3">
             <div class="pricing">
@@ -49,9 +49,6 @@
         <div class="col-md-9">
             <div class="row">
                 <div class="card w-100">
-                    <div class="card-header">
-                        <h4>Popular Browser</h4>
-                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col mb-4 mb-lg-0 text-center">
@@ -59,21 +56,15 @@
                                 <a href="{{ route('materi.mhs', encrypt($jadwal->id)) }}">
                                     <i data-feather="book-open"></i>
                                     <div class="mt-2 font-weight-bold">Materi</div>
-                                    <div class="text-small text-muted"><span class="text-primary"><i
-                                                class="fas fa-caret-up"></i></span> 38%</div>
                                 </a>
                             </div>
                             <a href="{{ route('tugas.mhs', encrypt($jadwal->id)) }}" class="col mb-4 mb-lg-0 text-center">
                                 <i data-feather="clipboard"></i>
                                 <div class="mt-2 font-weight-bold">Tugas</div>
-                                <div class="text-small text-muted"><span class="text-primary"><i
-                                            class="fas fa-caret-up"></i></span> 22%</div>
                             </a>
                             <div class="col mb-4 mb-lg-0 text-center">
                                 <i data-feather="message-square"></i>
                                 <div class="mt-2 font-weight-bold">Diskusi</div>
-                                <div class="text-small text-muted"><span class="text-danger"><i
-                                            class="fas fa-caret-down"></i></span> 27%</div>
                             </div>
                         </div>
                     </div>
@@ -81,7 +72,6 @@
                 <div class="card w-100">
                     <div class="card-header">
                         <h4>Rekap Absen</h4>
-                        <p>{{ Auth::user()->nama }}</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

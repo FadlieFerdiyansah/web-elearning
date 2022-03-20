@@ -1,24 +1,19 @@
 <x-app-layouts>
     <div class="card">
         <div class="card-header">
-            <h4>Form Buat Absensi</h4>
+            <h5 class="text-uppercase">Buat absen untuk kelas <b>{{ $jadwal->kelas->kd_kelas }}</b></h5>
         </div>
         <div class="card-body col-md-8 col-sm">
             <form action="{{ route('absensi.store') }}" method="post">
                 @csrf
                 <input type="hidden" value="{{ encrypt($jadwal->id) }}" name="jadwal">
-                <div class="form-group">
-                    <label for="kelas">Kelas</label>
-                    <input disabled value="{{ $jadwal->kelas->kd_kelas }}" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="matkul">Matakuliah</label>
-                        <input disabled value="{{ $jadwal->matkul->nm_matkul }}" class="form-control">
-                </div>
+                <input type="hidden" name="kelas" value="{{ $jadwal->kelas->id }}">
+                <x-input attr="matkul" label="Matakuliah" readonly value="{{ $jadwal->matkul->nm_matkul }}" />
                 <div class="form-group">
                     <label for="pertemuan">Pertemuan</label>
                     <input autofocus type="text" name="pertemuan"
-                        class="form-control @error('pertemuan')is-invalid @enderror" id="pertemuan" value="{{ $absen->pertemuan ?? '' }}">
+                        class="form-control @error('pertemuan')is-invalid @enderror" id="pertemuan"
+                        value="{{ $absen->pertemuan ?? '' }}">
                     @error('pertemuan')
                     <div class="invalid-feedback">
                         {{ $message }}

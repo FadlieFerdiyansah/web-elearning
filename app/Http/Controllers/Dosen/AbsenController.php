@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dosen;
 
 use Carbon\Carbon;
-use App\Models\{Jadwal, Absen};
+use App\Models\{Jadwal, Absen, Mahasiswa};
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\{Auth, Crypt};
 
@@ -38,13 +38,25 @@ class AbsenController extends Controller
         request()->validate([
             'pertemuan' => 'required'
         ]);
-        
-        Auth::user()->absens()->create([
+
+        // return Mahasiswa::where()
+        $absen = Auth::user()->absens()->create([
             'jadwal_id' => $jadwal_id,
             'pertemuan' => request('pertemuan'),
             'rangkuman' => request('rangkuman'),
             'berita_acara' => request('berita_acara')
         ]);
+        
+        $mahasiswas = Mahasiswa::where('kelas_id', request('kelas'))->get();
+        
+        foreach ($mahasiswas as $mahasiswa) {
+            $mahasiswa->absens()->create([
+                'jadwal_id' => $jadwal_id,
+                'parent' => $absen->id,
+                'mahasiswa_id' => $mahasiswa->id,
+                'pertemuan' => $absen->pertemuan,
+            ]);
+        }
         
         session()->flash('success', 'Berhasil membuat absen hari ini');
         return redirect(route('kelas.masuk',request('jadwal')));

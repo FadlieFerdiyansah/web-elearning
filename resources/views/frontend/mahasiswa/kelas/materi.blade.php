@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Bahan Ajar">
     <div class="card">
         <div class="card-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">

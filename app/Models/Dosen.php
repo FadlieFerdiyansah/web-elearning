@@ -57,6 +57,13 @@ class Dosen extends Authenticatable
         return $this->hasMany(Absen::class);
     }
 
+    public function absenTodayPerJadwal($jadwalId)
+    {
+        return $this->hasOne(Absen::class)
+                ->where('jadwal_id', $jadwalId)
+                ->whereDate('created_at', date('Y-m-d'));
+    }
+
     public function tugas()
     {
         return $this->hasMany(Tugas::class);

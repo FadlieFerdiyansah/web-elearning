@@ -56,7 +56,7 @@ class Mahasiswa extends Authenticatable
 
     public function isAbsen($jadwalId)
     {
-            return Absen::whereNotNull('mahasiswa_id')
+            return $this->absens()->whereNotNull('mahasiswa_id')
             ->where('parent','!=', 0)
             ->where('status', 1)
             ->where('jadwal_id', $jadwalId)
