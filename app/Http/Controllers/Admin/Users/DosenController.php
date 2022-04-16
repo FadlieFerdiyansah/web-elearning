@@ -36,8 +36,6 @@ class DosenController extends Controller
                                     ' . method_field('delete') . '
                                     <button type="submit" class="dropdown-item has-icon font-sm"><i class="fas fa-times"></i> Delete</button>
                                 </form>
-                                <a class="dropdown-item has-icon" href="' . route("dosens.destroy", $dosen) . '"><i class="
-                                fas fa-list-alt"></i> Detail</a>
                             </div>
                         </div>
                 ';

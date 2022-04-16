@@ -52,16 +52,7 @@
                     <a href="{{ route('dosens.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Tambah Dosen</a>
                 </div>
                 <div class="card-body">
-                    @if (session('success'))
-                    <div class="alert alert-success alert-dismissible show fade">
-                        <div class="alert-body">
-                            <button class="close" data-dismiss="alert">
-                                <span>×</span>
-                            </button>
-                            {{ session('success') }}
-                        </div>
-                    </div>
-                    @endif
+                    <x-alert />
                     <div class="table-responsive">
                         <button type="button" name="btn_delete" id="btn_delete" class="btn btn-sm btn-danger">
                             <span>Delete Selected</span>

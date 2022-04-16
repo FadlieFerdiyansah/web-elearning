@@ -33,14 +33,14 @@
 @endcan
 
 @can('management users')
-<li class="dropdown{{ request()->routeIs(['dosens.index','mahasiswa.table']) ? ' active' : '' }}">
+<li class="dropdown{{ request()->routeIs(['dosens.index','mahasiswa.index']) ? ' active' : '' }}">
     <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="users"></i><span>
             Users</span></a>
     <ul class="dropdown-menu">
         <li {{ request()->routeIs('dosens.index') ? 'class=active' : '' }}><a class="nav-link"
                 href="{{ route('dosens.index') }}">Dosen</a></li>
-        <li {{ request()->routeIs('mahasiswa.table') ? 'class=active' : '' }}><a class="nav-link"
-                href="{{ route('mahasiswa.table') }}">Mahasiswa</a></li>
+        <li {{ request()->routeIs('mahasiswa.index') ? 'class=active' : '' }}><a class="nav-link"
+                href="{{ route('mahasiswa.index') }}">Mahasiswa</a></li>
     </ul>
 </li>
 @endcan

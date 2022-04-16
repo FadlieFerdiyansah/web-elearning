@@ -52,16 +52,7 @@
                     <a href="{{ route('mahasiswa.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Tambah Mahasiswa</a>
                 </div>
                 <div class="card-body">
-                    @if (session('success'))
-                    <div class="alert alert-success alert-dismissible show fade">
-                        <div class="alert-body">
-                            <button class="close" data-dismiss="alert">
-                                <span>×</span>
-                            </button>
-                            {{ session('success') }}
-                        </div>
-                    </div>
-                    @endif
+                    <x-alert/>
                     <div class="table-responsive">
                         <button type="button" name="btn_delete" id="btn_delete" class="btn btn-sm btn-danger">
                             <span>Delete Selected</span>
@@ -103,7 +94,7 @@
                 $('#table-1').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: '{!! route('mahasiswa.table') !!}',
+                    ajax: '{!! route('mahasiswa.index') !!}',
                     lengthMenu: [[5,10,25,50,100,-1],[5,10,25,50,100,'All']],
                     columnDefs: [
                                 {
@@ -217,7 +208,7 @@
                 if(nim.length === 0){
                     alert("Pilih minimal satu data");
                 }else{
-                    $.ajax({ url:'{!! route('mahasiswa.table') !!}', type:'delete', data:{ "_token": "{{ csrf_token() }}", nim:nim } });
+                    $.ajax({ url:'{!! route('mahasiswa.index') !!}', type:'delete', data:{ "_token": "{{ csrf_token() }}", nim:nim } });
                     window.location.href=window.location.href;
                 }
                 }

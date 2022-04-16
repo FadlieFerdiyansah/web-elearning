@@ -10,7 +10,7 @@ use App\Models\{Fakultas, Kelas, Mahasiswa};
 
 class MahasiswaController extends Controller
 {
-    public function table(Request $request)
+    public function index(Request $request)
     {
         if($request->wantsJson()){
             return DataTables::of(Mahasiswa::query()->latest()->with('fakultas','kelas'))
@@ -23,13 +23,11 @@ class MahasiswaController extends Controller
                             <div class="dropdown-menu">
                                 <a class="dropdown-item has-icon" href="'.route("mahasiswa.edit",$mahasiswa).'"><i class="
                                 fas fa-edit"></i> Edit</a>
-                                <form action="'.route("mahasiswa.delete",$mahasiswa).'" method="post" style="font-size:13px">
+                                <form action="'.route("mahasiswa.destroy",$mahasiswa).'" method="post" style="font-size:13px">
                                     '.csrf_field().'
                                     '.method_field('delete').'
                                     <button type="submit" class="dropdown-item has-icon font-sm"><i class="fas fa-times"></i> Delete</button>
                                 </form>
-                                <a class="dropdown-item has-icon" href="'.route("mahasiswa.delete",$mahasiswa).'"><i class="
-                                fas fa-list-alt"></i> Detail</a>
                             </div>
                         </div>
                 ';
@@ -73,7 +71,7 @@ class MahasiswaController extends Controller
         ]);
         $mahasiswa->assignRole('mahasiswa');
 
-        return back()->with('success','Berhasil membuat data mahasiswa');
+        return redirect(route('mahasiswa.index'))->with('success','Berhasil membuat data mahasiswa');
     }
 
     public function edit(Mahasiswa $mahasiswa)
@@ -101,7 +99,7 @@ class MahasiswaController extends Controller
             'fakultas_id' => request('fakultas'),
             'kelas_id' => request('kelas'),
         ]);
-        return redirect()->route('mahasiswa.table')->with('success','Berhasil meng-update data');
+        return redirect(route('mahasiswa.index'))->with('success','Berhasil meng-update data');
     }
 
     public function destroy(Mahasiswa $mahasiswa)

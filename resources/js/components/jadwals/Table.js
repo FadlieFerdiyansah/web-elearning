@@ -33,7 +33,7 @@ function Table(props) {
             <div className="card">
                 <div className="card-header d-flex justify-content-between">
                     <h4>{props.title}</h4>
-                    <a href={props.routeCreate} className="btn btn-sm btn-primary"><i data-feather="plus"></i>Tambah Jadwal</a>
+                    <a href={props.routeCreate} className="btn btn-sm btn-success"><i data-feather="plus"></i>Tambah Jadwal</a>
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">

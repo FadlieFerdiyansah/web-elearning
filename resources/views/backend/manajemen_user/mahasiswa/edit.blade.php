@@ -6,7 +6,7 @@
                 <h4>Edit &raquo; {{ $mahasiswa->nama }}</h4>
             </div>
             <div class="card-body col-md-8 col-sm">
-                <form action="{{ route('mahasiswa.edit',$mahasiswa) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('mahasiswa.update',$mahasiswa) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="form-group">

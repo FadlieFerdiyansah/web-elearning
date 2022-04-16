@@ -44,7 +44,6 @@
 			<a href="{{ route('logout') }}" class="nav-link"><i data-feather="log-out"></i><span>Logout</span></a>
 			</form>
 			</li> --}}
-			<li class="menu-header">User: {{ Auth::user()->nama }}</li>
 			<li class="menu-header">Action</li>
 
 			<li class="dropdown">

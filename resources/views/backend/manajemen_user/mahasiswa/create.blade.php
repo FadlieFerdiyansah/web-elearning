@@ -4,8 +4,7 @@
             <h4>Create Mahasiswa</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
-            <x-alert/>
-            <form action="{{ route('mahasiswa.create') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('mahasiswa.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="foto">Foto</label>
