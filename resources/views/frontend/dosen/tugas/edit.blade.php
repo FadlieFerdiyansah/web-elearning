@@ -51,10 +51,13 @@
     @push('lastScripts')
     <script>
         $(document).ready(function(){
-            $('#formLink').hide();
-            $('#formFile').hide();
+            if($('#tipe option:selected').val() == 'pdf'){
+                $('#formLink').hide();
+            }else{
+                $('#formFile').hide();
+            }
             $("#tipe").change(function() {
-                if ($("#tipe option:selected").val() == 'file') {
+                if ($("#tipe option:selected").val() == 'pdf') {
                         $('#formLink').hide();
                         $('#formFile').show();
                     } else {

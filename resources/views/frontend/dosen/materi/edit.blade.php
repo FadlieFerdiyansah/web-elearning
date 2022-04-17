@@ -25,24 +25,8 @@
             <h4>Form Edit Materi</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible show fade">
-                <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                        <span>×</span>
-                    </button>
-                    {!! session('success') !!}
-                </div>
-            </div>
-            @endif
+            <x-alert/>
 
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                @foreach ($errors->all() as $message)
-                <li>{{ $message }}</li>
-                @endforeach
-            </div>
-            @endif
             <form action="{{ route('materis.update', encrypt($materi->id)) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
@@ -102,18 +86,6 @@
     <script src="{{ asset('assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('assets/bundles/jquery-selectric/jquery.selectric.min.js') }}"></script>
     <script>
-        // let link = document.getElementById('formLink'); 
-            // let file = document.getElementById('formFile'); 
-            // function selectType(sel)
-            // {
-            //     if(sel.value == 'pdf'){
-            //         link.style.display = "none";
-            //         file.style.display = "block";
-            //     }else{
-            //         file.style.display = "none";
-            //         link.style.display = "block";
-            //     }
-            // }
             $(document).ready(function(){
                 if($('#tipe option:selected').val() == 'pdf'){
                     $('#formLink').hide();

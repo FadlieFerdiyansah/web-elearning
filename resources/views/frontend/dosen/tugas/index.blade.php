@@ -59,6 +59,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer">
+            {{ $tugas->links() }}
+        </div>
     </div>
 
 </x-app-layouts>

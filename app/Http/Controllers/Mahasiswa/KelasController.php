@@ -118,7 +118,7 @@ class KelasController extends Controller
 
         $tugas = Tugas::whereJadwalId($jadwal->id)->whereParent(0)->latest()->paginate(10);
         $tugasHasBeenSent = Auth::user()->tugas()->whereJadwalId($jadwal->id)->paginate(10);
-
+        
         return view('frontend.mahasiswa.kelas.tugas.index', compact('jadwal', 'tugas', 'tugasHasBeenSent'));
     }
 

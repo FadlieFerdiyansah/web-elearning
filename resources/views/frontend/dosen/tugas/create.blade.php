@@ -7,16 +7,7 @@
             <h4>Form Buat Tugas</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible show fade">
-                <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                        <span>×</span>
-                    </button>
-                    {!! session('success') !!}
-                </div>
-            </div>
-            @endif
+            <x-alert/>
 
             <form action="{{ route('tugas.store') }}" method="post" enctype="multipart/form-data">
                 @csrf

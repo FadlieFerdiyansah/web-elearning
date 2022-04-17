@@ -25,24 +25,8 @@
             <h4>Form Upload Materi</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible show fade">
-                <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                        <span>×</span>
-                    </button>
-                    {!! session('success') !!}
-                </div>
-            </div>
-            @endif
+            <x-alert/>
 
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                @foreach ($errors->all() as $message)
-                <li>{{ $message }}</li>
-                @endforeach
-            </div>
-            @endif
             <form action="{{ route('materis.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <x-select attr="kelas_id" label="Kelas" :data="$jadwal" valueOption="kelas_id" relasi="kelas"
@@ -69,7 +53,8 @@
                     <input type="file" name="file_or_link" class="form-control" id="file">
                 </div>
                 <x-textarea attr="deskripsi" label="Deskripsi"></x-textarea>
-
+                <input type="hidden" name="jadwal" value="{{ encrypt($jadwal->id) }}">
+                
                 <x-button>Simpan</x-button>
             </form>
         </div>

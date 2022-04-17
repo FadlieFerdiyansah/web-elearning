@@ -13,7 +13,7 @@ Route::middleware('auth:dosen')->group(function () {
 
     // ** MATERI **
     Route::get('materis/create/{jadwal}', [MateriController::class, 'create'])->name('materis.create');
-    Route::resource('materis', MateriController::class)->except('create');
+    Route::resource('materis', MateriController::class)->except('index', 'create');
 
     // ** KELAS **
     Route::get('mengajar/{jadwal}', [KelasController::class, 'masuk'])->name('kelas.masuk');
@@ -38,10 +38,6 @@ Route::middleware('auth:dosen')->group(function () {
     Route::delete('tugas/{tugas}/delete', [TugasController::class, 'destroy'])->name('tugas.destroy');
     Route::get('tugas/{tugas}/edit', [TugasController::class, 'edit'])->name('tugas.edit');
     Route::put('tugas/{tugas}/edit', [TugasController::class, 'update']);
-    // Route::resource('tugas', TugasController::class)->except('index');
-    // Route::prefix('tugas')->group(function(){
-    //     Route::get('create', [TugasController::class, 'create']);
-    // });
 
     Route::get('tugas/{tugas}/tanggapi', [NilaiController::class, 'create'])->name('nilai.create');
     Route::post('tugas/{tugas}/tanggapi', [NilaiController::class, 'store'])->name('nilai.store');

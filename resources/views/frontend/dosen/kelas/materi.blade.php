@@ -1,7 +1,7 @@
 <x-app-layouts>
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('materis.create', Crypt::encrypt($jadwal->id)) }}" class="btn btn-sm btn-warning"><i
+            <a href="{{ route('materis.create', encrypt($jadwal->id)) }}" class="btn btn-sm btn-dark"><i
                     class="fas fa-plus"></i> Tambah materi</a>
         </div>
         <div class="card-body">

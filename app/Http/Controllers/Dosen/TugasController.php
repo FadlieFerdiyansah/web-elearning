@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Dosen;
 
 use App\Models\Tugas;
 use App\Models\Jadwal;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use App\Http\Requests\Dosen\TugasRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Dosen\TugasRequest;
 
 class TugasController extends Controller
 {
@@ -77,15 +78,24 @@ class TugasController extends Controller
 
     public function show(Tugas $tugas)
     {
-        $tugasMahasiswa = Tugas::with('mahasiswa')->where('parent', '!=', 0)->whereParent($tugas->id)->get();
-        return view('frontend.dosen.tugas.show', compact('tugas', 'tugasMahasiswa'));
+        $tugasMahasiswa = Tugas::with('mahasiswa')->where('parent', '!=', 0)->whereParent($tugas->id)->latest()->paginate(10);
+        $mahasiswa = Mahasiswa::where('kelas_id', $tugas->kelas->id)->get();
+        return view('frontend.dosen.tugas.show', compact('tugas', 'tugasMahasiswa','mahasiswa'));
     }
 
     public function destroy(Tugas $tugas)
     {
+        $tugasMahasiswa = Tugas::whereParent($tugas->id)->get();
+        
         if ($tugas->tipe == "file") {
             Storage::delete($tugas->file_or_link);
         }
+
+        foreach ($tugasMahasiswa as $tgsMhs) {
+            $tgsMhs->delete();
+            $tgsMhs->nilai()->delete();
+        }
+
         $tugas->delete();
         return back()->with('success', 'Berhasil menghapus tugas');
     }

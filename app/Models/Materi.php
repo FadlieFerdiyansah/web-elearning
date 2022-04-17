@@ -24,7 +24,7 @@ class Materi extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d-m-Y');
+        return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d-m-Y h:i');
 
     }
 }

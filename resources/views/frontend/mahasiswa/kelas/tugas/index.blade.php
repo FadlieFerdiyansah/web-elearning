@@ -104,7 +104,7 @@
                                     <td><a href="{{ $thbs->file_or_link }}" target="_blank">{{ $thbs->file_or_link }}</a></td>
                                     <td>{{ $thbs->nilai->komentar_dosen ?? '-' }}</td>
                                     <td>
-                                        {{ $thbs->nilai->nilai ?? '-' }}
+                                        <h4>{{ $thbs->nilai->nilai ?? '-' }}</h4>
                                     </td>
                                     <td>{{ date('d F Y ~ H:i', strtotime($thbs->created_at)) }}</td>
                                     <td>{{ date('d F Y ~ H:i', strtotime($thbs->updated_at)) }}</td>
