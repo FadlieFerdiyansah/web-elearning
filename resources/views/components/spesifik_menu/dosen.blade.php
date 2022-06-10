@@ -36,8 +36,8 @@
 <li class="dropdown">
     <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="edit"></i><span>Nilai</span></a>
     <ul class="dropdown-menu">
-        <li><a class="nav-link" href="icon-material.html">Dosen</a></li>
-        <li><a class="nav-link" href="icon-font-awesome.html">Mahasiswa</a></li>
+        {{-- <li><a class="nav-link" href="icon-material.html">Dosen</a></li> --}}
+        <li><a class="nav-link" href="{{ route('nilai.index') }}">Mahasiswa</a></li>
     </ul>
 </li>
 @endcan

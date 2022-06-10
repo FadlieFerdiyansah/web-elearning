@@ -8,9 +8,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Dosen\NilaiRequest;
+use App\Models\Dosen;
+use App\Models\Kelas;
+use App\Models\Mahasiswa;
 
 class NilaiController extends Controller
 {
+    public function index()
+    {
+        $nilai = Nilai::where('dosen_id', Auth::user()->id)->get();
+        $kelas = Auth::user()->kelas;
+        // return ;
+        // return Mahasiswa::whereKelasId($kelas->wtih)
+        return view('frontend.dosen.nilai.index');
+    }
     public function create(Tugas $tugas)
     {
         $tugasParent = Tugas::where('id', $tugas->parent)->first();
