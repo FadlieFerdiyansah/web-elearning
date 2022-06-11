@@ -18,9 +18,12 @@ class NilaiController extends Controller
     {
         $nilai = Nilai::where('dosen_id', Auth::user()->id)->get();
         $kelas = Auth::user()->kelas;
-        // return ;
+        // return implode('', explode('.', $kelas[0]->kd_kelas));
+        $mahasiswa = Mahasiswa::whereIn('kelas_id', $kelas->pluck('id'))->orderBy('kelas_id', 'asc')->get();
+        // return Auth::user()->kelas;
+        // return $mahasiswa;
         // return Mahasiswa::whereKelasId($kelas->wtih)
-        return view('frontend.dosen.nilai.index');
+        return view('frontend.dosen.nilai.index', compact('kelas', 'mahasiswa'));
     }
     public function create(Tugas $tugas)
     {
