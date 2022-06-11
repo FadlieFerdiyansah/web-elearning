@@ -25,16 +25,16 @@
                     <table border="1px" class="table">
                         <thead>
                             <tr>
-                              <td>Mahasiswa</td>
-                              @foreach ($mahasiswa as $mhs)
+                              <td style="background:#8D8DAA; color:white">MAHASISWA</td>
+                              @foreach ($mahasiswa as $key => $mhs)
                                   @if ($mhs->kelas_id == $kls->id)
-                                      <td>
+                                      <td style="background:{{ $key % 2 == 0 ? '#DFDFDE' : '' }}">
                                         <li class="media">
                                             <img alt="image" class="mr-3 rounded-circle" width="50"
                                                 src="{{ $mhs->foto == 'default.png' ?  $mhs->pictureDefault : $mhs->picture }}">
                                             <div class="media-body">
                                                 <div class="media-title">{{ $mhs->nama }}</div>
-                                                <div class="text-job text-muted">{{ $mhs->nim }}</div>
+                                                <div class="text-job">{{ $mhs->nim }}</div>
                                             </div>
                                         </li>  
                                       </td>
@@ -43,14 +43,16 @@
                             </tr>
                             @for ($i = 1; $i <= 16; $i++)
                             <tr>
-                              <td>Pertemuan {{ $i }}</td>
-                              @foreach ($mahasiswa as $mhs)
+                              <td style="background:#8D8DAA; color:white">PERTEMUAN {{ $i }}</td>
+                              @foreach ($mahasiswa as $key => $mhs)
                                 @if ($mhs->kelas_id == $kls->id)
+                                <td style="background:{{ $key % 2 == 0 ? '#DFDFDE' : '' }}">
                                   @foreach($mhs->tugas as $tugas)
                                       @if ($tugas->pertemuan == $i)
-                                        <td>{{ $tugas->nilai->nilai ?? 'Belum dinilai' }}</td>
+                                        {{ $tugas->nilai->nilai ?? 'Belum dinilai' }}
                                       @endif
                                   @endforeach
+                                </td>
                                 @endif
                               @endforeach
                             </tr>
