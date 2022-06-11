@@ -82,5 +82,10 @@ class Mahasiswa extends Authenticatable
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');
     }
 
+    public function nilais()
+    {
+        return $this->hasManyThrough(Nilai::class, Tugas::class);
+    }
+
 
 }

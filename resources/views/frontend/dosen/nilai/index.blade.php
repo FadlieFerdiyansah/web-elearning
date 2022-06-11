@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layouts title="Seluruh nilai mahasiswa">
   <div class="card">
       <div class="card-header">
           {{-- <a href="{{ route('materis.create', encrypt($jadwal->id)) }}" class="btn btn-sm btn-dark"><i
@@ -22,27 +22,41 @@
               @foreach ($kelas as $key => $kls)
                 <div class="tab-pane fade{{ $loop->index == 0 ? ' show active' : '' }}" id="content-{{ $key }}" role="tabpanel" aria-labelledby="{{ $kls->kd_kelas }}-tab">
                   <div class="table-responsive">
-                    <table class="table">
+                    <table border="1px" class="table">
                         <thead>
                             <tr>
                               <td>Mahasiswa</td>
                               @foreach ($mahasiswa as $mhs)
                                   @if ($mhs->kelas_id == $kls->id)
-                                      <td>{{ $mhs->nama }}</td>
+                                      <td>
+                                        <li class="media">
+                                            <img alt="image" class="mr-3 rounded-circle" width="50"
+                                                src="{{ $mhs->foto == 'default.png' ?  $mhs->pictureDefault : $mhs->picture }}">
+                                            <div class="media-body">
+                                                <div class="media-title">{{ $mhs->nama }}</div>
+                                                <div class="text-job text-muted">{{ $mhs->nim }}</div>
+                                            </div>
+                                        </li>  
+                                      </td>
                                   @endif
                               @endforeach
                             </tr>
-                            @for ($i = 1; $i <= 14; $i++)
+                            @for ($i = 1; $i <= 16; $i++)
                             <tr>
-                              <td style="inline">Pertemuan {{ $i }}</td>
+                              <td>Pertemuan {{ $i }}</td>
+                              @foreach ($mahasiswa as $mhs)
+                                @if ($mhs->kelas_id == $kls->id)
+                                  @foreach($mhs->tugas as $tugas)
+                                      @if ($tugas->pertemuan == $i)
+                                        <td>{{ $tugas->nilai->nilai }}</td>
+                                      @endif
+                                  @endforeach
+                                @endif
+                              @endforeach
                             </tr>
                             @endfor
                         </thead>
                         <tbody>
-                            {{-- @foreach ($mahasiswa as $i => $mhs)
-                              <tr>
-                              </tr>
-                            @endforeach --}}
                         </tbody>
                     </table>
                   </div>
