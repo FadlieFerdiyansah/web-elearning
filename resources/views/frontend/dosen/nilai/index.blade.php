@@ -48,7 +48,7 @@
                                 @if ($mhs->kelas_id == $kls->id)
                                   @foreach($mhs->tugas as $tugas)
                                       @if ($tugas->pertemuan == $i)
-                                        <td>{{ $tugas->nilai->nilai }}</td>
+                                        <td>{{ $tugas->nilai->nilai ?? 'Belum dinilai' }}</td>
                                       @endif
                                   @endforeach
                                 @endif
