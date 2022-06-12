@@ -45,7 +45,7 @@
                                 <tr>
                                   @if ($mhs->kelas_id == $kls->id)
                                   {{-- <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}">{{ $key + 1 }}</td> --}}
-                                      <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}">
+                                      <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; border: 1px solid; border-color: #3A5BA0">
                                         <li class="media">
                                             <img alt="image" class="mr-3 rounded-circle" width="50"
                                                 src="{{ $mhs->foto == 'default.png' ?  $mhs->pictureDefault : $mhs->picture }}">
@@ -58,7 +58,7 @@
                                     @if ($mhs->kelas_id == $kls->id)
                                       @for ($i = 1; $i <= 16; $i++)
                                         {{-- <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}">{{ $i }}</td> --}}
-                                        <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; text-align: center; font-size: 18px; font-weight: bold">
+                                        <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; text-align: center; font-size: 18px; font-weight: bold; border: 1px solid; border-color: #3A5BA0">
                                           @foreach($mhs->tugas as $tugas)
                                               @if ($tugas->pertemuan == $i)
                                                 {{ $tugas->nilai->nilai ?? 'Belum dinilai' }}
