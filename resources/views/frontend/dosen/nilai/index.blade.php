@@ -1,4 +1,14 @@
 <x-app-layouts title="Seluruh nilai mahasiswa">
+  @push('styles')
+      <style>
+          td:nth-child(1) {
+            width: 8em;
+            min-width: 23em;
+            /* max-width: 33em; */
+            word-break: break-all;
+          }
+      </style>
+  @endpush
   <div class="card">
       <div class="card-header">
           {{-- <a href="{{ route('materis.create', encrypt($jadwal->id)) }}" class="btn btn-sm btn-dark"><i
@@ -22,13 +32,20 @@
               @foreach ($kelas as $key => $kls)
                 <div class="tab-pane fade{{ $loop->index == 0 ? ' show active' : '' }}" id="content-{{ $key }}" role="tabpanel" aria-labelledby="{{ $kls->kd_kelas }}-tab">
                   <div class="table-responsive">
-                    <table border="1px" class="table">
+                    <table border="0px" class="table">
                         <thead>
                             <tr>
-                              <td style="background:#8D8DAA; color:white">MAHASISWA</td>
-                              @foreach ($mahasiswa as $key => $mhs)
+                              {{-- <td class="bg-secondary text-center font-weight-bold">#</td> --}}
+                              <td class="bg-secondary text-center font-weight-bold">MAHASISWA</td>
+                              @for ($i = 1; $i <= 16; $i++)
+                                <td class="text-center bg-secondary font-weight-bold">P {{ $i }}</td>
+                              @endfor
+                            </tr>
+                            @foreach ($mahasiswa as $key => $mhs)
+                                <tr>
                                   @if ($mhs->kelas_id == $kls->id)
-                                      <td style="background:{{ $key % 2 == 0 ? '#DFDFDE' : '' }}">
+                                  {{-- <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}">{{ $key + 1 }}</td> --}}
+                                      <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}">
                                         <li class="media">
                                             <img alt="image" class="mr-3 rounded-circle" width="50"
                                                 src="{{ $mhs->foto == 'default.png' ?  $mhs->pictureDefault : $mhs->picture }}">
@@ -38,25 +55,21 @@
                                             </div>
                                         </li>  
                                       </td>
+                                    @if ($mhs->kelas_id == $kls->id)
+                                      @for ($i = 1; $i <= 16; $i++)
+                                        {{-- <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}">{{ $i }}</td> --}}
+                                        <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; text-align: center; font-size: 18px; font-weight: bold">
+                                          @foreach($mhs->tugas as $tugas)
+                                              @if ($tugas->pertemuan == $i)
+                                                {{ $tugas->nilai->nilai ?? 'Belum dinilai' }}
+                                              @endif
+                                          @endforeach
+                                        </td>
+                                      @endfor
+                                    @endif
                                   @endif
-                              @endforeach
-                            </tr>
-                            @for ($i = 1; $i <= 16; $i++)
-                            <tr>
-                              <td style="background:#8D8DAA; color:white">PERTEMUAN {{ $i }}</td>
-                              @foreach ($mahasiswa as $key => $mhs)
-                                @if ($mhs->kelas_id == $kls->id)
-                                <td style="background:{{ $key % 2 == 0 ? '#DFDFDE' : '' }}">
-                                  @foreach($mhs->tugas as $tugas)
-                                      @if ($tugas->pertemuan == $i)
-                                        {{ $tugas->nilai->nilai ?? 'Belum dinilai' }}
-                                      @endif
-                                  @endforeach
-                                </td>
-                                @endif
-                              @endforeach
-                            </tr>
-                            @endfor
+                                </tr>
+                            @endforeach
                         </thead>
                         <tbody>
                         </tbody>
