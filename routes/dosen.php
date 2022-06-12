@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dosen\{AbsenController, KelasController, JadwalController, MateriController, DashboardController, NilaiController, TugasController};
+use App\Http\Controllers\Dosen\{AbsenController, KelasController, JadwalController, MateriController, DashboardController, LaporanNilaiController, NilaiController, TugasController};
 
 
 Route::middleware('auth:dosen')->group(function () {
@@ -42,6 +42,7 @@ Route::middleware('auth:dosen')->group(function () {
     Route::get('tugas/{tugas}/tanggapi', [NilaiController::class, 'create'])->name('nilai.create');
     Route::post('tugas/{tugas}/tanggapi', [NilaiController::class, 'store'])->name('nilai.store');
 
-    // ** NILAI **
-    Route::get('nilai/mahasiswa', [NilaiController::class, 'index'])->name('nilai.index');
+    // ** Laporan **
+    Route::get('nilai/mahasiswa', LaporanNilaiController::class)->name('laporan.nilai');
+    Route::get('absensi/mahasiswa', [AbsenController::class, 'laporanAbsensi'])->name('laporan.absensi');
 });

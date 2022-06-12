@@ -34,10 +34,11 @@
 
 @can('management nilai')
 <li class="dropdown">
-    <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="edit"></i><span>Nilai</span></a>
+    <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="bar-chart-2"></i><span>Laporan</span></a>
     <ul class="dropdown-menu">
         {{-- <li><a class="nav-link" href="icon-material.html">Dosen</a></li> --}}
-        <li><a class="nav-link" href="{{ route('nilai.index') }}">Mahasiswa</a></li>
+        <li><a class="nav-link" href="{{ route('laporan.nilai') }}">Nilai</a></li>
+        <li><a class="nav-link" href="{{ route('laporan.absensi') }}">Absensi</a></li>
     </ul>
 </li>
 @endcan

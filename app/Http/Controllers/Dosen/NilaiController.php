@@ -14,22 +14,6 @@ use App\Models\Mahasiswa;
 
 class NilaiController extends Controller
 {
-    public function index()
-    {
-        $nilai = Nilai::where('dosen_id', Auth::user()->id)->get();
-        $kelas = Auth::user()->kelas;
-        // return implode('', explode('.', $kelas[0]->kd_kelas));
-        $mahasiswa = Mahasiswa::with('tugas')->whereIn('kelas_id', $kelas->pluck('id'))->orderBy('kelas_id', 'asc')->get();
-        // return Auth::user()->kelas;
-        // return $mahasiswa;
-        // foreach($mahasiswa as $mhs){
-        //     foreach($mhs->tugas as $tugas){
-        //         echo $tugas->nilai;
-        //     }
-        // }
-        // return Mahasiswa::whereKelasId($kelas->wtih)
-        return view('frontend.dosen.nilai.index', compact('kelas', 'mahasiswa'));
-    }
     public function create(Tugas $tugas)
     {
         $tugasParent = Tugas::where('id', $tugas->parent)->first();
