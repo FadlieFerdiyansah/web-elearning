@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Dosen;
+namespace App\Http\Controllers\Dosen\Laporan;
+
 use App\Models\Mahasiswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 
 
-class LaporanNilaiController extends Controller
+class NilaiController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         $kelas = Auth::user()->kelas;
         $mahasiswa = Mahasiswa::with('tugas')->whereIn('kelas_id', $kelas->pluck('id'))->orderBy('kelas_id', 'asc')->get();

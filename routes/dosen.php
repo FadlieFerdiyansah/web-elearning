@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dosen\{AbsenController, KelasController, JadwalController, MateriController, DashboardController, LaporanNilaiController, NilaiController, TugasController};
-
+use App\Http\Controllers\Dosen\Laporan\{NilaiController as LaporanNilaiController, AbsensiController as LaporanAbsensiController};
+use App\Http\Controllers\Dosen\{AbsenController, KelasController, JadwalController, MateriController, DashboardController, NilaiController, TugasController};
 
 Route::middleware('auth:dosen')->group(function () {
     Route::prefix('dosen')->get('dashboard', DashboardController::class)->name('dashboard.dosen');
@@ -44,5 +44,5 @@ Route::middleware('auth:dosen')->group(function () {
 
     // ** Laporan **
     Route::get('nilai/mahasiswa', LaporanNilaiController::class)->name('laporan.nilai');
-    Route::get('absensi/mahasiswa', [AbsenController::class, 'laporanAbsensi'])->name('laporan.absensi');
+    Route::get('absensi/mahasiswa', LaporanAbsensiController::class)->name('laporan.absensi');
 });
