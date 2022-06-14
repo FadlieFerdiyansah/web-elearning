@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="{{ $attr }}">{{ $label }}</label>
-    <select name="{{ $attr }}[]" id="{{ $attr }}" class="form-control select2 @error($attr) is-invalid @enderror" multiple>
+    <select name="{{ $attr }}[]" id="{{ $attr }}" class="form-control select2 @error($attr)is-invalid @enderror" multiple>
         @foreach ($dataArray as $item)
         <option 
             @isset($isSelected)

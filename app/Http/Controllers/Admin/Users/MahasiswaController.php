@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MahasiswaRequest;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\{Fakultas, Kelas, Mahasiswa};
@@ -48,26 +49,18 @@ class MahasiswaController extends Controller
         return view('backend.manajemen_user.mahasiswa.create',compact('kelas','fakultas'));
     }
 
-    public function store()
+    public function store(MahasiswaRequest $request)
     {
-        request()->validate([
-            'nim' => 'required',
-            'nama' => 'required',
-            'email' => 'required',
-            'fakultas' => 'required',
-            'kelas' => 'required',
-        ]);
-
         if(request('foto')) $img = request()->file('foto')->move('images/profile');
         
        $mahasiswa = Mahasiswa::create([
             'foto' => $img ?? 'default.png',
-            'nim' => request('nim'),
-            'nama' => request('nama'),
-            'email' => request('email'),
-            'password' => bcrypt(request('password')),
-            'fakultas_id' => request('fakultas'),
-            'kelas_id' => request('kelas'),
+            'nim' => $request->nim,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'fakultas_id' => $request->fakultas,
+            'kelas_id' => $request->kelas,
         ]);
         $mahasiswa->assignRole('mahasiswa');
 

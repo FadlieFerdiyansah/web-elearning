@@ -1,6 +1,7 @@
 <div class="form-group">
     <label for="{{ $attr }}">{{ $label }}</label>
-    <select name="{{ $attr }}" id="{{ $attr }}" class="form-control">
+    <select name="{{ $attr }}" id="{{ $attr }}" class="form-control @error($attr)is-invalid @enderror">
+        <option selected disabled>Choose one</option>
         {{-- Jika datanya adalah array/collection yang lebih dari 1  --}}
         @if(isset($dataArray))
             @foreach ($dataArray as $item)
@@ -17,4 +18,9 @@
                 @endif
         @endif
     </select>
+    @error($attr)
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
