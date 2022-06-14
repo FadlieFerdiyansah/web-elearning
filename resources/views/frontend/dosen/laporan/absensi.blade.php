@@ -83,4 +83,24 @@
         </div>
     </div>
   
+    @push('lastScripts')
+        <script>
+            $(document).ready(function () {
+                // when klik tab parsing data matkul to controller
+                $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                    var kelas = $(e.target).text();
+                    $.ajax({
+                        url: "{{ route('laporan.absensi') }}",
+                        type: "GET",
+                        data: {
+                            matkul: kelas
+                        },
+                        success: function (data) {
+                            $('tbody').html(data);
+                        }
+                    });
+                });
+            })
+        </script>
+    @endpush
   </x-app-layouts>
