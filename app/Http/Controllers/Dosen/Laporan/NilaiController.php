@@ -13,6 +13,7 @@ class NilaiController extends Controller
     {
         $kelas = Auth::user()->kelas;
         $mahasiswa = Mahasiswa::with('tugas')->whereIn('kelas_id', $kelas->pluck('id'))->orderBy('kelas_id', 'asc')->get();
+        // return Auth::user()->jadwals;
         return view('frontend.dosen.laporan.nilai', compact('kelas', 'mahasiswa'));
     }
 }
