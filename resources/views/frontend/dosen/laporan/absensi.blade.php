@@ -60,8 +60,8 @@
                                           {{-- <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}">{{ $i }}</td> --}}
                                           <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; text-align: center; font-size: 18px; font-weight: bold; border: 1px solid; border-color: #3A5BA0">
                                             @foreach($mhs->absens as $absen)
-                                                @if ($absen->pertemuan == $i)
-                                                  {{ $absen->status ? '✓' : '-' }}
+                                                @if ($absen->pertemuan == $i && $kls->pivot->matkul_id == $absen->jadwal->matkul_id)
+                                                {{ $absen->status ? '✓' : '-' }}
                                                 @endif
                                             @endforeach
                                           </td>
@@ -83,7 +83,7 @@
         </div>
     </div>
   
-    @push('lastScripts')
+    {{-- @push('lastScripts')
         <script>
             $(document).ready(function () {
                 // when klik tab parsing data matkul to controller
@@ -102,5 +102,5 @@
                 });
             })
         </script>
-    @endpush
+    @endpush --}}
   </x-app-layouts>
