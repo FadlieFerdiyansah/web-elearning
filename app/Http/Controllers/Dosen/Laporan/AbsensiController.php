@@ -11,10 +11,8 @@ class AbsensiController extends Controller
 {
     public function __invoke(Request $request)
     {
-        info(request('matkul'));
         $kelas = Auth::user()->kelas;
         $mahasiswa = Mahasiswa::with(['absens', 'absens.jadwal'])->whereIn('kelas_id', $kelas->pluck('id'))->orderBy('kelas_id', 'asc')->get();
-
         return view('frontend.dosen.laporan.absensi', compact('kelas', 'mahasiswa'));
     }
 }
