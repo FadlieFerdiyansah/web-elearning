@@ -35,7 +35,6 @@
                       <table border="0px" class="table">
                           <thead>
                               <tr>
-                                {{-- <td class="bg-secondary text-center font-weight-bold">#</td> --}}
                                 <td class="bg-secondary text-center font-weight-bold">MAHASISWA</td>
                                 @for ($i = 1; $i <= 16; $i++)
                                   <td class="text-center bg-secondary font-weight-bold">P {{ $i }}</td>
@@ -44,7 +43,6 @@
                               @foreach ($mahasiswa as $key => $mhs)
                                   <tr>
                                     @if ($mhs->kelas_id == $kls->id)
-                                    {{-- <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}">{{ $key + 1 }}</td> --}}
                                         <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; border: 1px solid; border-color: #3A5BA0">
                                           <li class="media">
                                               <img alt="image" class="mr-3 rounded-circle" width="50"
@@ -57,7 +55,6 @@
                                         </td>
                                       @if ($mhs->kelas_id == $kls->id)
                                         @for ($i = 1; $i <= 16; $i++)
-                                          {{-- <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}">{{ $i }}</td> --}}
                                           <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; text-align: center; font-size: 18px; font-weight: bold; border: 1px solid; border-color: #3A5BA0">
                                             @foreach($mhs->absens as $absen)
                                                 @if ($absen->pertemuan == $i && $kls->pivot->matkul_id == $absen->jadwal->matkul_id)

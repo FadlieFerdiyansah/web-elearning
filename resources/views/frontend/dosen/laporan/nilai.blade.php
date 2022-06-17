@@ -31,11 +31,11 @@
               {{-- Tab pane --}}
               @foreach ($kelas as $key => $kls)
                 <div class="tab-pane fade{{ $loop->index == 0 ? ' show active' : '' }}" id="content-{{ $key }}" role="tabpanel" aria-labelledby="{{ $kls->kd_kelas }}-tab">
+                  {{-- <h3>{{ $kls->pivot->matkul_id }}</h3> --}}
                   <div class="table-responsive">
                     <table border="0px" class="table">
                         <thead>
                             <tr>
-                              {{-- <td class="bg-secondary text-center font-weight-bold">#</td> --}}
                               <td class="bg-secondary text-center font-weight-bold">MAHASISWA</td>
                               @for ($i = 1; $i <= 16; $i++)
                                 <td class="text-center bg-secondary font-weight-bold">P {{ $i }}</td>
@@ -44,7 +44,6 @@
                             @foreach ($mahasiswa as $key => $mhs)
                                 <tr>
                                   @if ($mhs->kelas_id == $kls->id)
-                                  {{-- <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}">{{ $key + 1 }}</td> --}}
                                       <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; border: 1px solid; border-color: #3A5BA0">
                                         <li class="media">
                                             <img alt="image" class="mr-3 rounded-circle" width="50"
