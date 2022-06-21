@@ -3,12 +3,12 @@
 @include('components.spesifik_menu.partials.menu',[
 'icon' => 'calendar',
 'parentName' => 'Jadwal',
-// 'nameRoute' => ['jadwals.mengajar','jadwals.mengajar_pengganti'],
+'childName' => ['Jadwal Kuliah'],
 'nameRoute' => ['jadwals.mengajar'],
 'countChild' => 1,
+// 'nameRoute' => ['jadwals.mengajar','jadwals.mengajar_pengganti'],
 // 'countChild' => 2,
 // 'childName' => ['Jadwal Kuliah','Jadwal Pengganti'],
-'childName' => ['Jadwal Kuliah'],
 ])
 @endcan
 
@@ -33,12 +33,11 @@
 @endcan --}}
 
 @can('management nilai')
-<li class="dropdown">
-    <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="bar-chart-2"></i><span>Laporan</span></a>
-    <ul class="dropdown-menu">
-        {{-- <li><a class="nav-link" href="icon-material.html">Dosen</a></li> --}}
-        <li><a class="nav-link" href="{{ route('laporan.nilai') }}">Nilai</a></li>
-        <li><a class="nav-link" href="{{ route('laporan.absensi') }}">Absensi</a></li>
-    </ul>
-</li>
+@include('components.spesifik_menu.partials.menu',[
+'icon' => 'bar-chart-2',
+'parentName' => 'Laporan',
+'childName' => ['Nilai', 'Absensi'],
+'nameRoute' => ['laporan.nilai', 'laporan.absensi'],
+'countChild' => 2,
+])
 @endcan
