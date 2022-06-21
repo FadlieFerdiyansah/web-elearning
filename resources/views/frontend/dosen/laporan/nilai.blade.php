@@ -31,7 +31,9 @@
               {{-- Tab pane --}}
               @foreach ($kelas as $key => $kls)
                 <div class="tab-pane fade{{ $loop->index == 0 ? ' show active' : '' }}" id="content-{{ $key }}" role="tabpanel" aria-labelledby="{{ $kls->kd_kelas }}-tab">
-                  {{-- <h3>{{ $kls->pivot->matkul_id }}</h3> --}}
+                  <hr>
+                    <h5>{{ auth()->user()->matkuls->find($kls->pivot->matkul_id)->nm_matkul ?? '' }}</h5>
+                  <hr>
                   <div class="table-responsive">
                     <table border="0px" class="table">
                         <thead>

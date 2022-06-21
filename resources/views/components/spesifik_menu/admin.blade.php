@@ -45,32 +45,4 @@
 </li>
 @endcan
 
-{{-- @can('management users')
-@include('components.spesifik_menu.partials.menu',[
-'icon' => 'layout',
-'parentName' => 'Form Control',
-'nameRoute' =>
-['matkuls.create','kelas.create','fakultas.create','mahasiswa.create','dosens.create'],
-'countChild' => 5,
-'childName' => [ 'Buat Matakuliah', 'Buat Kelas', 'Buat Fakultas', 'Buat Mahasiswa', 'Buat
-Dosen', ],
-])
-@endcan --}}
-
-{{-- @can('management datatable')
-@include('components.spesifik_menu.partials.menu',[
-'icon' => 'layout',
-'parentName' => 'Data Table',
-'nameRoute' => ['matkuls.index','kelas.index','fakultas.table'],
-'countChild' => 3,
-'childName' => [ 'Matakuliah', 'Kelas', 'Fakultas'],
-])
-@endcan --}}
-
-
-
-
-
-
-
 @endauth
