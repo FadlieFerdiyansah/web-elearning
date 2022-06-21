@@ -34,6 +34,7 @@
                     <hr>
                       <h5>{{ auth()->user()->matkuls->find($kls->pivot->matkul_id)->nm_matkul ?? '' }}</h5>
                     <hr>
+                      <a href="#" class="btn btn-success btn-md mb-3"><i class="fas fa-file-excel"></i> Export Excel</a>
                     <div class="table-responsive">
                       <table border="0px" class="table">
                           <thead>
