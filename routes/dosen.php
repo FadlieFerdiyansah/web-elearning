@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dosen\Laporan\{NilaiController as LaporanNilaiController, AbsensiController as LaporanAbsensiController};
+use App\Http\Controllers\Dosen\Exports\ExportNilaiController;
+use App\Http\Controllers\Dosen\Laporan\{LaporanNilaiController, LaporanAbsensiController};
 use App\Http\Controllers\Dosen\{AbsenController, KelasController, JadwalController, MateriController, DashboardController, NilaiController, TugasController};
+use App\Http\Controllers\Dosen\Exports\ExportAbsensiController;
 
 Route::middleware('auth:dosen')->group(function () {
     Route::prefix('dosen')->get('dashboard', DashboardController::class)->name('dashboard.dosen');
@@ -45,4 +47,8 @@ Route::middleware('auth:dosen')->group(function () {
     // ** Laporan **
     Route::get('nilai/mahasiswa', LaporanNilaiController::class)->name('laporan.nilai');
     Route::get('absensi/mahasiswa', LaporanAbsensiController::class)->name('laporan.absensi');
+
+    // ** Exports **
+    Route::get('nilai/mahasiswa/export-excel', ExportNilaiController::class)->name('laporan.nilai.export_excel');
+    Route::get('absensi/mahasiswa/export-excel', ExportAbsensiController::class)->name('laporan.absensi.export_excel');
 });

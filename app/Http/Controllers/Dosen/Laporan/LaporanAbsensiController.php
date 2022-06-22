@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Matkul;
 use Illuminate\Support\Facades\Auth;
 
-class AbsensiController extends Controller
+class LaporanAbsensiController extends Controller
 {
     public function __invoke(Request $request)
     {

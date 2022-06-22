@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 
-class NilaiController extends Controller
+class LaporanNilaiController extends Controller
 {
     public function __invoke()
     {
