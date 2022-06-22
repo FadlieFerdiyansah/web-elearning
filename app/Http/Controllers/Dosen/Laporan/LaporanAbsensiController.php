@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dosen\Laporan;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Matkul;
 use Illuminate\Support\Facades\Auth;
 
 class LaporanAbsensiController extends Controller

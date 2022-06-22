@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class ExportAbsensiController extends Controller
 {
-    //
+    public function __invoke()
+    {
+        return 'hello export absensi';
+    }
 }
