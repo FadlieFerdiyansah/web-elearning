@@ -17,10 +17,12 @@ class ExportNilaiController extends Controller
         //                 ->where('kelas_id', $kelas->id)
         //                 ->get(['id', 'kelas_id', 'nama', 'nim']);
         // return Auth::user()->kelas->find($kelas->id);\
+        // $mahasiswa = Mahasiswa::with(['tugas' => function($query) {
+        //     $query->whereIn('parent', Auth::user()->tugas->pluck('id'))->select('id', 'mahasiswa_id', 'pertemuan');
+        // }, 'tugas.nilai:id,tugas_id,nilai', 'kelas'])->where('kelas_id', $kelas->id)->get(['id', 'nim', 'nama', 'kelas_id']);
         $mahasiswa = Mahasiswa::with(['tugas' => function($query) {
             $query->whereIn('parent', Auth::user()->tugas->pluck('id'));
         }])->where('kelas_id', $kelas->id)->get();
-            // return Auth::user()->tugas->pluck('id');
         return $mahasiswa;
         return 'hello export nilai';
     }
