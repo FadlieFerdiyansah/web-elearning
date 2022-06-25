@@ -25,7 +25,6 @@ class TugasController extends Controller
     public function create($jadwalId)
     {
         $jadwal = Jadwal::whereId(decrypt($jadwalId))->first();
-
         $newtsPertemuan = $jadwal->absens()->where('parent', 0)->whereDate('created_at', now('Asia/Jakarta'))->latest()->select('pertemuan')->first();
         return view('frontend.dosen.tugas.create', compact('jadwal', 'newtsPertemuan'));
     }
@@ -36,7 +35,8 @@ class TugasController extends Controller
         $jadwal = Jadwal::with('kelas')->where('id', $jadwalId)->first();
         $attr = $request->validated();
         $attr['jadwal_id'] = $jadwalId;
-
+        $attr['matkul_id'] = $jadwal->matkul_id;
+        
         if ($request->tipe == 'file') {
             $file = $request->file('file_or_link')->store('bahan_ajar');
             $attr['file_or_link'] = $file;

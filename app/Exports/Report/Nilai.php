@@ -7,6 +7,13 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class Nilai implements FromCollection, WithHeadings
 {
+    protected $mahasiswa;
+    public function __construct($mahasiswa)
+    {
+        $this->mahasiswa = $mahasiswa;
+    }
+
+
     public function headings(): array
     {
         return [
@@ -35,6 +42,6 @@ class Nilai implements FromCollection, WithHeadings
 
     public function collection()
     {
-        //
+        return $this->mahasiswa;
     }
 }

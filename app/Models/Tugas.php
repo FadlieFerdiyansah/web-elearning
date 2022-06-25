@@ -9,12 +9,17 @@ class Tugas extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'jadwal_id', 'parent', 'judul', 'tipe', 'file_or_link', 'pertemuan', 'deskripsi', 'pengumpulan' ];
-    protected $with = ['nilai'];
+    protected $fillable = [ 'jadwal_id', 'matkul_id', 'parent', 'judul', 'tipe', 'file_or_link', 'pertemuan', 'deskripsi', 'pengumpulan' ];
+    protected $with = ['nilai', 'matkul'];
 
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class);
+    }
+
+    public function matkul()
+    {
+        return $this->belongsTo(Matkul::class);
     }
 
     public function nilai()

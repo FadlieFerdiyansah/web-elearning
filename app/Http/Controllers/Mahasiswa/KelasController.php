@@ -143,7 +143,6 @@ class KelasController extends Controller
 
         $jadwal = Jadwal::whereId(decrypt($jadwalId))->firstOrFail();
         $tugas = Tugas::whereId($tugasId)->firstOrFail();
-        
         if ($tugas->pengumpulan > date('Y-m-d H:i:s')) {
             Auth::user()->tugas()->updateOrCreate(
                 [
@@ -152,6 +151,7 @@ class KelasController extends Controller
                 ],
                 [
                     'jadwal_id' => $jadwal->id,
+                    'matkul_id' => $jadwal->matkul_id,
                     'judul' => $tugas->judul,
                     'parent' => $tugas->id,
                     'tipe' => 'link',
