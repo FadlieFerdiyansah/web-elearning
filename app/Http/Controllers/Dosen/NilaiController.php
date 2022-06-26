@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use App\Models\Nilai;
 use App\Models\Tugas;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Dosen\NilaiRequest;
-use App\Models\Dosen;
-use App\Models\Kelas;
-use App\Models\Mahasiswa;
 
 class NilaiController extends Controller
 {

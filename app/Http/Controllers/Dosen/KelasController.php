@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dosen;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\{Auth, Crypt};
+use Illuminate\Support\Facades\Auth;
 use App\Models\{Absen, Jadwal, Materi, Mahasiswa};
 
 class KelasController extends Controller

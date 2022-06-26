@@ -13,8 +13,6 @@ class LaporanNilaiController extends Controller
     {
         $kelas = Auth::user()->kelas;
         $mahasiswa = Mahasiswa::with(['tugas', 'tugas.jadwal'])->whereIn('kelas_id', $kelas->pluck('id'))->orderBy('kelas_id', 'asc')->get();
-        // return $mahasiswa[0]->tugas[0]->jadwal->matkul_id;
-        // return $mahasiswa[0]->tugas[0]->;
         return view('frontend.dosen.laporan.nilai', compact('kelas', 'mahasiswa'));
     }
 }

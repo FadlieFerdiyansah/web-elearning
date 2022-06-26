@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers\Dosen\Exports;
 
-use App\Models\Kelas;
-use App\Models\Tugas;
-use App\Models\Matkul;
-use App\Models\Mahasiswa;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Exports\Report\Nilai;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\{Kelas, Matkul, Mahasiswa};
 
 class ExportNilaiController extends Controller
 {

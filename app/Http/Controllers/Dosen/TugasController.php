@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use App\Models\Tugas;
-use App\Models\Jadwal;
-use App\Models\Mahasiswa;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Dosen\TugasRequest;
+use App\Models\{Tugas, Jadwal, Mahasiswa};
+use Illuminate\Support\Facades\{Auth, Storage};
 
 class TugasController extends Controller
 {
@@ -31,7 +26,7 @@ class TugasController extends Controller
 
     public function store(TugasRequest $request)
     {
-        $jadwalId = Crypt::decrypt(request('jadwal'));
+        $jadwalId = decrypt(request('jadwal'));
         $jadwal = Jadwal::with('kelas')->where('id', $jadwalId)->first();
         $attr = $request->validated();
         $attr['jadwal_id'] = $jadwalId;

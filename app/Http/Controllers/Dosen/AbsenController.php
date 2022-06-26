@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dosen;
 use Carbon\Carbon;
 use App\Models\{Jadwal, Absen, Mahasiswa};
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\{Auth, Crypt};
+use Illuminate\Support\Facades\Auth;
 
 class AbsenController extends Controller
 {

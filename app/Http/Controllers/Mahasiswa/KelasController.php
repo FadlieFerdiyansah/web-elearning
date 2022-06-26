@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\{Absen, Jadwal, Materi, Tugas};
-use Illuminate\Support\Facades\{Auth, Crypt};
-
-use function PHPUnit\Framework\isEmpty;
 
 class KelasController extends Controller
 {
@@ -18,23 +16,15 @@ class KelasController extends Controller
 
     public function masuk($id)
     {
-        // return Auth::user()->mahasiswaAbsenHariIni;
         $jadwal_id = decrypt($id);
         $jadwal = Jadwal::where('id', $jadwal_id)->first();
 
         $absens = Auth::user()->absens()->where('jadwal_id', $jadwal_id)->paginate(5);
 
-        // return Auth::user()->mahasiswaAbsenHariIni;
-
-        // return Auth::user()->mahasiswaAbsenHariIni;
-        // return $absens;
-
         $test = collect([
             ['jadwal_id' => 2, 'nama' => 'fadlie'],
             ['jadwal_id' => 3, 'nama' => 'udin']
         ]);
-
-        // return Auth::user()->;
 
         //Untuk membatasi waktu absen misal : jam masuk 12:00 sedangkan waktu saat itu belum jam 12:00 
         //Jadi tidak bisa absen kalau belum waktu nya dan juga berlaku untuk jam keluar, jika lebih dari waktu
@@ -45,25 +35,9 @@ class KelasController extends Controller
             $waktuAbsen = false;
         }
 
-        //Nyambung sama kode diatas.. jadi kode dibawah untuk mengizinkan mahasiswa melakukan absen jika
-        //Absen sudah dibuat oleh dosen, jika waktu jam masuk sudah lebih dari jam 12:00 tapi dosen belum
-        //Buat absen nya maka mahasiswa nya juga belum bisa absen
-        // Mahasiswa::with(['mahasiswaAbsenHariIni' => function($q) use ($jadwal){
-        //     $q->where('jadwal_id', $jadwal->id);
-        // }])->where('kelas_id', $jadwal->kelas_id)->get();
-
-
-
         $allowMhsAbsen = Absen::where('jadwal_id', $jadwal_id)->where('parent', 0)->whereDate('created_at', now())->first();
         $isAbsen = Auth::user()->isAbsen($jadwal_id)->first();
 
-        // return Auth::user()->absenYuk($jadwal_id)->first() ? 'ada' : 'kosong';
-
-        // Absen::where('jadwal_id', $jadwal_id)->where('parent', 0)->whereDate('created_at', now())->first();
-
-        // return Auth::user()->mahasiswaAbsenHariIni;
-        // return $allowMhsAbsen;
-        // return $allowMhsAbsen;
         return view('frontend.mahasiswa.kelas.masuk', compact('jadwal', 'absens', 'waktuAbsen', 'allowMhsAbsen', 'isAbsen'));
     }
 

@@ -7,7 +7,7 @@ use Yajra\DataTables\DataTables;
 use App\Models\{Jadwal, Materi};
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MateriRequest;
-use Illuminate\Support\Facades\{Auth, Crypt, Storage};
+use Illuminate\Support\Facades\{Auth, Storage};
 
 class MateriController extends Controller
 {

@@ -2,13 +2,8 @@
 
 namespace App\Exports\Report;
 
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-use PhpOffice\PhpSpreadsheet\Style\Color;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\{WithStyles, WithHeadings, FromCollection, WithColumnWidths};
 
 class Nilai implements FromCollection, WithHeadings, WithColumnWidths, WithStyles
 {
