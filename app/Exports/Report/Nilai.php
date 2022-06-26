@@ -2,10 +2,15 @@
 
 namespace App\Exports\Report;
 
-use Maatwebsite\Excel\Concerns\FromCollection;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class Nilai implements FromCollection, WithHeadings
+class Nilai implements FromCollection, WithHeadings, WithColumnWidths, WithStyles
 {
     protected $mahasiswa;
     public function __construct($mahasiswa)
@@ -40,8 +45,44 @@ class Nilai implements FromCollection, WithHeadings
         ];
     }
 
+    public function columnWidths(): array
+    {
+        return [
+            'A' => 10,
+            'B' => 15,            
+            'C' => 30,            
+            'D' => 30,
+            'E' => 5,
+            'F' => 5,
+            'G' => 5,
+            'H' => 5,
+            'I' => 5,
+            'J' => 5,
+            'K' => 5,
+            'L' => 5,
+            'M' => 5,
+            'N' => 5,
+            'O' => 5,
+            'P' => 5,
+            'Q' => 5,
+            'R' => 5,
+            'S' => 5,
+            'T' => 5,
+        ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        return [
+            1 => ['font' => ['bold' => true]],
+            'A1:Z1' => ['alignment' => ['horizontal' => 'center']],
+            '2:50' => ['alignment' => ['horizontal' => 'left']],
+        ];
+    }
+
     public function collection()
     {
+        info(count($this->mahasiswa));
         return $this->mahasiswa;
     }
 }
