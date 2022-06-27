@@ -49,5 +49,5 @@ Route::middleware('auth:dosen')->group(function () {
 
     // ** Exports **
     Route::get('nilai/mahasiswa/export-excel/{kelas}/{matkul}', ExportNilaiController::class)->name('laporan.nilai.export_excel');
-    Route::get('absensi/mahasiswa/export-excel', ExportAbsensiController::class)->name('laporan.absensi.export_excel');
+    Route::get('absensi/mahasiswa/export-excel/{kelas}/{matkul}', ExportAbsensiController::class)->name('laporan.absensi.export_excel');
 });

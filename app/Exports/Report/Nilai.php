@@ -77,7 +77,6 @@ class Nilai implements FromCollection, WithHeadings, WithColumnWidths, WithStyle
 
     public function collection()
     {
-        info(count($this->mahasiswa));
         return $this->mahasiswa;
     }
 }

@@ -32,7 +32,6 @@ class ExportNilaiController extends Controller
                 }
             }
         }
-
-        return Excel::download(new Nilai(collect($formatMhs)), 'nilai.xlsx');
+        return Excel::download(new Nilai(collect($formatMhs)), "Laporan_Nilai_Kelas_{$formatMhs[0]['kelas']}.xlsx");
     }
 }
