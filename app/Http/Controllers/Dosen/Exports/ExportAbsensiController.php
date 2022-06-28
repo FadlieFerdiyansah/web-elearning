@@ -21,9 +21,7 @@ class ExportAbsensiController extends Controller
             $query->whereIn('parent', Auth::user()->absens->pluck('id'))->select('id','mahasiswa_id','pertemuan', 'status');
         }, 'kelas'])->where('kelas_id', $kelas->id)->get(['id', 'kelas_id', 'nim', 'nama']);
 
-        $lastPertemuan = Auth::user()->absens->load(['jadwal' => function($query) use ($matkul) {
-            $query->where('matkul_id', $matkul->id);
-        }])->max('pertemuan');
+        $lastPertemuan = Auth::user()->tugas->where('matkul_id', $matkul->id)->max('pertemuan');
 
         foreach($mahasiswa as $i => $mhs){
             $formatMhs[$i] = [
@@ -35,11 +33,12 @@ class ExportAbsensiController extends Controller
             for($j = 1; $j <= $lastPertemuan; $j++){
                 $formatMhs[$i]["p$j"] = '-';
                 if($mhs->absens->where('pertemuan', $j)->count() > 0){
-                    $formatMhs[$i]["p$j"] = $mhs->absens->where('pertemuan', $j)->first()->status ?? '-';
+                    $formatMhs[$i]["p$j"] = $mhs->absens->where('pertemuan', $j)->first()->status ? '✓' : '-';
                 }
             }
         }
 
+        // return $mahasiswa;
         return Excel::download(new Absensi(collect($formatMhs)), "Laporan_Absensi_Kelas_{$formatMhs[0]['kelas']}.xlsx");
     }
 }
