@@ -38,7 +38,6 @@ class ExportAbsensiController extends Controller
             }
         }
 
-        // return $mahasiswa;
         return Excel::download(new Absensi(collect($formatMhs)), "Laporan_Absensi_Kelas_{$formatMhs[0]['kelas']}.xlsx");
     }
 }
