@@ -25,6 +25,10 @@ class MatkulSeeder extends Seeder
                         'machine learning',
                         'pemrograman dasar',
                         'algoritma',
+                        'pemrograman java',
+                        'pemrograman python',
+                        'design grafis',
+                        'figma'
                         ]);
         $matkuls->each(function($matkul){
             $arr = explode(' ', $matkul);
