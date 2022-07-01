@@ -24,7 +24,7 @@ class MahasiswaFactory extends Factory
     {
         return [
             'fakultas_id' => rand(1,2),
-            'kelas_id' => rand(1,5),
+            'kelas_id' => rand(1,8),
             'nim' => rand(11111111,99999999),
             'nama' => $this->faker->name(),
             'foto' => 'default.png',
