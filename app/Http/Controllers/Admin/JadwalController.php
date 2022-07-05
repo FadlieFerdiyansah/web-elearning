@@ -26,7 +26,7 @@ class JadwalController extends Controller
     {
         Jadwal::create($request->all());
         $dosen = Dosen::where('id', $request->dosen_id)->first();
-        // $dosen->kelas()->updateExistingPivot(['kelas_id' => $request->kelas_id], ['matkul_id' => $request->matkul_id] );
+        $dosen->kelas()->updateExistingPivot(['kelas_id' => $request->kelas_id], ['matkul_id' => $request->matkul_id] );
         $kelas = Kelas::find($request->kelas_id);
         return response()->json(['message' => 'Berhasil membuat jadwal untuk kelas ' . $kelas->kd_kelas]);
     }
