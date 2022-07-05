@@ -39,7 +39,7 @@ class Dosen extends Authenticatable
 
     public function kelas()
     {
-        return $this->belongsToMany(Kelas::class);
+        return $this->belongsToMany(Kelas::class)->withPivot('matkul_id');
     }
 
     public function matkuls()
