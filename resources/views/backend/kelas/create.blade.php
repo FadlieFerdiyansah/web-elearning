@@ -1,6 +1,4 @@
 <x-app-layouts title="Buat Kelas">
-    @push('styles')
-    @endpush
     <div class="card">
         <div class="card-header">
             <h4>Form Create Kelas</h4>
@@ -13,6 +11,4 @@
             </form>
         </div>
     </div>
-    @push('scrips')
-    @endpush
 </x-app-layouts>

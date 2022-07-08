@@ -6,7 +6,7 @@ use App\Http\Controllers\Mahasiswa\JadwalController;
 use App\Http\Controllers\Mahasiswa\KelasController;
 use Illuminate\Support\Facades\Auth;
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/',fn () => view('index'));
 

@@ -18,10 +18,10 @@
 @stack('styles')
 </head>
 <body>
-  @if (!Route::is('login'))
+  @auth
     <x-navbar/>
     <x-sidebar/>
-  @endif
+  @endauth
   <div class="main-content">
     <section class="section">
       <div class="section-body">
