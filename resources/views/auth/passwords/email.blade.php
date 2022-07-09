@@ -8,7 +8,7 @@
                     </div>
                     @if (session('token'))
                     <div class="d-flex justify-content-center bg-light">
-                        <p class="p-1">Link riset password : </p>
+                        <p class="p-1">Link alternatif riset password : </p>
                         <p class="p-1">
                             <a class="text-info" href="{{ session('token') }}" class="text-primary">
                                 <b>Link ini akan hilang, Jika browser kamu ter refresh</b>
