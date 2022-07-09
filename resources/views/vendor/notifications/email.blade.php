@@ -1,62 +1,55 @@
-@component('mail::message')
-{{-- Greeting --}}
-@if (! empty($greeting))
-# {{ $greeting }}
-@else
-@if ($level === 'error')
-# @lang('Whoops!')
-@else
-# @lang('Hello!')
-@endif
-@endif
+<!DOCTYPE html>
+<html lang="en">
 
-{{-- Intro Lines --}}
-@foreach ($introLines as $line)
-{{ $line }}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 10px !important;
+        }
 
-@endforeach
+        p {
+            font-size: 14px;
+        }
 
-{{-- Action Button --}}
-@isset($actionText)
-<?php
-    switch ($level) {
-        case 'success':
-        case 'error':
-            $color = $level;
-            break;
-        default:
-            $color = 'primary';
-    }
-?>
-@component('mail::button', ['url' => $actionUrl, 'color' => $color])
-{{ $actionText }}
-@endcomponent
-@endisset
+        .link {
+            background-color: #495C83;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
+        rel="stylesheet">
+    <title>Permintaan Riset Password</title>
+</head>
 
-{{-- Outro Lines --}}
-@foreach ($outroLines as $line)
-{{ $line }}
+<body>
+    <h3>{{ $greeting }}</h3>
+    <p>Kamu meminta untuk melakukan riset password</p>
+    <p><b>Jika benar </b>itu <b>kamu</b> yang melakukan Permintaan riset password</p>
+    <p>Silahkan klik button dibawah ini untuk melakukan riset password</p>
+    <p>
+        <a href="{{ $actionUrl }}" class="link">
+            Riset Password
+        </a>
+    </p>
+    <br><br>
 
-@endforeach
+    <code>Note : Jika tombol diatas tidak berfungsi kamu bisa langsung klik link dibawah</code>
+    <p>
+        <a href="{{ $actionUrl }}">
+            {{ $actionUrl }}
+        </a>
+    </p>
 
-{{-- Salutation --}}
-@if (! empty($salutation))
-{{ $salutation }}
-@else
-@lang('Regards'),<br>
-{{ config('app.name') }}
-@endif
+</body>
 
-{{-- Subcopy --}}
-@isset($actionText)
-@slot('subcopy')
-@lang(
-    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
-    [
-        'actionText' => $actionText,
-    ]
-) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
-@endslot
-@endisset
-@endcomponent
+</html>
