@@ -40,7 +40,8 @@
     <p class="greeting">{{ $greeting }}</p>
     <p>Kamu meminta untuk melakukan riset password</p>
     <p><b>Jika benar </b>itu <b>kamu</b> yang melakukan Permintaan riset password</p>
-    <p>Silahkan klik button dibawah ini untuk melakukan riset password, Jika tidak bisa kamu <b>Abaikan</b></p>
+    <p>Silahkan klik button dibawah ini untuk melakukan riset password, Jika itu bukan kamu, bisa kamu <b>Abaikan</b>
+    </p>
     <p>
         <a href="{{ $actionUrl }}" class="link">
             Riset Password
@@ -55,6 +56,12 @@
         </a>
     </p>
 
+    <br>
+    <hr>
+    <p><b>Github</b> : <a href="https://github.com/fadlieFerdiyansah">github.com/fadlieFerdiyansah</a> <br>
+        <b>Email</b> : <a href="mailto:fadlieferdiyansah26@gmail.com">fadlieferdiyansah26@gmail.com</a> <br>
+        <b>Whatsapp</b> : <a href="https://wa.me/85717648925">085717648925</a></p>
+    <hr>
 </body>
 
 </html>
