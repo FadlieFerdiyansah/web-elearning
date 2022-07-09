@@ -35,6 +35,8 @@ class ForgotPasswordController extends Controller
             'token' => $token,
             'created_at' => Carbon::now(),
         ]);
+        // kirim url riset token langsung menggunakan session ini sebagain alternatif penggati kirim email
+        session()->flash('token', url("/riset-password?token=$token"));
         return back()->with('success', 'Link sudah dikirim, Silahkan cek email anda.');
     }
 
@@ -46,8 +48,6 @@ class ForgotPasswordController extends Controller
         }
 
         return abort(404);
-
-        // return view('auth.passwords.reset', ['token' => request('token')]);
     }
 
     public function updatePassword()
@@ -67,7 +67,7 @@ class ForgotPasswordController extends Controller
                 $dosen->save();
             }
             DB::table('password_resets')->where('token', request('token'))->delete();
-            return redirect('/login')->with('success', 'Password berhasil diubah');
+            return redirect('/login')->with('success', 'Password berhasil diubah.');
         }
         return abort(404);
     }
