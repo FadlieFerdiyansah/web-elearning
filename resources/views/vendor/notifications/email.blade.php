@@ -11,6 +11,11 @@
             margin: 10px !important;
         }
 
+        .greeting {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
         p {
             font-size: 14px;
         }
@@ -23,7 +28,7 @@
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
-            margin-top: 10px;
+            margin-top: 15px !important;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
@@ -32,10 +37,10 @@
 </head>
 
 <body>
-    <h3>{{ $greeting }}</h3>
+    <p class="greeting">{{ $greeting }}</p>
     <p>Kamu meminta untuk melakukan riset password</p>
     <p><b>Jika benar </b>itu <b>kamu</b> yang melakukan Permintaan riset password</p>
-    <p>Silahkan klik button dibawah ini untuk melakukan riset password</p>
+    <p>Silahkan klik button dibawah ini untuk melakukan riset password, Jika tidak bisa kamu <b>Abaikan</b></p>
     <p>
         <a href="{{ $actionUrl }}" class="link">
             Riset Password
