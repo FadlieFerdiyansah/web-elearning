@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Mahasiswa extends Authenticatable
 {
 
-    use HasFactory, HasRoles;
+    use HasFactory, HasRoles, Notifiable;
     protected $fillable = ['foto','nim','nama','email','password','fakultas_id','kelas_id'];
     // protected $with = ['absens','userAbsen'];
 

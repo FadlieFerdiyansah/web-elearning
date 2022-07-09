@@ -1,18 +1,14 @@
-<x-app-layouts>
+<x-app-layouts title="Login Elearning">
     <div class="container mt-3">
         <div class="row d-flex">
             <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h4>Login</h4>
-                        @if (session()->has('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                        @endif
+                        <h4>Silahkan Login</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
+                        <x-alert />
+                        <form method="POST" action="{{ route('login') }}" class="needs-validation mt-2" novalidate="">
                             @csrf
                             <div class="form-group">
                                 <label for="email">Email</label>
@@ -26,8 +22,8 @@
                                 <div class="d-block">
                                     <label for="password" class="control-label">Password</label>
                                     <div class="float-right">
-                                        <a href="auth-forgot-password.html" class="text-small">
-                                            Forgot Password?
+                                        <a href="{{ route('forgot.password') }}" class="text-small">
+                                            Lupa kata sandi?
                                         </a>
                                     </div>
                                 </div>

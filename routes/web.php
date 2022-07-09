@@ -1,14 +1,19 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\Mahasiswa\JadwalController;
 use App\Http\Controllers\Mahasiswa\KelasController;
 use Illuminate\Support\Facades\Auth;
 
-Auth::routes(['register' => false]);
+Auth::routes(['register' => false, 'reset' => false, 'verify' => false, 'confirm' => false, 'forgot' => false]);
 
 Route::get('/',fn () => view('index'));
+Route::get('forgot-password', [ForgotPasswordController::class, 'showPageForgotPassword'])->name('forgot.password');
+Route::post('forgot-password', [ForgotPasswordController::class, 'sendEmail']);
+Route::get('riset-password', [ForgotPasswordController::class, 'showPageRisetPassword'])->name('riset.password');
+Route::patch('riset-password', [ForgotPasswordController::class, 'updatePassword']);
 
 Route::middleware('auth:mahasiswa', 'disable.back')->group(function () {
     Route::prefix('user')->get('dashboard', DashboardController::class)->name('dashboard.mahasiswa');
