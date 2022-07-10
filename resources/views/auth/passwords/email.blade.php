@@ -4,7 +4,7 @@
             <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-1 col-xl-8">
                 <div class="card card-primary">
                     <div class="card-header">
-                        Lupa Kata Sandi
+                        Lupa Password
                     </div>
                     @if (session('token'))
                     <div class="d-flex justify-content-center bg-light">

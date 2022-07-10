@@ -2,13 +2,29 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Dosen\UpdateProfile;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
-    public function __invoke(Request $request)
+    public function dashboard()
     {
         return view('frontend.dosen.dashboard');
+    }
+
+    public function updateProfile(UpdateProfile $request)
+    {
+        $dosen = auth()->user();
+
+        if (Hash::check($request->password, $dosen->password)) {
+            return redirect()->back()->with('error', 'Password baru tidak boleh sama dengan password saat ini');
+        }
+
+        $dosen->password = bcrypt($request->password);
+        $dosen->save();
+
+        return redirect()->back()->with('success', 'Berhasil mengubah data profile');
     }
 }

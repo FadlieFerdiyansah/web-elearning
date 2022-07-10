@@ -6,7 +6,8 @@ use App\Http\Controllers\Dosen\Laporan\{LaporanNilaiController, LaporanAbsensiCo
 use App\Http\Controllers\Dosen\{AbsenController, KelasController, JadwalController, MateriController, DashboardController, NilaiController, TugasController};
 
 Route::middleware('auth:dosen')->group(function () {
-    Route::prefix('dosen')->get('dashboard', DashboardController::class)->name('dashboard.dosen');
+    Route::prefix('dosen')->get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.dosen');
+    Route::prefix('dosen')->post('dashboard/update-profile', [DashboardController::class, 'updateProfile'])->name('dashboard.dosen_updateProfile');
     
     // ** JADWAL **
     Route::get('jadwal-mengajar', [JadwalController::class, 'jadwalMengajar'])->name('jadwals.mengajar');

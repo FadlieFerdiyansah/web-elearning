@@ -1,9 +1,8 @@
 <div class="main-sidebar sidebar-style-2">
 	<aside id="sidebar-wrapper">
 		<div class="sidebar-brand">
-			<a href="index.html"> <img alt="image" src="/assets/images/logo/logo-elearning.png" class="header-logo" />
+			<a href="index.html"> <img alt="image" src="/assets/images/logo/logo-elearning.png" style="width: 60px; height: 60px" class="header-logo" />
 				{{-- <span class="logo-name">{{ Auth::user()->nama }}</span> --}}
-				Learner
 			</a>
 		</div>
 		<ul class="sidebar-menu">
