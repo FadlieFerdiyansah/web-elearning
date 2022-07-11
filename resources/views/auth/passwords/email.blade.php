@@ -6,7 +6,7 @@
                     <div class="card-header">
                         Lupa Password
                     </div>
-                    @if (session('token'))
+                    {{-- @if (session('token'))
                     <div class="d-flex justify-content-center bg-light">
                         <p class="p-1">Link alternatif riset password : </p>
                         <p class="p-1">
@@ -15,7 +15,7 @@
                             </a>
                         </p>
                     </div>
-                    @endif
+                    @endif --}}
                     <div class="card-body">
                         <x-alert />
                         <form method="POST" action="{{ route('forgot.password') }}">

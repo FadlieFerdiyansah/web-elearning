@@ -9,7 +9,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Notifications\ForgotPassword;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller
 {
@@ -36,7 +35,7 @@ class ForgotPasswordController extends Controller
             'created_at' => Carbon::now(),
         ]);
         // kirim url riset token langsung menggunakan session ini sebagain alternatif penggati kirim email
-        session()->flash('token', url("/riset-password?token=$token"));
+        // session()->flash('token', url("/riset-password?token=$token"));
         return back()->with('success', 'Link sudah dikirim, Silahkan cek email anda.');
     }
 
