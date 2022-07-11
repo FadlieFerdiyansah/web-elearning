@@ -2,31 +2,28 @@
 
 namespace App\Http\Controllers\Mahasiswa;
 
-use ZipArchive;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dosen\UpdateProfile;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function __invoke(Request $request)
+    public function dashboard()
     {
-        // $role = Role::find(3);
-        // $role->givePermissionTo(['jadwal kuliahm']);
-        // dd(new ZipArchive);
-        // return Auth::user()->roles->name;
-        // return $role->givePermissionTo(['']);
-        // return $role->hasPermissionTo('management absensi');
-        // return $role->hasPermissionTo('jadwal kuliah');
-
-        // return $user;
-
-        // return $user->hasPermissionTo('jadwal mengajar');
         return view('frontend.mahasiswa.dashboard');
+    }
+
+    public function updateProfile(UpdateProfile $request)
+    {
+        $mahasiswa = auth()->user();
+
+        if (Hash::check($request->password, $mahasiswa->password)) {
+            return redirect()->back()->with('error', 'Password baru tidak boleh sama dengan password saat ini');
+        }
+
+        $mahasiswa->password = bcrypt($request->password);
+        $mahasiswa->save();
+
+        return redirect()->back()->with('success', 'Berhasil mengubah data profile');
     }
 }

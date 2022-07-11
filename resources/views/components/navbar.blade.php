@@ -27,7 +27,7 @@
 
 
   <ul class="navbar-nav navbar-right">
-    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+    {{-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
         class="nav-link nav-link-lg message-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
           viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
           stroke-linejoin="round" class="feather feather-mail">
@@ -93,8 +93,8 @@
           <a href="#">View All <i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
-    </li>
-    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+    </li> --}}
+    {{-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
         class="nav-link notification-toggle nav-link-lg"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
           viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
           stroke-linejoin="round" class="feather feather-bell bell">
@@ -146,19 +146,19 @@
           <a href="#">View All <i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
-    </li>
+    </li> --}}
     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
         <img alt="image" src="{{ asset('assets/img/user.png') }}" class="user-img-radious-style"> <span
           class="d-sm-none d-lg-inline-block"></span></a>
       <div class="dropdown-menu dropdown-menu-right pullDown">
         {{-- <div class="dropdown-title">Hello {{ Str::limit(Auth::user()->nama, 8,'.') }}</div> --}}
-        <a href="profile.html" class="dropdown-item has-icon"> <i class="far
+        {{-- <a href="profile.html" class="dropdown-item has-icon"> <i class="far
                                     fa-user"></i> Profile
         </a> <a href="timeline.html" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
           Activities
         </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
           Settings
-        </a>
+        </a> --}}
         <div class="dropdown-divider"></div>
         <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">

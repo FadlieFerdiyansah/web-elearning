@@ -10,13 +10,15 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes(['register' => false, 'reset' => false, 'verify' => false, 'confirm' => false, 'forgot' => false]);
 
 Route::get('/',fn () => view('index'));
+
 Route::get('forgot-password', [ForgotPasswordController::class, 'showPageForgotPassword'])->name('forgot.password');
 Route::post('forgot-password', [ForgotPasswordController::class, 'sendEmail']);
 Route::get('riset-password', [ForgotPasswordController::class, 'showPageRisetPassword'])->name('riset.password');
 Route::patch('riset-password', [ForgotPasswordController::class, 'updatePassword']);
 
 Route::middleware('auth:mahasiswa', 'disable.back')->group(function () {
-    Route::prefix('user')->get('dashboard', DashboardController::class)->name('dashboard.mahasiswa');
+    Route::prefix('user')->get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.mahasiswa');
+    Route::prefix('user')->post('dashboard/update-profile', [DashboardController::class, 'updateProfile'])->name('dashboard.mahasiswa_updateProfile');
 
     Route::get('jadwal-kuliah', [JadwalController::class, 'jadwalKuliah'])->name('jadwalKuliah');
     // Route::get('jadwal-pengganti', [JadwalController::class, 'jadwalPengganti'])->name('jadwalPengganti');
