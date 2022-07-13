@@ -33,7 +33,7 @@ class JadwalController extends Controller
 
     public function edit(Jadwal $jadwal)
     {
-        return $jadwal;
+        return view('backend.jadwal.edit', compact('jadwal'));
     }
 
     public function update(Jadwal $jadwal)

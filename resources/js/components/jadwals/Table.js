@@ -12,6 +12,8 @@ function Table(props) {
 
             let response = await axios.get(url);
             setJadwals(response.data.data);
+        console.log(jadwals)
+
             setLinks(response.data.meta.links);
         } catch (e) {
             console.log(e);
@@ -25,7 +27,6 @@ function Table(props) {
 
     useEffect((e) => {
         getJadwals();
-
     }, [url])
 
     return (
@@ -61,7 +62,7 @@ function Table(props) {
                                                 <td>{jadwal.matkul}</td>
                                                 <td>{`${jadwal.jam_masuk} - ${jadwal.jam_keluar}`}</td>
                                                 <td>
-                                                    <a href="#" className="btn btn-icon icon-left btn-primary btn-sm mr-1"><i className="fas fa-edit"></i> Edit</a>
+                                                    <a href={`/jadwals/${jadwal.id}/edit`} className="btn btn-icon icon-left btn-primary btn-sm mr-1"><i className="fas fa-edit"></i> Edit</a>
                                                     <a href="#" className="btn btn-icon icon-left btn-danger btn-sm"><i className="fas fa-times"></i> Delete</a>
                                                 </td>
                                             </tr>

@@ -15,6 +15,7 @@ class JadwalResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'hari' => $this->hari,
             'kelas' => $this->kelas->kd_kelas,
             'dosen' => $this->dosen->nama,
