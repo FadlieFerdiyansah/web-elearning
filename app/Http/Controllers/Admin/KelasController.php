@@ -3,14 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Kelas;
+use App\Traits\Search;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\KelasRequest;
 
 class KelasController extends Controller
 {
+    use Search;
 
     public function index()
     {
+        if(request('q')) {
+            return $this->search(Kelas::class, 'backend.kelas.index', 'kelas', 'kd_kelas');
+        }
+
         $kelas = Kelas::get();
         
         if (request()->expectsJson()) {

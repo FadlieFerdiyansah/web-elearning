@@ -5,11 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Fakultas;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FakultasRequest;
+use App\Traits\Search;
 
 class FakultasController extends Controller
 {
+    use Search;
+    
     public function index()
     {
+        if(request('q')) {
+            return $this->search(Fakultas::class, 'backend.fakultas.index', 'fakultas', 'nama');
+        }
         $fakultas = Fakultas::get();
         return view('backend.fakultas.index', compact('fakultas'));
     }

@@ -1,12 +1,6 @@
 <x-app-layouts title="Tabel Matakuliah">
-    @push('styles')
-    @endpush
-    <div class="d-flex justify-content-end mb-4">
-        <form class="form-inline" action="{{ route('matkuls.search') }}" method="GET ">
-            <input class="form-control mr-4 col-md" type="search" placeholder="Search" aria-label="Search" name="q">
-            <button class="btn btn-icon icon-left btn-primary"><i class="fas fa-search"></i> Cari</button>
-        </form>
-    </div>
+    <x-search action="{{ route('matkuls.index') }}" />
+
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h4>Table Matakuliah</h4>
@@ -14,16 +8,7 @@
                 Matakuliah</a>
         </div>
         <div class="card-body">
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible show fade">
-                <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                        <span>×</span>
-                    </button>
-                    {!! session('success') !!}
-                </div>
-            </div>
-            @endif
+            <x-alert />
             <div class="table-responsive">
                 <table class="table table-hover">
                     <tr>
@@ -59,6 +44,4 @@
             </div>
         </div>
     </div>
-    @push('scrips')
-    @endpush
 </x-app-layouts>

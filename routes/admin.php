@@ -24,7 +24,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('kelas', KelasController::class)->except('show');
 
     // ** MATAKULIAH **
-    Route::get('matkuls/search', [MatkulController::class, 'search'])->name('matkuls.search');
+    // Route::get('matkuls/search', [MatkulController::class, 'search'])->name('matkuls.search');
     Route::resource('matkuls', MatkulController::class)->except('show');
 
     // ** FAKULTAS **

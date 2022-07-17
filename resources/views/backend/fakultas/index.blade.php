@@ -1,6 +1,5 @@
 <x-app-layouts title="Tabel Fakultas">
-    @push('styles')
-    @endpush
+    <x-search action="{{ route('fakultas.index') }}" />
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h4>Table Kelas</h4>
@@ -43,6 +42,4 @@
             </table>
         </div>
     </div>
-    @push('scrips')
-    @endpush
 </x-app-layouts>
