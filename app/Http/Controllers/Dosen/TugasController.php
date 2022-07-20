@@ -46,15 +46,11 @@ class TugasController extends Controller
 
     public function edit(Tugas $tugas)
     {
-        // $tugas->pengumpulan = date('d/m/Y H:s', strtotime($tugas->pengumpulan));
-        // return $tugas;
         return view('frontend.dosen.tugas.edit', compact('tugas'));
     }
 
     public function update(Tugas $tugas, TugasRequest $request)
     {
-
-        // return request()->all();
         $attr = $request->validated();
 
         if ($request->tipe == 'file') {

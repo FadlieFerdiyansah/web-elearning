@@ -28,7 +28,6 @@ class Matkul extends Model
         return $this->hasMany(Materi::class);
     }
 
-    //Mutators when attribute 'nameOfAttribute' store will be lowercase
     public function setNmMatkulAttribute($value)
     {
         return $this->attributes['nm_matkul'] = strtolower($value);

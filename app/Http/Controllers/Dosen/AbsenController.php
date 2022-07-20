@@ -39,7 +39,6 @@ class AbsenController extends Controller
             'pertemuan' => 'required'
         ]);
 
-        // return Mahasiswa::where()
         $absen = Auth::user()->absens()->create([
             'jadwal_id' => $jadwal_id,
             'pertemuan' => request('pertemuan'),

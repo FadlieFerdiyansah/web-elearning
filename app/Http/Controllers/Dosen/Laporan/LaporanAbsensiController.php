@@ -13,7 +13,6 @@ class LaporanAbsensiController extends Controller
     {
         $kelas = Auth::user()->kelas;
         $mahasiswa = Mahasiswa::with(['absens', 'absens.jadwal'])->whereIn('kelas_id', $kelas->pluck('id'))->orderBy('kelas_id', 'asc')->get();
-        // return $kelas;
         return view('frontend.dosen.laporan.absensi', compact('kelas', 'mahasiswa'));
     }
 }

@@ -115,14 +115,5 @@ class MahasiswaController extends Controller
                 }
             }
         }
-
-        // foreach($mhs as $m){
-            //  dd($m);
-            // $m[0]->delete();
-            // if($m[0]->foto != 'default.png'){
-            //     Storage::delete($m[0]->foto); 
-            // }
-        // }
-        
     }
 }
