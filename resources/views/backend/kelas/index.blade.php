@@ -26,9 +26,10 @@
                                     style="float:left;margin-right:5px;">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-icon icon-left btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus kelas ini ?')"><i class="fas fa-trash"></i> Delete</button>
                                 </form>
-                                <a href="{{ route('kelas.edit', $kls) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{ route('kelas.edit', $kls) }}" class="btn btn-icon icon-left btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+
                             </td>
                         </tr>
                     @empty

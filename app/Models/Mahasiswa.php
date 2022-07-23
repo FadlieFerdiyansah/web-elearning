@@ -13,6 +13,7 @@ class Mahasiswa extends Authenticatable
 {
 
     use HasFactory, HasRoles, Notifiable;
+    
     protected $fillable = ['foto','nim','nama','email','password','fakultas_id','kelas_id'];
     // protected $with = ['absens','userAbsen'];
 

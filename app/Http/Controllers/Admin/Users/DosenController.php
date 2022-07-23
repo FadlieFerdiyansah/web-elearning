@@ -34,7 +34,7 @@ class DosenController extends Controller
                                 <form action="' . route("dosens.destroy", $dosen) . '" method="post" style="font-size:13px">
                                     ' . csrf_field() . '
                                     ' . method_field('delete') . '
-                                    <button type="submit" class="dropdown-item has-icon font-sm"><i class="fas fa-times"></i> Delete</button>
+                                    <button type="submit" class="dropdown-item has-icon font-sm"><i class="fas fa-trash"></i> Delete</button>
                                 </form>
                             </div>
                         </div>
