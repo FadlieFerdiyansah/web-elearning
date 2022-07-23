@@ -2173,7 +2173,6 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-// import axios from 'axios';
 
 
 
@@ -2196,7 +2195,7 @@ function Create(props) {
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
       matkuls = _useState6[0],
-      setMakuls = _useState6[1];
+      setMatkuls = _useState6[1];
 
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(['']),
       _useState8 = _slicedToArray(_useState7, 2),
@@ -2368,7 +2367,7 @@ function Create(props) {
 
             case 3:
               response = _context4.sent;
-              setMakuls(response.data);
+              setMatkuls(response.data);
 
             case 5:
             case "end":
@@ -2626,67 +2625,62 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function Edit(props) {
   //Fecthing data
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(props.data),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      jadwal = _useState2[0],
-      setJadwal = _useState2[1];
+      kelas = _useState2[0],
+      setKelas = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      kelas = _useState4[0],
-      setKelas = _useState4[1];
+      dosens = _useState4[0],
+      setDosens = _useState4[1];
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      dosens = _useState6[0],
-      setDosens = _useState6[1];
+      matkuls = _useState6[0],
+      setMatkuls = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(['']),
       _useState8 = _slicedToArray(_useState7, 2),
-      matkuls = _useState8[0],
-      setMakuls = _useState8[1];
+      days = _useState8[0],
+      setDays = _useState8[1]; //untuk mendapatkan value dari inputan
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(['']),
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState10 = _slicedToArray(_useState9, 2),
-      days = _useState10[0],
-      setDays = _useState10[1]; //untuk mendapatkan value dari inputan
-
+      kelasId = _useState10[0],
+      setKelasId = _useState10[1];
 
   var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState12 = _slicedToArray(_useState11, 2),
-      kelasId = _useState12[0],
-      setKelasId = _useState12[1];
+      dosenId = _useState12[0],
+      setDosenId = _useState12[1];
 
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState14 = _slicedToArray(_useState13, 2),
-      dosenId = _useState14[0],
-      setDosenId = _useState14[1];
+      matkulId = _useState14[0],
+      setMatkulId = _useState14[1];
 
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState16 = _slicedToArray(_useState15, 2),
-      matkulId = _useState16[0],
-      setMatkulId = _useState16[1];
+      hari = _useState16[0],
+      setHari = _useState16[1];
 
   var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState18 = _slicedToArray(_useState17, 2),
-      hari = _useState18[0],
-      setHari = _useState18[1];
+      jamMasuk = _useState18[0],
+      setJamMasuk = _useState18[1];
 
   var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState20 = _slicedToArray(_useState19, 2),
-      jamMasuk = _useState20[0],
-      setJamMasuk = _useState20[1];
+      jamKeluar = _useState20[0],
+      setJamKeluar = _useState20[1]; //Notif ketika berhasil create jadwal
 
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
+
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(['']),
       _useState22 = _slicedToArray(_useState21, 2),
-      jamKeluar = _useState22[0],
-      setJamKeluar = _useState22[1]; //Notif ketika berhasil create jadwal
-
-
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(['']),
-      _useState24 = _slicedToArray(_useState23, 2),
-      errors = _useState24[0],
-      setErrors = _useState24[1];
+      errors = _useState22[0],
+      setErrors = _useState22[1];
 
   var request = {
     kelas_id: kelasId,
@@ -2704,36 +2698,29 @@ function Edit(props) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log(props.match.params.id);
               e.preventDefault();
-              _context.prev = 2;
-              _context.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default().post(props.endpoint, request);
+              _context.prev = 1;
+              _context.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().put(props.endpoint, request);
 
-            case 5:
+            case 4:
               response = _context.sent;
               react_hot_toast__WEBPACK_IMPORTED_MODULE_5__["default"].success(response.data.message);
-              setKelasId('');
-              setDosenId('');
-              setMatkulId('');
-              setHari('');
-              setJamMasuk('');
-              setJamKeluar('');
               setErrors(['']);
-              _context.next = 19;
+              _context.next = 12;
               break;
 
-            case 16:
-              _context.prev = 16;
-              _context.t0 = _context["catch"](2);
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](1);
               setErrors(_context.t0.response.data.errors);
 
-            case 19:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 16]]);
+      }, _callee, null, [[1, 9]]);
     }));
 
     return function update(_x) {
@@ -2817,7 +2804,7 @@ function Edit(props) {
 
             case 3:
               response = _context4.sent;
-              setMakuls(response.data);
+              setMatkuls(response.data);
 
             case 5:
             case "end":
@@ -2836,9 +2823,50 @@ function Edit(props) {
     setMatkulId(e.target.value);
   };
 
+  var getJadwal = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+      var jadwal, dosen, matkul;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              jadwal = props.data;
+              _context5.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/jadwals/get-dosen-by-".concat(jadwal.kelas_id));
+
+            case 3:
+              dosen = _context5.sent;
+              _context5.next = 6;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/jadwals/get-matkul-by-".concat(jadwal.dosen_id));
+
+            case 6:
+              matkul = _context5.sent;
+              setKelasId(jadwal.kelas_id);
+              setDosens(dosen.data);
+              setDosenId(jadwal.dosen_id);
+              setMatkuls(matkul.data);
+              setMatkulId(jadwal.matkul_id);
+              setHari(jadwal.hari);
+              setJamMasuk(jadwal.jam_masuk);
+              setJamKeluar(jadwal.jam_keluar);
+
+            case 15:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function getJadwal() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function (e) {
     setDays(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum\'at', 'Sabtu', 'Minggu']);
     getKelas();
+    getJadwal();
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "row",
@@ -2875,7 +2903,6 @@ function Edit(props) {
                 }), kelas.map(function (k) {
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
                     value: k.id,
-                    selected: k.id == jadwal.kelas_id ? 'selected' : '',
                     children: k.kd_kelas
                   }, k.id);
                 })]

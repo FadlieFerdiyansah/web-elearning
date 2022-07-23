@@ -5,10 +5,9 @@ import toast, { Toaster } from 'react-hot-toast';
 
 function Edit(props) {
     //Fecthing data
-    const [jadwal, setJadwal] = useState(props.data);
     const [kelas, setKelas] = useState([])
     const [dosens, setDosens] = useState([])
-    const [matkuls, setMakuls] = useState([])
+    const [matkuls, setMatkuls] = useState([])
     const [days, setDays] = useState([''])
 
     //untuk mendapatkan value dari inputan
@@ -32,20 +31,10 @@ function Edit(props) {
     }
 
     const update = async (e) => {
-        console.log(props.match.params.id)
-
         e.preventDefault();
         try {
-            // get url id from url
-            let response = await axios.post(props.endpoint, request)
+            let response = await axios.put(props.endpoint, request)
             toast.success(response.data.message);
-
-            setKelasId('')
-            setDosenId('')
-            setMatkulId('')
-            setHari('')
-            setJamMasuk('')
-            setJamKeluar('')
             setErrors([''])
         } catch (e) {
             setErrors(e.response.data.errors);
@@ -70,16 +59,32 @@ function Edit(props) {
     const getMatkulBySelectedDosen = async (e) => {
         setDosenId(e.target.value)
         let response = await axios.get(`/jadwals/get-matkul-by-${e.target.value}`)
-        setMakuls(response.data)
+        setMatkuls(response.data)
     }
 
     const getMatkulId = (e) => {
         setMatkulId(e.target.value)
     }
 
+    const getJadwal = async () => {
+        let jadwal = props.data
+        let dosen = await axios.get(`/jadwals/get-dosen-by-${jadwal.kelas_id}`)
+        let matkul = await axios.get(`/jadwals/get-matkul-by-${jadwal.dosen_id}`)
+        
+        setKelasId(jadwal.kelas_id)
+        setDosens(dosen.data)
+        setDosenId(jadwal.dosen_id)
+        setMatkuls(matkul.data)
+        setMatkulId(jadwal.matkul_id)
+        setHari(jadwal.hari)
+        setJamMasuk(jadwal.jam_masuk)
+        setJamKeluar(jadwal.jam_keluar)
+    }
+
     useEffect((e) => {
         setDays(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum\'at', 'Sabtu', 'Minggu'])
         getKelas()
+        getJadwal()
     }, [])
     return (
         <div className="row">
@@ -100,7 +105,7 @@ function Edit(props) {
                                     <option value={null}>Pilih Kelas</option>
                                     {
                                         kelas.map((k) => {
-                                            return <option key={k.id} value={k.id} selected={k.id == jadwal.kelas_id ? 'selected' : ''}>{k.kd_kelas}</option>
+                                            return <option key={k.id} value={k.id}>{k.kd_kelas}</option>
                                         })
                                     }
                                 </select>

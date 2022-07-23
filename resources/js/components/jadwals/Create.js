@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -8,7 +7,7 @@ function Create(props) {
     //Fecthing data
     const [kelas, setKelas] = useState([])
     const [dosens, setDosens] = useState([])
-    const [matkuls, setMakuls] = useState([])
+    const [matkuls, setMatkuls] = useState([])
     const [days, setDays] = useState([''])
 
     //untuk mendapatkan value dari inputan
@@ -67,7 +66,7 @@ function Create(props) {
     const getMatkulBySelectedDosen = async (e) => {
         setDosenId(e.target.value)
         let response = await axios.get(`/jadwals/get-matkul-by-${e.target.value}`)
-        setMakuls(response.data)
+        setMatkuls(response.data)
     }
 
     const getMatkulId = (e) => {

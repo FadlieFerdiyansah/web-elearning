@@ -38,7 +38,15 @@ class JadwalController extends Controller
 
     public function update(Jadwal $jadwal)
     {
-        return 'ok';
+        // return request()->all();
+        // update jadwal
+        $jadwal->update(request()->all());
+        // update dosen
+        $dosen = Dosen::where('id', request()->dosen_id)->first();
+        $dosen->kelas()->updateExistingPivot(['kelas_id' => $jadwal->kelas_id], ['matkul_id' => $jadwal->matkul_id] );
+        // update kelas
+        $kelas = Kelas::find($jadwal->kelas_id);
+        return response()->json(['message' => 'Berhasil memperbarui jadwal untuk kelas ' . $kelas->kd_kelas]);
     }
 
     //Mendapatkan data dosen berdasarkan kelas
