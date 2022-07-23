@@ -5,14 +5,11 @@ function Table(props) {
     const [jadwals, setJadwals] = useState([])
     const [url, setUrl] = useState(props.endpoint)
     const [links, setLinks] = useState([])
-    const [isModal, setIsModal] = useState(false)
 
     const getJadwals = async (e) => {
         try {
-
             let response = await axios.get(url);
             setJadwals(response.data.data);
-        console.log(jadwals)
 
             setLinks(response.data.meta.links);
         } catch (e) {
@@ -20,9 +17,15 @@ function Table(props) {
         }
     }
 
-    const modalHandler = (e) => {
+    const deleteJadwal = (e) => {
         e.preventDefault()
-        setIsModal(true)
+        if (window.confirm('Apakah anda yakin ingin menghapus jadwal ini?')) {
+            axios.delete(`${props.endpoint}/${e.target.value}`)
+            .then(response => {
+                getJadwals()
+            }
+            )
+        }
     }
 
     useEffect((e) => {
@@ -52,6 +55,7 @@ function Table(props) {
                             </thead>
                             <tbody>
                                 {
+                                    jadwals.length ?
                                     jadwals.map((jadwal, id) => {
                                         return (
                                             <tr key={id}>
@@ -63,11 +67,15 @@ function Table(props) {
                                                 <td>{`${jadwal.jam_masuk} - ${jadwal.jam_keluar}`}</td>
                                                 <td>
                                                     <a href={`/jadwals/${jadwal.id}/edit`} className="btn btn-icon icon-left btn-primary btn-sm mr-1"><i className="fas fa-edit"></i> Edit</a>
-                                                    <a href="#" className="btn btn-icon icon-left btn-danger btn-sm"><i className="fas fa-times"></i> Delete</a>
+                                                    <button className="btn btn-icon icon-left btn-danger btn-sm" value={jadwal.id} onClick={deleteJadwal}><i className="fas fa-trash"></i> Delete</button>
                                                 </td>
                                             </tr>
                                         )
                                     })
+                                    :
+                                    <tr>
+                                        <td colSpan="7" className="text-center">Tidak ada data</td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>

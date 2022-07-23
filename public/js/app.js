@@ -3113,11 +3113,6 @@ function Table(props) {
       links = _useState6[0],
       setLinks = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      isModal = _useState8[0],
-      setIsModal = _useState8[1];
-
   var getJadwals = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
       var response;
@@ -3132,22 +3127,21 @@ function Table(props) {
             case 3:
               response = _context.sent;
               setJadwals(response.data.data);
-              console.log(jadwals);
               setLinks(response.data.meta.links);
-              _context.next = 12;
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 9]]);
+      }, _callee, null, [[0, 8]]);
     }));
 
     return function getJadwals(_x) {
@@ -3155,9 +3149,14 @@ function Table(props) {
     };
   }();
 
-  var modalHandler = function modalHandler(e) {
+  var deleteJadwal = function deleteJadwal(e) {
     e.preventDefault();
-    setIsModal(true);
+
+    if (window.confirm('Apakah anda yakin ingin menghapus jadwal ini?')) {
+      axios["delete"]("".concat(props.endpoint, "/").concat(e.target.value)).then(function (response) {
+        getJadwals();
+      });
+    }
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function (e) {
@@ -3202,7 +3201,7 @@ function Table(props) {
                 })]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
-              children: jadwals.map(function (jadwal, id) {
+              children: jadwals.length ? jadwals.map(function (jadwal, id) {
                 return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
                     children: id + 1
@@ -3223,15 +3222,22 @@ function Table(props) {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
                         className: "fas fa-edit"
                       }), " Edit"]
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-                      href: "#",
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
                       className: "btn btn-icon icon-left btn-danger btn-sm",
+                      value: jadwal.id,
+                      onClick: deleteJadwal,
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
-                        className: "fas fa-times"
+                        className: "fas fa-trash"
                       }), " Delete"]
                     })]
                   })]
                 }, id);
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                  colSpan: "7",
+                  className: "text-center",
+                  children: "Tidak ada data"
+                })
               })
             })]
           })

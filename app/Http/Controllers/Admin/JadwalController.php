@@ -26,7 +26,7 @@ class JadwalController extends Controller
     {
         Jadwal::create($request->all());
         $dosen = Dosen::where('id', $request->dosen_id)->first();
-        $dosen->kelas()->updateExistingPivot(['kelas_id' => $request->kelas_id], ['matkul_id' => $request->matkul_id] );
+        $dosen->kelas()->updateExistingPivot(['kelas_id' => $request->kelas_id], ['matkul_id' => $request->matkul_id]);
         $kelas = Kelas::find($request->kelas_id);
         return response()->json(['message' => 'Berhasil membuat jadwal untuk kelas ' . $kelas->kd_kelas]);
     }
@@ -43,10 +43,16 @@ class JadwalController extends Controller
         $jadwal->update(request()->all());
         // update dosen
         $dosen = Dosen::where('id', request()->dosen_id)->first();
-        $dosen->kelas()->updateExistingPivot(['kelas_id' => $jadwal->kelas_id], ['matkul_id' => $jadwal->matkul_id] );
+        $dosen->kelas()->updateExistingPivot(['kelas_id' => $jadwal->kelas_id], ['matkul_id' => $jadwal->matkul_id]);
         // update kelas
         $kelas = Kelas::find($jadwal->kelas_id);
         return response()->json(['message' => 'Berhasil memperbarui jadwal untuk kelas ' . $kelas->kd_kelas]);
+    }
+
+    public function destroy(Jadwal $jadwal)
+    {
+        $jadwal->delete();
+        return response()->json(['message' => 'Berhasil menghapus jadwal']);
     }
 
     //Mendapatkan data dosen berdasarkan kelas
@@ -60,5 +66,4 @@ class JadwalController extends Controller
     {
         return $dosen->matkuls;
     }
-
 }
