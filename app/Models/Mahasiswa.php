@@ -17,6 +17,11 @@ class Mahasiswa extends Authenticatable
     protected $fillable = ['foto','nim','nama','email','password','fakultas_id','kelas_id'];
     // protected $with = ['absens','userAbsen'];
 
+    // public function roles()
+    // {
+    //      $this->morphToMany(Role::class, 'model', 'model_has_roles', 'model_id', 'role_id');
+    // }
+
     public function getPictureAttribute()
     {
         return asset('/storage/'.$this->foto);

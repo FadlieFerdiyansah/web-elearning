@@ -23,6 +23,9 @@ class DosenSeeder extends Seeder
             'foto' => 'default.png'
         ]);
 
-        $dosen->assignRole('dosen');
+        $randDosen = Dosen::all();
+        $randDosen->each(function ($dsn) {
+            $dsn->assignRole('dosen');
+        });
     }
 }

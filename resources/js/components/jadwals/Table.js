@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom';
 
@@ -5,13 +6,13 @@ function Table(props) {
     const [jadwals, setJadwals] = useState([])
     const [url, setUrl] = useState(props.endpoint)
     const [links, setLinks] = useState([])
+    const [filter, setFilter] = useState('')
 
     const getJadwals = async (e) => {
         try {
-            let response = await axios.get(url);
+            let response = await axios.get(url, {params: {filter: filter}});
             setJadwals(response.data.data);
-
-            setLinks(response.data.meta.links);
+            response.data.meta ? setLinks(response.data.meta.links) : setLinks([])
         } catch (e) {
             console.log(e);
         }
@@ -28,19 +29,27 @@ function Table(props) {
         }
     }
 
+    // const handleFilter = (e) => {
+    //     e.preventDefault()
+    //     getJadwals()
+    // }
+
     useEffect((e) => {
-        getJadwals();
-    }, [url])
+        getJadwals()
+    }, [url, filter])
 
     return (
         <div>
             <div className="card">
                 <div className="card-header d-flex justify-content-between">
                     <h4>{props.title}</h4>
-                    <a href={props.routeCreate} className="btn btn-sm btn-success"><i data-feather="plus"></i>Tambah Jadwal</a>
+                    <a href={props.routeCreate} className="btn btn-sm btn-success"><i className="fas fa-plus"></i> Tambah Jadwal</a>
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">
+                        <div className="form-group">
+                            <input type="search" value={filter} onChange={e => setFilter(e.target.value)} className="form-control" placeholder='Cari jadwal kelas disini...' />
+                        </div>
                         <table className="table table-hover">
                             <thead>
                                 <tr>

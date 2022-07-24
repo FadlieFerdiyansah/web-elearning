@@ -15,7 +15,7 @@ class MahasiswaSeeder extends Seeder
      */
     public function run()
     {
-        $mhs = Mahasiswa::create([
+        Mahasiswa::create([
             'fakultas_id' => 1,
             'kelas_id' => 2,
             'nim' => 17200812,
@@ -25,6 +25,9 @@ class MahasiswaSeeder extends Seeder
             'foto' => 'default.png'
         ]);
 
-        $mhs->assignRole('mahasiswa');
+        $randMahasiswa = Mahasiswa::all();
+        $randMahasiswa->each(function ($mhs) {
+            $mhs->assignRole('mahasiswa');
+        });
     }
 }

@@ -12,7 +12,11 @@ class JadwalController extends Controller
     public function index()
     {
         if (request()->expectsJson()) {
-            return JadwalResource::collection(Jadwal::paginate(7));
+            if (request('filter')) {
+                $kelas = Kelas::where('kd_kelas', 'like', '%'.request('filter') .'%')->first();
+                return JadwalResource::collection($kelas->jadwals);
+            }
+            return JadwalResource::collection(Jadwal::paginate(10));
         }
         return view('backend.jadwal.index');
     }

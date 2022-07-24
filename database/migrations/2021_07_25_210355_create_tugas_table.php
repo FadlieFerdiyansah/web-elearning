@@ -17,6 +17,7 @@ class CreateTugasTable extends Migration
             $table->increments('id');
             $table->foreignId('jadwal_id');
             $table->foreignId('dosen_id')->nullable();
+            $table->foreignId('matkul_id');
             $table->foreignId('mahasiswa_id')->nullable();
             $table->string('parent')->default(0);
             $table->string('judul')->nullable();

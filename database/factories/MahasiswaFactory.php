@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Fakultas;
+use App\Models\Kelas;
 use App\Models\Mahasiswa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -23,8 +25,10 @@ class MahasiswaFactory extends Factory
     public function definition()
     {
         return [
-            'fakultas_id' => rand(1,2),
-            'kelas_id' => rand(1,8),
+            // 'fakultas_id' => rand(1,Fakultas::count()),
+            // 'kelas_id' => rand(1, Kelas::count()),
+            'fakultas_id' => rand(1,11  ),
+            'kelas_id' => rand(1, 8),
             'nim' => rand(11111111,99999999),
             'nama' => $this->faker->name(),
             'foto' => 'default.png',
