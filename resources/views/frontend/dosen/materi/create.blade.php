@@ -25,17 +25,18 @@
             <h4>Form Upload Materi</h4>
         </div>
         <div class="card-body col-md-8 col-sm">
-            <x-alert/>
+            <x-alert />
 
             <form action="{{ route('materis.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <x-select attr="kelas_id" label="Kelas" :data="$jadwal" valueOption="kelas_id" relasi="kelas"
-                    labelOption="kd_kelas" />
+                    labelOption="kd_kelas" selected />
                 <x-select attr="matkul_id" label="Matakuliah" :data="$jadwal" valueOption="matkul_id" relasi="matkul"
-                    labelOption="nm_matkul" />
+                    labelOption="nm_matkul" selected />
                 <x-input type="text" attr="judul" label="Judul" />
-                <x-input type="text" attr="pertemuan" label="Pertemuan" value="{{ $jadwal->absenParent->pertemuan ?? '' }}" />
-                    {{-- <input type="text" value="pertemuan" class="form-control"> --}}
+                <x-input type="number" attr="pertemuan" label="Pertemuan"
+                    value="{{ $jadwal->absenParent->pertemuan ?? '' }}" />
+                {{-- <input type="text" value="pertemuan" class="form-control"> --}}
                 <div class="form-group">
                     <label for="tipe">Tipe</label>
                     <select class="form-control selectric" name="tipe" id="tipe">
@@ -45,8 +46,8 @@
                     </select>
                 </div>
                 <div class="form-group" id="formLink">
-                    <label for="link">Link</label>
-                    <input type="text" name="file_or_link" class="form-control" id="link">
+                    <label for="link">Link <code>https://www.youtube.com/watch?v=jfKfPfyJRdk</code></label>
+                    <input type="text" name="file_or_link" class="form-control" id="link" placeholder="jfKfPfyJRdk">
                 </div>
                 <div class="form-group" id="formFile">
                     <label for="file">File</label>
@@ -54,7 +55,7 @@
                 </div>
                 <x-textarea attr="deskripsi" label="Deskripsi"></x-textarea>
                 <input type="hidden" name="jadwal" value="{{ encrypt($jadwal->id) }}">
-                
+
                 <x-button>Simpan</x-button>
             </form>
         </div>
@@ -63,7 +64,7 @@
     <script src="{{ asset('assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('assets/bundles/jquery-selectric/jquery.selectric.min.js') }}"></script>
     <script>
-            $(document).ready(function(){
+        $(document).ready(function(){
                 $('#formLink').hide();
                 $('#formFile').hide();
                 $("#tipe").change(function() {
