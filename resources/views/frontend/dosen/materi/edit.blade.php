@@ -50,19 +50,18 @@
                 </div>
                 <div class="form-group">
                     <label for="pertemuan">Pertemuan</label>
-                    <input type="text" name="pertemuan" class="form-control" id="pertemuan" value="{{ $materi->pertemuan }}">
+                    <input type="number" name="pertemuan" class="form-control" id="pertemuan" value="{{ $materi->pertemuan }}">
                 </div>
                 <div class="form-group">
                     <label for="tipe">Tipe</label>
                     <select class="form-control selectric" name="tipe" id="tipe">
-                        {{-- <select class="form-control selectric" name="tipe" id="tipe" onchange="selectType(this)"> --}}
                         <option disabled selected>Pilih Tipe</option>
                         <option {{ $materi->tipe == 'pdf' ? 'selected' : '' }} value="pdf">PDF</option>
                         <option {{ $materi->tipe == 'youtube' ? 'selected' : '' }} value="youtube">YouTube</option>
                     </select>
                 </div>
                 <div class="form-group" id="formLink">
-                    <label for="link">Link</label>
+                    <label for="link">Link <code>https://www.youtube.com/watch?v=jfKfPfyJRdk</code></label>
                     <input type="text" name="file_or_link" class="form-control" id="link" value="{{ $materi->tipe == 'youtube' ? $materi->file_or_link : '' }}">
                 </div>
                 <div class="form-group" id="formFile">
