@@ -10,7 +10,7 @@ class JadwalController extends Controller
 {
     public function jadwalKuliah()
     {
-        $jadwals = Jadwal::where('kelas_id', Auth::user()->kelas_id)->get();
+        $jadwals = Jadwal::with('matkul','kelas','dosen')->where('kelas_id', Auth::user()->kelas_id)->get();
 
         return view('frontend.mahasiswa.jadwal.jadwal_kuliah', [
             'jadwals' => $jadwals,

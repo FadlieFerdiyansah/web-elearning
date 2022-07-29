@@ -5,7 +5,7 @@
             <a href="{{ route('tugas.create', encrypt($jadwal->id)) }}" class="btn btn-dark btn-sm"><i
                     class="fas fa-plus"></i> Buat Tugas</a>
             @else
-            <a href="{{ route('absensi.create', encrypt($jadwal->id)) }}" class="btn btn-primary btn-sm"><i
+            <a href="{{ route('absensi.create', encrypt($jadwal->id)) }}" class="btn btn-dark btn-sm"><i
                     class="fas fa-plus"></i> Buat absen terlebih dahulu</a>
             @endif
         </div>
@@ -46,7 +46,7 @@
                                     <form action="{{ route('tugas.destroy', $tgs) }}" method="post">
                                         @method('delete')
                                         @csrf
-                                        <button type="submit" style="font-size:13px" class="dropdown-item has-icon font-sm"><i
+                                        <button onclick="return confirm('Anda yakin ingin menghapus tugas ini ?')" type="submit" style="font-size:13px" class="dropdown-item has-icon font-sm"><i
                                                 class="fas fa-trash"></i>
                                             Hapus</button>
 

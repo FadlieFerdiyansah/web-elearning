@@ -62,10 +62,10 @@
                                 <i data-feather="clipboard"></i>
                                 <div class="mt-2 font-weight-bold">Tugas</div>
                             </a>
-                            <div class="col mb-4 mb-lg-0 text-center">
+                            {{-- <div class="col mb-4 mb-lg-0 text-center">
                                 <i data-feather="message-square"></i>
                                 <div class="mt-2 font-weight-bold">Diskusi</div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

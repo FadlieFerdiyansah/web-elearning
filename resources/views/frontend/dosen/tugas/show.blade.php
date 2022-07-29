@@ -75,7 +75,7 @@
                         <h4 class="pull-right">Mahasiswa yang tidak mengumpulkan</h4>
                     </div>
                     <div class="card-body pull-right">
-                        30
+                        {{ $mahasiswa->count() - $tugasMahasiswa->count() }}
                     </div>
                 </div>
             </div>

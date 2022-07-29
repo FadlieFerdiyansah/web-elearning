@@ -68,7 +68,7 @@
                                     <td>
                                         <input type="password" name="password_saat_ini"
                                             class="form-control @error('password_saat_ini') is-invalid @enderror"
-                                            placeholder="masukan password saat ini">
+                                            placeholder="masukan password saat ini" required>
                                         @error('password_saat_ini')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -82,7 +82,7 @@
                                     <td>
                                         <input type="password" name="password"
                                             class="form-control @error('password') is-invalid @enderror"
-                                            placeholder="masukan password baru">
+                                            placeholder="masukan password baru" required>
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -96,7 +96,7 @@
                                     <td>
                                         <input id="password-confirm" type="password" class="form-control"
                                             name="password_confirmation" placeholder="konfirmasi password baru"
-                                            autocomplete="new-password">
+                                            autocomplete="new-password" required>
 
                                     </td>
                                 </tr>

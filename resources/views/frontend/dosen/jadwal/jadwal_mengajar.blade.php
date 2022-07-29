@@ -17,7 +17,6 @@
 				<div class="pricing-padding">
 					<div class="pricing-price">
 						<div>{{ strtoupper($jadwal->hari) }}</div>
-						<p>{{ $jadwal->id }}</p>
 						<div>{{ $jadwal->matkul->nm_matkul }}</div>
 					</div>
 					<div>
@@ -75,7 +74,7 @@
 	@push('lastScripts')
 	<script>
 		$(".masuk").click(function () {
-			swal('Anda Belum Waktunya Masuk Kelas', 'Silahkan cek kembali', 'error');
+			swal('Dapat masuk sesuai waktu yang ditentukan', 'Silahkan cek kembali', 'error');
 		});
 	</script>
 	<!-- JS Libraies -->

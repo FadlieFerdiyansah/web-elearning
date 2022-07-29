@@ -10,7 +10,7 @@ class Tugas extends Model
     use HasFactory;
 
     protected $fillable = [ 'jadwal_id', 'matkul_id', 'parent', 'judul', 'tipe', 'file_or_link', 'pertemuan', 'deskripsi', 'pengumpulan' ];
-    protected $with = ['nilai', 'matkul'];
+    protected $with = ['nilai'];
 
     public function mahasiswa()
     {
