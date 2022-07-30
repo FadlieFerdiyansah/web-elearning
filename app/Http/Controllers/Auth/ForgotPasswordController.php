@@ -21,10 +21,17 @@ class ForgotPasswordController extends Controller
     {
         $mahasiswa = Mahasiswa::whereEmail(request('email'))->first();
         $dosen = Dosen::whereEmail(request('email'))->first();
+
         $token = Str::random(60);
         if ($mahasiswa) {
+            if($mahasiswa->email == 'mahasiswa@gmail.com'){
+                return back()->with('error', 'Tidak bisa mengirim email ke akun demo');
+            }
             $mahasiswa->notify(new ForgotPassword($token));
         } else if ($dosen) {
+            if($dosen->email == 'dosen@gmail.com'){
+                return back()->with('error', 'Tidak bisa mengirim email ke akun demo');
+            }
             $dosen->notify(new ForgotPassword($token));
         } else {
             return back()->with('error', 'Email yang anda masukan tidak ditemukan');

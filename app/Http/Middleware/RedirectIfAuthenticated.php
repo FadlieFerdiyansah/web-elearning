@@ -26,6 +26,9 @@ class RedirectIfAuthenticated
                 if (Auth::guard('mahasiswa')->check()) {
                     return redirect(route('dashboard.mahasiswa'));
                 }
+                if (Auth::guard('admin')->check()) {
+                    return redirect(route('dashboard.admin'));
+                }
                 return redirect(RouteServiceProvider::HOME);
             }
         }

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['register' => false, 'reset' => false, 'verify' => false, 'confirm' => false, 'forgot' => false]);
 
-Route::get('/',fn () => view('index'));
+Route::get('/',fn () => redirect(route('login')));
 
 Route::get('forgot-password', [ForgotPasswordController::class, 'showPageForgotPassword'])->name('forgot.password');
 Route::post('forgot-password', [ForgotPasswordController::class, 'sendEmail']);
