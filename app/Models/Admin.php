@@ -12,8 +12,9 @@ class Admin extends Authenticatable
 
     use HasFactory,HasRoles;
 
-    public function absens()
+    public function getPictureDefaultAttribute()
     {
-        return 'ok';
+        return asset('/assets/images/default.png');
     }
+    
 }

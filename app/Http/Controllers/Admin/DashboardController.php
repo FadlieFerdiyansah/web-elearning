@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use ZipArchive;
+use App\Models\Dosen;
+use App\Models\Kelas;
+use App\Models\Jadwal;
+use App\Models\Matkul;
+use App\Models\Fakultas;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Dosen;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -22,6 +27,12 @@ class DashboardController extends Controller
         // return $user;
 
         // return $user->hasPermissionTo('jadwal mengajar');
-        return view('backend.dashboard');
+        $dosens = Dosen::count();
+        $mahasiswas = Mahasiswa::count();
+        $kelas = Kelas::count();
+        $matkuls = Matkul::count();
+        $fakultas = Fakultas::count();
+        $jadwals = Jadwal::count();
+        return view('backend.dashboard', compact('dosens', 'mahasiswas', 'matkuls', 'kelas', 'fakultas', 'jadwals'));
     }
 }
