@@ -132,3 +132,6 @@ git clone https://github.com/FadlieFerdiyansah/web-elearning.git
         <td>Mahasiswa</td>
     </tr>
 </table>
+
+<h2>Apakah akan update❓</h1>
+<p>Mungkin saja akan ada update an, Jadi pastikan kamu beri star ⭐ untuk project ini supaya mudah mengecek update an nya</p>
