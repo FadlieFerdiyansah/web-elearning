@@ -102,7 +102,7 @@ git clone https://github.com/FadlieFerdiyansah/web-elearning.git
         </ul>
     </li>
     <li>Setelah berhasil, masukan data-data nya dengan cara <code> php artisan db:seed </code> pada terminal lalu enter</li>
-    <li>Lalu buat faactory jadwalnya <code>Jadwal::factory()->count(200)->create();</code></li>
+    <li>Lalu buat faactory jadwalnya masuk ke terminal lagi ketikan <code> php artisan tinker </code> masukan <code>Jadwal::factory()->count(200)->create();</code></li>
     <li>Terakhir jalankan server nya <code> php artisan serve </code></li>
     <li>dan buka url nya diweb browser <code> http://127.0.0.1:8000 / http://web-elearning.test </code></li>
 </ol>
