@@ -62,12 +62,12 @@ class JadwalController extends Controller
     //Mendapatkan data dosen berdasarkan kelas
     public function getDosenByKelasId(Kelas $kelas)
     {
-        return $kelas->dosens;
+        return $kelas->dosens()->orderBy('nama')->get();
     }
 
     //Mendapatkan data matkul berdasarkan dosen
     public function getMatkulByDosenId(Dosen $dosen)
     {
-        return $dosen->matkuls;
+        return $dosen->matkuls()->orderBy('nm_matkul')->get();
     }
 }
