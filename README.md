@@ -1,4 +1,43 @@
-<h3>Cara instalasi project : </h3>
+<h1>Fitur ✨</h1>
+<ul>
+    <li>
+        <h5>Autentikasi</h5>
+    </li>
+    <ul>
+        <li>Login mahasiswa, dosen dan admin</li>
+        <li>Lupa password</li>
+    </ul>
+    <li>
+        <h5>Mahasiswa</h5>
+    </li>
+    <ul>
+        <li>absen sesuai waktu yang ditentukan</li>
+        <li>Akses Materi dan Tugas</li>
+        <li>Submit Tugas</li>
+    </ul>
+    <li>
+        <h5>Dosen</h5>
+    </li>
+    <ul>
+        <li> Membuat Absensi untuk mahasiswa</li>
+        <li>Membuat Materi dan Tugas</li>
+        <li>Input nilai</li>
+        <li>Export absensi dan nilai mahasiswa ke excel</li>
+    </ul>
+    <li>Admin</li>
+    <ul>
+        <li>Manage user, dosen, mahasiswa, matakuliah, jadwal, kelas, fakultas</li>
+    </ul>
+</ul>
+
+<hr>
+    <h1>Dukungan ❤️</h1>
+    <p>Kamu bisa dukung saya dengan cara memberikan <b>star/fork</b> pada project ini</p>
+    <p>Atau kamu bisa donate melalui saweria <a href="https://saweria.co/fadlieferdiyansah" target="_blank">https://saweria.co/fadlieferdiyansah</a> atau menjadi sponsor 💗 untuk project ini</p>
+    <p>Terimakasih atas dukungannya :)</p>
+<hr>
+
+<h1>Cara instalasi project ⚙️ </h1>
 <h4> Zip </h4>
 <p>Klik button Code disamping kanan atas, lalu klik <b>download zip</b></p>
 <h4> Git Clone </h4>
@@ -68,7 +107,7 @@ git clone https://github.com/FadlieFerdiyansah/web-elearning.git
     <li>dan buka url nya diweb browser <code> http://127.0.0.1:8000 / http://web-elearning.test </code></li>
 </ol>
 
-<h3>Data Login</h3>
+<h1>Data Login 👥</h1>
 
 </ul>
 <table border="1px" cellspacing="0" cellpadding="5px">
