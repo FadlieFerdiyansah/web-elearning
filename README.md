@@ -33,7 +33,7 @@
 <hr>
     <h1>Dukungan ❤️</h1>
     <p>Kamu bisa dukung saya dengan cara memberikan <b>star ⭐ / fork 🖇️</b> pada project ini</p>
-    <p>Atau kamu bisa donate melalui saweria <a href="https://saweria.co/fadlieferdiyansah" target="_blank">https://saweria.co/fadlieferdiyansah</a> atau menjadi sponsor 💗 untuk project ini</p>
+    <p>Atau kamu bisa donate melalui saweria <a href="https://saweria.co/fadlieferdiyansah" target="_blank">https://saweria.co/fadlieferdiyansah</a></p>
     <p>Terimakasih atas dukungannya 😊</p>
 <hr>
 
@@ -132,6 +132,3 @@ git clone https://github.com/FadlieFerdiyansah/web-elearning.git
         <td>Mahasiswa</td>
     </tr>
 </table>
-
-<h2>Apakah akan update❓</h1>
-<p>Mungkin saja akan ada update an, Jadi pastikan kamu beri star ⭐ untuk project ini supaya mudah mengecek update an nya</p>
