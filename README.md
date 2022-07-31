@@ -24,17 +24,17 @@
         <li>Input nilai</li>
         <li>Export absensi dan nilai mahasiswa ke excel</li>
     </ul>
-    <li>Admin</li>
+    <li><h5>Admin</h5></li>
     <ul>
-        <li>Manage user, dosen, mahasiswa, matakuliah, jadwal, kelas, fakultas</li>
+        <li>Manage dosen, mahasiswa, matakuliah, jadwal, kelas, fakultas</li>
     </ul>
 </ul>
 
 <hr>
     <h1>Dukungan ❤️</h1>
-    <p>Kamu bisa dukung saya dengan cara memberikan <b>star/fork</b> pada project ini</p>
+    <p>Kamu bisa dukung saya dengan cara memberikan <b>star ⭐ / fork 🖇️</b> pada project ini</p>
     <p>Atau kamu bisa donate melalui saweria <a href="https://saweria.co/fadlieferdiyansah" target="_blank">https://saweria.co/fadlieferdiyansah</a> atau menjadi sponsor 💗 untuk project ini</p>
-    <p>Terimakasih atas dukungannya :)</p>
+    <p>Terimakasih atas dukungannya 😊</p>
 <hr>
 
 <h1>Cara instalasi project ⚙️ </h1>
@@ -107,7 +107,7 @@ git clone https://github.com/FadlieFerdiyansah/web-elearning.git
     <li>dan buka url nya diweb browser <code> http://127.0.0.1:8000 / http://web-elearning.test </code></li>
 </ol>
 
-<h1>Data Login 👥</h1>
+<h1>Data Login 🔐</h1>
 
 </ul>
 <table border="1px" cellspacing="0" cellpadding="5px">
