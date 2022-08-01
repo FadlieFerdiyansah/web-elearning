@@ -17,7 +17,7 @@
                                 <h6 class="mb-1">Panduan Penggunaan</h6>
                             </div>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action">
+                        <a href="https://www.youtube.com/watch?v=37AFCKgYRZQ" target="_blank" class="list-group-item list-group-item-action">
                             <div class="d-flex justify-content-between">
                                 <h6 class="mb-1"><img width="36" height="36" alt="GitHub Logomark" class="height-auto"
                                         src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_youtube-512.png">
