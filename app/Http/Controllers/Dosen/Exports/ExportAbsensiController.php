@@ -21,7 +21,7 @@ class ExportAbsensiController extends Controller
             $query->whereIn('parent', Auth::user()->absens->pluck('id'))->select('id','mahasiswa_id','pertemuan', 'status');
         }, 'kelas'])->where('kelas_id', $kelas->id)->get(['id', 'kelas_id', 'nim', 'nama']);
 
-        $lastPertemuan = Auth::user()->tugas->where('matkul_id', $matkul->id)->max('pertemuan');
+        $lastPertemuan = Auth::user()->tugas->where('matkul_id', $matkul->id)->load('matkul')->max('pertemuan');
 
         foreach($mahasiswa as $i => $mhs){
             $formatMhs[$i] = [
