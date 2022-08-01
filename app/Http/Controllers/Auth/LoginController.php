@@ -137,6 +137,10 @@ class LoginController extends Controller
         if ($response = $this->loggedOut($request)) {
             return $response;
         }
+        
+        foreach ($_COOKIE as $key => $value) {
+            setcookie($key, '', time() - 3600, '/');
+        }
 
         return $request->wantsJson()
             ? new JsonResponse([], 204)

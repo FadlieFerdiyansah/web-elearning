@@ -21,7 +21,7 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="rangkuman">Rangkuman</label>
                     <textarea name="rangkuman" id="rangkuman" class="form-control"></textarea>
                     <code>
@@ -35,7 +35,7 @@
                     <code>
                         Note: Boleh di isi diakhir pelajaran
                     </code>
-                </div>
+                </div> --}}
 
 
                 <div class="form-group">
