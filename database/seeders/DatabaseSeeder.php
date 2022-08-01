@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             MahasiswaSeeder::class,
             PivotDosenMatkulSeeder::class,
             PivotDosenKelasSeeder::class,
+            JadwalSeeder::class
         ]);
     }
 }
