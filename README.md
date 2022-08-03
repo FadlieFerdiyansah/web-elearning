@@ -103,7 +103,7 @@ git clone https://github.com/FadlieFerdiyansah/web-elearning.git
     </li>
     <li>Setelah berhasil, masukan data-data nya dengan cara <code> php artisan db:seed </code> pada terminal lalu enter</li>
     <li>Terakhir jalankan server nya <code> php artisan serve </code></li>
-    <li>dan buka url nya diweb browser <code> http://127.0.0.1:8000 / http://web-elearning.test </code></li>
+    <li>dan buka url nya diweb browser <code> http://127.0.0.1:8000 </code></li>
 </ol>
 
 <h1>Data Login 🔐</h1>
