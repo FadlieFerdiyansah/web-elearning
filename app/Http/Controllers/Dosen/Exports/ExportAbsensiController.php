@@ -33,7 +33,7 @@ class ExportAbsensiController extends Controller
             for($j = 1; $j <= $lastPertemuan; $j++){
                 $formatMhs[$i]["p$j"] = '-';
                 if($mhs->absens->where('pertemuan', $j)->count() > 0){
-                    $formatMhs[$i]["p$j"] = $mhs->absens->where('pertemuan', $j)->first()->status ? '✓' : '-';
+                    $formatMhs[$i]["p$j"] = $mhs->absens->where('pertemuan', $j)->first()->status ? 'v' : '-';
                 }
             }
         }

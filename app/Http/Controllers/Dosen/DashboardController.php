@@ -21,7 +21,9 @@ class DashboardController extends Controller
         if (Hash::check($request->password, $dosen->password)) {
             return redirect()->back()->with('error', 'Password baru tidak boleh sama dengan password saat ini');
         }
-
+        if($dosen->email == 'dosen@gmail.com'){
+            return back()->with('error', 'Tidak bisa merubah password pada akun demo');
+        }
         $dosen->password = bcrypt($request->password);
         $dosen->save();
 
