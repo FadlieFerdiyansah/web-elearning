@@ -13,7 +13,7 @@ class JadwalController extends Controller
     {
         if (request()->expectsJson()) {
             if (request('filter')) {
-                $kelas = Kelas::where('kd_kelas', 'like', '%'.request('filter') .'%')->first();
+                $kelas = Kelas::where('kd_kelas', 'like', '%' . request('filter') . '%')->first();
                 return JadwalResource::collection($kelas->jadwals);
             }
             return JadwalResource::collection(Jadwal::paginate(10));
@@ -28,6 +28,16 @@ class JadwalController extends Controller
 
     public function store(JadwalRequest $request)
     {
+        // check if kelas dosen matkul same in 1 day and return back with error
+        $check = Jadwal::where('kelas_id', $request->kelas_id)
+            ->where('dosen_id', $request->dosen_id)
+            ->where('matkul_id', $request->matkul_id)
+            ->where('hari', $request->hari)
+            ->first();
+        if ($check) {
+            return response()->json(['message' => "Jadwal sudah ada dihari $request->hari"]);
+        }
+
         Jadwal::create($request->all());
         $dosen = Dosen::where('id', $request->dosen_id)->first();
         $dosen->kelas()->updateExistingPivot(['kelas_id' => $request->kelas_id], ['matkul_id' => $request->matkul_id]);
@@ -42,8 +52,6 @@ class JadwalController extends Controller
 
     public function update(Jadwal $jadwal)
     {
-        // return request()->all();
-        // update jadwal
         $jadwal->update(request()->all());
         // update dosen
         $dosen = Dosen::where('id', request()->dosen_id)->first();

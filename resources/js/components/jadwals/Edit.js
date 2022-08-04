@@ -90,7 +90,7 @@ function Edit(props) {
         <div className="row">
             <div className="col-12 col-md-6 col-lg-6">
                 <Toaster
-                    position="bottom-right"
+                    position="bottom-center"
                     reverseOrder={true}
                 />
                 <div className="card">
@@ -203,10 +203,13 @@ function Edit(props) {
                                 </div>
                             </div>
 
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-dark btn-lg btn-block">
+                            <div className="form-group d-flex justify-content-between">
+                                <button type="submit" className="btn btn-dark btn-lg">
                                     Update
                                 </button>
+                                <a href="/jadwals" className="btn btn-light btn-lg">
+                                    Back
+                                </a>
                             </div>
                         </form>
                     </div>

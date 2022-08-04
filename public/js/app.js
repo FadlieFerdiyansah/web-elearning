@@ -2395,7 +2395,7 @@ function Create(props) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "col-12 col-md-6 col-lg-6",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_hot_toast__WEBPACK_IMPORTED_MODULE_5__.Toaster, {
-        position: "bottom-right",
+        position: "bottom-center",
         reverseOrder: true
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "card",
@@ -2552,13 +2552,17 @@ function Create(props) {
                   }) : '']
                 })
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "form-group",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "form-group d-flex justify-content-between",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                 type: "submit",
-                className: "btn btn-dark btn-lg btn-block",
+                className: "btn btn-dark btn-lg",
                 children: "Create"
-              })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+                href: "/jadwals",
+                className: "btn btn-light btn-lg",
+                children: "Back"
+              })]
             })]
           })
         })]
@@ -2873,7 +2877,7 @@ function Edit(props) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "col-12 col-md-6 col-lg-6",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_hot_toast__WEBPACK_IMPORTED_MODULE_5__.Toaster, {
-        position: "bottom-right",
+        position: "bottom-center",
         reverseOrder: true
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "card",
@@ -3030,13 +3034,17 @@ function Edit(props) {
                   }) : '']
                 })
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "form-group",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "form-group d-flex justify-content-between",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                 type: "submit",
-                className: "btn btn-dark btn-lg btn-block",
+                className: "btn btn-dark btn-lg",
                 children: "Update"
-              })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+                href: "/jadwals",
+                className: "btn btn-light btn-lg",
+                children: "Back"
+              })]
             })]
           })
         })]
